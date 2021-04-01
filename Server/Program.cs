@@ -10,11 +10,14 @@ namespace Server
             ushort port = 6756;
             if (args.Length > 0) ushort.TryParse(args[0], out port);
 
-            Processor.Log = (string type, string empNum, string content) =>
-                Console.WriteLine(string.Format("[{0}] {1} | {2} : {3}\n",
-                    DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
-                    type, empNum, content));
-            Processor.Instance.InitSocket(port);
+            Processor.Instance.OpenSocket(port);
         }
+        public static void Log(string type, string empNum, string content) =>
+            Console.WriteLine(string.Format("[{0}] {1} | {2}{3}{4}",
+                    DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
+                    type,
+                    empNum,
+                    string.IsNullOrEmpty(empNum) ? "" : " : ",
+                    content));
     }
 }

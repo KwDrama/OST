@@ -35,6 +35,7 @@ namespace Client.Forms
             this.btnLogin = new MetroFramework.Controls.MetroButton();
             this.lnkResetPw = new MetroFramework.Controls.MetroLink();
             this.picLogo = new System.Windows.Forms.PictureBox();
+            this.lblResult = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,6 +73,9 @@ namespace Client.Forms
             this.txtPassword.WaterMark = "비밀번호";
             this.txtPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPassword.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
+            this.txtPassword.Enter += new System.EventHandler(this.txt_Enter);
+            this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
             // 
             // txtEmpNum
             // 
@@ -107,6 +111,8 @@ namespace Client.Forms
             this.txtEmpNum.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtEmpNum.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmpNum.TextChanged += new System.EventHandler(this.txtEmpNum_TextChanged);
+            this.txtEmpNum.Enter += new System.EventHandler(this.txt_Enter);
+            this.txtEmpNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
             // 
             // chkAutoLogin
             // 
@@ -137,7 +143,7 @@ namespace Client.Forms
             this.lnkResetPw.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
             this.lnkResetPw.Name = "lnkResetPw";
             this.lnkResetPw.Size = new System.Drawing.Size(105, 25);
-            this.lnkResetPw.TabIndex = 4;
+            this.lnkResetPw.TabIndex = 5;
             this.lnkResetPw.Text = "비밀번호 재설정";
             this.lnkResetPw.UseSelectable = true;
             // 
@@ -149,12 +155,24 @@ namespace Client.Forms
             this.picLogo.TabIndex = 6;
             this.picLogo.TabStop = false;
             // 
+            // lblResult
+            // 
+            this.lblResult.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblResult.Location = new System.Drawing.Point(80, 380);
+            this.lblResult.Margin = new System.Windows.Forms.Padding(3, 20, 3, 20);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(200, 107);
+            this.lblResult.TabIndex = 4;
+            this.lblResult.UseStyleColors = true;
+            this.lblResult.WrapToLine = true;
+            // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(360, 590);
+            this.Controls.Add(this.lblResult);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.lnkResetPw);
             this.Controls.Add(this.btnLogin);
@@ -170,7 +188,8 @@ namespace Client.Forms
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Text = "로그인";
-            this.Load += new System.EventHandler(this.FormLogin_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLogin_FormClosing);
+            this.Shown += new System.EventHandler(this.FormLogin_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -185,5 +204,6 @@ namespace Client.Forms
         private MetroFramework.Controls.MetroButton btnLogin;
         private MetroFramework.Controls.MetroLink lnkResetPw;
         private System.Windows.Forms.PictureBox picLogo;
+        private MetroFramework.Controls.MetroLabel lblResult;
     }
 }
