@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace Server.Classes
 {
     public class Employee
     {
