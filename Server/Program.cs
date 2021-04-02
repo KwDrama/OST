@@ -14,11 +14,8 @@ namespace Server
             Processor.Instance.OpenSocket(port);
         }
         public static void Log(string type, string empNum, string content) =>
-            Console.WriteLine(string.Format("[{0}] {1} | {2}{3}{4}",
+            Console.WriteLine(string.Format("[{0}] {1} | {2} : {3}",
                     DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
-                    type,
-                    empNum,
-                    string.IsNullOrEmpty(empNum) ? "" : " : ",
-                    content));
+                    type, empNum, content));
     }
 }
