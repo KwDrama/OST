@@ -72,6 +72,9 @@ namespace Client.Forms
 
         public void EndConnect(bool success)
         {
+            // 연결 도중 폼을 닫으면 함수 실행 안함
+            if (this == null) return;
+
             Invoke(new MethodInvoker(() =>
             {
                 if (loginable = success)
@@ -87,6 +90,7 @@ namespace Client.Forms
         {
             if (logined = success)
             {
+                DialogResult = DialogResult.OK;
                 Close();
             }
             else
