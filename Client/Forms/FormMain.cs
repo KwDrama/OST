@@ -13,7 +13,8 @@ namespace Client.Forms
         {
             InitializeComponent();
             proc.formMain = this;
-            (new FormLogin()).ShowDialog();
+            if ((new FormLogin()).ShowDialog() != DialogResult.OK)
+                Close();
         }
         private void FormMain_Shown(object sender, System.EventArgs e)
         {
