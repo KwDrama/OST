@@ -63,6 +63,8 @@ namespace Server.Classes
                 try
                 {
                     client = server.Accept();
+                    Program.Log("system", "클라 접속",
+                        ((IPEndPoint)client.RemoteEndPoint).Address.ToString());
                 }
                 catch (Exception e)
                 {
@@ -102,6 +104,8 @@ namespace Server.Classes
                 if (!string.IsNullOrEmpty(ao.emp.num))
                     Program.Log("auth", ao.emp.num, "로그아웃");
 
+                Program.Log("system", "클라 종료",
+                    ((IPEndPoint)ao.socket.RemoteEndPoint).Address.ToString());
                 ao.socket.Close();
                 clientList.Remove(ao);
             }
@@ -140,9 +144,11 @@ namespace Server.Classes
                     bool success = ao.memory[0] as string == "1234" && ao.memory[1] as string == "1234";
                     if (success)
                     {
-                        ao.emp.num = ao.memory[0] as string;
-                        Program.Log("auth", ao.emp.num, "로그인");
+                        Program.Log("auth", ao.emp.num = ao.memory[0] as string, "로그인");
                     }
+                    else
+                        Program.Log("auth", ao.memory[0] as string, "실패");
+
 
                     // 로그인 성공 여부를 클라이언트에게 보내고 해당 클라이언트 상태 초기화
                     ao.socket.Send(new byte[1] { (byte)(success ? 2 : 1) });
