@@ -12,6 +12,8 @@ namespace Client.Forms
         Processor proc = Processor.Instance;
         bool loginable = false, logined = false;
 
+        FormRegist formRegist;
+
         public FormLogin()
         {
             InitializeComponent();
@@ -86,6 +88,13 @@ namespace Client.Forms
                 }
             }));
         }
+
+        private void btnRegist_Click(object sender, EventArgs e)
+        {
+            formRegist = new FormRegist();
+            formRegist.ShowDialog();
+        }
+
         public void EndLogin(bool success)
         {
             if (logined = success)
