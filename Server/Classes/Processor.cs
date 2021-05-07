@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
 
 namespace Server.Classes
 {
@@ -170,5 +173,13 @@ namespace Server.Classes
                 ao.ClearState();
             }
         }
+        //public void MariaDB_SelectTest()
+        //{
+        //    string connstr = "Server=127.0.0.1;Port=3306;Database=insadb;Uid=root;Pwd=12345678";
+        //    MySqlConnection conn = new MySqlConnection(connstr);
+        //    MySqlCommand cmd = conn.CreateCommand();
+
+        //    string sql = "Select * from member where id = 1";
+        //}
     }
 }
