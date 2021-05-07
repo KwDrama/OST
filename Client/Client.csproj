@@ -60,6 +60,12 @@
   <ItemGroup>
     <Compile Include="Classes\Employee.cs" />
     <Compile Include="Classes\Processor.cs" />
+    <Compile Include="Forms\FormChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormChat.Designer.cs">
+      <DependentUpon>FormChat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,10 +78,43 @@
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormRegist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormRegist.Designer.cs">
+      <DependentUpon>FormRegist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSchedule.Designer.cs">
+      <DependentUpon>FormSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormTree.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTree.Designer.cs">
+      <DependentUpon>FormTree.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\FormChat.resx">
+      <DependentUpon>FormChat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormRegist.resx">
+      <DependentUpon>FormRegist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSchedule.resx">
+      <DependentUpon>FormSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTree.resx">
+      <DependentUpon>FormTree.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -101,12 +140,32 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\장백기.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\user.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\조직도_아이콘.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\캘린더_아이콘.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\닫기_아이콘.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\원인터내셔널_로고.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info_아이콘.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\더보기_아이콘.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

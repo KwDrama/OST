@@ -29,15 +29,91 @@ namespace Client.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtPassword = new MetroFramework.Controls.MetroTextBox();
-            this.txtEmpNum = new MetroFramework.Controls.MetroTextBox();
             this.chkAutoLogin = new MetroFramework.Controls.MetroCheckBox();
             this.btnLogin = new MetroFramework.Controls.MetroButton();
             this.lnkResetPw = new MetroFramework.Controls.MetroLink();
-            this.picLogo = new System.Windows.Forms.PictureBox();
             this.lblResult = new MetroFramework.Controls.MetroLabel();
+            this.btnRegist = new MetroFramework.Controls.MetroButton();
+            this.lblName = new System.Windows.Forms.Label();
+            this.picLogo = new System.Windows.Forms.PictureBox();
+            this.txtPassword = new MetroFramework.Controls.MetroTextBox();
+            this.txtEmpNum = new MetroFramework.Controls.MetroTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
+            // 
+            // chkAutoLogin
+            // 
+            this.chkAutoLogin.AutoSize = true;
+            this.chkAutoLogin.Checked = true;
+            this.chkAutoLogin.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAutoLogin.Location = new System.Drawing.Point(80, 389);
+            this.chkAutoLogin.Name = "chkAutoLogin";
+            this.chkAutoLogin.Size = new System.Drawing.Size(89, 17);
+            this.chkAutoLogin.TabIndex = 3;
+            this.chkAutoLogin.Text = "자동로그인";
+            this.chkAutoLogin.UseSelectable = true;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(80, 331);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(200, 23);
+            this.btnLogin.TabIndex = 2;
+            this.btnLogin.Text = "로그인";
+            this.btnLogin.UseSelectable = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // lnkResetPw
+            // 
+            this.lnkResetPw.AutoSize = true;
+            this.lnkResetPw.Location = new System.Drawing.Point(128, 510);
+            this.lnkResetPw.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
+            this.lnkResetPw.Name = "lnkResetPw";
+            this.lnkResetPw.Size = new System.Drawing.Size(129, 30);
+            this.lnkResetPw.TabIndex = 5;
+            this.lnkResetPw.Text = "비밀번호 재설정";
+            this.lnkResetPw.UseSelectable = true;
+            // 
+            // lblResult
+            // 
+            this.lblResult.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblResult.Location = new System.Drawing.Point(80, 407);
+            this.lblResult.Margin = new System.Windows.Forms.Padding(3, 20, 3, 20);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(200, 80);
+            this.lblResult.TabIndex = 4;
+            this.lblResult.UseStyleColors = true;
+            this.lblResult.WrapToLine = true;
+            // 
+            // btnRegist
+            // 
+            this.btnRegist.Location = new System.Drawing.Point(80, 360);
+            this.btnRegist.Name = "btnRegist";
+            this.btnRegist.Size = new System.Drawing.Size(200, 23);
+            this.btnRegist.TabIndex = 7;
+            this.btnRegist.Text = "사원 정보 등록";
+            this.btnRegist.UseSelectable = true;
+            this.btnRegist.Click += new System.EventHandler(this.btnRegist_Click);
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("휴먼엑스포", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblName.Location = new System.Drawing.Point(74, 30);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(214, 34);
+            this.lblName.TabIndex = 8;
+            this.lblName.Text = "원 인터내셔널";
+            // 
+            // picLogo
+            // 
+            this.picLogo.Image = global::Client.Properties.Resources.원인터내셔널_로고;
+            this.picLogo.Location = new System.Drawing.Point(80, 67);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(200, 200);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picLogo.TabIndex = 6;
+            this.picLogo.TabStop = false;
             // 
             // txtPassword
             // 
@@ -56,7 +132,7 @@ namespace Client.Forms
             this.txtPassword.DisplayIcon = true;
             this.txtPassword.Icon = global::Client.Properties.Resources.key;
             this.txtPassword.Lines = new string[0];
-            this.txtPassword.Location = new System.Drawing.Point(80, 284);
+            this.txtPassword.Location = new System.Drawing.Point(80, 302);
             this.txtPassword.MaxLength = 20;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
@@ -94,7 +170,7 @@ namespace Client.Forms
             this.txtEmpNum.DisplayIcon = true;
             this.txtEmpNum.Icon = global::Client.Properties.Resources.user;
             this.txtEmpNum.Lines = new string[0];
-            this.txtEmpNum.Location = new System.Drawing.Point(80, 255);
+            this.txtEmpNum.Location = new System.Drawing.Point(80, 273);
             this.txtEmpNum.MaxLength = 20;
             this.txtEmpNum.Name = "txtEmpNum";
             this.txtEmpNum.PasswordChar = '\0';
@@ -114,64 +190,14 @@ namespace Client.Forms
             this.txtEmpNum.Enter += new System.EventHandler(this.txt_Enter);
             this.txtEmpNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
             // 
-            // chkAutoLogin
-            // 
-            this.chkAutoLogin.AutoSize = true;
-            this.chkAutoLogin.Checked = true;
-            this.chkAutoLogin.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAutoLogin.Location = new System.Drawing.Point(80, 342);
-            this.chkAutoLogin.Name = "chkAutoLogin";
-            this.chkAutoLogin.Size = new System.Drawing.Size(83, 15);
-            this.chkAutoLogin.TabIndex = 3;
-            this.chkAutoLogin.Text = "자동로그인";
-            this.chkAutoLogin.UseSelectable = true;
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Location = new System.Drawing.Point(80, 313);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(200, 23);
-            this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "로그인";
-            this.btnLogin.UseSelectable = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // lnkResetPw
-            // 
-            this.lnkResetPw.AutoSize = true;
-            this.lnkResetPw.Location = new System.Drawing.Point(128, 510);
-            this.lnkResetPw.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
-            this.lnkResetPw.Name = "lnkResetPw";
-            this.lnkResetPw.Size = new System.Drawing.Size(105, 25);
-            this.lnkResetPw.TabIndex = 5;
-            this.lnkResetPw.Text = "비밀번호 재설정";
-            this.lnkResetPw.UseSelectable = true;
-            // 
-            // picLogo
-            // 
-            this.picLogo.Location = new System.Drawing.Point(80, 49);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(200, 200);
-            this.picLogo.TabIndex = 6;
-            this.picLogo.TabStop = false;
-            // 
-            // lblResult
-            // 
-            this.lblResult.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblResult.Location = new System.Drawing.Point(80, 380);
-            this.lblResult.Margin = new System.Windows.Forms.Padding(3, 20, 3, 20);
-            this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(200, 107);
-            this.lblResult.TabIndex = 4;
-            this.lblResult.UseStyleColors = true;
-            this.lblResult.WrapToLine = true;
-            // 
             // FormLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(360, 590);
+            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.btnRegist);
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.lnkResetPw);
@@ -205,5 +231,7 @@ namespace Client.Forms
         private MetroFramework.Controls.MetroLink lnkResetPw;
         private System.Windows.Forms.PictureBox picLogo;
         private MetroFramework.Controls.MetroLabel lblResult;
+        private MetroFramework.Controls.MetroButton btnRegist;
+        private System.Windows.Forms.Label lblName;
     }
 }
