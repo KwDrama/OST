@@ -30,22 +30,22 @@ namespace Client.Forms
         private void InitializeComponent()
         {
             this.gbxProfile = new System.Windows.Forms.GroupBox();
+            this.lblRank = new System.Windows.Forms.Label();
             this.lblTeam = new System.Windows.Forms.Label();
             this.lblNum = new System.Windows.Forms.Label();
             this.lblDepartment = new System.Windows.Forms.Label();
+            this.picProfile = new System.Windows.Forms.PictureBox();
             this.lblName = new System.Windows.Forms.Label();
             this.gbxMenu = new System.Windows.Forms.GroupBox();
-            this.gbx_ReceiveMsg = new System.Windows.Forms.GroupBox();
             this.lblCompanyName = new System.Windows.Forms.Label();
             this.pic_Calendar = new System.Windows.Forms.PictureBox();
             this.pic_Tree = new System.Windows.Forms.PictureBox();
-            this.picProfile = new System.Windows.Forms.PictureBox();
-            this.lblRank = new System.Windows.Forms.Label();
+            this.gbx_ReceiveMsg = new System.Windows.Forms.GroupBox();
             this.gbxProfile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
             this.gbxMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Calendar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Tree)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
             this.SuspendLayout();
             // 
             // gbxProfile
@@ -63,12 +63,21 @@ namespace Client.Forms
             this.gbxProfile.TabStop = false;
             this.gbxProfile.Text = "My Profile";
             // 
+            // lblRank
+            // 
+            this.lblRank.AutoSize = true;
+            this.lblRank.Location = new System.Drawing.Point(259, 26);
+            this.lblRank.Name = "lblRank";
+            this.lblRank.Size = new System.Drawing.Size(38, 15);
+            this.lblRank.TabIndex = 6;
+            this.lblRank.Text = "직급 :";
+            // 
             // lblTeam
             // 
             this.lblTeam.AutoSize = true;
             this.lblTeam.Location = new System.Drawing.Point(119, 119);
             this.lblTeam.Name = "lblTeam";
-            this.lblTeam.Size = new System.Drawing.Size(32, 20);
+            this.lblTeam.Size = new System.Drawing.Size(26, 15);
             this.lblTeam.TabIndex = 5;
             this.lblTeam.Text = "팀 :";
             // 
@@ -77,7 +86,7 @@ namespace Client.Forms
             this.lblNum.AutoSize = true;
             this.lblNum.Location = new System.Drawing.Point(119, 56);
             this.lblNum.Name = "lblNum";
-            this.lblNum.Size = new System.Drawing.Size(77, 20);
+            this.lblNum.Size = new System.Drawing.Size(62, 15);
             this.lblNum.TabIndex = 4;
             this.lblNum.Text = "사원번호 :";
             // 
@@ -86,16 +95,26 @@ namespace Client.Forms
             this.lblDepartment.AutoSize = true;
             this.lblDepartment.Location = new System.Drawing.Point(119, 87);
             this.lblDepartment.Name = "lblDepartment";
-            this.lblDepartment.Size = new System.Drawing.Size(47, 20);
+            this.lblDepartment.Size = new System.Drawing.Size(38, 15);
             this.lblDepartment.TabIndex = 3;
             this.lblDepartment.Text = "부서 :";
+            // 
+            // picProfile
+            // 
+            this.picProfile.Image = global::Client.Properties.Resources.장백기;
+            this.picProfile.Location = new System.Drawing.Point(19, 42);
+            this.picProfile.Name = "picProfile";
+            this.picProfile.Size = new System.Drawing.Size(80, 80);
+            this.picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picProfile.TabIndex = 2;
+            this.picProfile.TabStop = false;
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(119, 26);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(47, 20);
+            this.lblName.Size = new System.Drawing.Size(38, 15);
             this.lblName.TabIndex = 1;
             this.lblName.Text = "이름 :";
             // 
@@ -104,21 +123,12 @@ namespace Client.Forms
             this.gbxMenu.Controls.Add(this.lblCompanyName);
             this.gbxMenu.Controls.Add(this.pic_Calendar);
             this.gbxMenu.Controls.Add(this.pic_Tree);
-            this.gbxMenu.Location = new System.Drawing.Point(4, 11);
+            this.gbxMenu.Location = new System.Drawing.Point(6, 33);
             this.gbxMenu.Name = "gbxMenu";
-            this.gbxMenu.Size = new System.Drawing.Size(393, 84);
+            this.gbxMenu.Size = new System.Drawing.Size(382, 62);
             this.gbxMenu.TabIndex = 0;
             this.gbxMenu.TabStop = false;
             this.gbxMenu.Text = "Menu";
-            // 
-            // gbx_ReceiveMsg
-            // 
-            this.gbx_ReceiveMsg.Location = new System.Drawing.Point(4, 249);
-            this.gbx_ReceiveMsg.Name = "gbx_ReceiveMsg";
-            this.gbx_ReceiveMsg.Size = new System.Drawing.Size(393, 333);
-            this.gbx_ReceiveMsg.TabIndex = 1;
-            this.gbx_ReceiveMsg.TabStop = false;
-            this.gbx_ReceiveMsg.Text = "받은 메세지함";
             // 
             // lblCompanyName
             // 
@@ -126,7 +136,7 @@ namespace Client.Forms
             this.lblCompanyName.Font = new System.Drawing.Font("휴먼엑스포", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblCompanyName.Location = new System.Drawing.Point(62, 36);
             this.lblCompanyName.Name = "lblCompanyName";
-            this.lblCompanyName.Size = new System.Drawing.Size(262, 27);
+            this.lblCompanyName.Size = new System.Drawing.Size(215, 22);
             this.lblCompanyName.TabIndex = 9;
             this.lblCompanyName.Text = "One International";
             // 
@@ -152,31 +162,21 @@ namespace Client.Forms
             this.pic_Tree.TabStop = false;
             this.pic_Tree.Click += new System.EventHandler(this.pic_Tree_Click);
             // 
-            // picProfile
+            // gbx_ReceiveMsg
             // 
-            this.picProfile.Image = global::Client.Properties.Resources.장백기;
-            this.picProfile.Location = new System.Drawing.Point(19, 42);
-            this.picProfile.Name = "picProfile";
-            this.picProfile.Size = new System.Drawing.Size(80, 80);
-            this.picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picProfile.TabIndex = 2;
-            this.picProfile.TabStop = false;
-            // 
-            // lblRank
-            // 
-            this.lblRank.AutoSize = true;
-            this.lblRank.Location = new System.Drawing.Point(259, 26);
-            this.lblRank.Name = "lblRank";
-            this.lblRank.Size = new System.Drawing.Size(47, 20);
-            this.lblRank.TabIndex = 6;
-            this.lblRank.Text = "직급 :";
+            this.gbx_ReceiveMsg.Location = new System.Drawing.Point(4, 249);
+            this.gbx_ReceiveMsg.Name = "gbx_ReceiveMsg";
+            this.gbx_ReceiveMsg.Size = new System.Drawing.Size(393, 333);
+            this.gbx_ReceiveMsg.TabIndex = 1;
+            this.gbx_ReceiveMsg.TabStop = false;
+            this.gbx_ReceiveMsg.Text = "받은 메세지함";
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(400, 590);
+            this.ClientSize = new System.Drawing.Size(833, 590);
             this.Controls.Add(this.gbx_ReceiveMsg);
             this.Controls.Add(this.gbxMenu);
             this.Controls.Add(this.gbxProfile);
@@ -185,20 +185,19 @@ namespace Client.Forms
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(360, 590);
             this.Name = "FormMain";
-            this.Padding = new System.Windows.Forms.Padding(20, 38, 20, 25);
+            this.Padding = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Text = "Office messengar Supporing Telecommuting";
             this.TransparencyKey = System.Drawing.Color.Empty;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
-            this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.gbxProfile.ResumeLayout(false);
             this.gbxProfile.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
             this.gbxMenu.ResumeLayout(false);
             this.gbxMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Calendar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Tree)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
             this.ResumeLayout(false);
 
         }

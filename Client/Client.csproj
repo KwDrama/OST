@@ -58,8 +58,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Employee.cs" />
-    <Compile Include="Classes\Processor.cs" />
     <Compile Include="Forms\FormChat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +164,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\더보기_아이콘.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OSTNetwork\OSTNetwork.csproj">
+      <Project>{4b31b468-d982-4a42-ab5d-3fa8b19bfed9}</Project>
+      <Name>OSTNetwork</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

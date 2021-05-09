@@ -1,32 +1,30 @@
-﻿using Client.Classes;
-using MetroFramework.Forms;
+﻿using MetroFramework.Forms;
 using System.Windows.Forms;
 using System.Drawing;
+using OSTNetwork;
 
 namespace Client.Forms
 {
     public partial class FormMain : MetroForm
     {
-        Processor proc = Processor.Instance;
-        public Employee MyEmp;
-
         FormTree formTree;
         FormSchedule formSchedule;
 
         public FormMain()
         {
             InitializeComponent();
-            proc.formMain = this;
+            Program.callback.Add(PacketType.None, p =>
+                MessageBox.Show("PacketType is none", "Recieve", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            );
+
             if ((new FormLogin()).ShowDialog() != DialogResult.OK)
                 Close();
         }
-        private void FormMain_Shown(object sender, System.EventArgs e)
-        {
-
-        }
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            proc.Close();
+            if (Program.recvThread != null && Program.recvThread.IsAlive)
+                Program.recvThread.Abort();
+            Program.client.Close();
         }
 
         private void pic_Tree_Click(object sender, System.EventArgs e)
@@ -35,7 +33,6 @@ namespace Client.Forms
             formTree.Location = new Point(500, 300);
             formTree.Show();
         }
-
         private void pic_Calendar_Click(object sender, System.EventArgs e)
         {
             formSchedule = new FormSchedule();
@@ -54,7 +51,7 @@ namespace Client.Forms
                     MessageBoxIcon.Question
                     );
                 if (result == DialogResult.OK)
-                    this.Close();
+                    Close();
             }
         }
     }

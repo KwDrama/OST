@@ -1,34 +1,26 @@
-﻿using Client.Classes;
-using MetroFramework.Forms;
+﻿using MetroFramework.Forms;
 using MetroFramework.Controls;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using OSTNetwork;
 
 namespace Client.Forms
 {
     public partial class FormLogin : MetroForm
     {
-        Processor proc = Processor.Instance;
-        bool loginable = false, logined = false;
-
-        FormRegist formRegist;
+        bool loginable = false;
 
         public FormLogin()
         {
             InitializeComponent();
-            proc.formLogin = this;
         }
         private void FormLogin_Shown(object sender, EventArgs e)
         {
-            lblResult.Style = MetroFramework.MetroColorStyle.Black;
-            lblResult.Text = "기본 서버에 연결 중입니다.";
-            proc.Connect("127.0.0.1");
-        }
-        private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!logined)
-                proc.Close();
+            lblResult.Style = MetroFramework.MetroColorStyle.Blue;
+            lblResult.Text = $"기본 서버에 연결 중입니다.\n{Program.hostname}:{Program.port.ToString()}";
+            
+            Program.client.BeginConnect(Program.hostname, Program.port, EndConnect, null);
         }
 
         private void txtEmpNum_TextChanged(object sender, EventArgs e)
@@ -38,10 +30,6 @@ namespace Client.Forms
             lblResult.Text = "";
         }
         private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-            lblResult.Text = "";
-        }
-        private void txt_Enter(object sender, EventArgs e)
         {
             lblResult.Text = "";
         }
@@ -69,35 +57,46 @@ namespace Client.Forms
             lblResult.Style = MetroFramework.MetroColorStyle.Black;
             lblResult.Text = "로그인 중..";
 
-            proc.Login(txtEmpNum.Text, txtPassword.Text);
+            // 로그인 데이터 서버로 전송
+            if (!Program.callback.ContainsKey(PacketType.Login))
+                Program.callback.Add(PacketType.Login, EndLogin);
+
+            Program.Send(new LoginPacket(int.Parse(txtEmpNum.Text), txtPassword.Text).Serialize());
+        }
+        private void btnRegist_Click(object sender, EventArgs e)
+        {
+
         }
 
-        public void EndConnect(bool success)
+        public void EndConnect(IAsyncResult result)
         {
+            string resultText = Program.client.Connected ? "" : "기본 서버 연결 실패";
+            try
+            {
+                Program.client.EndConnect(result);
+            }
+            catch (Exception ex)
+            {
+                resultText = ex.Message;
+            }
+
             // 연결 도중 폼을 닫으면 함수 실행 안함
             if (this == null) return;
 
+            if (Program.client.Connected)
+                Program.ns = Program.client.GetStream();
+
+            loginable = true;
             Invoke(new MethodInvoker(() =>
             {
-                if (loginable = success)
-                    lblResult.Text = "";
-                else
-                {
+                if (!Program.client.Connected)
                     lblResult.Style = MetroFramework.MetroColorStyle.Red;
-                    lblResult.Text = "서버 연결 실패했다.\n연결 폼 띄우게 만들어라.";
-                }
+                lblResult.Text = resultText;
             }));
         }
-
-        private void btnRegist_Click(object sender, EventArgs e)
+        public void EndLogin(Packet packet)
         {
-            formRegist = new FormRegist();
-            formRegist.ShowDialog();
-        }
-
-        public void EndLogin(bool success)
-        {
-            if (logined = success)
+            if ((packet as LoginPacket).success)
             {
                 DialogResult = DialogResult.OK;
                 Close();

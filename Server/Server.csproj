@@ -4,10 +4,15 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>OSTServer</AssemblyName>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.24" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OSTNetwork\OSTNetwork.csproj" />
   </ItemGroup>
 
 </Project>
