@@ -8,35 +8,38 @@ namespace Client.Panel
 {
     public partial class Panel : MetroUserControl
     {
-        public event EventHandler shown;
-        public event EventHandler closed;
+        public event EventHandler Shown;
+        public event EventHandler Closed;
+        public Form Owner;
         public bool loaded;
 
-        Panel()
+        protected Panel(Form owner)
         {
             InitializeComponent();
 
             Visible = false;
-
+            Owner = owner;
+            Owner.Controls.Add(this);
+            Owner.Resize += parent_Resize;
+            Owner.Click += (sender, e) => Swipe(false);
             BringToFront();
-            ParentForm.Resize += parent_Resize;
         }
 
-        protected virtual void Shown(EventArgs e)
+        protected virtual void handleShown(EventArgs e)
         {
-            if (shown != null)
-                shown(this, e);
+            if (Shown != null)
+                Shown(this, e);
         }
-        protected virtual void Closed(EventArgs e)
+        protected virtual void handleClosed(EventArgs e)
         {
-            if (closed != null)
-                closed(this, e);
+            if (Closed != null)
+                Closed(this, e);
         }
         void parent_Resize(object sender, EventArgs e)
         {
-            Width = ParentForm.Width;
-            Height = ParentForm.Height;
-            Location = new Point(loaded ? 0 : ParentForm.Width, 0);
+            Width = Owner.Width;
+            Height = Owner.Height;
+            Location = new Point(loaded ? 0 : Owner.Width, 0);
         }
         private void Panel_KeyDown(object sender, KeyEventArgs e)
         {
@@ -44,7 +47,7 @@ namespace Client.Panel
                 Swipe(false);
         }
 
-        void Swipe(bool show = true)
+        public void Swipe(bool show = true)
         {
             Visible = true;
             Transition t = new Transition(new TransitionType_EaseInEaseOut(400));
@@ -58,13 +61,13 @@ namespace Client.Panel
             {
                 loaded = true;
                 parent_Resize(null, null);
-                Shown(new EventArgs());
+                handleShown(new EventArgs());
             }
             else
             {
-                Closed(new EventArgs());
-                ParentForm.Resize -= parent_Resize;
-                ParentForm.Controls.Remove(this);
+                handleClosed(new EventArgs());
+                Owner.Resize -= parent_Resize;
+                Owner.Controls.Remove(this);
                 Dispose();
             }
         }

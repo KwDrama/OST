@@ -83,7 +83,8 @@ namespace Client.Forms
         }
         private void btnRegist_Click(object sender, EventArgs e)
         {
-            PanelRegister pnlRegister = new PanelRegister();
+            PanelRegister pnlRegister = new PanelRegister(this);
+            pnlRegister.Swipe();
         }
 
         public void EndConnect(IAsyncResult result)
