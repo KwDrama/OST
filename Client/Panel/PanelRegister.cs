@@ -2,7 +2,7 @@
 
 namespace Client.Panel
 {
-    public partial class PanelRegister : Panel
+    public partial class PanelRegister : PanelSlider
     {
         public PanelRegister(Form owner) : base(owner)
         {

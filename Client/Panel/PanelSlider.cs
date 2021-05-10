@@ -6,17 +6,19 @@ using Transitions;
 
 namespace Client.Panel
 {
-    public partial class Panel : MetroUserControl
+    public partial class PanelSlider : MetroUserControl
     {
         public event EventHandler Shown;
         public event EventHandler Closed;
         public Form Owner;
         public bool loaded;
 
-        protected Panel(Form owner)
+        public PanelSlider()
         {
             InitializeComponent();
-
+        }
+        public PanelSlider(Form owner) : this()
+        {
             Visible = false;
             Owner = owner;
             Owner.Controls.Add(this);

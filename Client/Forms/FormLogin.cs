@@ -84,6 +84,7 @@ namespace Client.Forms
         private void btnRegist_Click(object sender, EventArgs e)
         {
             PanelRegister pnlRegister = new PanelRegister(this);
+            pnlRegister.Show();
             pnlRegister.Swipe();
         }
 

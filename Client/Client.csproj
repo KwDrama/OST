@@ -94,11 +94,11 @@
     <Compile Include="Forms\FormTree.Designer.cs">
       <DependentUpon>FormTree.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panel\Panel.cs">
+    <Compile Include="Panel\PanelSlider.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\Panel.Designer.cs">
-      <DependentUpon>Panel.cs</DependentUpon>
+    <Compile Include="Panel\PanelSlider.Designer.cs">
+      <DependentUpon>PanelSlider.cs</DependentUpon>
     </Compile>
     <Compile Include="Panel\PanelRegister.cs">
       <SubType>UserControl</SubType>
@@ -126,24 +126,27 @@
     <EmbeddedResource Include="Forms\FormTree.resx">
       <DependentUpon>FormTree.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Panel\Panel.resx">
-      <DependentUpon>Panel.cs</DependentUpon>
+    <EmbeddedResource Include="Panel\PanelRegister.resx">
+      <DependentUpon>PanelRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\PanelSlider.resx">
+      <DependentUpon>PanelSlider.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -185,6 +188,24 @@
       <Project>{4b31b468-d982-4a42-ab5d-3fa8b19bfed9}</Project>
       <Name>OSTNetwork</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\manager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add-user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
