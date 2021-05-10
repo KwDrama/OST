@@ -32,36 +32,52 @@ namespace Client.Forms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(formMain = new FormMain());
+
+            // 프로그램이 종료되면 서버 연결 끊기
+            if (client.Connected)
+            {
+                if (recvThread.IsAlive)
+                    recvThread.Abort();
+                ns.Close();
+                client.Close();
+            }
         }
 
         static void Recieve()
         {
-            // 패킷 읽기
-            try
+            while(true)
             {
-                ns.Read(readBuffer, 0, readBuffer.Length);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(formMain, ex.Message, "Recieve", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // 패킷 읽기
+                try
+                {
+                    ns.Read(readBuffer, 0, readBuffer.Length);
+                }
+                catch (ThreadAbortException)
+                {
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(formMain, ex.Message, "Recieve", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Array.Clear(readBuffer, 0, readBuffer.Length);
+                    return;
+                }
+
+                // 패킷 번역
+                object pakcetObj = Packet.Deserialize(readBuffer);
+                if (pakcetObj == null)
+                    continue;
+                Packet packet = pakcetObj as Packet;
                 Array.Clear(readBuffer, 0, readBuffer.Length);
-                return;
-            }
 
-            // 패킷 번역
-            object pakcetObj = Packet.Deserialize(readBuffer);
-            if (pakcetObj == null)
-                return;
-            Packet packet = pakcetObj as Packet;
-            Array.Clear(readBuffer, 0, readBuffer.Length);
-
-            // 패킷 타입에 따라 호출 가능한 콜백 메서드 실행
-            if (packet.Type == PacketType.None)
-            {
-                MessageBox.Show(formMain, "PacketType is none", "Recieve", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // 패킷 타입에 따라 호출 가능한 콜백 메서드 실행
+                if (packet.Type == PacketType.None)
+                {
+                    MessageBox.Show(formMain, "PacketType is none", "Recieve", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (callback.ContainsKey(packet.Type))
+                    callback[packet.Type].Invoke(packet);
             }
-            else if (callback.ContainsKey(packet.Type))
-                callback[packet.Type].Invoke(packet);
         }
         public static void Send(byte[] data)
         {

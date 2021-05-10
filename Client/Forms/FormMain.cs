@@ -13,18 +13,19 @@ namespace Client.Forms
         public FormMain()
         {
             InitializeComponent();
+            Opacity = 0;
+        }
+        private void FormMain_Shown(object sender, System.EventArgs e)
+        {
             Program.callback.Add(PacketType.None, p =>
                 MessageBox.Show("PacketType is none", "Recieve", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             );
 
+            Hide();
+            Opacity = 1;
             if ((new FormLogin()).ShowDialog() != DialogResult.OK)
                 Close();
-        }
-        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (Program.recvThread != null && Program.recvThread.IsAlive)
-                Program.recvThread.Abort();
-            Program.client.Close();
+            Show();
         }
 
         private void pic_Tree_Click(object sender, System.EventArgs e)

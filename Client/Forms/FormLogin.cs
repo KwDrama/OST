@@ -9,7 +9,7 @@ namespace Client.Forms
 {
     public partial class FormLogin : MetroForm
     {
-        bool loginable = false;
+        bool loginable = false, enableEnter = true;
 
         public FormLogin()
         {
@@ -35,8 +35,15 @@ namespace Client.Forms
         }
         private void txt_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && enableEnter)
+            {
+                enableEnter = false;
                 btnLogin.PerformClick();
+            }
+        }
+        private void txt_KeyUp(object sender, KeyEventArgs e)
+        {
+            enableEnter = true;
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -84,7 +91,10 @@ namespace Client.Forms
             if (this == null) return;
 
             if (Program.client.Connected)
+            {
                 Program.ns = Program.client.GetStream();
+                Program.recvThread.Start();
+            }
 
             loginable = true;
             Invoke(new MethodInvoker(() =>

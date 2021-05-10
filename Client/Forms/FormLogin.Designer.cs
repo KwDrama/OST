@@ -38,6 +38,7 @@ namespace Client.Forms
             this.txtEmpNum = new MetroFramework.Controls.MetroTextBox();
             this.lnkRegist = new MetroFramework.Controls.MetroLink();
             this.lblSeperate = new MetroFramework.Controls.MetroLink();
+            this.spnLogin = new MetroFramework.Controls.MetroProgressSpinner();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,6 +132,7 @@ namespace Client.Forms
             this.txtPassword.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
+            this.txtPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_KeyUp);
             // 
             // txtEmpNum
             // 
@@ -167,6 +169,7 @@ namespace Client.Forms
             this.txtEmpNum.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmpNum.TextChanged += new System.EventHandler(this.txtEmpNum_TextChanged);
             this.txtEmpNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
+            this.txtEmpNum.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_KeyUp);
             // 
             // lnkRegist
             // 
@@ -190,12 +193,23 @@ namespace Client.Forms
             this.lblSeperate.Text = "|";
             this.lblSeperate.UseSelectable = true;
             // 
+            // spnLogin
+            // 
+            this.spnLogin.Location = new System.Drawing.Point(169, 332);
+            this.spnLogin.Maximum = 100;
+            this.spnLogin.Name = "spnLogin";
+            this.spnLogin.Size = new System.Drawing.Size(23, 23);
+            this.spnLogin.TabIndex = 8;
+            this.spnLogin.UseSelectable = true;
+            this.spnLogin.Visible = false;
+            // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(360, 600);
+            this.Controls.Add(this.spnLogin);
             this.Controls.Add(this.lblSeperate);
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.picLogo);
@@ -232,5 +246,6 @@ namespace Client.Forms
         private MetroFramework.Controls.MetroLabel lblResult;
         private MetroFramework.Controls.MetroLink lnkRegist;
         private MetroFramework.Controls.MetroLink lblSeperate;
+        private MetroFramework.Controls.MetroProgressSpinner spnLogin;
     }
 }

@@ -189,7 +189,7 @@ namespace Client.Forms
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Text = "Office messengar Supporing Telecommuting";
             this.TransparencyKey = System.Drawing.Color.Empty;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+            this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.gbxProfile.ResumeLayout(false);
             this.gbxProfile.PerformLayout();

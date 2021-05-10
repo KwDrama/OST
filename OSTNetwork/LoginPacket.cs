@@ -18,6 +18,7 @@ namespace OSTNetwork
         }
         public LoginPacket(bool success)
         {
+            Type = PacketType.Login;
             this.success = success;
         }
     }

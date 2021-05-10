@@ -28,51 +28,62 @@ namespace Server.Classes
 
         public void Recieve()
         {
-            // 패킷 읽기
-            try
+            while (true)
             {
-                ns.Read(readBuffer, 0, readBuffer.Length);
-            }
-            catch (IOException socketEx)
-            {
-                Log("Disconnect", socketEx.Message);
+                // 패킷 읽기
+                try
+                {
+                    ns.Read(readBuffer, 0, readBuffer.Length);
+                }
+                catch (IOException socketEx)
+                {
+                    Log("Disconnect", socketEx.Message);
+                    Array.Clear(readBuffer, 0, readBuffer.Length);
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    Log("Exception", ex.ToString());
+                    Array.Clear(readBuffer, 0, readBuffer.Length);
+                    return;
+                }
+
+                // 패킷 번역
+                object pakcetObj = Packet.Deserialize(readBuffer);
+                if (pakcetObj == null)
+                    return;
+                Packet packet = pakcetObj as Packet;
                 Array.Clear(readBuffer, 0, readBuffer.Length);
-                return;
-            }
-            catch (Exception ex)
-            {
-                Log("Exception", ex.ToString());
-                Array.Clear(readBuffer, 0, readBuffer.Length);
-                return;
-            }
 
-            // 패킷 번역
-            object pakcetObj = Packet.Deserialize(readBuffer);
-            if (pakcetObj == null)
-                return;
-            Packet packet = pakcetObj as Packet;
-            Array.Clear(readBuffer, 0, readBuffer.Length);
+                // 패킷 타입에 따라 진행
+                if (packet.Type == PacketType.None)
+                {
+                    Log("Warning", "Receieved packetType is none");
+                }
+                else if (packet.Type == PacketType.Login)
+                {
+                    LoginPacket p = packet as LoginPacket;
 
-            // 패킷 타입에 따라 진행
-            if (packet.Type == PacketType.None)
-            {
-                Log("Warning", "Receieved packetType is none");
-            }
-            else if (packet.Type == PacketType.Login)
-            {
-                LoginPacket p = packet as LoginPacket;
+                    bool success = Database.Login(p.empNum, p.password);
+                    if (success)
+                    {
+                        empNum = p.empNum;
+                        Log("Login", "성공");
+                        Program.MoveLoginClient(this);
+                    }
+                    else
+                    {
+                        Program.Log("Login", string.Format("{0} 실패", p.empNum));
+                    }
 
-                bool success = Database.Login(p.empNum, p.password);
-                Program.Log("Login", string.Format("{0} {1}", p.empNum, success ? "성공" : "실패"));
-                if (success)
-                    Program.MoveLoginClient(this);
-
-                Send(new LoginPacket(success).Serialize());
-                Array.Clear(sendBuffer, 0, sendBuffer.Length);
-            }
-            else
-            {
-                Log("Warning", "Receieved packetType is unknown");
+                    Thread.Sleep(2000); // 클라이언트 스피너 보기 위함
+                    Send(new LoginPacket(success).Serialize());
+                    Array.Clear(sendBuffer, 0, sendBuffer.Length);
+                }
+                else
+                {
+                    Log("Warning", "Receieved packetType is unknown");
+                }
             }
         }
 
