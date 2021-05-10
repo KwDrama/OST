@@ -51,7 +51,11 @@ namespace Server.Classes
                 // 패킷 번역
                 object pakcetObj = Packet.Deserialize(readBuffer);
                 if (pakcetObj == null)
+                {
+                    Log("Warning", "Cannot deserialize packet");
+                    Array.Clear(readBuffer, 0, readBuffer.Length);
                     return;
+                }
                 Packet packet = pakcetObj as Packet;
                 Array.Clear(readBuffer, 0, readBuffer.Length);
 
@@ -76,7 +80,7 @@ namespace Server.Classes
                         Program.Log("Login", string.Format("{0} 실패", p.empNum));
                     }
 
-                    Thread.Sleep(2000); // 클라이언트 스피너 보기 위함
+                    Thread.Sleep(400); // 클라이언트 스피너 보기 위함
                     Send(new LoginPacket(success).Serialize());
                     Array.Clear(sendBuffer, 0, sendBuffer.Length);
                 }

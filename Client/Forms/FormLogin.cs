@@ -51,7 +51,7 @@ namespace Client.Forms
 
             // 빈 항목 있을 경우 입력 요구
             foreach (MetroTextBox mtb in new MetroTextBox[] { txtEmpNum, txtPassword })
-                if (string.IsNullOrWhiteSpace(txtEmpNum.Text))
+                if (string.IsNullOrWhiteSpace(mtb.Text))
                 {
                     mtb.Focus();
                     lblResult.Style = MetroFramework.MetroColorStyle.Red;
@@ -59,16 +59,26 @@ namespace Client.Forms
                     return;
                 }
 
-            // TODO 프로그래스 스피너 제작하기
-            loginable = false;
-            lblResult.Style = MetroFramework.MetroColorStyle.Black;
-            lblResult.Text = "로그인 중..";
-
             // 로그인 데이터 서버로 전송
             if (!Program.callback.ContainsKey(PacketType.Login))
                 Program.callback.Add(PacketType.Login, EndLogin);
 
-            Program.Send(new LoginPacket(int.Parse(txtEmpNum.Text), txtPassword.Text).Serialize());
+            // 서버 연결 여부에 따라 로그인 시도
+            if (Program.client.Connected)
+            {
+                spnLogin.Visible = true;
+                txtEmpNum.Enabled = txtPassword.Enabled =
+                    btnLogin.Visible = loginable = false;
+                lblResult.Style = MetroFramework.MetroColorStyle.Black;
+                lblResult.Text = "로그인 중..";
+                Program.Send(new LoginPacket(int.Parse(txtEmpNum.Text), txtPassword.Text).Serialize());
+            }
+            else
+            {
+                lblResult.Style = MetroFramework.MetroColorStyle.Red;
+                lblResult.Text = "서버와 연결 되어있지 않습니다.";
+            }
+
         }
         private void btnRegist_Click(object sender, EventArgs e)
         {
@@ -99,8 +109,9 @@ namespace Client.Forms
             loginable = true;
             Invoke(new MethodInvoker(() =>
             {
-                if (!Program.client.Connected)
-                    lblResult.Style = MetroFramework.MetroColorStyle.Red;
+                lblResult.Style = Program.client.Connected ?
+                    MetroFramework.MetroColorStyle.Black :
+                    MetroFramework.MetroColorStyle.Red;
                 lblResult.Text = resultText;
             }));
         }
@@ -114,10 +125,12 @@ namespace Client.Forms
             else
                 Invoke(new MethodInvoker(() =>
                 {
+                    spnLogin.Visible = false;
+                    txtEmpNum.Enabled = txtPassword.Enabled =
+                        btnLogin.Visible = loginable = true;
                     lblResult.Style = MetroFramework.MetroColorStyle.Red;
                     lblResult.Text = "사원번호 또는 비밀번호를 다시 확인해주세요.";
                 }));
-            loginable = true;
         }
     }
 }

@@ -195,12 +195,15 @@ namespace Client.Forms
             // 
             // spnLogin
             // 
+            this.spnLogin.EnsureVisible = false;
             this.spnLogin.Location = new System.Drawing.Point(169, 332);
             this.spnLogin.Maximum = 100;
             this.spnLogin.Name = "spnLogin";
             this.spnLogin.Size = new System.Drawing.Size(23, 23);
+            this.spnLogin.Speed = 2F;
             this.spnLogin.TabIndex = 8;
             this.spnLogin.UseSelectable = true;
+            this.spnLogin.Value = 60;
             this.spnLogin.Visible = false;
             // 
             // FormLogin

@@ -38,7 +38,6 @@ namespace Client.Forms
             {
                 if (recvThread.IsAlive)
                     recvThread.Abort();
-                ns.Close();
                 client.Close();
             }
         }
