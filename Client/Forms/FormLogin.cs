@@ -1,4 +1,5 @@
-﻿using MetroFramework.Controls;
+﻿using Client.Panel;
+using MetroFramework.Controls;
 using MetroFramework.Forms;
 using OSTNetwork;
 using System;
@@ -82,7 +83,7 @@ namespace Client.Forms
         }
         private void btnRegist_Click(object sender, EventArgs e)
         {
-
+            PanelRegister pnlRegister = new PanelRegister();
         }
 
         public void EndConnect(IAsyncResult result)

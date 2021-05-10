@@ -4,9 +4,10 @@ namespace Client.Panel
 {
     public partial class PanelRegister : MetroUserControl
     {
-        public PanelRegister()
+        public PanelRegister() : base()
         {
             InitializeComponent();
+            StyleManager.Update();
         }
     }
 }

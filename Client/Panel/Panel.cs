@@ -1,5 +1,6 @@
 ﻿using MetroFramework.Controls;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Transitions;
 
@@ -9,6 +10,7 @@ namespace Client.Panel
     {
         public event EventHandler shown;
         public event EventHandler closed;
+        public bool loaded;
 
         Panel()
         {
@@ -32,7 +34,9 @@ namespace Client.Panel
         }
         void parent_Resize(object sender, EventArgs e)
         {
-
+            Width = ParentForm.Width;
+            Height = ParentForm.Height;
+            Location = new Point(loaded ? 0 : ParentForm.Width, 0);
         }
         private void Panel_KeyDown(object sender, KeyEventArgs e)
         {
@@ -43,20 +47,26 @@ namespace Client.Panel
         void Swipe(bool show = true)
         {
             Visible = true;
-            Transition t = new Transition(new TransitionType_EaseInEaseOut(1000));
+            Transition t = new Transition(new TransitionType_EaseInEaseOut(400));
             t.add(this, "Left", show ? 0 : Width);
             t.run();
 
             while (Left != (show ? 0 : Width))
                 Application.DoEvents();
 
-            if (!show)
+            if (show)
+            {
+                loaded = true;
+                parent_Resize(null, null);
+                Shown(new EventArgs());
+            }
+            else
             {
                 Closed(new EventArgs());
                 ParentForm.Resize -= parent_Resize;
                 ParentForm.Controls.Remove(this);
+                Dispose();
             }
-            
         }
     }
 }
