@@ -36,6 +36,7 @@ namespace Client.Forms
             // 프로그램이 종료되면 서버 연결 끊기
             if (client.Connected)
             {
+                Send(Packet.Serialize(new Packet(PacketType.Close)));
                 if (recvThread.IsAlive)
                     recvThread.Abort();
                 client.Close();
@@ -44,7 +45,7 @@ namespace Client.Forms
 
         static void Recieve()
         {
-            while(true)
+            while (true)
             {
                 // 패킷 읽기
                 try

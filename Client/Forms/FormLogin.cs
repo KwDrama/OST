@@ -1,9 +1,9 @@
-﻿using MetroFramework.Forms;
-using MetroFramework.Controls;
+﻿using MetroFramework.Controls;
+using MetroFramework.Forms;
+using OSTNetwork;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using OSTNetwork;
 
 namespace Client.Forms
 {
@@ -19,7 +19,7 @@ namespace Client.Forms
         {
             lblResult.Style = MetroFramework.MetroColorStyle.Blue;
             lblResult.Text = $"기본 서버에 연결 중입니다.\n{Program.hostname}:{Program.port.ToString()}";
-            
+
             Program.client.BeginConnect(Program.hostname, Program.port, EndConnect, null);
         }
 

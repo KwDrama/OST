@@ -37,15 +37,15 @@ namespace Server.Classes
                 }
                 catch (IOException socketEx)
                 {
-                    Log("Disconnect", socketEx.Message);
+                    Log("IOException", socketEx.Message);
                     Array.Clear(readBuffer, 0, readBuffer.Length);
-                    return;
+                    break;
                 }
                 catch (Exception ex)
                 {
                     Log("Exception", ex.ToString());
                     Array.Clear(readBuffer, 0, readBuffer.Length);
-                    return;
+                    break;
                 }
 
                 // 패킷 번역
@@ -54,7 +54,7 @@ namespace Server.Classes
                 {
                     Log("Warning", "Cannot deserialize packet");
                     Array.Clear(readBuffer, 0, readBuffer.Length);
-                    return;
+                    break;
                 }
                 Packet packet = pakcetObj as Packet;
                 Array.Clear(readBuffer, 0, readBuffer.Length);
@@ -63,6 +63,11 @@ namespace Server.Classes
                 if (packet.Type == PacketType.None)
                 {
                     Log("Warning", "Receieved packetType is none");
+                }
+                if (packet.Type == PacketType.Close)
+                {
+                    Log("Close", "Disconnect client");
+                    break;
                 }
                 else if (packet.Type == PacketType.Login)
                 {
@@ -77,10 +82,10 @@ namespace Server.Classes
                     }
                     else
                     {
-                        Program.Log("Login", string.Format("{0} 실패", p.empNum));
+                        Log("Login", string.Format("{0} 실패", p.empNum));
                     }
 
-                    Thread.Sleep(400); // 클라이언트 스피너 보기 위함
+                    Thread.Sleep(200); // 클라이언트 스피너 보기 위함
                     Send(new LoginPacket(success).Serialize());
                     Array.Clear(sendBuffer, 0, sendBuffer.Length);
                 }
@@ -89,8 +94,12 @@ namespace Server.Classes
                     Log("Warning", "Receieved packetType is unknown");
                 }
             }
-        }
 
+            // Close client
+            ns.Close();
+            if (socket.Connected) socket.Close();
+            Program.RemoveClient(this);
+        }
         void Send(byte[] data)
         {
             data.CopyTo(sendBuffer, 0);

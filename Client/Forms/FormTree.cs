@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Client.Forms
@@ -56,7 +50,7 @@ namespace Client.Forms
         private void tv_viewer_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             //더블클릭 시 채팅방 이동(후에 내용이 있다면 저장된 내용 불러오기, 없다면 새 채팅방으로 구현)
-            
+
             formChat = new FormChat();
             formChat.Location = new Point(500, 500);
 

@@ -6,8 +6,7 @@ namespace OSTNetwork
 {
     public enum PacketType
     {
-        None,
-        Login,
+        None, Close, Login,
     }
 
     [Serializable]
@@ -20,6 +19,10 @@ namespace OSTNetwork
         public Packet()
         {
             Type = PacketType.None;
+        }
+        public Packet(PacketType type)
+        {
+            Type = type;
         }
 
         public byte[] Serialize()

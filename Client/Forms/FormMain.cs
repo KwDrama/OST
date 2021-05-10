@@ -1,7 +1,7 @@
 ﻿using MetroFramework.Forms;
-using System.Windows.Forms;
-using System.Drawing;
 using OSTNetwork;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Client.Forms
 {
@@ -43,7 +43,7 @@ namespace Client.Forms
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Escape)
+            if (e.KeyCode == Keys.Escape)
             {
                 var result = MessageBox.Show(
                     "메신저를 종료하시겠습니까?",
