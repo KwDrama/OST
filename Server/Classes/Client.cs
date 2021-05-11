@@ -34,6 +34,7 @@ namespace Server.Classes
                 try
                 {
                     ns.Read(readBuffer, 0, readBuffer.Length);
+                    // 명준 readBuffer 복호화
                 }
                 catch (IOException socketEx)
                 {
@@ -103,8 +104,10 @@ namespace Server.Classes
         void Send(byte[] data)
         {
             data.CopyTo(sendBuffer, 0);
+            // 명준 sendBuffer 암호화
             ns.Write(sendBuffer, 0, sendBuffer.Length);
             ns.Flush();
+            Array.Clear(sendBuffer, 0, sendBuffer.Length);
         }
         void Log(string type, string content)
         {

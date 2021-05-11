@@ -27,6 +27,7 @@ namespace Client.Panel
         /// 디자이너 지원에 필요한 메서드입니다. 
         /// 이 메서드의 내용을 코드 편집기로 수정하지 마세요.
         /// </summary>
+        #pragma warning disable CS0618 // 형식 또는 멤버는 사용되지 않습니다.
         private void InitializeComponent()
         {
             MetroFramework.Controls.MetroTextBox txtName;
@@ -300,15 +301,17 @@ namespace Client.Panel
             // picClose
             // 
             this.picClose.BackColor = System.Drawing.Color.White;
-            this.picClose.Image = global::Client.Properties.Resources.next;
-            this.picClose.Location = new System.Drawing.Point(16, 16);
-            this.picClose.Margin = new System.Windows.Forms.Padding(16);
+            this.picClose.Image = ((System.Drawing.Image)(resources.GetObject("picClose.Image")));
+            this.picClose.Location = new System.Drawing.Point(319, 3);
             this.picClose.Name = "picClose";
-            this.picClose.Size = new System.Drawing.Size(32, 32);
+            this.picClose.Padding = new System.Windows.Forms.Padding(10);
+            this.picClose.Size = new System.Drawing.Size(36, 36);
             this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picClose.TabIndex = 6;
             this.picClose.TabStop = false;
             this.picClose.Click += new System.EventHandler(this.picClose_Click);
+            this.picClose.MouseEnter += new System.EventHandler(this.picClose_MouseEnter);
+            this.picClose.MouseLeave += new System.EventHandler(this.picClose_MouseLeave);
             // 
             // PanelRegister
             // 
@@ -325,9 +328,9 @@ namespace Client.Panel
             this.Controls.Add(this.txtPwConfirm);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtEmpNum);
-            this.Location = new System.Drawing.Point(0, 40);
+            this.Location = new System.Drawing.Point(0, 30);
             this.Name = "PanelRegister";
-            this.Size = new System.Drawing.Size(300, 560);
+            this.Size = new System.Drawing.Size(358, 560);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PanelRegister_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();

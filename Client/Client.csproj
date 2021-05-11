@@ -190,12 +190,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\back.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\next.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\phone.png" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +200,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\add-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

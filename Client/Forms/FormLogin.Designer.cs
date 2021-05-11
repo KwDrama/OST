@@ -27,6 +27,7 @@ namespace Client.Forms
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        #pragma warning disable CS0618 // 형식 또는 멤버는 사용되지 않습니다.
         private void InitializeComponent()
         {
             this.chkAutoLogin = new MetroFramework.Controls.MetroCheckBox();
@@ -205,6 +206,7 @@ namespace Client.Forms
             this.txtEmpNum.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtEmpNum.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmpNum.TextChanged += new System.EventHandler(this.txtEmpNum_TextChanged);
+            this.txtEmpNum.Click += new System.EventHandler(this.txtEmpNum_Click);
             this.txtEmpNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
             this.txtEmpNum.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_KeyUp);
             // 

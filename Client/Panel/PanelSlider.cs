@@ -18,7 +18,7 @@ namespace Client.Panel
         public Form owner;
         public bool loaded;
 
-        int endY = 0;
+        int visibleX = 0, invisibleX = 0;
 
         public PanelSlider()
         {
@@ -33,24 +33,26 @@ namespace Client.Panel
             owner.Controls.Add(this);
             owner.Resize += ownerResize;
             owner.Click += (sender, e) => Swipe(false);
-
-            Left = endY = type == SlidingType.Left ? owner.Width : -Width;
             BringToFront();
+        }
+        protected void Init()
+        {
+            visibleX = type == SlidingType.Left ? owner.Width - Width - 1 : 1;
+            Left = invisibleX = type == SlidingType.Left ? owner.Width : -Width;
         }
 
         void ownerResize(object sender, EventArgs e)
         {
-            Left = loaded ? 0 : endY;
+            Left = loaded ? visibleX : invisibleX;
         }
 
         public void Swipe(bool show = true)
         {
             Visible = true;
-            Transition t = new Transition(new TransitionType_EaseInEaseOut(400));
-            t.add(this, "Left", show ? 0 : endY);
-            t.run();
 
-            while (Left != (show ? 0 : endY))
+            Transition.run(this, "Left", show ? visibleX : invisibleX, new TransitionType_EaseInEaseOut(400));
+
+            while (Left != (show ? visibleX : invisibleX))
                 Application.DoEvents();
 
             if (show)
@@ -70,6 +72,17 @@ namespace Client.Panel
                 owner.Controls.Remove(this);
                 Dispose();
             }
+        }
+
+        public void EnterShadow(object sender, EventArgs e)
+        {
+            Control c = sender as Control;
+            c.BackColor = Color.FromArgb(238, 238, 238);
+        }
+        public void LeaveShadow(object sender, EventArgs e)
+        {
+            Control c = sender as Control;
+            c.BackColor = Color.Transparent;
         }
     }
 }

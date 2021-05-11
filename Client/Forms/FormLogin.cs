@@ -60,11 +60,11 @@ namespace Client.Forms
                     return;
                 }
 
-            // 로그인 데이터 서버로 전송
+            // 로그인이 끝나면 실행하도록 콜백 메서드 전달
             if (!Program.callback.ContainsKey(PacketType.Login))
                 Program.callback.Add(PacketType.Login, EndLogin);
 
-            // 서버 연결 여부에 따라 로그인 시도
+            // 서버가 연결되어 있으면 계정 정보를 서버로 전송하여 로그인 시도
             if (Program.client.Connected)
             {
                 spnLogin.Visible = true;
@@ -72,7 +72,9 @@ namespace Client.Forms
                     btnLogin.Visible = loginable = false;
                 lblResult.Style = MetroFramework.MetroColorStyle.Black;
                 lblResult.Text = "로그인 중..";
-                Program.Send(new LoginPacket(int.Parse(txtEmpNum.Text), txtPassword.Text).Serialize());
+                // 명준 아래 것 단방향 암호화
+                string encryptedPassword = txtPassword.Text;
+                Program.Send(new LoginPacket(int.Parse(txtEmpNum.Text), encryptedPassword).Serialize());
             }
             else
             {
@@ -83,7 +85,7 @@ namespace Client.Forms
         }
         private void lnkRegist_Click(object sender, EventArgs e)
         {
-            PanelRegister pnlRegister = new PanelRegister(this, SlidingType.Right);
+            PanelRegister pnlRegister = new PanelRegister(this, SlidingType.Left);
             pnlRegister.Show();
             pnlRegister.Swipe();
         }
@@ -122,6 +124,12 @@ namespace Client.Forms
                 lblResult.Text = resultText;
             }));
         }
+
+        private void txtEmpNum_Click(object sender, EventArgs e)
+        {
+
+        }
+
         public void EndLogin(Packet packet)
         {
             if ((packet as LoginPacket).success)

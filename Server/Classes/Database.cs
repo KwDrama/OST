@@ -33,7 +33,7 @@ namespace Server.Classes
         }
         public static bool Login(int empNum, string password)
         {
-            string sql = $"SELECT Name FROM Employee WHERE Num={empNum} AND Password={Filter(password)}";
+            string sql = $"SELECT Name FROM employee WHERE id={empNum} AND password={Filter(password)}";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             return cmd.ExecuteScalar() != null;

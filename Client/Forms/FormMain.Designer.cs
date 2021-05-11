@@ -56,7 +56,7 @@ namespace Client.Forms
             this.gbxProfile.Controls.Add(this.lblDepartment);
             this.gbxProfile.Controls.Add(this.picProfile);
             this.gbxProfile.Controls.Add(this.lblName);
-            this.gbxProfile.Location = new System.Drawing.Point(4, 101);
+            this.gbxProfile.Location = new System.Drawing.Point(6, 101);
             this.gbxProfile.Name = "gbxProfile";
             this.gbxProfile.Size = new System.Drawing.Size(393, 142);
             this.gbxProfile.TabIndex = 0;
