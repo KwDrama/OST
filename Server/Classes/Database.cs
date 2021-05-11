@@ -5,6 +5,8 @@ namespace Server.Classes
 {
     static class Database
     {
+
+        // test feature-db
         public static MySqlConnection con;                      // DB 연결 정보
         public static readonly string hostname = "www.ygh.kr";  // DB 서버 주소
         public static readonly string id = "ost";               // DB 유저 이름
