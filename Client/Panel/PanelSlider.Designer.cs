@@ -33,8 +33,7 @@ namespace Client.Panel
             // 
             // PanelSlider
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Name = "PanelSlider";
             this.ResumeLayout(false);
 

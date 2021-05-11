@@ -83,7 +83,7 @@ namespace Client.Forms
         }
         private void lnkRegist_Click(object sender, EventArgs e)
         {
-            PanelRegister pnlRegister = new PanelRegister(this);
+            PanelRegister pnlRegister = new PanelRegister(this, SlidingType.Right);
             pnlRegister.Show();
             pnlRegister.Swipe();
         }

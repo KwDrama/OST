@@ -23,9 +23,10 @@ namespace Client.Forms
 
             Hide();
             Opacity = 1;
-            if ((new FormLogin()).ShowDialog() != DialogResult.OK)
+            if ((new FormLogin()).ShowDialog() == DialogResult.OK)
+                Show();
+            else
                 Close();
-            Show();
         }
 
         private void pic_Tree_Click(object sender, System.EventArgs e)

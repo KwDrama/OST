@@ -6,66 +6,68 @@ using Transitions;
 
 namespace Client.Panel
 {
+    public enum SlidingType
+    {
+        Left, Right
+    }
     public partial class PanelSlider : MetroUserControl
     {
+        public SlidingType type;
         public event EventHandler Shown;
         public event EventHandler Closed;
-        public Form Owner;
+        public Form owner;
         public bool loaded;
+
+        int endY = 0;
 
         public PanelSlider()
         {
             InitializeComponent();
         }
-        public PanelSlider(Form owner) : this()
+        public PanelSlider(Form owner, SlidingType type) : this()
         {
+            this.type = type;
+            this.owner = owner;
+
             Visible = false;
-            Owner = owner;
-            Owner.Controls.Add(this);
-            Owner.Resize += ownerResize;
-            Owner.Click += (sender, e) => Swipe(false);
-            Location = new Point(Owner.Width, 0);
+            owner.Controls.Add(this);
+            owner.Resize += ownerResize;
+            owner.Click += (sender, e) => Swipe(false);
+
+            Left = endY = type == SlidingType.Left ? owner.Width : -Width;
             BringToFront();
         }
 
-        protected virtual void handleShown(EventArgs e)
-        {
-            if (Shown != null)
-                Shown(this, e);
-        }
-        protected virtual void handleClosed(EventArgs e)
-        {
-            if (Closed != null)
-                Closed(this, e);
-        }
         void ownerResize(object sender, EventArgs e)
         {
-            Width = Owner.Width;
-            Height = Owner.Height;
-            Location = new Point(loaded ? 0 : Owner.Width, 0);
+            Left = loaded ? 0 : endY;
         }
 
         public void Swipe(bool show = true)
         {
             Visible = true;
             Transition t = new Transition(new TransitionType_EaseInEaseOut(400));
-            t.add(this, "Left", show ? 0 : Width);
+            t.add(this, "Left", show ? 0 : endY);
             t.run();
 
-            while (Left != (show ? 0 : Width))
+            while (Left != (show ? 0 : endY))
                 Application.DoEvents();
 
             if (show)
             {
                 loaded = true;
                 ownerResize(null, null);
-                handleShown(new EventArgs());
+
+                if (Shown != null)
+                    Shown(this, new EventArgs());
             }
             else
             {
-                handleClosed(new EventArgs());
-                Owner.Resize -= ownerResize;
-                Owner.Controls.Remove(this);
+                if (Closed != null)
+                    Closed(this, new EventArgs());
+
+                owner.Resize -= ownerResize;
+                owner.Controls.Remove(this);
                 Dispose();
             }
         }

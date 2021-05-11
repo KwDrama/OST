@@ -325,8 +325,10 @@ namespace Client.Panel
             this.Controls.Add(this.txtPwConfirm);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtEmpNum);
+            this.Location = new System.Drawing.Point(0, 40);
             this.Name = "PanelRegister";
-            this.Size = new System.Drawing.Size(360, 559);
+            this.Size = new System.Drawing.Size(300, 560);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PanelRegister_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
             this.ResumeLayout(false);
