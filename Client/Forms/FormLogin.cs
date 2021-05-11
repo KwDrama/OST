@@ -81,11 +81,15 @@ namespace Client.Forms
             }
 
         }
-        private void btnRegist_Click(object sender, EventArgs e)
+        private void lnkRegist_Click(object sender, EventArgs e)
         {
             PanelRegister pnlRegister = new PanelRegister(this);
             pnlRegister.Show();
             pnlRegister.Swipe();
+        }
+        private void lnkResetPw_Click(object sender, EventArgs e)
+        {
+
         }
 
         public void EndConnect(IAsyncResult result)

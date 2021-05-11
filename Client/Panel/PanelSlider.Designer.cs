@@ -31,12 +31,11 @@ namespace Client.Panel
         {
             this.SuspendLayout();
             // 
-            // Panel
+            // PanelSlider
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "Panel";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Panel_KeyDown);
+            this.Name = "PanelSlider";
             this.ResumeLayout(false);
 
         }

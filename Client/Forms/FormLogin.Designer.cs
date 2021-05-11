@@ -74,6 +74,7 @@ namespace Client.Forms
             this.lnkResetPw.TabIndex = 7;
             this.lnkResetPw.Text = "비밀번호 재설정";
             this.lnkResetPw.UseSelectable = true;
+            this.lnkResetPw.Click += new System.EventHandler(this.lnkResetPw_Click);
             // 
             // lblResult
             // 
@@ -96,6 +97,7 @@ namespace Client.Forms
             this.lnkRegist.TabIndex = 5;
             this.lnkRegist.Text = "사원 등록";
             this.lnkRegist.UseSelectable = true;
+            this.lnkRegist.Click += new System.EventHandler(this.lnkRegist_Click);
             // 
             // lblSeperate
             // 
@@ -137,9 +139,9 @@ namespace Client.Forms
             // 
             // 
             this.txtPassword.CustomButton.Image = null;
-            this.txtPassword.CustomButton.Location = new System.Drawing.Point(178, 1);
+            this.txtPassword.CustomButton.Location = new System.Drawing.Point(176, 1);
             this.txtPassword.CustomButton.Name = "";
-            this.txtPassword.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtPassword.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtPassword.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtPassword.CustomButton.TabIndex = 1;
             this.txtPassword.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -175,9 +177,9 @@ namespace Client.Forms
             // 
             // 
             this.txtEmpNum.CustomButton.Image = null;
-            this.txtEmpNum.CustomButton.Location = new System.Drawing.Point(176, 2);
+            this.txtEmpNum.CustomButton.Location = new System.Drawing.Point(176, 1);
             this.txtEmpNum.CustomButton.Name = "";
-            this.txtEmpNum.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtEmpNum.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtEmpNum.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtEmpNum.CustomButton.TabIndex = 1;
             this.txtEmpNum.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;

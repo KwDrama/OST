@@ -63,11 +63,11 @@ namespace Client.Panel
             txtName.DisplayIcon = true;
             txtName.Icon = global::Client.Properties.Resources.user;
             txtName.Lines = new string[0];
-            txtName.Location = new System.Drawing.Point(80, 338);
+            txtName.Location = new System.Drawing.Point(80, 317);
             txtName.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
             txtName.MaxLength = 20;
             txtName.Name = "txtName";
-            txtName.PasswordChar = '●';
+            txtName.PasswordChar = '\0';
             txtName.PromptText = "이름";
             txtName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             txtName.SelectedText = "";
@@ -77,7 +77,6 @@ namespace Client.Panel
             txtName.Size = new System.Drawing.Size(200, 25);
             txtName.TabIndex = 3;
             txtName.UseSelectable = true;
-            txtName.UseSystemPasswordChar = true;
             txtName.WaterMark = "이름";
             txtName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             txtName.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -86,7 +85,7 @@ namespace Client.Panel
             // 
             this.cmbRank1.FormattingEnabled = true;
             this.cmbRank1.ItemHeight = 23;
-            this.cmbRank1.Location = new System.Drawing.Point(80, 427);
+            this.cmbRank1.Location = new System.Drawing.Point(80, 406);
             this.cmbRank1.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.cmbRank1.Name = "cmbRank1";
             this.cmbRank1.Size = new System.Drawing.Size(97, 29);
@@ -97,7 +96,7 @@ namespace Client.Panel
             // 
             this.cmbRank2.FormattingEnabled = true;
             this.cmbRank2.ItemHeight = 23;
-            this.cmbRank2.Location = new System.Drawing.Point(183, 427);
+            this.cmbRank2.Location = new System.Drawing.Point(183, 406);
             this.cmbRank2.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.cmbRank2.Name = "cmbRank2";
             this.cmbRank2.Size = new System.Drawing.Size(97, 29);
@@ -106,7 +105,7 @@ namespace Client.Panel
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(80, 520);
+            this.btnSubmit.Location = new System.Drawing.Point(80, 499);
             this.btnSubmit.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(200, 23);
@@ -131,10 +130,10 @@ namespace Client.Panel
             this.txtPhone.DisplayIcon = true;
             this.txtPhone.Icon = ((System.Drawing.Image)(resources.GetObject("txtPhone.Icon")));
             this.txtPhone.Lines = new string[0];
-            this.txtPhone.Location = new System.Drawing.Point(80, 369);
+            this.txtPhone.Location = new System.Drawing.Point(80, 348);
             this.txtPhone.MaxLength = 20;
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.PasswordChar = '●';
+            this.txtPhone.PasswordChar = '\0';
             this.txtPhone.PromptText = "전화번호";
             this.txtPhone.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtPhone.SelectedText = "";
@@ -144,7 +143,6 @@ namespace Client.Panel
             this.txtPhone.Size = new System.Drawing.Size(200, 25);
             this.txtPhone.TabIndex = 3;
             this.txtPhone.UseSelectable = true;
-            this.txtPhone.UseSystemPasswordChar = true;
             this.txtPhone.WaterMark = "전화번호";
             this.txtPhone.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPhone.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -166,10 +164,10 @@ namespace Client.Panel
             this.txtRank.DisplayIcon = true;
             this.txtRank.Icon = global::Client.Properties.Resources.star;
             this.txtRank.Lines = new string[0];
-            this.txtRank.Location = new System.Drawing.Point(80, 462);
+            this.txtRank.Location = new System.Drawing.Point(80, 441);
             this.txtRank.MaxLength = 20;
             this.txtRank.Name = "txtRank";
-            this.txtRank.PasswordChar = '●';
+            this.txtRank.PasswordChar = '\0';
             this.txtRank.PromptText = "직위";
             this.txtRank.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtRank.SelectedText = "";
@@ -179,7 +177,6 @@ namespace Client.Panel
             this.txtRank.Size = new System.Drawing.Size(200, 25);
             this.txtRank.TabIndex = 3;
             this.txtRank.UseSelectable = true;
-            this.txtRank.UseSystemPasswordChar = true;
             this.txtRank.WaterMark = "직위";
             this.txtRank.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtRank.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -201,7 +198,7 @@ namespace Client.Panel
             this.txtPwConfirm.DisplayIcon = true;
             this.txtPwConfirm.Icon = global::Client.Properties.Resources.key;
             this.txtPwConfirm.Lines = new string[0];
-            this.txtPwConfirm.Location = new System.Drawing.Point(80, 280);
+            this.txtPwConfirm.Location = new System.Drawing.Point(80, 259);
             this.txtPwConfirm.MaxLength = 20;
             this.txtPwConfirm.Name = "txtPwConfirm";
             this.txtPwConfirm.PasswordChar = '●';
@@ -236,7 +233,7 @@ namespace Client.Panel
             this.txtPassword.DisplayIcon = true;
             this.txtPassword.Icon = global::Client.Properties.Resources.key;
             this.txtPassword.Lines = new string[0];
-            this.txtPassword.Location = new System.Drawing.Point(80, 249);
+            this.txtPassword.Location = new System.Drawing.Point(80, 228);
             this.txtPassword.MaxLength = 20;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
@@ -271,7 +268,7 @@ namespace Client.Panel
             this.txtEmpNum.DisplayIcon = true;
             this.txtEmpNum.Icon = global::Client.Properties.Resources.manager;
             this.txtEmpNum.Lines = new string[0];
-            this.txtEmpNum.Location = new System.Drawing.Point(80, 218);
+            this.txtEmpNum.Location = new System.Drawing.Point(80, 197);
             this.txtEmpNum.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.txtEmpNum.MaxLength = 6;
             this.txtEmpNum.Name = "txtEmpNum";
@@ -293,7 +290,7 @@ namespace Client.Panel
             // 
             this.picLogo.BackColor = System.Drawing.Color.White;
             this.picLogo.Image = global::Client.Properties.Resources.add_user;
-            this.picLogo.Location = new System.Drawing.Point(80, 57);
+            this.picLogo.Location = new System.Drawing.Point(80, 36);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(200, 128);
             this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -311,6 +308,7 @@ namespace Client.Panel
             this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picClose.TabIndex = 6;
             this.picClose.TabStop = false;
+            this.picClose.Click += new System.EventHandler(this.picClose_Click);
             // 
             // PanelRegister
             // 
@@ -328,7 +326,7 @@ namespace Client.Panel
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtEmpNum);
             this.Name = "PanelRegister";
-            this.Size = new System.Drawing.Size(360, 600);
+            this.Size = new System.Drawing.Size(360, 559);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
             this.ResumeLayout(false);

@@ -22,8 +22,9 @@ namespace Client.Panel
             Visible = false;
             Owner = owner;
             Owner.Controls.Add(this);
-            Owner.Resize += parent_Resize;
+            Owner.Resize += ownerResize;
             Owner.Click += (sender, e) => Swipe(false);
+            Location = new Point(Owner.Width, 0);
             BringToFront();
         }
 
@@ -37,16 +38,11 @@ namespace Client.Panel
             if (Closed != null)
                 Closed(this, e);
         }
-        void parent_Resize(object sender, EventArgs e)
+        void ownerResize(object sender, EventArgs e)
         {
             Width = Owner.Width;
             Height = Owner.Height;
             Location = new Point(loaded ? 0 : Owner.Width, 0);
-        }
-        private void Panel_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-                Swipe(false);
         }
 
         public void Swipe(bool show = true)
@@ -62,13 +58,13 @@ namespace Client.Panel
             if (show)
             {
                 loaded = true;
-                parent_Resize(null, null);
+                ownerResize(null, null);
                 handleShown(new EventArgs());
             }
             else
             {
                 handleClosed(new EventArgs());
-                Owner.Resize -= parent_Resize;
+                Owner.Resize -= ownerResize;
                 Owner.Controls.Remove(this);
                 Dispose();
             }

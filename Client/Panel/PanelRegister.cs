@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Client.Panel
 {
@@ -7,7 +8,11 @@ namespace Client.Panel
         public PanelRegister(Form owner) : base(owner)
         {
             InitializeComponent();
-            StyleManager.Update();
+        }
+
+        private void picClose_Click(object sender, EventArgs e)
+        {
+            Swipe(false);
         }
     }
 }
