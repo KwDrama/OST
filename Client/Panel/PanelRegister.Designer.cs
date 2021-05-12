@@ -300,6 +300,7 @@ namespace Client.Panel
             // 
             // picClose
             // 
+            this.picClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picClose.BackColor = System.Drawing.Color.White;
             this.picClose.Image = ((System.Drawing.Image)(resources.GetObject("picClose.Image")));
             this.picClose.Location = new System.Drawing.Point(319, 3);

@@ -39,6 +39,13 @@ namespace Client.Panel
         {
             visibleX = type == SlidingType.Left ? owner.Width - Width - 1 : 1;
             Left = invisibleX = type == SlidingType.Left ? owner.Width : -Width;
+
+            // Add splitter
+            Splitter spl = new Splitter();
+            spl.BackColor = Color.LightGray;
+            spl.Width = 1;
+            spl.Dock = type == SlidingType.Left ? DockStyle.Left : DockStyle.Right;
+            Controls.Add(spl);
         }
 
         void ownerResize(object sender, EventArgs e)
