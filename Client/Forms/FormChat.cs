@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Client.Forms
 {
@@ -9,10 +10,19 @@ namespace Client.Forms
             InitializeComponent();
         }
 
-        private void picClose_Click(object sender, EventArgs e)
+        private void FormChat_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            this.Close();
+            if ((Keys)e.KeyCode == System.Windows.Forms.Keys.Escape)
+            {
+                var result = MessageBox.Show(
+                    "채딩방을 나가시겠습니까?",
+                    "Caption",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question
+                    );
+                if (result == DialogResult.OK)
+                    this.Close();
+            }
         }
-
     }
 }
