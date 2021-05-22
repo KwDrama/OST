@@ -6,7 +6,7 @@ namespace OSTNetwork
 {
     public enum PacketType
     {
-        None, Close, Login,
+        Header, Close, Login,
     }
 
     [Serializable]
@@ -15,24 +15,23 @@ namespace OSTNetwork
         public const int BUFFER_SIZE = 4096;
 
         public PacketType Type;
+        public int Length = 0;
 
         public Packet()
         {
-            Type = PacketType.None;
+            Type = PacketType.Header;
+        }
+        public Packet(int length)
+        {
+            Type = PacketType.Header;
+            Length = length;
         }
         public Packet(PacketType type)
         {
             Type = type;
         }
 
-        public byte[] Serialize()
-        {
-            using (MemoryStream ms = new MemoryStream(BUFFER_SIZE))
-            {
-                new BinaryFormatter().Serialize(ms, this);
-                return ms.ToArray();
-            }
-        }
+        public byte[] Serialize() => Serialize(this);
         public static byte[] Serialize(object o)
         {
             using (MemoryStream ms = new MemoryStream(BUFFER_SIZE))

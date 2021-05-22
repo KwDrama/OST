@@ -74,7 +74,7 @@ namespace Client.Forms
                 lblResult.Text = "로그인 중..";
                 // 명준 아래 것 단방향 암호화
                 string encryptedPassword = txtPassword.Text;
-                Program.Send(new LoginPacket(int.Parse(txtEmpNum.Text), encryptedPassword).Serialize());
+                Program.Send(new LoginPacket(int.Parse(txtEmpNum.Text), encryptedPassword));
             }
             else
             {

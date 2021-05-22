@@ -13,8 +13,6 @@ namespace Client.Forms
         public static NetworkStream ns;                                 // 네트워크 스트림
         public static readonly string hostname = "127.0.0.1";           // 접속할 서버 주소
         public static readonly ushort port = 6756;                      // 접속할 서버 포트
-        static byte[] sendBuffer;                                       // 송신 버퍼
-        static byte[] readBuffer;                                       // 수신 버퍼
         public static Thread recvThread;                                // 서버로부터 수신을 대기하는 스레드
         public static int empNum = 0;                                   // 나의 사원 번호
         public static Dictionary<PacketType, Action<Packet>> callback;  // 타입에 따른 콜백 메소드
@@ -24,8 +22,6 @@ namespace Client.Forms
         static void Main()
         {
             client = new TcpClient();
-            sendBuffer = new byte[Packet.BUFFER_SIZE];
-            readBuffer = new byte[Packet.BUFFER_SIZE];
             recvThread = new Thread(new ThreadStart(Recieve));
             callback = new Dictionary<PacketType, Action<Packet>>();
 
@@ -36,7 +32,7 @@ namespace Client.Forms
             // 프로그램이 종료되면 서버 연결 끊기
             if (client.Connected)
             {
-                Send(Packet.Serialize(new Packet(PacketType.Close)));
+                Send(new Packet(PacketType.Close));
                 if (recvThread.IsAlive)
                     recvThread.Abort();
                 client.Close();
@@ -45,13 +41,18 @@ namespace Client.Forms
 
         static void Recieve()
         {
+            byte[] readBuffer = new byte[Packet.BUFFER_SIZE];
+            int readLength = Packet.BUFFER_SIZE;
             while (true)
             {
+                // 읽어야 하는 길이가 버퍼 사이즈랑 다를 경우
+                if (readLength != readBuffer.Length)
+                    readBuffer = new byte[readLength];
+
                 // 패킷 읽기
                 try
                 {
                     ns.Read(readBuffer, 0, readBuffer.Length);
-                    // 명준 readBuffer 복호화
                 }
                 catch (ThreadAbortException)
                 {
@@ -64,29 +65,47 @@ namespace Client.Forms
                     return;
                 }
 
+                // 큰 버퍼 읽었으면 다시 버퍼 크기 원상 복귀
+                if (readLength > Packet.BUFFER_SIZE)
+                    readLength = Packet.BUFFER_SIZE;
+
                 // 패킷 번역
                 object pakcetObj = Packet.Deserialize(readBuffer);
-                if (pakcetObj == null)
-                    continue;
+                if (pakcetObj == null) continue;
                 Packet packet = pakcetObj as Packet;
+
+                // 패킷 길이가 클 경우 큰 데이터를 받기
+                if (packet.Length > 0)
+                {
+                    readLength = packet.Length;
+                    continue;
+                }
                 Array.Clear(readBuffer, 0, readBuffer.Length);
 
                 // 패킷 타입에 따라 호출 가능한 콜백 메서드 실행
-                if (packet.Type == PacketType.None)
-                {
-                    MessageBox.Show(formMain, "PacketType is none", "Recieve", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else if (callback.ContainsKey(packet.Type))
+                if (callback.ContainsKey(packet.Type))
                     callback[packet.Type].Invoke(packet);
             }
         }
-        public static void Send(byte[] data)
+        public static void Send(Packet packet)
         {
-            data.CopyTo(sendBuffer, 0);
-            // 명준 sendBuffer 암호화
-            ns.Write(sendBuffer, 0, sendBuffer.Length);
+            byte[] sendBuffer = new byte[Packet.BUFFER_SIZE];
+            byte[] packetBytes = packet.Serialize();
+
+            // 기존 버퍼 크기보다 클 경우 (이미지 등)
+            if (packetBytes.Length > Packet.BUFFER_SIZE)
+            {
+                new Packet(packetBytes.Length).Serialize().CopyTo(sendBuffer, 0);
+                ns.Write(sendBuffer, 0, sendBuffer.Length);
+                ns.Write(packetBytes, 0, packetBytes.Length);
+            }
+            else
+            {
+                packetBytes.CopyTo(sendBuffer, 0);
+                ns.Write(sendBuffer, 0, sendBuffer.Length);
+            }
+
             ns.Flush();
-            Array.Clear(sendBuffer, 0, sendBuffer.Length);
         }
     }
 }

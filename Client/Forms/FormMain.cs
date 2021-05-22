@@ -17,10 +17,6 @@ namespace Client.Forms
         }
         private void FormMain_Shown(object sender, System.EventArgs e)
         {
-            Program.callback.Add(PacketType.None, p =>
-                MessageBox.Show("PacketType is none", "Recieve", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            );
-
             Hide();
             Opacity = 1;
             if ((new FormLogin()).ShowDialog() == DialogResult.OK)

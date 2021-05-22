@@ -10,8 +10,6 @@ namespace Server.Classes
     {
         public TcpClient socket;    // 클라이언트 소켓
         NetworkStream ns;           // 네트워크 스트림
-        byte[] sendBuffer;          // 송신 버퍼
-        byte[] readBuffer;          // 수신 버퍼
         public Thread recvThread;   // 클라이언트로부터 수신을 대기하는 스레드
         public int empNum;          // 클라이언트의 사원 번호
 
@@ -19,8 +17,6 @@ namespace Server.Classes
         {
             this.socket = socket;
             ns = socket.GetStream();
-            sendBuffer = new byte[Packet.BUFFER_SIZE];
-            readBuffer = new byte[Packet.BUFFER_SIZE];
 
             recvThread = new Thread(new ThreadStart(Recieve));
             recvThread.Start();
@@ -28,13 +24,18 @@ namespace Server.Classes
 
         public void Recieve()
         {
+            byte[] readBuffer = new byte[Packet.BUFFER_SIZE];
+            int readLength = Packet.BUFFER_SIZE;
             while (true)
             {
+                // 읽어야 하는 길이가 버퍼 사이즈랑 다를 경우
+                if (readLength != readBuffer.Length)
+                    readBuffer = new byte[readLength];
+
                 // 패킷 읽기
                 try
                 {
                     ns.Read(readBuffer, 0, readBuffer.Length);
-                    // 명준 readBuffer 복호화
                 }
                 catch (IOException socketEx)
                 {
@@ -49,6 +50,10 @@ namespace Server.Classes
                     break;
                 }
 
+                // 큰 버퍼 읽었으면 다시 버퍼 크기 원상 복귀
+                if (readLength > Packet.BUFFER_SIZE)
+                    readLength = Packet.BUFFER_SIZE;
+
                 // 패킷 번역
                 object pakcetObj = Packet.Deserialize(readBuffer);
                 if (pakcetObj == null)
@@ -61,13 +66,14 @@ namespace Server.Classes
                 Array.Clear(readBuffer, 0, readBuffer.Length);
 
                 // 패킷 타입에 따라 진행
-                if (packet.Type == PacketType.None)
+                if (packet.Type == PacketType.Header)
                 {
-                    Log("Warning", "Receieved packetType is none");
+                    Log("Warning", "Receieved packetType is header");
                 }
                 if (packet.Type == PacketType.Close)
                 {
                     Log("Close", "Disconnect client");
+                    socket.Close();
                     break;
                 }
                 else if (packet.Type == PacketType.Login)
@@ -86,9 +92,8 @@ namespace Server.Classes
                         Log("Login", string.Format("{0} 실패", p.empNum));
                     }
 
-                    Thread.Sleep(200); // 클라이언트 스피너 보기 위함
-                    Send(new LoginPacket(success).Serialize());
-                    Array.Clear(sendBuffer, 0, sendBuffer.Length);
+                    Thread.Sleep(200);  // 클라이언트 스피너 보기 위함
+                    Send(new LoginPacket(success));
                 }
                 else
                 {
@@ -101,13 +106,25 @@ namespace Server.Classes
             if (socket.Connected) socket.Close();
             Program.RemoveClient(this);
         }
-        void Send(byte[] data)
+        void Send(Packet packet)
         {
-            data.CopyTo(sendBuffer, 0);
-            // 명준 sendBuffer 암호화
-            ns.Write(sendBuffer, 0, sendBuffer.Length);
+            byte[] sendBuffer = new byte[Packet.BUFFER_SIZE];
+            byte[] packetBytes = packet.Serialize();
+
+            // 기존 버퍼 크기보다 클 경우 (이미지 등)
+            if (packetBytes.Length > Packet.BUFFER_SIZE)
+            {
+                new Packet(packetBytes.Length).Serialize().CopyTo(sendBuffer, 0);
+                ns.Write(sendBuffer, 0, sendBuffer.Length);
+                ns.Write(packetBytes, 0, packetBytes.Length);
+            }
+            else
+            {
+                packetBytes.CopyTo(sendBuffer, 0);
+                ns.Write(sendBuffer, 0, sendBuffer.Length);
+            }
+
             ns.Flush();
-            Array.Clear(sendBuffer, 0, sendBuffer.Length);
         }
         void Log(string type, string content)
         {

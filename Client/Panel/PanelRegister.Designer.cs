@@ -92,6 +92,7 @@ namespace Client.Panel
             this.cmbRank1.Size = new System.Drawing.Size(97, 29);
             this.cmbRank1.TabIndex = 4;
             this.cmbRank1.UseSelectable = true;
+            this.cmbRank1.SelectedIndexChanged += new System.EventHandler(this.cmbRank1_SelectedIndexChanged);
             // 
             // cmbRank2
             // 
