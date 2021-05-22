@@ -29,163 +29,117 @@ namespace Client.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtChatContext = new MetroFramework.Controls.MetroTextBox();
-            this.gbxChatName1 = new System.Windows.Forms.GroupBox();
-            this.lblChatName = new System.Windows.Forms.Label();
-            this.picInfo = new System.Windows.Forms.PictureBox();
-            this.picClose = new System.Windows.Forms.PictureBox();
-            this.txtInput = new MetroFramework.Controls.MetroTextBox();
+            this.txtContext = new MetroFramework.Controls.MetroTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtMsg = new MetroFramework.Controls.MetroTextBox();
             this.btnSend = new MetroFramework.Controls.MetroButton();
-            this.gbxChatName1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // txtChatContext
+            // txtContext
             // 
             // 
             // 
             // 
-            this.txtChatContext.CustomButton.Image = null;
-            this.txtChatContext.CustomButton.Location = new System.Drawing.Point(11, 1);
-            this.txtChatContext.CustomButton.Name = "";
-            this.txtChatContext.CustomButton.Size = new System.Drawing.Size(391, 391);
-            this.txtChatContext.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtChatContext.CustomButton.TabIndex = 1;
-            this.txtChatContext.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtChatContext.CustomButton.UseSelectable = true;
-            this.txtChatContext.CustomButton.Visible = false;
-            this.txtChatContext.Lines = new string[0];
-            this.txtChatContext.Location = new System.Drawing.Point(24, 128);
-            this.txtChatContext.MaxLength = 32767;
-            this.txtChatContext.Multiline = true;
-            this.txtChatContext.Name = "txtChatContext";
-            this.txtChatContext.PasswordChar = '\0';
-            this.txtChatContext.ReadOnly = true;
-            this.txtChatContext.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtChatContext.SelectedText = "";
-            this.txtChatContext.SelectionLength = 0;
-            this.txtChatContext.SelectionStart = 0;
-            this.txtChatContext.ShortcutsEnabled = true;
-            this.txtChatContext.Size = new System.Drawing.Size(403, 393);
-            this.txtChatContext.TabIndex = 1;
-            this.txtChatContext.UseSelectable = true;
-            this.txtChatContext.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtChatContext.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // gbxChatName1
-            // 
-            this.gbxChatName1.Controls.Add(this.lblChatName);
-            this.gbxChatName1.Controls.Add(this.picInfo);
-            this.gbxChatName1.Controls.Add(this.picClose);
-            this.gbxChatName1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbxChatName1.Location = new System.Drawing.Point(20, 60);
-            this.gbxChatName1.Name = "gbxChatName1";
-            this.gbxChatName1.Size = new System.Drawing.Size(410, 62);
-            this.gbxChatName1.TabIndex = 5;
-            this.gbxChatName1.TabStop = false;
-            this.gbxChatName1.Text = "그룹채팅";
-            // 
-            // lblChatName
-            // 
-            this.lblChatName.AutoSize = true;
-            this.lblChatName.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblChatName.Location = new System.Drawing.Point(6, 28);
-            this.lblChatName.Name = "lblChatName";
-            this.lblChatName.Size = new System.Drawing.Size(153, 24);
-            this.lblChatName.TabIndex = 9;
-            this.lblChatName.Text = "부서명 / 팀명";
-            // 
-            // picInfo
-            // 
-            this.picInfo.Image = global::Client.Properties.Resources.Info_아이콘;
-            this.picInfo.Location = new System.Drawing.Point(316, 12);
-            this.picInfo.Name = "picInfo";
-            this.picInfo.Size = new System.Drawing.Size(40, 40);
-            this.picInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picInfo.TabIndex = 3;
-            this.picInfo.TabStop = false;
-            // 
-            // picClose
-            // 
-            this.picClose.Image = global::Client.Properties.Resources.닫기_아이콘;
-            this.picClose.Location = new System.Drawing.Point(364, 12);
-            this.picClose.Name = "picClose";
-            this.picClose.Size = new System.Drawing.Size(40, 40);
-            this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picClose.TabIndex = 4;
-            this.picClose.TabStop = false;
-            this.picClose.Click += new System.EventHandler(this.picClose_Click);
-            // 
-            // txtInput
-            // 
-            // 
-            // 
-            // 
-            this.txtInput.CustomButton.Image = null;
-            this.txtInput.CustomButton.Location = new System.Drawing.Point(272, 2);
-            this.txtInput.CustomButton.Name = "";
-            this.txtInput.CustomButton.Size = new System.Drawing.Size(35, 35);
-            this.txtInput.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtInput.CustomButton.TabIndex = 1;
-            this.txtInput.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtInput.CustomButton.UseSelectable = true;
-            this.txtInput.CustomButton.Visible = false;
-            this.txtInput.Lines = new string[0];
-            this.txtInput.Location = new System.Drawing.Point(66, 527);
-            this.txtInput.MaxLength = 32767;
-            this.txtInput.Multiline = true;
-            this.txtInput.Name = "txtInput";
-            this.txtInput.PasswordChar = '\0';
-            this.txtInput.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtInput.SelectedText = "";
-            this.txtInput.SelectionLength = 0;
-            this.txtInput.SelectionStart = 0;
-            this.txtInput.ShortcutsEnabled = true;
-            this.txtInput.Size = new System.Drawing.Size(310, 40);
-            this.txtInput.TabIndex = 6;
-            this.txtInput.UseSelectable = true;
-            this.txtInput.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtInput.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtContext.CustomButton.Image = null;
+            this.txtContext.CustomButton.Location = new System.Drawing.Point(-127, 2);
+            this.txtContext.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtContext.CustomButton.Name = "";
+            this.txtContext.CustomButton.Size = new System.Drawing.Size(483, 483);
+            this.txtContext.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtContext.CustomButton.TabIndex = 1;
+            this.txtContext.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtContext.CustomButton.UseSelectable = true;
+            this.txtContext.CustomButton.Visible = false;
+            this.txtContext.Lines = new string[0];
+            this.txtContext.Location = new System.Drawing.Point(20, 62);
+            this.txtContext.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtContext.MaxLength = 32767;
+            this.txtContext.Multiline = true;
+            this.txtContext.Name = "txtContext";
+            this.txtContext.PasswordChar = '\0';
+            this.txtContext.ReadOnly = true;
+            this.txtContext.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtContext.SelectedText = "";
+            this.txtContext.SelectionLength = 0;
+            this.txtContext.SelectionStart = 0;
+            this.txtContext.ShortcutsEnabled = true;
+            this.txtContext.Size = new System.Drawing.Size(359, 488);
+            this.txtContext.TabIndex = 10;
+            this.txtContext.UseSelectable = true;
+            this.txtContext.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtContext.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Client.Properties.Resources.더보기_아이콘;
-            this.pictureBox1.Location = new System.Drawing.Point(20, 527);
+            this.pictureBox1.Location = new System.Drawing.Point(21, 554);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.Size = new System.Drawing.Size(31, 28);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
+            // 
+            // txtMsg
+            // 
+            // 
+            // 
+            // 
+            this.txtMsg.CustomButton.Image = null;
+            this.txtMsg.CustomButton.Location = new System.Drawing.Point(246, 2);
+            this.txtMsg.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtMsg.CustomButton.Name = "";
+            this.txtMsg.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.txtMsg.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtMsg.CustomButton.TabIndex = 1;
+            this.txtMsg.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtMsg.CustomButton.UseSelectable = true;
+            this.txtMsg.CustomButton.Visible = false;
+            this.txtMsg.Lines = new string[0];
+            this.txtMsg.Location = new System.Drawing.Point(58, 554);
+            this.txtMsg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtMsg.MaxLength = 32767;
+            this.txtMsg.Multiline = true;
+            this.txtMsg.Name = "txtMsg";
+            this.txtMsg.PasswordChar = '\0';
+            this.txtMsg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMsg.SelectedText = "";
+            this.txtMsg.SelectionLength = 0;
+            this.txtMsg.SelectionStart = 0;
+            this.txtMsg.ShortcutsEnabled = true;
+            this.txtMsg.Size = new System.Drawing.Size(272, 28);
+            this.txtMsg.TabIndex = 13;
+            this.txtMsg.UseSelectable = true;
+            this.txtMsg.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtMsg.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(382, 527);
+            this.btnSend.Location = new System.Drawing.Point(336, 554);
+            this.btnSend.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(44, 40);
-            this.btnSend.TabIndex = 8;
+            this.btnSend.Size = new System.Drawing.Size(43, 28);
+            this.btnSend.TabIndex = 14;
             this.btnSend.Text = "Send";
             this.btnSend.UseSelectable = true;
             // 
             // FormChat
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 590);
+            this.ClientSize = new System.Drawing.Size(400, 600);
             this.Controls.Add(this.btnSend);
+            this.Controls.Add(this.txtMsg);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.txtInput);
-            this.Controls.Add(this.gbxChatName1);
-            this.Controls.Add(this.txtChatContext);
+            this.Controls.Add(this.txtContext);
             this.IsMdiContainer = true;
+            this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormChat";
+            this.Padding = new System.Windows.Forms.Padding(18, 60, 18, 16);
             this.TransparencyKey = System.Drawing.Color.Empty;
-            this.gbxChatName1.ResumeLayout(false);
-            this.gbxChatName1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormChat_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -193,13 +147,9 @@ namespace Client.Forms
 
         #endregion
 
-        private MetroFramework.Controls.MetroTextBox txtChatContext;
-        private System.Windows.Forms.PictureBox picInfo;
-        private System.Windows.Forms.PictureBox picClose;
-        private System.Windows.Forms.GroupBox gbxChatName1;
-        private MetroFramework.Controls.MetroTextBox txtInput;
+        private MetroFramework.Controls.MetroTextBox txtContext;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private MetroFramework.Controls.MetroTextBox txtMsg;
         private MetroFramework.Controls.MetroButton btnSend;
-        private System.Windows.Forms.Label lblChatName;
     }
 }

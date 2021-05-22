@@ -88,11 +88,11 @@
     <Compile Include="Forms\FormSchedule.Designer.cs">
       <DependentUpon>FormSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormTree.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Panel\PanelSchedule.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\FormTree.Designer.cs">
-      <DependentUpon>FormTree.cs</DependentUpon>
+    <Compile Include="Panel\PanelSchedule.Designer.cs">
+      <DependentUpon>PanelSchedule.cs</DependentUpon>
     </Compile>
     <Compile Include="Panel\PanelSlider.cs">
       <SubType>UserControl</SubType>
@@ -123,11 +123,11 @@
     <EmbeddedResource Include="Forms\FormSchedule.resx">
       <DependentUpon>FormSchedule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormTree.resx">
-      <DependentUpon>FormTree.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Panel\PanelRegister.resx">
       <DependentUpon>PanelRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\PanelSchedule.resx">
+      <DependentUpon>PanelSchedule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panel\PanelSlider.resx">
       <DependentUpon>PanelSlider.cs</DependentUpon>
@@ -203,6 +203,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\사람프로필_아이콘.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\수정_아이콘.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ost아이콘_최종.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

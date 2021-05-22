@@ -113,6 +113,16 @@ namespace Client.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap ost아이콘_최종 {
+            get {
+                object obj = ResourceManager.GetObject("ost아이콘_최종", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap phone {
             get {
                 object obj = ResourceManager.GetObject("phone", resourceCulture);
@@ -156,6 +166,26 @@ namespace Client.Properties {
         internal static System.Drawing.Bitmap 더보기_아이콘 {
             get {
                 object obj = ResourceManager.GetObject("더보기_아이콘", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 사람프로필_아이콘 {
+            get {
+                object obj = ResourceManager.GetObject("사람프로필_아이콘", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 수정_아이콘 {
+            get {
+                object obj = ResourceManager.GetObject("수정_아이콘", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

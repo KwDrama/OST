@@ -303,7 +303,7 @@ namespace Client.Panel
             this.picClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picClose.BackColor = System.Drawing.Color.White;
             this.picClose.Image = ((System.Drawing.Image)(resources.GetObject("picClose.Image")));
-            this.picClose.Location = new System.Drawing.Point(319, 3);
+            this.picClose.Location = new System.Drawing.Point(321, 3);
             this.picClose.Name = "picClose";
             this.picClose.Padding = new System.Windows.Forms.Padding(10);
             this.picClose.Size = new System.Drawing.Size(36, 36);
@@ -316,7 +316,7 @@ namespace Client.Panel
             // 
             // PanelRegister
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.picClose);
             this.Controls.Add(this.picLogo);
@@ -331,7 +331,7 @@ namespace Client.Panel
             this.Controls.Add(this.txtEmpNum);
             this.Location = new System.Drawing.Point(0, 30);
             this.Name = "PanelRegister";
-            this.Size = new System.Drawing.Size(358, 560);
+            this.Size = new System.Drawing.Size(360, 600);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PanelRegister_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
