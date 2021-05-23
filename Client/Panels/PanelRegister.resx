@@ -117,4 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="txtPhone.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAB3RJTUUH5QUKDgAq/CWrWQAAARRJREFU
+        OE+NkrtqAlEURSepki8wICQfkCJfYGNlKgkJttPP0ymtJh9hYWEppEpvYZnGItgZSEBbERuFVKLjGj2R
+        o5nXhg3D2Y/LPXONGLZt3zmOM3Jdd873835YFJ7n3RKcwEi4ZtYQOR+cPFBhXVIXSzYoWCUURMzHYskG
+        5p/zsLArlmxwUvs8zMxCujg4csDW7wltVcFSpOIg1FMFMSsiFYPv+yVCC1UwNE3zSuRi4LfVCG5UyXsQ
+        BNciG2EYXrKbN+ZfeJ9kfArEpiqI+UmoGocJtdQ8/bEhvirjMZAye5HYKTg1QNTXSeNMIv9BySMGvdgk
+        fog9GZZl3cji9Dv54zdLLos1G5Q8EOjAKfyF/UPYMHYaUv3+cPv9ZgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="picClose.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        6wAAAOsBK2zXwgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAB4SURBVDhPpZOx
+        DYAwDAQ9Ax0NFZOwOMMwA7V5IxHFjkNsJdIVvuRfSmFi5gLOBk5w1P4PPRAt4AJ3tKQVRHumxJeJElcK
+        0RJXfkRKGmEZlaihhylZ1V099JgqMOHcF0bh940nhUhY8GUwLLQiERb0MLtMOMl1ZnoASvplBbAdCgEA
+        AAAASUVORK5CYII=
+</value>
+  </data>
 </root>

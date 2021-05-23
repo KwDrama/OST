@@ -1,5 +1,5 @@
 ﻿
-namespace Client.Panel
+namespace Client.Panels
 {
     partial class PanelSlider
     {

@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Transitions;
 
-namespace Client.Panel
+namespace Client.Panels
 {
     public enum SlidingType
     {
@@ -37,7 +37,7 @@ namespace Client.Panel
         }
         protected void Init()
         {
-            visibleX = type == SlidingType.Left ? owner.Width - Width - 1 : 1;
+            visibleX = type == SlidingType.Left ? owner.Width - Width : 0;
             Left = invisibleX = type == SlidingType.Left ? owner.Width : -Width;
 
             // Add splitter

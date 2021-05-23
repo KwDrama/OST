@@ -33,9 +33,9 @@ namespace Server.Classes
         {
             return Regex.Replace(str, @"[-<>()'""\;=+|&#.]", "");
         }
-        public static bool Login(int empNum, string password)
+        public static bool Login(int empId, string password)
         {
-            string sql = $"SELECT Name FROM employee WHERE id={empNum} AND password={Filter(password)}";
+            string sql = $"SELECT Name FROM employee WHERE id={empId} AND password={Filter(password)}";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             return cmd.ExecuteScalar() != null;

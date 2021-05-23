@@ -27,6 +27,7 @@ namespace Client.Forms
         /// 디자이너 지원에 필요한 메서드입니다. 
         /// 이 메서드의 내용을 코드 편집기로 수정하지 마세요.
         /// </summary>
+        #pragma warning disable CS0618 // 형식 또는 멤버는 사용되지 않습니다.
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -37,23 +38,25 @@ namespace Client.Forms
             this.lblDepartment = new System.Windows.Forms.Label();
             this.picProfile = new System.Windows.Forms.PictureBox();
             this.lblName = new System.Windows.Forms.Label();
-            this.tcMenu = new MetroFramework.Controls.MetroTabControl();
-            this.tpTreeview = new MetroFramework.Controls.MetroTabPage();
+            this.tabMenu = new MetroFramework.Controls.MetroTabControl();
+            this.tpOrganization = new MetroFramework.Controls.MetroTabPage();
             this.txtSearch = new MetroFramework.Controls.MetroTextBox();
-            this.tvw = new System.Windows.Forms.TreeView();
-            this.contextMenu = new MetroFramework.Controls.MetroContextMenu(this.components);
-            this.mnInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnChat = new System.Windows.Forms.ToolStripMenuItem();
+            this.tvwOrganization = new System.Windows.Forms.TreeView();
+            this.cms = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.tsmiInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiChat = new System.Windows.Forms.ToolStripMenuItem();
             this.tpSchedule = new MetroFramework.Controls.MetroTabPage();
-            this.btnAddSche = new MetroFramework.Controls.MetroButton();
+            this.tpChat = new MetroFramework.Controls.MetroTabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.lnkSchAdd = new MetroFramework.Controls.MetroLink();
             this.gbxProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
-            this.tcMenu.SuspendLayout();
-            this.tpTreeview.SuspendLayout();
-            this.contextMenu.SuspendLayout();
-            this.tpSchedule.SuspendLayout();
+            this.tabMenu.SuspendLayout();
+            this.tpOrganization.SuspendLayout();
+            this.cms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // gbxProfile
@@ -126,32 +129,34 @@ namespace Client.Forms
             this.lblName.TabIndex = 1;
             this.lblName.Text = "이름 :";
             // 
-            // tcMenu
+            // tabMenu
             // 
-            this.tcMenu.Controls.Add(this.tpTreeview);
-            this.tcMenu.Controls.Add(this.tpSchedule);
-            this.tcMenu.Location = new System.Drawing.Point(6, 204);
-            this.tcMenu.Name = "tcMenu";
-            this.tcMenu.SelectedIndex = 0;
-            this.tcMenu.Size = new System.Drawing.Size(348, 390);
-            this.tcMenu.TabIndex = 1;
-            this.tcMenu.UseSelectable = true;
+            this.tabMenu.Controls.Add(this.tpOrganization);
+            this.tabMenu.Controls.Add(this.tpSchedule);
+            this.tabMenu.Controls.Add(this.tpChat);
+            this.tabMenu.Location = new System.Drawing.Point(6, 204);
+            this.tabMenu.Name = "tabMenu";
+            this.tabMenu.SelectedIndex = 0;
+            this.tabMenu.Size = new System.Drawing.Size(348, 390);
+            this.tabMenu.TabIndex = 1;
+            this.tabMenu.UseSelectable = true;
+            this.tabMenu.SelectedIndexChanged += new System.EventHandler(this.tabMenu_SelectedIndexChanged);
             // 
-            // tpTreeview
+            // tpOrganization
             // 
-            this.tpTreeview.Controls.Add(this.txtSearch);
-            this.tpTreeview.Controls.Add(this.tvw);
-            this.tpTreeview.HorizontalScrollbarBarColor = true;
-            this.tpTreeview.HorizontalScrollbarHighlightOnWheel = false;
-            this.tpTreeview.HorizontalScrollbarSize = 6;
-            this.tpTreeview.Location = new System.Drawing.Point(4, 38);
-            this.tpTreeview.Name = "tpTreeview";
-            this.tpTreeview.Size = new System.Drawing.Size(340, 348);
-            this.tpTreeview.TabIndex = 1;
-            this.tpTreeview.Text = "사내 조직도";
-            this.tpTreeview.VerticalScrollbarBarColor = true;
-            this.tpTreeview.VerticalScrollbarHighlightOnWheel = false;
-            this.tpTreeview.VerticalScrollbarSize = 11;
+            this.tpOrganization.Controls.Add(this.txtSearch);
+            this.tpOrganization.Controls.Add(this.tvwOrganization);
+            this.tpOrganization.HorizontalScrollbarBarColor = true;
+            this.tpOrganization.HorizontalScrollbarHighlightOnWheel = false;
+            this.tpOrganization.HorizontalScrollbarSize = 3;
+            this.tpOrganization.Location = new System.Drawing.Point(4, 38);
+            this.tpOrganization.Name = "tpOrganization";
+            this.tpOrganization.Size = new System.Drawing.Size(340, 348);
+            this.tpOrganization.TabIndex = 1;
+            this.tpOrganization.Text = "조직도";
+            this.tpOrganization.VerticalScrollbarBarColor = true;
+            this.tpOrganization.VerticalScrollbarHighlightOnWheel = false;
+            this.tpOrganization.VerticalScrollbarSize = 11;
             // 
             // txtSearch
             // 
@@ -159,7 +164,7 @@ namespace Client.Forms
             // 
             // 
             this.txtSearch.CustomButton.Image = null;
-            this.txtSearch.CustomButton.Location = new System.Drawing.Point(315, 1);
+            this.txtSearch.CustomButton.Location = new System.Drawing.Point(312, 1);
             this.txtSearch.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSearch.CustomButton.Name = "";
             this.txtSearch.CustomButton.Size = new System.Drawing.Size(21, 17);
@@ -169,7 +174,7 @@ namespace Client.Forms
             this.txtSearch.CustomButton.UseSelectable = true;
             this.txtSearch.CustomButton.Visible = false;
             this.txtSearch.Lines = new string[0];
-            this.txtSearch.Location = new System.Drawing.Point(0, 3);
+            this.txtSearch.Location = new System.Drawing.Point(3, 3);
             this.txtSearch.MaxLength = 32767;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PasswordChar = '\0';
@@ -179,71 +184,77 @@ namespace Client.Forms
             this.txtSearch.SelectionLength = 0;
             this.txtSearch.SelectionStart = 0;
             this.txtSearch.ShortcutsEnabled = true;
-            this.txtSearch.Size = new System.Drawing.Size(337, 23);
+            this.txtSearch.Size = new System.Drawing.Size(334, 23);
             this.txtSearch.TabIndex = 3;
             this.txtSearch.UseSelectable = true;
             this.txtSearch.WaterMark = "소속이나 이름 검색";
             this.txtSearch.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtSearch.WaterMarkFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
-            // tvw
+            // tvwOrganization
             // 
-            this.tvw.ContextMenuStrip = this.contextMenu;
-            this.tvw.Location = new System.Drawing.Point(-4, 32);
-            this.tvw.Name = "tvw";
-            this.tvw.Size = new System.Drawing.Size(348, 313);
-            this.tvw.TabIndex = 2;
+            this.tvwOrganization.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tvwOrganization.Location = new System.Drawing.Point(3, 32);
+            this.tvwOrganization.Name = "tvwOrganization";
+            this.tvwOrganization.Size = new System.Drawing.Size(334, 313);
+            this.tvwOrganization.TabIndex = 2;
             // 
-            // contextMenu
+            // cms
             // 
-            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnInfo,
-            this.mnChat});
-            this.contextMenu.Name = "metroContextMenu1";
-            this.contextMenu.Size = new System.Drawing.Size(139, 48);
+            this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiInfo,
+            this.tsmiChat});
+            this.cms.Name = "metroContextMenu1";
+            this.cms.Size = new System.Drawing.Size(99, 48);
             // 
-            // mnInfo
+            // tsmiInfo
             // 
-            this.mnInfo.Name = "mnInfo";
-            this.mnInfo.Size = new System.Drawing.Size(138, 22);
-            this.mnInfo.Text = "정보";
-            this.mnInfo.Click += new System.EventHandler(this.mnInfo_Click);
+            this.tsmiInfo.Name = "tsmiInfo";
+            this.tsmiInfo.Size = new System.Drawing.Size(98, 22);
+            this.tsmiInfo.Text = "정보";
+            this.tsmiInfo.Click += new System.EventHandler(this.tsmiInfo_Click);
             // 
-            // mnChat
+            // tsmiChat
             // 
-            this.mnChat.Name = "mnChat";
-            this.mnChat.Size = new System.Drawing.Size(138, 22);
-            this.mnChat.Text = "채팅방 이동";
-            this.mnChat.Click += new System.EventHandler(this.mnChat_Click);
+            this.tsmiChat.Name = "tsmiChat";
+            this.tsmiChat.Size = new System.Drawing.Size(98, 22);
+            this.tsmiChat.Text = "채팅";
+            this.tsmiChat.Click += new System.EventHandler(this.tsmiChat_Click);
             // 
             // tpSchedule
             // 
-            this.tpSchedule.Controls.Add(this.btnAddSche);
+            this.tpSchedule.AutoScroll = true;
+            this.tpSchedule.HorizontalScrollbar = true;
             this.tpSchedule.HorizontalScrollbarBarColor = true;
             this.tpSchedule.HorizontalScrollbarHighlightOnWheel = false;
-            this.tpSchedule.HorizontalScrollbarSize = 6;
+            this.tpSchedule.HorizontalScrollbarSize = 3;
             this.tpSchedule.Location = new System.Drawing.Point(4, 38);
             this.tpSchedule.Name = "tpSchedule";
             this.tpSchedule.Size = new System.Drawing.Size(340, 348);
             this.tpSchedule.TabIndex = 2;
             this.tpSchedule.Text = "일정";
+            this.tpSchedule.VerticalScrollbar = true;
             this.tpSchedule.VerticalScrollbarBarColor = true;
             this.tpSchedule.VerticalScrollbarHighlightOnWheel = false;
             this.tpSchedule.VerticalScrollbarSize = 11;
             // 
-            // btnAddSche
+            // tpChat
             // 
-            this.btnAddSche.BackColor = System.Drawing.Color.Aqua;
-            this.btnAddSche.Location = new System.Drawing.Point(269, 3);
-            this.btnAddSche.Name = "btnAddSche";
-            this.btnAddSche.Size = new System.Drawing.Size(75, 23);
-            this.btnAddSche.TabIndex = 2;
-            this.btnAddSche.Text = "일정 추가";
-            this.btnAddSche.UseSelectable = true;
+            this.tpChat.HorizontalScrollbarBarColor = true;
+            this.tpChat.HorizontalScrollbarHighlightOnWheel = false;
+            this.tpChat.HorizontalScrollbarSize = 8;
+            this.tpChat.Location = new System.Drawing.Point(4, 38);
+            this.tpChat.Name = "tpChat";
+            this.tpChat.Size = new System.Drawing.Size(340, 348);
+            this.tpChat.TabIndex = 3;
+            this.tpChat.Text = "채팅";
+            this.tpChat.VerticalScrollbarBarColor = true;
+            this.tpChat.VerticalScrollbarHighlightOnWheel = false;
+            this.tpChat.VerticalScrollbarSize = 10;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Client.Properties.Resources.ost아이콘_최종;
+            this.pictureBox1.Image = global::Client.Properties.Resources.logo;
             this.pictureBox1.Location = new System.Drawing.Point(6, 15);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(50, 50);
@@ -251,14 +262,32 @@ namespace Client.Forms
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // metroStyleManager1
+            // 
+            this.metroStyleManager1.Owner = this;
+            this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Yellow;
+            // 
+            // lnkSchAdd
+            // 
+            this.lnkSchAdd.AutoSize = true;
+            this.lnkSchAdd.Location = new System.Drawing.Point(278, 211);
+            this.lnkSchAdd.Name = "lnkSchAdd";
+            this.lnkSchAdd.Size = new System.Drawing.Size(69, 25);
+            this.lnkSchAdd.TabIndex = 2;
+            this.lnkSchAdd.Text = "일정 추가";
+            this.lnkSchAdd.UseSelectable = true;
+            this.lnkSchAdd.Visible = false;
+            this.lnkSchAdd.Click += new System.EventHandler(this.lnkSchAdd_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(360, 600);
+            this.Controls.Add(this.lnkSchAdd);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.tcMenu);
+            this.Controls.Add(this.tabMenu);
             this.Controls.Add(this.gbxProfile);
             this.DisplayHeader = false;
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -268,20 +297,19 @@ namespace Client.Forms
             this.Name = "FormMain";
             this.Padding = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
-            this.Style = MetroFramework.MetroColorStyle.Default;
+            this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.TransparencyKey = System.Drawing.Color.Empty;
-            this.Load += new System.EventHandler(this.FormMain_Load);
             this.Shown += new System.EventHandler(this.FormMain_Shown);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.gbxProfile.ResumeLayout(false);
             this.gbxProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
-            this.tcMenu.ResumeLayout(false);
-            this.tpTreeview.ResumeLayout(false);
-            this.contextMenu.ResumeLayout(false);
-            this.tpSchedule.ResumeLayout(false);
+            this.tabMenu.ResumeLayout(false);
+            this.tpOrganization.ResumeLayout(false);
+            this.cms.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -294,16 +322,18 @@ namespace Client.Forms
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblTeam;
         private System.Windows.Forms.Label lblRank;
-        private MetroFramework.Controls.MetroTabControl tcMenu;
-        private MetroFramework.Controls.MetroTabPage tpTreeview;
+        private MetroFramework.Controls.MetroTabControl tabMenu;
+        private MetroFramework.Controls.MetroTabPage tpOrganization;
         private MetroFramework.Controls.MetroTabPage tpSchedule;
-        private MetroFramework.Controls.MetroButton btnAddSche;
-        private System.Windows.Forms.TreeView tvw;
+        private System.Windows.Forms.TreeView tvwOrganization;
         private MetroFramework.Controls.MetroTextBox txtSearch;
-        private MetroFramework.Controls.MetroContextMenu contextMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnInfo;
-        private System.Windows.Forms.ToolStripMenuItem mnChat;
+        private MetroFramework.Controls.MetroContextMenu cms;
+        private System.Windows.Forms.ToolStripMenuItem tsmiChat;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
+        private MetroFramework.Controls.MetroTabPage tpChat;
+        private MetroFramework.Controls.MetroLink lnkSchAdd;
+        private System.Windows.Forms.ToolStripMenuItem tsmiInfo;
     }
 }
 

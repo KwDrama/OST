@@ -11,7 +11,7 @@ namespace Server.Classes
         public TcpClient socket;    // 클라이언트 소켓
         NetworkStream ns;           // 네트워크 스트림
         public Thread recvThread;   // 클라이언트로부터 수신을 대기하는 스레드
-        public int empNum;          // 클라이언트의 사원 번호
+        public int empId;           // 클라이언트의 사원 번호
 
         public Client(TcpClient socket)
         {
@@ -80,20 +80,26 @@ namespace Server.Classes
                 {
                     LoginPacket p = packet as LoginPacket;
 
-                    bool success = Database.Login(p.empNum, p.password);
+                    bool success = Database.Login(p.empId, p.password);
                     if (success)
                     {
-                        empNum = p.empNum;
+                        empId = p.empId;
                         Log("Login", "성공");
                         Program.MoveLoginClient(this);
                     }
                     else
                     {
-                        Log("Login", string.Format("{0} 실패", p.empNum));
+                        Log("Login", string.Format("{0} 실패", p.empId));
                     }
 
                     Thread.Sleep(200);  // 클라이언트 스피너 보기 위함
                     Send(new LoginPacket(success));
+                }
+                else if (packet.Type == PacketType.Register)
+                {
+                    RegisterPacket p = packet as RegisterPacket;
+                    p.profile.Save("profile.png");
+                    Log("Test", "Id: " + p.empId.ToString());
                 }
                 else
                 {
@@ -128,7 +134,7 @@ namespace Server.Classes
         }
         void Log(string type, string content)
         {
-            Program.Log(empNum, type, content);
+            Program.Log(empId, type, content);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Client.Panel;
+﻿using Client.Panels;
 using MetroFramework.Controls;
 using MetroFramework.Forms;
 using OSTNetwork;
@@ -24,10 +24,10 @@ namespace Client.Forms
             Program.client.BeginConnect(Program.hostname, Program.port, EndConnect, null);
         }
 
-        private void txtEmpNum_TextChanged(object sender, EventArgs e)
+        private void txtempId_TextChanged(object sender, EventArgs e)
         {
             // 숫자가 아닌 문자들 전부 제거하는 Regex 패턴
-            txtEmpNum.Text = Regex.Replace(txtEmpNum.Text, @"\D", "");
+            txtempId.Text = Regex.Replace(txtempId.Text, @"\D", "");
             lblResult.Text = "";
         }
         private void txtPassword_TextChanged(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace Client.Forms
             if (!loginable) return;
 
             // 빈 항목 있을 경우 입력 요구
-            foreach (MetroTextBox mtb in new MetroTextBox[] { txtEmpNum, txtPassword })
+            foreach (MetroTextBox mtb in new MetroTextBox[] { txtempId, txtPassword })
                 if (string.IsNullOrWhiteSpace(mtb.Text))
                 {
                     mtb.Focus();
@@ -68,13 +68,13 @@ namespace Client.Forms
             if (Program.client.Connected)
             {
                 spnLogin.Visible = true;
-                txtEmpNum.Enabled = txtPassword.Enabled =
+                txtempId.Enabled = txtPassword.Enabled =
                     btnLogin.Visible = loginable = false;
                 lblResult.Style = MetroFramework.MetroColorStyle.Black;
                 lblResult.Text = "로그인 중..";
                 // 명준 아래 것 단방향 암호화
                 string encryptedPassword = txtPassword.Text;
-                Program.Send(new LoginPacket(int.Parse(txtEmpNum.Text), encryptedPassword));
+                Program.Send(new LoginPacket(int.Parse(txtempId.Text), encryptedPassword));
             }
             else
             {
@@ -125,7 +125,7 @@ namespace Client.Forms
             }));
         }
 
-        private void txtEmpNum_Click(object sender, EventArgs e)
+        private void txtempId_Click(object sender, EventArgs e)
         {
 
         }
@@ -141,7 +141,7 @@ namespace Client.Forms
                 Invoke(new MethodInvoker(() =>
                 {
                     spnLogin.Visible = false;
-                    txtEmpNum.Enabled = txtPassword.Enabled =
+                    txtempId.Enabled = txtPassword.Enabled =
                         btnLogin.Visible = loginable = true;
                     lblResult.Style = MetroFramework.MetroColorStyle.Red;
                     lblResult.Text = "사원번호 또는 비밀번호를 다시 확인해주세요.";

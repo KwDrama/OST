@@ -14,7 +14,7 @@ namespace Client.Forms
         public static readonly string hostname = "127.0.0.1";           // 접속할 서버 주소
         public static readonly ushort port = 6756;                      // 접속할 서버 포트
         public static Thread recvThread;                                // 서버로부터 수신을 대기하는 스레드
-        public static int empNum = 0;                                   // 나의 사원 번호
+        public static int empId = 0;                                    // 나의 사원 번호
         public static Dictionary<PacketType, Action<Packet>> callback;  // 타입에 따른 콜백 메소드
         public static FormMain formMain;                                // 적당한 폼 상호작용을 위한 메인폼
 

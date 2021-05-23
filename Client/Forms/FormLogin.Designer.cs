@@ -30,6 +30,7 @@ namespace Client.Forms
         #pragma warning disable CS0618 // 형식 또는 멤버는 사용되지 않습니다.
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.chkAutoLogin = new MetroFramework.Controls.MetroCheckBox();
             this.btnLogin = new MetroFramework.Controls.MetroButton();
             this.lnkResetPw = new MetroFramework.Controls.MetroLink();
@@ -39,8 +40,10 @@ namespace Client.Forms
             this.spnLogin = new MetroFramework.Controls.MetroProgressSpinner();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.txtPassword = new MetroFramework.Controls.MetroTextBox();
-            this.txtEmpNum = new MetroFramework.Controls.MetroTextBox();
+            this.txtempId = new MetroFramework.Controls.MetroTextBox();
+            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // chkAutoLogin
@@ -126,7 +129,7 @@ namespace Client.Forms
             // 
             // picLogo
             // 
-            this.picLogo.Image = global::Client.Properties.Resources.원인터내셔널_로고;
+            this.picLogo.Image = global::Client.Properties.Resources.logo;
             this.picLogo.Location = new System.Drawing.Point(80, 66);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(200, 200);
@@ -172,43 +175,48 @@ namespace Client.Forms
             this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
             this.txtPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_KeyUp);
             // 
-            // txtEmpNum
+            // txtempId
             // 
             // 
             // 
             // 
-            this.txtEmpNum.CustomButton.Image = null;
-            this.txtEmpNum.CustomButton.Location = new System.Drawing.Point(176, 1);
-            this.txtEmpNum.CustomButton.Name = "";
-            this.txtEmpNum.CustomButton.Size = new System.Drawing.Size(23, 23);
-            this.txtEmpNum.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtEmpNum.CustomButton.TabIndex = 1;
-            this.txtEmpNum.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtEmpNum.CustomButton.UseSelectable = true;
-            this.txtEmpNum.CustomButton.Visible = false;
-            this.txtEmpNum.DisplayIcon = true;
-            this.txtEmpNum.Icon = global::Client.Properties.Resources.manager;
-            this.txtEmpNum.Lines = new string[0];
-            this.txtEmpNum.Location = new System.Drawing.Point(80, 272);
-            this.txtEmpNum.MaxLength = 6;
-            this.txtEmpNum.Name = "txtEmpNum";
-            this.txtEmpNum.PasswordChar = '\0';
-            this.txtEmpNum.PromptText = "사원번호";
-            this.txtEmpNum.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtEmpNum.SelectedText = "";
-            this.txtEmpNum.SelectionLength = 0;
-            this.txtEmpNum.SelectionStart = 0;
-            this.txtEmpNum.ShortcutsEnabled = true;
-            this.txtEmpNum.Size = new System.Drawing.Size(200, 25);
-            this.txtEmpNum.TabIndex = 0;
-            this.txtEmpNum.UseSelectable = true;
-            this.txtEmpNum.WaterMark = "사원번호";
-            this.txtEmpNum.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtEmpNum.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmpNum.TextChanged += new System.EventHandler(this.txtEmpNum_TextChanged);
-            this.txtEmpNum.Click += new System.EventHandler(this.txtEmpNum_Click);
-            this.txtEmpNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
-            this.txtEmpNum.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_KeyUp);
+            this.txtempId.CustomButton.Image = null;
+            this.txtempId.CustomButton.Location = new System.Drawing.Point(176, 1);
+            this.txtempId.CustomButton.Name = "";
+            this.txtempId.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.txtempId.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtempId.CustomButton.TabIndex = 1;
+            this.txtempId.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtempId.CustomButton.UseSelectable = true;
+            this.txtempId.CustomButton.Visible = false;
+            this.txtempId.DisplayIcon = true;
+            this.txtempId.Icon = global::Client.Properties.Resources.manager;
+            this.txtempId.Lines = new string[0];
+            this.txtempId.Location = new System.Drawing.Point(80, 272);
+            this.txtempId.MaxLength = 6;
+            this.txtempId.Name = "txtempId";
+            this.txtempId.PasswordChar = '\0';
+            this.txtempId.PromptText = "사원번호";
+            this.txtempId.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtempId.SelectedText = "";
+            this.txtempId.SelectionLength = 0;
+            this.txtempId.SelectionStart = 0;
+            this.txtempId.ShortcutsEnabled = true;
+            this.txtempId.Size = new System.Drawing.Size(200, 25);
+            this.txtempId.TabIndex = 0;
+            this.txtempId.UseSelectable = true;
+            this.txtempId.WaterMark = "사원번호";
+            this.txtempId.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtempId.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtempId.TextChanged += new System.EventHandler(this.txtempId_TextChanged);
+            this.txtempId.Click += new System.EventHandler(this.txtempId_Click);
+            this.txtempId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
+            this.txtempId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_KeyUp);
+            // 
+            // metroStyleManager1
+            // 
+            this.metroStyleManager1.Owner = this;
+            this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Yellow;
             // 
             // FormLogin
             // 
@@ -225,7 +233,7 @@ namespace Client.Forms
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.chkAutoLogin);
             this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.txtEmpNum);
+            this.Controls.Add(this.txtempId);
             this.DisplayHeader = false;
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -234,9 +242,11 @@ namespace Client.Forms
             this.Padding = new System.Windows.Forms.Padding(20, 38, 20, 25);
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
+            this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.Text = "로그인";
             this.Shown += new System.EventHandler(this.FormLogin_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,7 +254,7 @@ namespace Client.Forms
 
         #endregion
 
-        private MetroFramework.Controls.MetroTextBox txtEmpNum;
+        private MetroFramework.Controls.MetroTextBox txtempId;
         private MetroFramework.Controls.MetroTextBox txtPassword;
         private MetroFramework.Controls.MetroCheckBox chkAutoLogin;
         private MetroFramework.Controls.MetroButton btnLogin;
@@ -254,5 +264,6 @@ namespace Client.Forms
         private MetroFramework.Controls.MetroLink lnkRegist;
         private MetroFramework.Controls.MetroLink lblSeperate;
         private MetroFramework.Controls.MetroProgressSpinner spnLogin;
+        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
     }
 }

@@ -1,18 +1,27 @@
-﻿using MetroFramework.Forms;
-using OSTNetwork;
-using System.Drawing;
+﻿using Client.Panels;
+using MetroFramework.Forms;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Client.Forms
 {
     public partial class FormMain : MetroForm
     {
+        public static Dictionary<string, string[]> organization;
+
         public FormMain()
         {
             InitializeComponent();
             Opacity = 0;
+
+            organization = new Dictionary<string, string[]>();
+            organization.Add("자원본부", new string[] { "자원1팀", "자원2팀", "자원3팀" });
+            organization.Add("철강본부", new string[] { "철강1팀", "철강2팀", "철강3팀" });
+            organization.Add("섬유본부", new string[] { "섬유1팀", "섬유2팀", "섬유3팀" });
+            organization.Add("영업본부", new string[] { "영업1팀", "영업2팀", "영업3팀" });
         }
-        private void FormMain_Shown(object sender, System.EventArgs e)
+        private void FormMain_Shown(object sender, EventArgs e)
         {
             Hide();
             Opacity = 1;
@@ -20,66 +29,34 @@ namespace Client.Forms
                 Show();
             else
                 Close();
-        }
 
-        private void FormMain_KeyDown(object sender, KeyEventArgs e)
-        {
-            if ((Keys)e.KeyCode == Keys.Escape)
+            foreach (string central in organization.Keys)
             {
-                var result = MessageBox.Show(
-                    "메신저를 종료하시겠습니까?",
-                    "Caption",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question
-                    );
-                if (result == DialogResult.OK)
-                    this.Close();
+                tvwOrganization.Nodes.Add(central, central);
+                foreach (string team in organization[central])
+                {
+                    tvwOrganization.Nodes[central].Nodes.Add(team).ContextMenuStrip = cms;
+                }
             }
         }
 
-        private void FormMain_Load(object sender, System.EventArgs e)
+        private void tabMenu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetTreeViewData();
+            lnkSchAdd.Visible = tabMenu.SelectedTab.Text == "일정";
         }
-
-        //트리구조 출력(임시, 후에 DB연동해서 불러와 Add할 것)
-        public void SetTreeViewData()
+        private void tsmiInfo_Click(object sender, EventArgs e)
         {
-            tvw.Nodes.Add("원인터내셔널");
 
-            tvw.Nodes[0].Nodes.Add("자원본부");
-            tvw.Nodes[0].Nodes[0].Nodes.Add("자원1팀");
-            tvw.Nodes[0].Nodes[0].Nodes.Add("자원2팀");
-            tvw.Nodes[0].Nodes[0].Nodes.Add("자원3팀");
-
-            tvw.Nodes[0].Nodes.Add("철강본부");
-            tvw.Nodes[0].Nodes[1].Nodes.Add("철강1팀");
-            tvw.Nodes[0].Nodes[1].Nodes.Add("철강2팀");
-            tvw.Nodes[0].Nodes[1].Nodes.Add("철강3팀");
-
-            tvw.Nodes[0].Nodes.Add("섬유본부");
-            tvw.Nodes[0].Nodes[2].Nodes.Add("섬유1팀");
-            tvw.Nodes[0].Nodes[2].Nodes.Add("섬유2팀");
-            tvw.Nodes[0].Nodes[2].Nodes.Add("섬유3팀");
-
-            tvw.Nodes[0].Nodes.Add("영업본부");
-            tvw.Nodes[0].Nodes[3].Nodes.Add("영업1팀");
-            tvw.Nodes[0].Nodes[3].Nodes.Add("영업2팀");
-            tvw.Nodes[0].Nodes[3].Nodes.Add("영업3팀");
-
-            tvw.ExpandAll();
         }
-
-        //클릭 시 채팅방 이동
-        private void mnChat_Click(object sender, System.EventArgs e)
+        private void tsmiChat_Click(object sender, EventArgs e)
         {
             FormChat formChat = new FormChat();
             formChat.Show();
         }
-
-        private void mnInfo_Click(object sender, System.EventArgs e)
+        private void lnkSchAdd_Click(object sender, EventArgs e)
         {
-
+            PanelSchedule pnl = new PanelSchedule(this, SlidingType.Left);
+            pnl.Show();
         }
     }
 }

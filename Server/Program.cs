@@ -46,11 +46,11 @@ namespace Server
                 Log("Connect", "클라이언트 접속");
             }
         }
-        public static void Log(int empNum, string type, string content)
+        public static void Log(int empId, string type, string content)
         {
             Console.WriteLine(string.Format("[{0}] {1} | {2} | {3}",
                 DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
-                empNum, type, content));
+                empId, type, content));
         }
         public static void Log(string type, string content)
         {
@@ -61,18 +61,18 @@ namespace Server
 
         public static void MoveLoginClient(Client c)
         {
-            if (c.empNum == 0)
-                Log("System", "empNum이 0인 객체가 로그인되었다고 함수를 호출했습니다.");
+            if (c.empId == 0)
+                Log("System", "empId가 0인 객체가 로그인되었다고 함수를 호출했습니다.");
 
-            clients.Add(c.empNum, c);
+            clients.Add(c.empId, c);
             unloginedClients.Remove(c);
         }
         public static void RemoveClient(Client c)
         {
-            if (c.empNum == 0)
+            if (c.empId == 0)
                 unloginedClients.Remove(c);
             else
-                clients.Remove(c.empNum);
+                clients.Remove(c.empId);
         }
     }
 }

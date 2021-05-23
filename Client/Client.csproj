@@ -76,34 +76,22 @@
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormRegist.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormRegist.Designer.cs">
-      <DependentUpon>FormRegist.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormSchedule.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormSchedule.Designer.cs">
-      <DependentUpon>FormSchedule.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Panel\PanelSchedule.cs">
+    <Compile Include="Panels\PanelSchedule.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\PanelSchedule.Designer.cs">
+    <Compile Include="Panels\PanelSchedule.Designer.cs">
       <DependentUpon>PanelSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panel\PanelSlider.cs">
+    <Compile Include="Panels\PanelSlider.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\PanelSlider.Designer.cs">
+    <Compile Include="Panels\PanelSlider.Designer.cs">
       <DependentUpon>PanelSlider.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panel\PanelRegister.cs">
+    <Compile Include="Panels\PanelRegister.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\PanelRegister.Designer.cs">
+    <Compile Include="Panels\PanelRegister.Designer.cs">
       <DependentUpon>PanelRegister.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -117,19 +105,13 @@
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormRegist.resx">
-      <DependentUpon>FormRegist.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormSchedule.resx">
-      <DependentUpon>FormSchedule.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Panel\PanelRegister.resx">
+    <EmbeddedResource Include="Panels\PanelRegister.resx">
       <DependentUpon>PanelRegister.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Panel\PanelSchedule.resx">
+    <EmbeddedResource Include="Panels\PanelSchedule.resx">
       <DependentUpon>PanelSchedule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Panel\PanelSlider.resx">
+    <EmbeddedResource Include="Panels\PanelSlider.resx">
       <DependentUpon>PanelSlider.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -157,9 +139,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\장백기.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\user.png" />
   </ItemGroup>
   <ItemGroup>
@@ -170,15 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\캘린더_아이콘.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\닫기_아이콘.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\원인터내셔널_로고.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Info_아이콘.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\더보기_아이콘.jpg" />
@@ -211,7 +181,7 @@
     <None Include="Resources\수정_아이콘.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ost아이콘_최종.png" />
+    <None Include="Resources\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
