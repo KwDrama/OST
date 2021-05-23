@@ -209,7 +209,6 @@ namespace Client.Forms
             this.txtempId.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtempId.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtempId.TextChanged += new System.EventHandler(this.txtempId_TextChanged);
-            this.txtempId.Click += new System.EventHandler(this.txtempId_Click);
             this.txtempId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
             this.txtempId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_KeyUp);
             // 
@@ -222,7 +221,6 @@ namespace Client.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(360, 600);
             this.Controls.Add(this.spnLogin);
             this.Controls.Add(this.lblSeperate);

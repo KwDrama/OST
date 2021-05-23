@@ -145,15 +145,6 @@
     <None Include="Resources\key.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\조직도_아이콘.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\캘린더_아이콘.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\더보기_아이콘.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\phone.png" />
   </ItemGroup>
   <ItemGroup>
@@ -169,12 +160,6 @@
     <None Include="Resources\next.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\사람프로필_아이콘.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\수정_아이콘.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\logo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +167,15 @@
       <Project>{200d53d6-a4d9-42d4-9982-d92a092956a9}</Project>
       <Name>OSTLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

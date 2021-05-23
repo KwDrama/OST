@@ -18,10 +18,14 @@ namespace Client.Forms
         }
         private void FormLogin_Shown(object sender, EventArgs e)
         {
-            lblResult.Style = MetroFramework.MetroColorStyle.Blue;
-            lblResult.Text = $"기본 서버에 연결 중입니다.\n{Program.hostname}:{Program.port}";
-
-            Program.client.BeginConnect(Program.hostname, Program.port, EndConnect, null);
+            if (Program.client.Connected)
+                loginable = true;
+            else
+            {
+                lblResult.Style = MetroFramework.MetroColorStyle.Blue;
+                lblResult.Text = $"기본 서버에 연결 중입니다.\n{Program.hostname}:{Program.port}";
+                Program.client.BeginConnect(Program.hostname, Program.port, EndConnect, null);
+            }
         }
 
         private void txtempId_TextChanged(object sender, EventArgs e)
@@ -72,9 +76,7 @@ namespace Client.Forms
                     btnLogin.Visible = loginable = false;
                 lblResult.Style = MetroFramework.MetroColorStyle.Black;
                 lblResult.Text = "로그인 중..";
-                // 명준 아래 것 단방향 암호화
-                string encryptedPassword = txtPassword.Text;
-                Program.Send(new LoginPacket(int.Parse(txtempId.Text), encryptedPassword));
+                Program.Send(new LoginPacket(int.Parse(txtempId.Text), txtPassword.Text));
             }
             else
             {
@@ -91,7 +93,8 @@ namespace Client.Forms
         }
         private void lnkResetPw_Click(object sender, EventArgs e)
         {
-
+            lblResult.Style = MetroFramework.MetroColorStyle.Black;
+            lblResult.Text = "인사팀 또는 프로그램 개발자에게 문의하세요.";
         }
 
         public void EndConnect(IAsyncResult result)
@@ -124,17 +127,13 @@ namespace Client.Forms
                 lblResult.Text = resultText;
             }));
         }
-
-        private void txtempId_Click(object sender, EventArgs e)
-        {
-
-        }
-
         public void EndLogin(Packet packet)
         {
-            if ((packet as LoginPacket).success)
+            LoginPacket p = packet as LoginPacket;
+            if (p.success)
             {
                 DialogResult = DialogResult.OK;
+                Program.employee = p.employee;
                 Close();
             }
             else

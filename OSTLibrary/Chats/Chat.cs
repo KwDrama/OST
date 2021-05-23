@@ -7,6 +7,7 @@ namespace OSTLibrary.Chats
         Text, Image
     }
     
+    [Serializable]
     public abstract class Chat : IComparable<Chat>
     {
         public ChatType type;

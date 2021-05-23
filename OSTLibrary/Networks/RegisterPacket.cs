@@ -1,5 +1,5 @@
-﻿using System;
-using System.Drawing;
+﻿using OSTLibrary.Classes;
+using System;
 
 namespace OSTLibrary.Networks
 {
@@ -9,9 +9,7 @@ namespace OSTLibrary.Networks
         public bool success = false;
         public string result;
 
-        public Image profile;
-        public int empId;
-        public string password, name, phone, central, team, rank;
+        public Employee employee;
 
         public RegisterPacket(bool success, string result = "")
         {
@@ -20,18 +18,10 @@ namespace OSTLibrary.Networks
             this.result = result;
         }
 
-        public RegisterPacket(Image profile, int empId, string password,
-            string name, string phone, string central, string team, string rank)
+        public RegisterPacket(Employee employee)
         {
             type = PacketType.Register;
-            this.profile = profile;
-            this.empId = empId;
-            this.password = password;
-            this.name = name;
-            this.phone = phone;
-            this.central = central;
-            this.team = team;
-            this.rank = rank;
+            this.employee = employee;
         }
     }
 }

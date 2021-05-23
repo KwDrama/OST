@@ -40,8 +40,7 @@ namespace Client.Panels
             this.tleSubmit = new MetroFramework.Controls.MetroTile();
             this.picClose = new System.Windows.Forms.PictureBox();
             this.txtContent = new MetroFramework.Controls.MetroTextBox();
-            this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
-            this.metroTextBox2 = new MetroFramework.Controls.MetroTextBox();
+            this.cmbRange = new MetroFramework.Controls.MetroComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
             this.SuspendLayout();
             // 
@@ -123,9 +122,9 @@ namespace Client.Panels
             this.lblRange.Location = new System.Drawing.Point(60, 188);
             this.lblRange.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.lblRange.Name = "lblRange";
-            this.lblRange.Size = new System.Drawing.Size(157, 15);
+            this.lblRange.Size = new System.Drawing.Size(58, 15);
             this.lblRange.TabIndex = 14;
-            this.lblRange.Text = "일정 공유 대상 (엔터로 구분)";
+            this.lblRange.Text = "적용 범위";
             // 
             // tleSubmit
             // 
@@ -155,6 +154,8 @@ namespace Client.Panels
             this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picClose.TabIndex = 7;
             this.picClose.TabStop = false;
+            this.picClose.MouseEnter += new System.EventHandler(this.picClose_MouseEnter);
+            this.picClose.MouseLeave += new System.EventHandler(this.picClose_MouseLeave);
             // 
             // txtContent
             // 
@@ -162,16 +163,16 @@ namespace Client.Panels
             // 
             // 
             this.txtContent.CustomButton.Image = null;
-            this.txtContent.CustomButton.Location = new System.Drawing.Point(122, 2);
+            this.txtContent.CustomButton.Location = new System.Drawing.Point(42, 2);
             this.txtContent.CustomButton.Name = "";
-            this.txtContent.CustomButton.Size = new System.Drawing.Size(115, 115);
+            this.txtContent.CustomButton.Size = new System.Drawing.Size(195, 195);
             this.txtContent.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtContent.CustomButton.TabIndex = 1;
             this.txtContent.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtContent.CustomButton.UseSelectable = true;
             this.txtContent.CustomButton.Visible = false;
             this.txtContent.Lines = new string[0];
-            this.txtContent.Location = new System.Drawing.Point(60, 340);
+            this.txtContent.Location = new System.Drawing.Point(60, 268);
             this.txtContent.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.txtContent.MaxLength = 32767;
             this.txtContent.Multiline = true;
@@ -183,88 +184,28 @@ namespace Client.Panels
             this.txtContent.SelectionLength = 0;
             this.txtContent.SelectionStart = 0;
             this.txtContent.ShortcutsEnabled = true;
-            this.txtContent.Size = new System.Drawing.Size(240, 120);
+            this.txtContent.Size = new System.Drawing.Size(240, 200);
             this.txtContent.TabIndex = 19;
             this.txtContent.UseSelectable = true;
             this.txtContent.WaterMark = "내용";
             this.txtContent.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtContent.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            
             // 
-            // metroTextBox1
+            // cmbRange
             // 
-            // 
-            // 
-            // 
-            this.metroTextBox1.CustomButton.Image = null;
-            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(17, 1);
-            this.metroTextBox1.CustomButton.Name = "";
-            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(99, 99);
-            this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBox1.CustomButton.TabIndex = 1;
-            this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBox1.CustomButton.UseSelectable = true;
-            this.metroTextBox1.CustomButton.Visible = false;
-            this.metroTextBox1.Lines = new string[0];
-            this.metroTextBox1.Location = new System.Drawing.Point(60, 206);
-            this.metroTextBox1.MaxLength = 32767;
-            this.metroTextBox1.Multiline = true;
-            this.metroTextBox1.Name = "metroTextBox1";
-            this.metroTextBox1.PasswordChar = '\0';
-            this.metroTextBox1.PromptText = "사원";
-            this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBox1.SelectedText = "";
-            this.metroTextBox1.SelectionLength = 0;
-            this.metroTextBox1.SelectionStart = 0;
-            this.metroTextBox1.ShortcutsEnabled = true;
-            this.metroTextBox1.Size = new System.Drawing.Size(117, 101);
-            this.metroTextBox1.TabIndex = 19;
-            this.metroTextBox1.UseSelectable = true;
-            this.metroTextBox1.WaterMark = "사원";
-            this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            
-            // 
-            // metroTextBox2
-            // 
-            // 
-            // 
-            // 
-            this.metroTextBox2.CustomButton.Image = null;
-            this.metroTextBox2.CustomButton.Location = new System.Drawing.Point(17, 1);
-            this.metroTextBox2.CustomButton.Name = "";
-            this.metroTextBox2.CustomButton.Size = new System.Drawing.Size(99, 99);
-            this.metroTextBox2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBox2.CustomButton.TabIndex = 1;
-            this.metroTextBox2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBox2.CustomButton.UseSelectable = true;
-            this.metroTextBox2.CustomButton.Visible = false;
-            this.metroTextBox2.Lines = new string[0];
-            this.metroTextBox2.Location = new System.Drawing.Point(183, 206);
-            this.metroTextBox2.MaxLength = 32767;
-            this.metroTextBox2.Multiline = true;
-            this.metroTextBox2.Name = "metroTextBox2";
-            this.metroTextBox2.PasswordChar = '\0';
-            this.metroTextBox2.PromptText = "팀";
-            this.metroTextBox2.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBox2.SelectedText = "";
-            this.metroTextBox2.SelectionLength = 0;
-            this.metroTextBox2.SelectionStart = 0;
-            this.metroTextBox2.ShortcutsEnabled = true;
-            this.metroTextBox2.Size = new System.Drawing.Size(117, 101);
-            this.metroTextBox2.TabIndex = 19;
-            this.metroTextBox2.UseSelectable = true;
-            this.metroTextBox2.WaterMark = "팀";
-            this.metroTextBox2.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBox2.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            
+            this.cmbRange.FormattingEnabled = true;
+            this.cmbRange.ItemHeight = 23;
+            this.cmbRange.Location = new System.Drawing.Point(60, 206);
+            this.cmbRange.Name = "cmbRange";
+            this.cmbRange.Size = new System.Drawing.Size(240, 29);
+            this.cmbRange.TabIndex = 21;
+            this.cmbRange.UseSelectable = true;
             // 
             // PanelSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.metroTextBox2);
-            this.Controls.Add(this.metroTextBox1);
+            this.Controls.Add(this.cmbRange);
             this.Controls.Add(this.txtContent);
             this.Controls.Add(this.tleSubmit);
             this.Controls.Add(this.lblRange);
@@ -274,9 +215,10 @@ namespace Client.Panels
             this.Controls.Add(this.dtpStart);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.picClose);
-            this.Location = new System.Drawing.Point(30, 0);
+            this.Location = new System.Drawing.Point(0, 30);
             this.Name = "PanelSchedule";
             this.Size = new System.Drawing.Size(360, 570);
+            this.Load += new System.EventHandler(this.PanelSchedule_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -294,7 +236,6 @@ namespace Client.Panels
         private MetroFramework.Controls.MetroLabel lblRange;
         private MetroFramework.Controls.MetroTile tleSubmit;
         private MetroFramework.Controls.MetroTextBox txtContent;
-        private MetroFramework.Controls.MetroTextBox metroTextBox1;
-        private MetroFramework.Controls.MetroTextBox metroTextBox2;
+        private MetroFramework.Controls.MetroComboBox cmbRange;
     }
 }

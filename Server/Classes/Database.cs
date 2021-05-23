@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
+using OSTLibrary.Classes;
 using System.Drawing;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Server.Classes
@@ -33,52 +34,94 @@ namespace Server.Classes
                 return false;
             }
         }
-        public static bool Login(int empId, string password)
+        public static Employee Login(int empId, string password)
         {
-            string sql = $"SELECT Name FROM employee WHERE id={empId} AND password={Filter(password)}";
+            string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee WHERE id={empId} AND password={Filter(password)}";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
-            return cmd.ExecuteScalar() != null;
+            using (MySqlDataReader rdr = cmd.ExecuteReader())
+                if (rdr.Read())
+                {
+                    byte[] profileBytes = new byte[rdr.GetInt32("profile_length")];
+                    rdr.GetBytes(rdr.GetOrdinal("profile"), 0, profileBytes, 0, profileBytes.Length);
+
+                    using (MemoryStream ms = new MemoryStream(profileBytes))
+                        return new Employee(
+                            Image.FromStream(ms),
+                            rdr.GetInt32("id"),
+                            string.Empty,
+                            rdr.GetString("name"),
+                            rdr.GetString("phone"),
+                            rdr.GetString("central"),
+                            rdr.GetString("team"),
+                            rdr.GetString("rank"));
+                }
+
+            return null;
         }
-        public static bool Register(Image profile, int empId, string password,
-            string name, string phone, string central, string team, string rank)
+        public static Employee GetEmployee(int empId)
+        {
+            string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee WHERE id={empId}";
+            MySqlCommand cmd = new MySqlCommand(sql, con);
+
+            using (MySqlDataReader rdr = cmd.ExecuteReader())
+                if (rdr.Read())
+                {
+                    byte[] profileBytes = new byte[rdr.GetUInt32("profile_length")];
+                    rdr.GetBytes(rdr.GetOrdinal("profile"), 0, profileBytes, 0, profileBytes.Length);
+
+                    using (MemoryStream ms = new MemoryStream(profileBytes))
+                        return new Employee(
+                            Image.FromStream(ms),
+                            rdr.GetInt32("id"),
+                            string.Empty,
+                            rdr.GetString("name"),
+                            rdr.GetString("phone"),
+                            rdr.GetString("central"),
+                            rdr.GetString("team"),
+                            rdr.GetString("rank"));
+                }
+
+            return null;
+        }
+        public static bool Register(Employee employee)
         {
             // employee 테이블의 id 가 기본키이므로 insert 했을 때 중복 되면 오류를 반환 할거임
             // 그럼 false 반환하면 되고 정상 작동 되었다 하면 true 반환하게 하면 됨
 
-            Program.Log("DB-Register", "empId : " + empId.ToString());
-            Program.Log("DB-Register", "password : " + password);
-            Program.Log("DB-Register", "name : " + name);
-            Program.Log("DB-Register", "phone : " + phone);
-            Program.Log("DB-Register", "central : " + central);
-            Program.Log("DB-Register", "team : " + team);
-            Program.Log("DB-Register", "rank : " + rank);
+            Program.Log("DB-Register", "empId : " + employee.id.ToString());
+            Program.Log("DB-Register", "password : " + employee.password);
+            Program.Log("DB-Register", "name : " + employee.name);
+            Program.Log("DB-Register", "phone : " + employee.phone);
+            Program.Log("DB-Register", "central : " + employee.central);
+            Program.Log("DB-Register", "team : " + employee.team);
+            Program.Log("DB-Register", "rank : " + employee.rank);
 
-            throw new NotImplementedException();
+            return false;
         }
         public static void AddSchedule()
         {
-            throw new NotImplementedException();
+            return;
         }
         public static void GetSchedule()
         {
-            throw new NotImplementedException();
+            return;
         }
         public static void AddChatText()
         {
-            throw new NotImplementedException();
+            return;
         }
         public static string[] GetChatText()
         {
-            throw new NotImplementedException();
+            return null;
         }
         public static void AddChatBlob(Image image)
         {
-            throw new NotImplementedException();
+            return;
         }
         public static Image GetChatBlob()
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace OSTLibrary.Chats
 {
+    [Serializable]
     public class ImageChat : Chat
     {
         public Image image;

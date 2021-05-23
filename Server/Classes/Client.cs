@@ -1,4 +1,5 @@
-﻿using OSTLibrary.Networks;
+﻿using OSTLibrary.Classes;
+using OSTLibrary.Networks;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,14 +13,13 @@ namespace Server.Classes
         public TcpClient socket;            // 클라이언트 소켓
         NetworkStream ns;                   // 네트워크 스트림
         public Thread recvThread;           // 클라이언트로부터 수신을 대기하는 스레드
-        public int empId;                   // 클라이언트의 사원 번호
-        public List<string> roomId;  // 클라이언트가 속해 있는 채팅방
+        public Employee employee;           // 클라이언트의 사원 정보
 
         public Client(TcpClient socket)
         {
             this.socket = socket;
             ns = socket.GetStream();
-            roomId = new List<string>();
+            employee = new Employee(0, string.Empty);
 
             recvThread = new Thread(new ThreadStart(Recieve));
             recvThread.Start();
@@ -86,26 +86,29 @@ namespace Server.Classes
                 {
                     LoginPacket p = packet as LoginPacket;
 
-                    bool success = Database.Login(p.empId, p.password);
-                    if (success)
-                    {
-                        empId = p.empId;
-                        Log("Login", "성공");
-                        Program.MoveLoginClient(this);
-                    }
+                    Employee emp = Database.Login(p.employee.id, p.employee.password);
+                    if (emp == null)
+                        Log("Login", string.Format("{0} 로그인 실패", p.employee.id));
                     else
                     {
-                        Log("Login", string.Format("{0} 실패", p.empId));
+                        employee = emp;
+                        Log("Login", "로그인 성공");
+                        Program.MoveLoginClient(this);
                     }
 
                     Thread.Sleep(200);  // 클라이언트 스피너 보기 위함
-                    Send(new LoginPacket(success));
+                    Send(new LoginPacket(emp != null, emp));
+                }
+                else if (packet.type == PacketType.Logout)
+                {
+                    Program.MoveLogoutClient(this);
+                    Log("Logout", "로그아웃");
+                    employee = new Employee(0, string.Empty);
                 }
                 else if (packet.type == PacketType.Register)
                 {
                     RegisterPacket p = packet as RegisterPacket;
-                    Database.Register(p.profile, p.empId, p.password,
-                        p.name, p.phone, p.central, p.team, p.rank);
+                    Database.Register(p.employee);
                 }
                 else
                 {
@@ -140,7 +143,7 @@ namespace Server.Classes
         }
         void Log(string type, string content)
         {
-            Program.Log(empId, type, content);
+            Program.Log(employee.id, type, content);
         }
     }
 }

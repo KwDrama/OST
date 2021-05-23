@@ -1,5 +1,6 @@
 ﻿using Client.Panels;
 using MetroFramework.Forms;
+using OSTLibrary.Networks;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -25,19 +26,36 @@ namespace Client.Forms
         {
             Hide();
             Opacity = 1;
-            if ((new FormLogin()).ShowDialog() == DialogResult.OK)
-                Show();
+
+            FormLogin form = new FormLogin();
+            if (form.ShowDialog() == DialogResult.OK) Show();
             else
+            {
                 Close();
+                return;
+            }
+
+            picProfile.Image = Program.employee.profile;
+            lblName.Text = Program.employee.name;
+            lblTeamRank.Text = $"{Program.employee.team} {Program.employee.rank}";
 
             foreach (string central in organization.Keys)
             {
-                tvwOrganization.Nodes.Add(central, central);
+                tvwOrganization.Nodes.Add(central, central).ContextMenuStrip = cms;
                 foreach (string team in organization[central])
-                {
                     tvwOrganization.Nodes[central].Nodes.Add(team).ContextMenuStrip = cms;
-                }
             }
+        }
+
+        private void picLogout_MouseEnter(object sender, EventArgs e)
+            => PanelSlider.EnterShadow(sender, e);
+        private void picLogout_MouseLeave(object sender, EventArgs e)
+            => PanelSlider.LeaveShadow(sender, e);
+        private void picLogout_Click(object sender, EventArgs e)
+        {
+            Opacity = 0;
+            Program.Send(new LogoutPacket());
+            FormMain_Shown(this, new EventArgs());
         }
 
         private void tabMenu_SelectedIndexChanged(object sender, EventArgs e)
@@ -56,7 +74,7 @@ namespace Client.Forms
         private void lnkSchAdd_Click(object sender, EventArgs e)
         {
             PanelSchedule pnl = new PanelSchedule(this, SlidingType.Left);
-            pnl.Show();
+            pnl.Swipe();
         }
     }
 }

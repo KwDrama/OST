@@ -1,5 +1,8 @@
-﻿namespace OSTLibrary.Chats
+﻿using System;
+
+namespace OSTLibrary.Chats
 {
+    [Serializable]
     public class TextChat : Chat
     {
         public string text;

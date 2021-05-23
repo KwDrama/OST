@@ -31,113 +31,41 @@ namespace Client.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.gbxProfile = new System.Windows.Forms.GroupBox();
-            this.lblRank = new System.Windows.Forms.Label();
-            this.lblTeam = new System.Windows.Forms.Label();
-            this.lblNum = new System.Windows.Forms.Label();
-            this.lblDepartment = new System.Windows.Forms.Label();
-            this.picProfile = new System.Windows.Forms.PictureBox();
-            this.lblName = new System.Windows.Forms.Label();
             this.tabMenu = new MetroFramework.Controls.MetroTabControl();
             this.tpOrganization = new MetroFramework.Controls.MetroTabPage();
             this.txtSearch = new MetroFramework.Controls.MetroTextBox();
             this.tvwOrganization = new System.Windows.Forms.TreeView();
+            this.tpSchedule = new MetroFramework.Controls.MetroTabPage();
+            this.tpChat = new MetroFramework.Controls.MetroTabPage();
             this.cms = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.tsmiInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiChat = new System.Windows.Forms.ToolStripMenuItem();
-            this.tpSchedule = new MetroFramework.Controls.MetroTabPage();
-            this.tpChat = new MetroFramework.Controls.MetroTabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.lnkSchAdd = new MetroFramework.Controls.MetroLink();
-            this.gbxProfile.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
+            this.lblName = new MetroFramework.Controls.MetroLabel();
+            this.lblTeamRank = new MetroFramework.Controls.MetroLabel();
+            this.picLogout = new System.Windows.Forms.PictureBox();
+            this.picProfile = new System.Windows.Forms.PictureBox();
             this.tabMenu.SuspendLayout();
             this.tpOrganization.SuspendLayout();
             this.cms.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogout)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
             this.SuspendLayout();
-            // 
-            // gbxProfile
-            // 
-            this.gbxProfile.Controls.Add(this.lblRank);
-            this.gbxProfile.Controls.Add(this.lblTeam);
-            this.gbxProfile.Controls.Add(this.lblNum);
-            this.gbxProfile.Controls.Add(this.lblDepartment);
-            this.gbxProfile.Controls.Add(this.picProfile);
-            this.gbxProfile.Controls.Add(this.lblName);
-            this.gbxProfile.Location = new System.Drawing.Point(6, 71);
-            this.gbxProfile.Name = "gbxProfile";
-            this.gbxProfile.Size = new System.Drawing.Size(348, 127);
-            this.gbxProfile.TabIndex = 0;
-            this.gbxProfile.TabStop = false;
-            this.gbxProfile.Text = "My Profile";
-            // 
-            // lblRank
-            // 
-            this.lblRank.AutoSize = true;
-            this.lblRank.Location = new System.Drawing.Point(223, 19);
-            this.lblRank.Name = "lblRank";
-            this.lblRank.Size = new System.Drawing.Size(38, 15);
-            this.lblRank.TabIndex = 6;
-            this.lblRank.Text = "직급 :";
-            // 
-            // lblTeam
-            // 
-            this.lblTeam.AutoSize = true;
-            this.lblTeam.Location = new System.Drawing.Point(119, 107);
-            this.lblTeam.Name = "lblTeam";
-            this.lblTeam.Size = new System.Drawing.Size(26, 15);
-            this.lblTeam.TabIndex = 5;
-            this.lblTeam.Text = "팀 :";
-            // 
-            // lblNum
-            // 
-            this.lblNum.AutoSize = true;
-            this.lblNum.Location = new System.Drawing.Point(119, 50);
-            this.lblNum.Name = "lblNum";
-            this.lblNum.Size = new System.Drawing.Size(62, 15);
-            this.lblNum.TabIndex = 4;
-            this.lblNum.Text = "사원번호 :";
-            // 
-            // lblDepartment
-            // 
-            this.lblDepartment.AutoSize = true;
-            this.lblDepartment.Location = new System.Drawing.Point(119, 79);
-            this.lblDepartment.Name = "lblDepartment";
-            this.lblDepartment.Size = new System.Drawing.Size(38, 15);
-            this.lblDepartment.TabIndex = 3;
-            this.lblDepartment.Text = "부서 :";
-            // 
-            // picProfile
-            // 
-            this.picProfile.Image = global::Client.Properties.Resources.사람프로필_아이콘;
-            this.picProfile.Location = new System.Drawing.Point(18, 26);
-            this.picProfile.Name = "picProfile";
-            this.picProfile.Size = new System.Drawing.Size(80, 80);
-            this.picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picProfile.TabIndex = 2;
-            this.picProfile.TabStop = false;
-            // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(119, 19);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(38, 15);
-            this.lblName.TabIndex = 1;
-            this.lblName.Text = "이름 :";
             // 
             // tabMenu
             // 
+            this.tabMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMenu.Controls.Add(this.tpOrganization);
             this.tabMenu.Controls.Add(this.tpSchedule);
             this.tabMenu.Controls.Add(this.tpChat);
-            this.tabMenu.Location = new System.Drawing.Point(6, 204);
+            this.tabMenu.Location = new System.Drawing.Point(6, 72);
             this.tabMenu.Name = "tabMenu";
             this.tabMenu.SelectedIndex = 0;
-            this.tabMenu.Size = new System.Drawing.Size(348, 390);
+            this.tabMenu.Size = new System.Drawing.Size(348, 522);
             this.tabMenu.TabIndex = 1;
             this.tabMenu.UseSelectable = true;
             this.tabMenu.SelectedIndexChanged += new System.EventHandler(this.tabMenu_SelectedIndexChanged);
@@ -148,10 +76,10 @@ namespace Client.Forms
             this.tpOrganization.Controls.Add(this.tvwOrganization);
             this.tpOrganization.HorizontalScrollbarBarColor = true;
             this.tpOrganization.HorizontalScrollbarHighlightOnWheel = false;
-            this.tpOrganization.HorizontalScrollbarSize = 3;
+            this.tpOrganization.HorizontalScrollbarSize = 2;
             this.tpOrganization.Location = new System.Drawing.Point(4, 38);
             this.tpOrganization.Name = "tpOrganization";
-            this.tpOrganization.Size = new System.Drawing.Size(340, 348);
+            this.tpOrganization.Size = new System.Drawing.Size(340, 480);
             this.tpOrganization.TabIndex = 1;
             this.tpOrganization.Text = "조직도";
             this.tpOrganization.VerticalScrollbarBarColor = true;
@@ -164,17 +92,20 @@ namespace Client.Forms
             // 
             // 
             this.txtSearch.CustomButton.Image = null;
-            this.txtSearch.CustomButton.Location = new System.Drawing.Point(312, 1);
+            this.txtSearch.CustomButton.Location = new System.Drawing.Point(316, 1);
             this.txtSearch.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSearch.CustomButton.Name = "";
-            this.txtSearch.CustomButton.Size = new System.Drawing.Size(21, 17);
+            this.txtSearch.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtSearch.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtSearch.CustomButton.TabIndex = 1;
             this.txtSearch.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtSearch.CustomButton.UseSelectable = true;
             this.txtSearch.CustomButton.Visible = false;
+            this.txtSearch.DisplayIcon = true;
+            this.txtSearch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtSearch.Icon = global::Client.Properties.Resources.search;
             this.txtSearch.Lines = new string[0];
-            this.txtSearch.Location = new System.Drawing.Point(3, 3);
+            this.txtSearch.Location = new System.Drawing.Point(0, 0);
             this.txtSearch.MaxLength = 32767;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PasswordChar = '\0';
@@ -184,7 +115,7 @@ namespace Client.Forms
             this.txtSearch.SelectionLength = 0;
             this.txtSearch.SelectionStart = 0;
             this.txtSearch.ShortcutsEnabled = true;
-            this.txtSearch.Size = new System.Drawing.Size(334, 23);
+            this.txtSearch.Size = new System.Drawing.Size(340, 25);
             this.txtSearch.TabIndex = 3;
             this.txtSearch.UseSelectable = true;
             this.txtSearch.WaterMark = "소속이나 이름 검색";
@@ -193,11 +124,45 @@ namespace Client.Forms
             // 
             // tvwOrganization
             // 
+            this.tvwOrganization.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tvwOrganization.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tvwOrganization.Location = new System.Drawing.Point(3, 32);
             this.tvwOrganization.Name = "tvwOrganization";
-            this.tvwOrganization.Size = new System.Drawing.Size(334, 313);
+            this.tvwOrganization.Size = new System.Drawing.Size(334, 448);
             this.tvwOrganization.TabIndex = 2;
+            // 
+            // tpSchedule
+            // 
+            this.tpSchedule.AutoScroll = true;
+            this.tpSchedule.HorizontalScrollbar = true;
+            this.tpSchedule.HorizontalScrollbarBarColor = true;
+            this.tpSchedule.HorizontalScrollbarHighlightOnWheel = false;
+            this.tpSchedule.HorizontalScrollbarSize = 2;
+            this.tpSchedule.Location = new System.Drawing.Point(4, 38);
+            this.tpSchedule.Name = "tpSchedule";
+            this.tpSchedule.Size = new System.Drawing.Size(340, 480);
+            this.tpSchedule.TabIndex = 2;
+            this.tpSchedule.Text = "일정";
+            this.tpSchedule.VerticalScrollbar = true;
+            this.tpSchedule.VerticalScrollbarBarColor = true;
+            this.tpSchedule.VerticalScrollbarHighlightOnWheel = false;
+            this.tpSchedule.VerticalScrollbarSize = 11;
+            // 
+            // tpChat
+            // 
+            this.tpChat.HorizontalScrollbarBarColor = true;
+            this.tpChat.HorizontalScrollbarHighlightOnWheel = false;
+            this.tpChat.HorizontalScrollbarSize = 4;
+            this.tpChat.Location = new System.Drawing.Point(4, 38);
+            this.tpChat.Name = "tpChat";
+            this.tpChat.Size = new System.Drawing.Size(340, 480);
+            this.tpChat.TabIndex = 3;
+            this.tpChat.Text = "채팅";
+            this.tpChat.VerticalScrollbarBarColor = true;
+            this.tpChat.VerticalScrollbarHighlightOnWheel = false;
+            this.tpChat.VerticalScrollbarSize = 10;
             // 
             // cms
             // 
@@ -221,47 +186,6 @@ namespace Client.Forms
             this.tsmiChat.Text = "채팅";
             this.tsmiChat.Click += new System.EventHandler(this.tsmiChat_Click);
             // 
-            // tpSchedule
-            // 
-            this.tpSchedule.AutoScroll = true;
-            this.tpSchedule.HorizontalScrollbar = true;
-            this.tpSchedule.HorizontalScrollbarBarColor = true;
-            this.tpSchedule.HorizontalScrollbarHighlightOnWheel = false;
-            this.tpSchedule.HorizontalScrollbarSize = 3;
-            this.tpSchedule.Location = new System.Drawing.Point(4, 38);
-            this.tpSchedule.Name = "tpSchedule";
-            this.tpSchedule.Size = new System.Drawing.Size(340, 348);
-            this.tpSchedule.TabIndex = 2;
-            this.tpSchedule.Text = "일정";
-            this.tpSchedule.VerticalScrollbar = true;
-            this.tpSchedule.VerticalScrollbarBarColor = true;
-            this.tpSchedule.VerticalScrollbarHighlightOnWheel = false;
-            this.tpSchedule.VerticalScrollbarSize = 11;
-            // 
-            // tpChat
-            // 
-            this.tpChat.HorizontalScrollbarBarColor = true;
-            this.tpChat.HorizontalScrollbarHighlightOnWheel = false;
-            this.tpChat.HorizontalScrollbarSize = 8;
-            this.tpChat.Location = new System.Drawing.Point(4, 38);
-            this.tpChat.Name = "tpChat";
-            this.tpChat.Size = new System.Drawing.Size(340, 348);
-            this.tpChat.TabIndex = 3;
-            this.tpChat.Text = "채팅";
-            this.tpChat.VerticalScrollbarBarColor = true;
-            this.tpChat.VerticalScrollbarHighlightOnWheel = false;
-            this.tpChat.VerticalScrollbarSize = 10;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Client.Properties.Resources.logo;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 15);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
             // metroStyleManager1
             // 
             this.metroStyleManager1.Owner = this;
@@ -269,8 +193,9 @@ namespace Client.Forms
             // 
             // lnkSchAdd
             // 
+            this.lnkSchAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkSchAdd.AutoSize = true;
-            this.lnkSchAdd.Location = new System.Drawing.Point(278, 211);
+            this.lnkSchAdd.Location = new System.Drawing.Point(278, 79);
             this.lnkSchAdd.Name = "lnkSchAdd";
             this.lnkSchAdd.Size = new System.Drawing.Size(69, 25);
             this.lnkSchAdd.TabIndex = 2;
@@ -279,49 +204,86 @@ namespace Client.Forms
             this.lnkSchAdd.Visible = false;
             this.lnkSchAdd.Click += new System.EventHandler(this.lnkSchAdd_Click);
             // 
+            // lblName
+            // 
+            this.lblName.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblName.Location = new System.Drawing.Point(83, 16);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(160, 25);
+            this.lblName.TabIndex = 3;
+            this.lblName.Text = "이름";
+            this.lblName.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblTeamRank
+            // 
+            this.lblTeamRank.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblTeamRank.Location = new System.Drawing.Point(83, 51);
+            this.lblTeamRank.Name = "lblTeamRank";
+            this.lblTeamRank.Size = new System.Drawing.Size(160, 15);
+            this.lblTeamRank.TabIndex = 3;
+            this.lblTeamRank.Text = "팀 직위";
+            this.lblTeamRank.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // picLogout
+            // 
+            this.picLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picLogout.BackColor = System.Drawing.Color.White;
+            this.picLogout.Image = global::Client.Properties.Resources.logout;
+            this.picLogout.Location = new System.Drawing.Point(318, 30);
+            this.picLogout.Name = "picLogout";
+            this.picLogout.Padding = new System.Windows.Forms.Padding(10);
+            this.picLogout.Size = new System.Drawing.Size(36, 36);
+            this.picLogout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picLogout.TabIndex = 7;
+            this.picLogout.TabStop = false;
+            this.picLogout.Click += new System.EventHandler(this.picLogout_Click);
+            this.picLogout.MouseEnter += new System.EventHandler(this.picLogout_MouseEnter);
+            this.picLogout.MouseLeave += new System.EventHandler(this.picLogout_MouseLeave);
+            // 
+            // picProfile
+            // 
+            this.picProfile.Image = global::Client.Properties.Resources.profile;
+            this.picProfile.Location = new System.Drawing.Point(249, 16);
+            this.picProfile.Name = "picProfile";
+            this.picProfile.Size = new System.Drawing.Size(50, 50);
+            this.picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picProfile.TabIndex = 2;
+            this.picProfile.TabStop = false;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(360, 600);
+            this.Controls.Add(this.picLogout);
+            this.Controls.Add(this.lblTeamRank);
+            this.Controls.Add(this.lblName);
             this.Controls.Add(this.lnkSchAdd);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picProfile);
             this.Controls.Add(this.tabMenu);
-            this.Controls.Add(this.gbxProfile);
             this.DisplayHeader = false;
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.MinimumSize = new System.Drawing.Size(360, 590);
+            this.MinimumSize = new System.Drawing.Size(360, 600);
             this.Name = "FormMain";
             this.Padding = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.TransparencyKey = System.Drawing.Color.Empty;
             this.Shown += new System.EventHandler(this.FormMain_Shown);
-            this.gbxProfile.ResumeLayout(false);
-            this.gbxProfile.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
             this.tabMenu.ResumeLayout(false);
             this.tpOrganization.ResumeLayout(false);
             this.cms.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogout)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox gbxProfile;
-        private System.Windows.Forms.Label lblNum;
-        private System.Windows.Forms.Label lblDepartment;
-        private System.Windows.Forms.PictureBox picProfile;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblTeam;
-        private System.Windows.Forms.Label lblRank;
         private MetroFramework.Controls.MetroTabControl tabMenu;
         private MetroFramework.Controls.MetroTabPage tpOrganization;
         private MetroFramework.Controls.MetroTabPage tpSchedule;
@@ -329,11 +291,14 @@ namespace Client.Forms
         private MetroFramework.Controls.MetroTextBox txtSearch;
         private MetroFramework.Controls.MetroContextMenu cms;
         private System.Windows.Forms.ToolStripMenuItem tsmiChat;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private MetroFramework.Components.MetroStyleManager metroStyleManager1;
         private MetroFramework.Controls.MetroTabPage tpChat;
         private MetroFramework.Controls.MetroLink lnkSchAdd;
         private System.Windows.Forms.ToolStripMenuItem tsmiInfo;
+        private System.Windows.Forms.PictureBox picProfile;
+        private MetroFramework.Controls.MetroLabel lblName;
+        private MetroFramework.Controls.MetroLabel lblTeamRank;
+        private System.Windows.Forms.PictureBox picLogout;
     }
 }
 

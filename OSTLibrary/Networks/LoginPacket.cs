@@ -1,25 +1,26 @@
-﻿using System;
+﻿using OSTLibrary.Classes;
+using System;
 
 namespace OSTLibrary.Networks
 {
     [Serializable]
     public class LoginPacket : Packet
     {
-        public int empId;
-        public string password;
+        public Employee employee;
+
         public bool success = false;
 
         public LoginPacket(int empId, string password)
         {
             type = PacketType.Login;
 
-            this.empId = empId;
-            this.password = password;
+            employee = new Employee(empId, password);
         }
-        public LoginPacket(bool success)
+        public LoginPacket(bool success, Employee employee)
         {
             type = PacketType.Login;
             this.success = success;
+            this.employee = employee;
         }
     }
 }

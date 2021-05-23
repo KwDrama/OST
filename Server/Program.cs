@@ -61,18 +61,32 @@ namespace Server
 
         public static void MoveLoginClient(Client c)
         {
-            if (c.empId == 0)
-                Log("System", "empId가 0인 객체가 로그인되었다고 함수를 호출했습니다.");
+            if (c.employee.id == 0)
+            {
+                Log("System", "사원 정보가 없는 클라이언트가 로그인을 했다고 함");
+                return;
+            }
 
-            clients.Add(c.empId, c);
+            clients.Add(c.employee.id, c);
             unloginedClients.Remove(c);
+        }
+        public static void MoveLogoutClient(Client c)
+        {
+            if (c.employee.id == 0)
+            {
+                Log("System", "사원 정보가 없는 클라이언트가 로그아웃을 했다고 함");
+                return;
+            }
+
+            unloginedClients.Add(c);
+            clients.Remove(c.employee.id);
         }
         public static void RemoveClient(Client c)
         {
-            if (c.empId == 0)
+            if (c.employee.id == 0)
                 unloginedClients.Remove(c);
             else
-                clients.Remove(c.empId);
+                clients.Remove(c.employee.id);
         }
     }
 }

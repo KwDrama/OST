@@ -6,7 +6,7 @@ namespace OSTLibrary.Securities
     {
         public static string Encrypt(string data)
         {
-            throw new NotImplementedException();
+            return data;
         }
     }
 }

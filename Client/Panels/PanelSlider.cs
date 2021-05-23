@@ -81,12 +81,12 @@ namespace Client.Panels
             }
         }
 
-        public void EnterShadow(object sender, EventArgs e)
+        public static void EnterShadow(object sender, EventArgs e)
         {
             Control c = sender as Control;
             c.BackColor = Color.FromArgb(238, 238, 238);
         }
-        public void LeaveShadow(object sender, EventArgs e)
+        public static void LeaveShadow(object sender, EventArgs e)
         {
             Control c = sender as Control;
             c.BackColor = Color.Transparent;

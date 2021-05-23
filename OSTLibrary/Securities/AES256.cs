@@ -7,14 +7,14 @@ namespace OSTLibrary.Securities
     {
         public static byte[] Encrypt(byte[] data, string key)
         {
-            throw new NotImplementedException();
+            return data;
         }
         public static string Encrypt(string data, string key)
             => Encoding.Default.GetString(Encrypt(Encoding.Default.GetBytes(data), key));
 
         public static byte[] Decrypt(byte[] data, string key)
         {
-            throw new NotImplementedException();
+            return data;
         }
         public static string Decrypt(string data, string key)
             => Encoding.Default.GetString(Decrypt(Encoding.Default.GetBytes(data), key));
