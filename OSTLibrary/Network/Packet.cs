@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace OSTLibrary
+namespace OSTLibrary.Network
 {
     public enum PacketType
     {

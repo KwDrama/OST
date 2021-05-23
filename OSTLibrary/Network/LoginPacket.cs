@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OSTLibrary
+namespace OSTLibrary.Network
 {
     [Serializable]
     public class LoginPacket : Packet

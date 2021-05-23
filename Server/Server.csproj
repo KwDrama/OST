@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OSTNetwork\OSTNetwork.csproj" />
+    <ProjectReference Include="..\OSTLibrary\OSTLibrary.csproj" />
   </ItemGroup>
 
 </Project>

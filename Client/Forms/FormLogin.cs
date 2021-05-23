@@ -1,7 +1,7 @@
 ﻿using Client.Panels;
 using MetroFramework.Controls;
 using MetroFramework.Forms;
-using OSTNetwork;
+using OSTLibrary.Network;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;

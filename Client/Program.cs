@@ -1,4 +1,4 @@
-﻿using OSTNetwork;
+﻿using OSTLibrary.Network;
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
