@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using OSTLibrary.Classes;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -86,18 +87,36 @@ namespace Server.Classes
         }
         public static bool Register(Employee employee)
         {
-            // employee 테이블의 id 가 기본키이므로 insert 했을 때 중복 되면 오류를 반환 할거임
-            // 그럼 false 반환하면 되고 정상 작동 되었다 하면 true 반환하게 하면 됨
+            MySqlCommand cmd = new MySqlCommand(
+                "INSERT INTO employee VAULES(" +
+                "@id," +
+                "@password," +
+                "@name," +
+                "@phone," +
+                "@central," +
+                "@team," +
+                "@rank," +
+                "@profile," +
+                "@profile_length);", con);
 
-            Program.Log("DB-Register", "empId : " + employee.id.ToString());
-            Program.Log("DB-Register", "password : " + employee.password);
-            Program.Log("DB-Register", "name : " + employee.name);
-            Program.Log("DB-Register", "phone : " + employee.phone);
-            Program.Log("DB-Register", "central : " + employee.central);
-            Program.Log("DB-Register", "team : " + employee.team);
-            Program.Log("DB-Register", "rank : " + employee.rank);
+            using(MemoryStream ms = new MemoryStream())
+            {
+                employee.profile.Save(ms, ImageFormat.Png);
+                MySqlParameter blob = new MySqlParameter("@profile", MySqlDbType.Blob, (int)ms.Length);
+                blob.Value = ms.ToArray();
 
-            return false;
+                cmd.Parameters.AddWithValue("@id", employee.id);
+                cmd.Parameters.AddWithValue("@password", employee.password);
+                cmd.Parameters.AddWithValue("@name", employee.name);
+                cmd.Parameters.AddWithValue("@phone", employee.phone);
+                cmd.Parameters.AddWithValue("@central", employee.central);
+                cmd.Parameters.AddWithValue("@team", employee.team);
+                cmd.Parameters.AddWithValue("@rank", employee.rank);
+                cmd.Parameters.Add(blob);
+                cmd.Parameters.AddWithValue("@profile_length", (int)ms.Length);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
         }
         public static void AddSchedule()
         {

@@ -108,7 +108,13 @@ namespace Server.Classes
                 else if (packet.type == PacketType.Register)
                 {
                     RegisterPacket p = packet as RegisterPacket;
-                    Database.Register(p.employee);
+                    if (Database.Register(p.employee))
+                    {
+                        employee = p.employee;
+                        Log("Register", "회원가입 성공");
+                    }
+                    else
+                        Log("Register", "회원가입 ㄲㅂ");
                 }
                 else
                 {
