@@ -68,9 +68,12 @@ namespace Server.Classes
                 // 패킷 타입에 따라 진행
                 if (packet.Type == PacketType.Header)
                 {
-                    Log("Warning", "Receieved packetType is header");
+                    if (packet.Length == 0)
+                        Log("Warning", "Receieved no length HeaderPacket");
+                    else
+                        readLength = packet.Length;
                 }
-                if (packet.Type == PacketType.Close)
+                else if (packet.Type == PacketType.Close)
                 {
                     Log("Close", "Disconnect client");
                     socket.Close();
@@ -98,8 +101,8 @@ namespace Server.Classes
                 else if (packet.Type == PacketType.Register)
                 {
                     RegisterPacket p = packet as RegisterPacket;
-                    p.profile.Save("profile.png");
-                    Log("Test", "Id: " + p.empId.ToString());
+                    Database.Register(p.profile, p.empId, p.password,
+                        p.name, p.phone, p.central, p.team, p.rank);
                 }
                 else
                 {

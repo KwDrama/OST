@@ -281,7 +281,6 @@ namespace Client.Panels
             this.tleSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tleSubmit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tleSubmit.Enabled = false;
             this.tleSubmit.Location = new System.Drawing.Point(0, 522);
             this.tleSubmit.Name = "tleSubmit";
             this.tleSubmit.Size = new System.Drawing.Size(360, 48);

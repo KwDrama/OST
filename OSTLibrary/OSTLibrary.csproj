@@ -46,6 +46,9 @@
     <Compile Include="Network\Packet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Network\RegisterPacket.cs" />
+    <Compile Include="Security\AES256.cs" />
+    <Compile Include="Security\MD5.cs" />
+    <Compile Include="Security\SHA256.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
