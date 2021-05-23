@@ -42,13 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Network\LoginPacket.cs" />
-    <Compile Include="Network\Packet.cs" />
+    <Compile Include="Chats\Chat.cs" />
+    <Compile Include="Chats\ImageChat.cs" />
+    <Compile Include="Chats\TextChat.cs" />
+    <Compile Include="Networks\ChatsPacket.cs" />
+    <Compile Include="Networks\LoginPacket.cs" />
+    <Compile Include="Networks\Packet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Network\RegisterPacket.cs" />
-    <Compile Include="Security\AES256.cs" />
-    <Compile Include="Security\MD5.cs" />
-    <Compile Include="Security\SHA256.cs" />
+    <Compile Include="Networks\RegisterPacket.cs" />
+    <Compile Include="Securities\AES256.cs" />
+    <Compile Include="Securities\MD5.cs" />
+    <Compile Include="Securities\SHA256.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

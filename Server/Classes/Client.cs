@@ -1,5 +1,6 @@
-﻿using OSTLibrary.Network;
+﻿using OSTLibrary.Networks;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
@@ -8,15 +9,17 @@ namespace Server.Classes
 {
     public class Client
     {
-        public TcpClient socket;    // 클라이언트 소켓
-        NetworkStream ns;           // 네트워크 스트림
-        public Thread recvThread;   // 클라이언트로부터 수신을 대기하는 스레드
-        public int empId;           // 클라이언트의 사원 번호
+        public TcpClient socket;            // 클라이언트 소켓
+        NetworkStream ns;                   // 네트워크 스트림
+        public Thread recvThread;           // 클라이언트로부터 수신을 대기하는 스레드
+        public int empId;                   // 클라이언트의 사원 번호
+        public List<string> roomId;  // 클라이언트가 속해 있는 채팅방
 
         public Client(TcpClient socket)
         {
             this.socket = socket;
             ns = socket.GetStream();
+            roomId = new List<string>();
 
             recvThread = new Thread(new ThreadStart(Recieve));
             recvThread.Start();
@@ -66,20 +69,20 @@ namespace Server.Classes
                 Array.Clear(readBuffer, 0, readBuffer.Length);
 
                 // 패킷 타입에 따라 진행
-                if (packet.Type == PacketType.Header)
+                if (packet.type == PacketType.Header)
                 {
                     if (packet.Length == 0)
                         Log("Warning", "Receieved no length HeaderPacket");
                     else
                         readLength = packet.Length;
                 }
-                else if (packet.Type == PacketType.Close)
+                else if (packet.type == PacketType.Close)
                 {
                     Log("Close", "Disconnect client");
                     socket.Close();
                     break;
                 }
-                else if (packet.Type == PacketType.Login)
+                else if (packet.type == PacketType.Login)
                 {
                     LoginPacket p = packet as LoginPacket;
 
@@ -98,7 +101,7 @@ namespace Server.Classes
                     Thread.Sleep(200);  // 클라이언트 스피너 보기 위함
                     Send(new LoginPacket(success));
                 }
-                else if (packet.Type == PacketType.Register)
+                else if (packet.type == PacketType.Register)
                 {
                     RegisterPacket p = packet as RegisterPacket;
                     Database.Register(p.profile, p.empId, p.password,

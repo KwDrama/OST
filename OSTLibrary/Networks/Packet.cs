@@ -2,11 +2,11 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace OSTLibrary.Network
+namespace OSTLibrary.Networks
 {
     public enum PacketType
     {
-        Header, Close, Login, Register
+        Header, Close, Login, Register, Chat
     }
 
     [Serializable]
@@ -14,21 +14,21 @@ namespace OSTLibrary.Network
     {
         public const int BUFFER_SIZE = 4096;
 
-        public PacketType Type;
+        public PacketType type;
         public int Length = 0;
 
         public Packet()
         {
-            Type = PacketType.Header;
+            type = PacketType.Header;
         }
         public Packet(int length)
         {
-            Type = PacketType.Header;
+            type = PacketType.Header;
             Length = length;
         }
         public Packet(PacketType type)
         {
-            Type = type;
+            this.type = type;
         }
 
         public byte[] Serialize() => Serialize(this);

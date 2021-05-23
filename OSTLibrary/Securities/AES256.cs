@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace OSTLibrary.Security
+namespace OSTLibrary.Securities
 {
     public static class AES256
     {

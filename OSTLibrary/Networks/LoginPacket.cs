@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OSTLibrary.Network
+namespace OSTLibrary.Networks
 {
     [Serializable]
     public class LoginPacket : Packet
@@ -11,14 +11,14 @@ namespace OSTLibrary.Network
 
         public LoginPacket(int empId, string password)
         {
-            Type = PacketType.Login;
+            type = PacketType.Login;
 
             this.empId = empId;
             this.password = password;
         }
         public LoginPacket(bool success)
         {
-            Type = PacketType.Login;
+            type = PacketType.Login;
             this.success = success;
         }
     }

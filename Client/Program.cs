@@ -1,4 +1,4 @@
-﻿using OSTLibrary.Network;
+﻿using OSTLibrary.Networks;
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
@@ -83,8 +83,8 @@ namespace Client.Forms
                 Array.Clear(readBuffer, 0, readBuffer.Length);
 
                 // 패킷 타입에 따라 호출 가능한 콜백 메서드 실행
-                if (callback.ContainsKey(packet.Type))
-                    callback[packet.Type].Invoke(packet);
+                if (callback.ContainsKey(packet.type))
+                    callback[packet.type].Invoke(packet);
             }
         }
         public static void Send(Packet packet)

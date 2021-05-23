@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OSTLibrary.Security
+namespace OSTLibrary.Securities
 {
     public static class MD5
     {

@@ -1,5 +1,5 @@
 ﻿using Client.Forms;
-using OSTLibrary.Network;
+using OSTLibrary.Networks;
 using System;
 using System.Drawing;
 using System.Windows.Forms;

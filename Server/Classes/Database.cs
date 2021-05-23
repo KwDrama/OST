@@ -58,8 +58,26 @@ namespace Server.Classes
         }
         public static void AddSchedule()
         {
-            // 스케쥴 부분은 어떤 데이터를 넣을 건지 유섭과 대화 후 결정
-
+            throw new NotImplementedException();
+        }
+        public static void GetSchedule()
+        {
+            throw new NotImplementedException();
+        }
+        public static void AddChatText()
+        {
+            throw new NotImplementedException();
+        }
+        public static string[] GetChatText()
+        {
+            throw new NotImplementedException();
+        }
+        public static void AddChatBlob(Image image)
+        {
+            throw new NotImplementedException();
+        }
+        public static Image GetChatBlob()
+        {
             throw new NotImplementedException();
         }
     }
