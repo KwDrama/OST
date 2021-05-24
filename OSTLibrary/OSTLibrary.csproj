@@ -46,6 +46,7 @@
     <Compile Include="Chats\ImageChat.cs" />
     <Compile Include="Chats\TextChat.cs" />
     <Compile Include="Classes\Employee.cs" />
+    <Compile Include="Classes\Schedule.cs" />
     <Compile Include="Networks\ChatsPacket.cs" />
     <Compile Include="Networks\LoginPacket.cs" />
     <Compile Include="Networks\LogoutPacket.cs" />

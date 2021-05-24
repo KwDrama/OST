@@ -1,5 +1,8 @@
-﻿namespace Server.Classes
+﻿using System;
+
+namespace OSTLibrary.Classes
 {
+    [Serializable]
     public class Schedule
     {
         public string department = null, team = null, num = null;
