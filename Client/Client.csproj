@@ -76,6 +76,12 @@
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Panels\ControlChat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\ControlChat.Designer.cs">
+      <DependentUpon>ControlChat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Panels\PanelSchedule.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -176,6 +182,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\send.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

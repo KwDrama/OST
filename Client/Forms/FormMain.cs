@@ -48,10 +48,6 @@ namespace Client.Forms
             }
         }
 
-        private void picLogout_MouseEnter(object sender, EventArgs e)
-            => PanelSlider.EnterShadow(sender, e);
-        private void picLogout_MouseLeave(object sender, EventArgs e)
-            => PanelSlider.LeaveShadow(sender, e);
         private void picLogout_Click(object sender, EventArgs e)
         {
             Program.Send(new Packet(PacketType.Close));
