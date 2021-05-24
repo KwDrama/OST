@@ -114,7 +114,7 @@ namespace Server.Classes
                         Log("Register", "회원가입 성공");
                     }
                     else
-                        Log("Register", "회원가입 ㄲㅂ");
+                        Log("Register", "회원가입 실패");
                 }
                 else
                 {

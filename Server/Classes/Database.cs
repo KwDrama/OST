@@ -107,7 +107,15 @@ namespace Server.Classes
                 cmd.Parameters.Add(blob);
                 cmd.Parameters.AddWithValue("@profile_length", (int)ms.Length);
 
-                return cmd.ExecuteNonQuery() > 0;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (MySqlException)
+                {
+                    return false;
+                }
             }
         }
         public static void AddSchedule()
