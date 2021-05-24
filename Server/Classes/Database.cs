@@ -94,7 +94,7 @@ namespace Server.Classes
             using(MemoryStream ms = new MemoryStream())
             {
                 employee.profile.Save(ms, ImageFormat.Png);
-                MySqlParameter blob = new MySqlParameter("@profile", MySqlDbType.Blob, (int)ms.Length);
+                MySqlParameter blob = new MySqlParameter("@profile", MySqlDbType.LongBlob, (int)ms.Length);
                 blob.Value = ms.ToArray();
 
                 cmd.Parameters.AddWithValue("@id", employee.id);
