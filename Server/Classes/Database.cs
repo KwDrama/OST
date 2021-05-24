@@ -88,16 +88,8 @@ namespace Server.Classes
         public static bool Register(Employee employee)
         {
             MySqlCommand cmd = new MySqlCommand(
-                "INSERT INTO employee VAULES(" +
-                "@id," +
-                "@password," +
-                "@name," +
-                "@phone," +
-                "@central," +
-                "@team," +
-                "@rank," +
-                "@profile," +
-                "@profile_length);", con);
+                "INSERT INTO employee VALUES (@id, @password, @name, @phone, @central, @team, @rank, @profile, @profile_length);",
+                con);
 
             using(MemoryStream ms = new MemoryStream())
             {
