@@ -31,7 +31,7 @@ namespace Client.Panels
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelSchedule));
-            this.txtName = new MetroFramework.Controls.MetroTextBox();
+            this.txtTitle = new MetroFramework.Controls.MetroTextBox();
             this.dtpStart = new MetroFramework.Controls.MetroDateTime();
             this.dtpEnd = new MetroFramework.Controls.MetroDateTime();
             this.lblStart = new MetroFramework.Controls.MetroLabel();
@@ -44,38 +44,38 @@ namespace Client.Panels
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
             this.SuspendLayout();
             // 
-            // txtName
+            // txtTitle
             // 
             // 
             // 
             // 
-            this.txtName.CustomButton.Image = null;
-            this.txtName.CustomButton.Location = new System.Drawing.Point(216, 1);
-            this.txtName.CustomButton.Name = "";
-            this.txtName.CustomButton.Size = new System.Drawing.Size(23, 23);
-            this.txtName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtName.CustomButton.TabIndex = 1;
-            this.txtName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtName.CustomButton.UseSelectable = true;
-            this.txtName.CustomButton.Visible = false;
-            this.txtName.Lines = new string[0];
-            this.txtName.Location = new System.Drawing.Point(60, 30);
-            this.txtName.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
-            this.txtName.MaxLength = 32767;
-            this.txtName.Name = "txtName";
-            this.txtName.PasswordChar = '\0';
-            this.txtName.PromptText = "일정 제목";
-            this.txtName.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtName.SelectedText = "";
-            this.txtName.SelectionLength = 0;
-            this.txtName.SelectionStart = 0;
-            this.txtName.ShortcutsEnabled = true;
-            this.txtName.Size = new System.Drawing.Size(240, 25);
-            this.txtName.TabIndex = 8;
-            this.txtName.UseSelectable = true;
-            this.txtName.WaterMark = "일정 제목";
-            this.txtName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtName.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTitle.CustomButton.Image = null;
+            this.txtTitle.CustomButton.Location = new System.Drawing.Point(216, 1);
+            this.txtTitle.CustomButton.Name = "";
+            this.txtTitle.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.txtTitle.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtTitle.CustomButton.TabIndex = 1;
+            this.txtTitle.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtTitle.CustomButton.UseSelectable = true;
+            this.txtTitle.CustomButton.Visible = false;
+            this.txtTitle.Lines = new string[0];
+            this.txtTitle.Location = new System.Drawing.Point(60, 30);
+            this.txtTitle.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
+            this.txtTitle.MaxLength = 32767;
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.PasswordChar = '\0';
+            this.txtTitle.PromptText = "일정 제목";
+            this.txtTitle.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtTitle.SelectedText = "";
+            this.txtTitle.SelectionLength = 0;
+            this.txtTitle.SelectionStart = 0;
+            this.txtTitle.ShortcutsEnabled = true;
+            this.txtTitle.Size = new System.Drawing.Size(240, 25);
+            this.txtTitle.TabIndex = 8;
+            this.txtTitle.UseSelectable = true;
+            this.txtTitle.WaterMark = "일정 제목";
+            this.txtTitle.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtTitle.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // dtpStart
             // 
@@ -213,7 +213,7 @@ namespace Client.Panels
             this.Controls.Add(this.lblStart);
             this.Controls.Add(this.dtpEnd);
             this.Controls.Add(this.dtpStart);
-            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.picClose);
             this.Location = new System.Drawing.Point(0, 30);
             this.Name = "PanelSchedule";
@@ -228,7 +228,7 @@ namespace Client.Panels
         #endregion
 
         private System.Windows.Forms.PictureBox picClose;
-        private MetroFramework.Controls.MetroTextBox txtName;
+        private MetroFramework.Controls.MetroTextBox txtTitle;
         private MetroFramework.Controls.MetroDateTime dtpStart;
         private MetroFramework.Controls.MetroDateTime dtpEnd;
         private MetroFramework.Controls.MetroLabel lblStart;
