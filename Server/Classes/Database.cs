@@ -118,9 +118,29 @@ namespace Server.Classes
                 }
             }
         }
-        public static void AddSchedule()
+        public static bool AddSchedule(Schedule schedule)
         {
-            return;
+            MySqlCommand cmd = new MySqlCommand(
+                "INSERT INTO schedule VALUES (@department, @team, @num, @start_year, @start_month, @start_day, @end_year, @end_month, @end_day);",
+                con);
+            cmd.Parameters.AddWithValue("@department", schedule.department);
+            cmd.Parameters.AddWithValue("@team", schedule.team);
+            cmd.Parameters.AddWithValue("@num", schedule.num);
+            cmd.Parameters.AddWithValue("@start_year", schedule.start_year);
+            cmd.Parameters.AddWithValue("@start_month", schedule.start_month);
+            cmd.Parameters.AddWithValue("@start_day", schedule.start_day);
+            cmd.Parameters.AddWithValue("@end_year", schedule.end_year);
+            cmd.Parameters.AddWithValue("@end_month", schedule.end_month);
+            cmd.Parameters.AddWithValue("@end_day", schedule.end_day);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (MySqlException)
+            {
+                return false;
+            }
         }
         public static void GetSchedule()
         {
