@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text.RegularExpressions;
+using System;
 
 namespace Server.Classes
 {
@@ -128,8 +129,8 @@ namespace Server.Classes
                 MySqlParameter start = new MySqlParameter("@start", MySqlDbType.DateTime, (int)ms.Length);
                 MySqlParameter end = new MySqlParameter("@start", MySqlDbType.DateTime, (int)ms.Length);
                 MySqlParameter contents = new MySqlParameter("@start", MySqlDbType.LongText, (int)ms.Length);
-                start.Value = ms.ToArray();
-                end.Value = ms.ToArray();
+                start.Value = ms.ToArray(); // MetroDateTime 연결할 것
+                end.Value = ms.ToArray(); // MetroDateTime 연결할 것
                 end.Value = ms.ToArray();
 
                 cmd.Parameters.AddWithValue("@author", schedule.author);
@@ -149,9 +150,27 @@ namespace Server.Classes
                 return false;
             }
         }
-        public static void GetSchedule()
+        public static Schedule GetSchedule(int authorID)
         {
-            return;
+            string sql = $"SELECT author, title, start, end, range, contents FROM employee WHERE id={authorID}";
+            MySqlCommand cmd = new MySqlCommand(sql, con);
+
+            using (MySqlDataReader rdr = cmd.ExecuteReader())
+            {
+                if (rdr.Read())
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                        return new Schedule(
+                            rdr.GetInt32("author"),
+                            rdr.GetString("range"),
+                            rdr.GetMySqlDateTime("start"),
+                            rdr.GetMySqlDateTime("end"),
+                            rdr.GetInt32("range"),
+                            rdr.GetString("contents"));
+                }
+            }
+            return null;
+            
         }
         public static void AddChatText()
         {
