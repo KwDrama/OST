@@ -4,11 +4,11 @@ using System.Security.Cryptography;
 
 namespace OSTLibrary.Securities
 {
-    public static class _MD5
+    public static class MD5
     {
         public static string Encrypt(string data)
         {
-            var md5Hash = MD5.Create();
+            var md5Hash = System.Security.Cryptography.MD5.Create();
             byte[] temp = md5Hash.ComputeHash(Encoding.Default.GetBytes(data));
             StringBuilder hdata = new StringBuilder();
 
