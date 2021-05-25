@@ -121,17 +121,24 @@ namespace Server.Classes
         public static bool AddSchedule(Schedule schedule)
         {
             MySqlCommand cmd = new MySqlCommand(
-                "INSERT INTO schedule VALUES (@department, @team, @num, @start_year, @start_month, @start_day, @end_year, @end_month, @end_day);",
+                "INSERT INTO schedule VALUES (@author, @title, @start, @end, @range, @contents);",
                 con);
-            cmd.Parameters.AddWithValue("@department", schedule.department);
-            cmd.Parameters.AddWithValue("@team", schedule.team);
-            cmd.Parameters.AddWithValue("@num", schedule.num);
-            cmd.Parameters.AddWithValue("@start_year", schedule.start_year);
-            cmd.Parameters.AddWithValue("@start_month", schedule.start_month);
-            cmd.Parameters.AddWithValue("@start_day", schedule.start_day);
-            cmd.Parameters.AddWithValue("@end_year", schedule.end_year);
-            cmd.Parameters.AddWithValue("@end_month", schedule.end_month);
-            cmd.Parameters.AddWithValue("@end_day", schedule.end_day);
+            using(MemoryStream ms = new MemoryStream())
+            {
+                MySqlParameter start = new MySqlParameter("@start", MySqlDbType.DateTime, (int)ms.Length);
+                MySqlParameter end = new MySqlParameter("@start", MySqlDbType.DateTime, (int)ms.Length);
+                MySqlParameter contents = new MySqlParameter("@start", MySqlDbType.LongText, (int)ms.Length);
+                start.Value = ms.ToArray();
+                end.Value = ms.ToArray();
+                end.Value = ms.ToArray();
+
+                cmd.Parameters.AddWithValue("@author", schedule.author);
+                cmd.Parameters.AddWithValue("@title", schedule.title);
+                cmd.Parameters.Add(start);
+                cmd.Parameters.Add(end);
+                cmd.Parameters.AddWithValue("@range", schedule.range);
+                cmd.Parameters.Add(contents);
+            }
             try
             {
                 cmd.ExecuteNonQuery();
