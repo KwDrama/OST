@@ -5,6 +5,7 @@ using System.IO;
 
 namespace OSTLibrary.Securities
 {
+    // 참조사이트-https://h5bak.tistory.com/148 
     public static class AES256
     {
         public static byte[] Encrypt(byte[] data, string key)

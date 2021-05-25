@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 
 namespace OSTLibrary.Securities
 {
+    // 참조사이트-MSDN
     public static class MD5
     {
         public static string Encrypt(string data)

@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 
 namespace OSTLibrary.Securities
 {
+    // 참조사이트-https://sosopro.tistory.com/33
     public static class SHA256
     {
         public static string Encrypt(string data)
@@ -18,9 +19,8 @@ namespace OSTLibrary.Securities
             }
 
             for (int i = 0; i < hashValue.Length; i++)
-            {
                 result += hashValue[i].ToString("x2");
-            }
+            
             return result;
         }
     }
