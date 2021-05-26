@@ -17,7 +17,7 @@ namespace Client.Forms
             Opacity = 0;
 
             organization = new Dictionary<string, string[]>();
-            organization.Add("자원본부", new string[] { "자원1팀", "자원2팀", "자원3팀" });
+            organization.Add("지원본부", new string[] { "지원1팀", "지원2팀", "지원3팀" });
             organization.Add("철강본부", new string[] { "철강1팀", "철강2팀", "철강3팀" });
             organization.Add("섬유본부", new string[] { "섬유1팀", "섬유2팀", "섬유3팀" });
             organization.Add("영업본부", new string[] { "영업1팀", "영업2팀", "영업3팀" });
@@ -39,6 +39,8 @@ namespace Client.Forms
             lblName.Text = Program.employee.name;
             lblTeamRank.Text = $"{Program.employee.team} {Program.employee.rank}";
 
+            //각 노드마다 추가 시 이름,key값(사원번호)를 둬서 정보조회 시 key값에 따라
+            //DB에서 정보를 다르게 불러오는 것으로 구현할 예정(0524기준)
             foreach (string central in organization.Keys)
             {
                 tvwOrganization.Nodes.Add(central, central).ContextMenuStrip = cms;
@@ -64,7 +66,9 @@ namespace Client.Forms
         }
         private void tsmiInfo_Click(object sender, EventArgs e)
         {
-
+            //사람클릭시와 부서클릭시를 차별화 둘 예정(0524기준)
+            FormInfoPeople formInfoP = new FormInfoPeople();
+            formInfoP.Show();
         }
         private void tsmiChat_Click(object sender, EventArgs e)
         {
@@ -75,6 +79,12 @@ namespace Client.Forms
         {
             PanelSchedule pnl = new PanelSchedule(this, SlidingType.Left);
             pnl.Swipe();
+        }
+
+        private void picProfile_Click(object sender, EventArgs e)
+        {
+            FormInfoPeople formInfoP = new FormInfoPeople();
+            formInfoP.Show();
         }
     }
 }

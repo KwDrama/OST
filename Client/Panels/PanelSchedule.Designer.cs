@@ -154,6 +154,7 @@ namespace Client.Panels
             this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picClose.TabIndex = 7;
             this.picClose.TabStop = false;
+            this.picClose.Click += new System.EventHandler(this.picClose_Click);
             this.picClose.MouseEnter += new System.EventHandler(this.picClose_MouseEnter);
             this.picClose.MouseLeave += new System.EventHandler(this.picClose_MouseLeave);
             // 
@@ -195,6 +196,12 @@ namespace Client.Panels
             // 
             this.cmbRange.FormattingEnabled = true;
             this.cmbRange.ItemHeight = 23;
+            this.cmbRange.Items.AddRange(new object[] {
+            "회사 전체",
+            "본부 전체",
+            "부서 전체",
+            "팀 전체",
+            "개인"});
             this.cmbRange.Location = new System.Drawing.Point(60, 206);
             this.cmbRange.Name = "cmbRange";
             this.cmbRange.Size = new System.Drawing.Size(240, 29);
