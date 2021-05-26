@@ -144,6 +144,22 @@ namespace Client.Panels
             this.tleSubmit.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
             this.tleSubmit.UseSelectable = true;
             // 
+            // picClose
+            // 
+            this.picClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picClose.BackColor = System.Drawing.Color.White;
+            this.picClose.Image = ((System.Drawing.Image)(resources.GetObject("picClose.Image")));
+            this.picClose.Location = new System.Drawing.Point(321, 3);
+            this.picClose.Name = "picClose";
+            this.picClose.Padding = new System.Windows.Forms.Padding(10);
+            this.picClose.Size = new System.Drawing.Size(36, 36);
+            this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picClose.TabIndex = 7;
+            this.picClose.TabStop = false;
+            this.picClose.Click += new System.EventHandler(this.picClose_Click);
+            this.picClose.MouseEnter += new System.EventHandler(this.picClose_MouseEnter);
+            this.picClose.MouseLeave += new System.EventHandler(this.picClose_MouseLeave);
+            // 
             // txtContent
             // 
             // 
@@ -182,6 +198,12 @@ namespace Client.Panels
             // 
             this.cmbRange.FormattingEnabled = true;
             this.cmbRange.ItemHeight = 23;
+            this.cmbRange.Items.AddRange(new object[] {
+            "회사 전체",
+            "본부 전체",
+            "부서 전체",
+            "팀 전체",
+            "개인"});
             this.cmbRange.Location = new System.Drawing.Point(60, 206);
             this.cmbRange.Name = "cmbRange";
             this.cmbRange.Size = new System.Drawing.Size(240, 29);
