@@ -1,8 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using OSTLibrary.Classes;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Text.RegularExpressions;
+using System;
 
 namespace Server.Classes
 {
@@ -86,26 +88,89 @@ namespace Server.Classes
         }
         public static bool Register(Employee employee)
         {
-            // employee 테이블의 id 가 기본키이므로 insert 했을 때 중복 되면 오류를 반환 할거임
-            // 그럼 false 반환하면 되고 정상 작동 되었다 하면 true 반환하게 하면 됨
+            MySqlCommand cmd = new MySqlCommand(
+                "INSERT INTO employee VALUES (@id, @password, @name, @phone, @central, @team, @rank, @profile, @profile_length);",
+                con);
 
-            Program.Log("DB-Register", "empId : " + employee.id.ToString());
-            Program.Log("DB-Register", "password : " + employee.password);
-            Program.Log("DB-Register", "name : " + employee.name);
-            Program.Log("DB-Register", "phone : " + employee.phone);
-            Program.Log("DB-Register", "central : " + employee.central);
-            Program.Log("DB-Register", "team : " + employee.team);
-            Program.Log("DB-Register", "rank : " + employee.rank);
+            using(MemoryStream ms = new MemoryStream())
+            {
+                employee.profile.Save(ms, ImageFormat.Png);
+                MySqlParameter blob = new MySqlParameter("@profile", MySqlDbType.LongBlob, (int)ms.Length);
+                blob.Value = ms.ToArray();
 
-            return false;
+                cmd.Parameters.AddWithValue("@id", employee.id);
+                cmd.Parameters.AddWithValue("@password", employee.password);
+                cmd.Parameters.AddWithValue("@name", employee.name);
+                cmd.Parameters.AddWithValue("@phone", employee.phone);
+                cmd.Parameters.AddWithValue("@central", employee.central);
+                cmd.Parameters.AddWithValue("@team", employee.team);
+                cmd.Parameters.AddWithValue("@rank", employee.rank);
+                cmd.Parameters.Add(blob);
+                cmd.Parameters.AddWithValue("@profile_length", (int)ms.Length);
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (MySqlException)
+                {
+                    return false;
+                }
+            }
         }
-        public static void AddSchedule()
+        public static bool AddSchedule(Schedule schedule)
         {
-            return;
+            MySqlCommand cmd = new MySqlCommand(
+                "INSERT INTO schedule VALUES (@author, @title, @start, @end, @range, @contents);",
+                con);
+            using(MemoryStream ms = new MemoryStream())
+            {
+                MySqlParameter start = new MySqlParameter("@start", MySqlDbType.DateTime, (int)ms.Length);
+                MySqlParameter end = new MySqlParameter("@start", MySqlDbType.DateTime, (int)ms.Length);
+                MySqlParameter contents = new MySqlParameter("@start", MySqlDbType.LongText, (int)ms.Length);
+                start.Value = ms.ToArray(); // MetroDateTime 연결할 것
+                end.Value = ms.ToArray(); // MetroDateTime 연결할 것
+                end.Value = ms.ToArray();
+
+                cmd.Parameters.AddWithValue("@author", schedule.author);
+                cmd.Parameters.AddWithValue("@title", schedule.title);
+                cmd.Parameters.Add(start);
+                cmd.Parameters.Add(end);
+                cmd.Parameters.AddWithValue("@range", schedule.range);
+                cmd.Parameters.Add(contents);
+            }
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (MySqlException)
+            {
+                return false;
+            }
         }
-        public static void GetSchedule()
+        public static Schedule GetSchedule(int authorID)
         {
-            return;
+            string sql = $"SELECT author, title, start, end, range, contents FROM employee WHERE id={authorID}";
+            MySqlCommand cmd = new MySqlCommand(sql, con);
+
+            using (MySqlDataReader rdr = cmd.ExecuteReader())
+            {
+                if (rdr.Read())
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                        return new Schedule(
+                            rdr.GetInt32("author"),
+                            rdr.GetString("range"),
+                            rdr.GetMySqlDateTime("start"),
+                            rdr.GetMySqlDateTime("end"),
+                            rdr.GetInt32("range"),
+                            rdr.GetString("contents"));
+                }
+            }
+            return null;
+            
         }
         public static void AddChatText()
         {
