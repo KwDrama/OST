@@ -46,12 +46,14 @@ namespace Client.Forms
             this.lblTeamRank = new MetroFramework.Controls.MetroLabel();
             this.picLogout = new System.Windows.Forms.PictureBox();
             this.picProfile = new System.Windows.Forms.PictureBox();
+            this.picSetting = new System.Windows.Forms.PictureBox();
             this.tabMenu.SuspendLayout();
             this.tpOrganization.SuspendLayout();
             this.cms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSetting)).BeginInit();
             this.SuspendLayout();
             // 
             // tabMenu
@@ -154,7 +156,7 @@ namespace Client.Forms
             // 
             this.tpChat.HorizontalScrollbarBarColor = true;
             this.tpChat.HorizontalScrollbarHighlightOnWheel = false;
-            this.tpChat.HorizontalScrollbarSize = 4;
+            this.tpChat.HorizontalScrollbarSize = 2;
             this.tpChat.Location = new System.Drawing.Point(4, 38);
             this.tpChat.Name = "tpChat";
             this.tpChat.Size = new System.Drawing.Size(340, 480);
@@ -207,7 +209,7 @@ namespace Client.Forms
             // lblName
             // 
             this.lblName.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.lblName.Location = new System.Drawing.Point(83, 16);
+            this.lblName.Location = new System.Drawing.Point(54, 16);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(160, 25);
             this.lblName.TabIndex = 3;
@@ -217,7 +219,7 @@ namespace Client.Forms
             // lblTeamRank
             // 
             this.lblTeamRank.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblTeamRank.Location = new System.Drawing.Point(83, 51);
+            this.lblTeamRank.Location = new System.Drawing.Point(54, 51);
             this.lblTeamRank.Name = "lblTeamRank";
             this.lblTeamRank.Size = new System.Drawing.Size(160, 15);
             this.lblTeamRank.TabIndex = 3;
@@ -243,18 +245,35 @@ namespace Client.Forms
             // picProfile
             // 
             this.picProfile.Image = global::Client.Properties.Resources.profile;
-            this.picProfile.Location = new System.Drawing.Point(249, 16);
+            this.picProfile.Location = new System.Drawing.Point(220, 16);
             this.picProfile.Name = "picProfile";
             this.picProfile.Size = new System.Drawing.Size(50, 50);
             this.picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picProfile.TabIndex = 2;
             this.picProfile.TabStop = false;
+            this.picProfile.MouseEnter += new System.EventHandler(Panels.PanelSlider.EnterShadow);
+            this.picProfile.MouseLeave += new System.EventHandler(Panels.PanelSlider.LeaveShadow);
+            // 
+            // picSetting
+            // 
+            this.picSetting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picSetting.BackColor = System.Drawing.Color.White;
+            this.picSetting.Image = global::Client.Properties.Resources.settings;
+            this.picSetting.Location = new System.Drawing.Point(276, 30);
+            this.picSetting.Name = "picSetting";
+            this.picSetting.Padding = new System.Windows.Forms.Padding(10);
+            this.picSetting.Size = new System.Drawing.Size(36, 36);
+            this.picSetting.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picSetting.TabIndex = 7;
+            this.picSetting.TabStop = false;
+            this.picSetting.Click += new System.EventHandler(this.picLogout_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(360, 600);
+            this.Controls.Add(this.picSetting);
             this.Controls.Add(this.picLogout);
             this.Controls.Add(this.lblTeamRank);
             this.Controls.Add(this.lblName);
@@ -278,6 +297,7 @@ namespace Client.Forms
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSetting)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -299,6 +319,7 @@ namespace Client.Forms
         private MetroFramework.Controls.MetroLabel lblName;
         private MetroFramework.Controls.MetroLabel lblTeamRank;
         private System.Windows.Forms.PictureBox picLogout;
+        private System.Windows.Forms.PictureBox picSetting;
     }
 }
 

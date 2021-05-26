@@ -40,12 +40,58 @@ namespace Client.Forms
             this.flowLayoutPanel1.Size = new System.Drawing.Size(348, 529);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
+            // txtChat
+            // 
+            // 
+            // 
+            // 
+            this.txtChat.CustomButton.Image = null;
+            this.txtChat.CustomButton.Location = new System.Drawing.Point(214, 1);
+            this.txtChat.CustomButton.Name = "";
+            this.txtChat.CustomButton.Size = new System.Drawing.Size(49, 49);
+            this.txtChat.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtChat.CustomButton.TabIndex = 1;
+            this.txtChat.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtChat.CustomButton.UseSelectable = true;
+            this.txtChat.CustomButton.Visible = false;
+            this.txtChat.Lines = new string[0];
+            this.txtChat.Location = new System.Drawing.Point(48, 543);
+            this.txtChat.MaxLength = 32767;
+            this.txtChat.Multiline = true;
+            this.txtChat.Name = "txtChat";
+            this.txtChat.PasswordChar = '\0';
+            this.txtChat.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtChat.SelectedText = "";
+            this.txtChat.SelectionLength = 0;
+            this.txtChat.SelectionStart = 0;
+            this.txtChat.ShortcutsEnabled = true;
+            this.txtChat.Size = new System.Drawing.Size(264, 51);
+            this.txtChat.TabIndex = 11;
+            this.txtChat.UseSelectable = true;
+            this.txtChat.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtChat.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtChat.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChat_KeyDown);
+            // 
+            // cms
+            // 
+            this.cms.Name = "cms";
+            this.cms.Size = new System.Drawing.Size(61, 4);
+            // 
+            // metroStyleManager1
+            // 
+            this.metroStyleManager1.Owner = this;
+            this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Yellow;
+            // 
             // FormChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(360, 600);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.txtChat);
+            this.Controls.Add(this.pnlChat);
+            this.Controls.Add(this.picSetting);
+            this.Controls.Add(this.picPlus);
+            this.Controls.Add(this.picSend);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(360, 600);
@@ -54,12 +100,21 @@ namespace Client.Forms
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.Text = "섬유2팀";
+            ((System.ComponentModel.ISupportInitialize)(this.picSend)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSetting)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPlus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.PictureBox picSetting;
+        private System.Windows.Forms.FlowLayoutPanel pnlChat;
+        private System.Windows.Forms.PictureBox picSend;
+        private System.Windows.Forms.PictureBox picPlus;
+        private MetroFramework.Controls.MetroTextBox txtChat;
+        private MetroFramework.Controls.MetroContextMenu cms;
+        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
     }
 }
