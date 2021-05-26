@@ -26,10 +26,5 @@ namespace Client.Panels
         {
             Swipe(false);
         }
-
-        private void picClose_Click(object sender, EventArgs e)
-        {
-            Swipe(false);
-        }
     }
 }

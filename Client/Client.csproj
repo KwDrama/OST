@@ -64,12 +64,6 @@
     <Compile Include="Forms\FormChat.Designer.cs">
       <DependentUpon>FormChat.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormInfoDep.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormInfoDep.Designer.cs">
-      <DependentUpon>FormInfoDep.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormInfoPeople.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,9 +116,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FormChat.resx">
       <DependentUpon>FormChat.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormInfoDep.resx">
-      <DependentUpon>FormInfoDep.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormInfoPeople.resx">
       <DependentUpon>FormInfoPeople.cs</DependentUpon>
@@ -187,9 +178,6 @@
     <None Include="Resources\manager.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\add-user.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\next.png" />
   </ItemGroup>
   <ItemGroup>
@@ -224,15 +212,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\back.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ost이름.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\사람프로필_아이콘.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Info_아이콘.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\department.png" />

@@ -63,29 +63,9 @@ namespace Client.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap add_user {
-            get {
-                object obj = ResourceManager.GetObject("add_user", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
         internal static System.Drawing.Bitmap back {
             get {
                 object obj = ResourceManager.GetObject("back", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap department {
-            get {
-                object obj = ResourceManager.GetObject("department", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -100,13 +80,12 @@ namespace Client.Properties {
             }
         }
         
-        
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap Info_아이콘 {
+        internal static System.Drawing.Bitmap department {
             get {
-                object obj = ResourceManager.GetObject("Info_아이콘", resourceCulture);
+                object obj = ResourceManager.GetObject("department", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -157,16 +136,6 @@ namespace Client.Properties {
         internal static System.Drawing.Bitmap next {
             get {
                 object obj = ResourceManager.GetObject("next", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap ost이름 {
-            get {
-                object obj = ResourceManager.GetObject("ost이름", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -247,16 +216,6 @@ namespace Client.Properties {
         internal static System.Drawing.Bitmap user {
             get {
                 object obj = ResourceManager.GetObject("user", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap 사람프로필_아이콘 {
-            get {
-                object obj = ResourceManager.GetObject("사람프로필_아이콘", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
