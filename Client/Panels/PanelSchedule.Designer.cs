@@ -38,9 +38,9 @@ namespace Client.Panels
             this.lblEnd = new MetroFramework.Controls.MetroLabel();
             this.lblRange = new MetroFramework.Controls.MetroLabel();
             this.tleSubmit = new MetroFramework.Controls.MetroTile();
-            this.picClose = new System.Windows.Forms.PictureBox();
             this.txtContent = new MetroFramework.Controls.MetroTextBox();
             this.cmbRange = new MetroFramework.Controls.MetroComboBox();
+            this.picClose = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,6 +58,8 @@ namespace Client.Panels
             this.txtName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtName.CustomButton.UseSelectable = true;
             this.txtName.CustomButton.Visible = false;
+            this.txtName.DisplayIcon = true;
+            this.txtName.Icon = global::Client.Properties.Resources.calendar;
             this.txtName.Lines = new string[0];
             this.txtName.Location = new System.Drawing.Point(60, 30);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
@@ -207,6 +209,22 @@ namespace Client.Panels
             this.cmbRange.Size = new System.Drawing.Size(240, 29);
             this.cmbRange.TabIndex = 21;
             this.cmbRange.UseSelectable = true;
+            // 
+            // picClose
+            // 
+            this.picClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picClose.BackColor = System.Drawing.Color.White;
+            this.picClose.Image = ((System.Drawing.Image)(resources.GetObject("picClose.Image")));
+            this.picClose.Location = new System.Drawing.Point(321, 3);
+            this.picClose.Name = "picClose";
+            this.picClose.Padding = new System.Windows.Forms.Padding(10);
+            this.picClose.Size = new System.Drawing.Size(36, 36);
+            this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picClose.TabIndex = 7;
+            this.picClose.TabStop = false;
+            this.picClose.Click += new System.EventHandler(this.picClose_Click);
+            this.picClose.MouseEnter += new System.EventHandler(PanelSlider.EnterShadow);
+            this.picClose.MouseLeave += new System.EventHandler(PanelSlider.LeaveShadow);
             // 
             // PanelSchedule
             // 

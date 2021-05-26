@@ -121,7 +121,7 @@ namespace Client.Forms
             // 
             this.tpChat.HorizontalScrollbarBarColor = true;
             this.tpChat.HorizontalScrollbarHighlightOnWheel = false;
-            this.tpChat.HorizontalScrollbarSize = 4;
+            this.tpChat.HorizontalScrollbarSize = 3;
             this.tpChat.Location = new System.Drawing.Point(4, 38);
             this.tpChat.Name = "tpChat";
             this.tpChat.Size = new System.Drawing.Size(340, 459);
@@ -214,8 +214,8 @@ namespace Client.Forms
             this.picLogout.TabIndex = 7;
             this.picLogout.TabStop = false;
             this.picLogout.Click += new System.EventHandler(this.picLogout_Click);
-            this.picLogout.MouseEnter += new System.EventHandler(this.picLogout_MouseEnter);
-            this.picLogout.MouseLeave += new System.EventHandler(this.picLogout_MouseLeave);
+            this.picLogout.MouseEnter += new System.EventHandler(Panels.PanelSlider.EnterShadow);
+            this.picLogout.MouseLeave += new System.EventHandler(Panels.PanelSlider.LeaveShadow);
             // 
             // picProfile
             // 

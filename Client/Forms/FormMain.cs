@@ -3,6 +3,7 @@ using MetroFramework.Forms;
 using OSTLibrary.Networks;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace Client.Forms
@@ -49,15 +50,11 @@ namespace Client.Forms
             }
         }
 
-        private void picLogout_MouseEnter(object sender, EventArgs e)
-            => PanelSlider.EnterShadow(sender, e);
-        private void picLogout_MouseLeave(object sender, EventArgs e)
-            => PanelSlider.LeaveShadow(sender, e);
         private void picLogout_Click(object sender, EventArgs e)
         {
-            Opacity = 0;
-            Program.Send(new LogoutPacket());
-            FormMain_Shown(this, new EventArgs());
+            Program.Send(new Packet(PacketType.Close));
+            Application.Exit();
+            Process.Start(Application.ExecutablePath);
         }
 
         private void tabMenu_SelectedIndexChanged(object sender, EventArgs e)

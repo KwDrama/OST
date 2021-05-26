@@ -88,6 +88,18 @@
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Panels\ControlChat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\ControlChat.Designer.cs">
+      <DependentUpon>ControlChat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelPlus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelPlus.Designer.cs">
+      <DependentUpon>PanelPlus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Panels\PanelSchedule.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -122,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelPlus.resx">
+      <DependentUpon>PanelPlus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panels\PanelRegister.resx">
       <DependentUpon>PanelRegister.cs</DependentUpon>
@@ -194,6 +209,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\send.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ost이름.png" />
