@@ -1,4 +1,6 @@
 ﻿using MetroFramework.Forms;
+using System;
+using System.Windows.Forms;
 
 namespace Client.Forms
 {
@@ -7,6 +9,16 @@ namespace Client.Forms
         public FormChat()
         {
             InitializeComponent();
+        }
+
+        private void txtChat_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!e.Shift && e.KeyCode == Keys.Enter)
+                picSend_Click(sender, new EventArgs());
+        }
+        private void picSend_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

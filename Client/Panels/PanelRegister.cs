@@ -23,22 +23,6 @@ namespace Client.Panels
         {
             Swipe(false);
         }
-        private void picClose_MouseEnter(object sender, EventArgs e)
-        {
-            EnterShadow(sender, e);
-        }
-        private void picClose_MouseLeave(object sender, EventArgs e)
-        {
-            LeaveShadow(sender, e);
-        }
-        private void picProfile_MouseEnter(object sender, EventArgs e)
-        {
-            EnterShadow(sender, e);
-        }
-        private void picProfile_MouseLeave(object sender, EventArgs e)
-        {
-            LeaveShadow(sender, e);
-        }
         private void picProfile_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();

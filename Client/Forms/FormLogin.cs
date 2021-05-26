@@ -134,7 +134,7 @@ namespace Client.Forms
             {
                 DialogResult = DialogResult.OK;
                 Program.employee = p.employee;
-                Close();
+                BeginInvoke(new MethodInvoker(() => Close()));
             }
             else
                 Invoke(new MethodInvoker(() =>

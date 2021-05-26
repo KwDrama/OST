@@ -64,6 +64,18 @@
     <Compile Include="Forms\FormChat.Designer.cs">
       <DependentUpon>FormChat.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormInfoDep.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormInfoDep.Designer.cs">
+      <DependentUpon>FormInfoDep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormInfoPeople.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormInfoPeople.Designer.cs">
+      <DependentUpon>FormInfoPeople.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +87,18 @@
     </Compile>
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ControlChat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\ControlChat.Designer.cs">
+      <DependentUpon>ControlChat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelPlus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelPlus.Designer.cs">
+      <DependentUpon>PanelPlus.cs</DependentUpon>
     </Compile>
     <Compile Include="Panels\PanelSchedule.cs">
       <SubType>UserControl</SubType>
@@ -99,11 +123,20 @@
     <EmbeddedResource Include="Forms\FormChat.resx">
       <DependentUpon>FormChat.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormInfoDep.resx">
+      <DependentUpon>FormInfoDep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormInfoPeople.resx">
+      <DependentUpon>FormInfoPeople.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelPlus.resx">
+      <DependentUpon>PanelPlus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panels\PanelRegister.resx">
       <DependentUpon>PanelRegister.cs</DependentUpon>
@@ -176,6 +209,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\send.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ost이름.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\사람프로필_아이콘.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info_아이콘.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\department.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

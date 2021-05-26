@@ -256,8 +256,8 @@ namespace Client.Panels
             this.picProfile.TabIndex = 6;
             this.picProfile.TabStop = false;
             this.picProfile.Click += new System.EventHandler(this.picProfile_Click);
-            this.picProfile.MouseEnter += new System.EventHandler(this.picProfile_MouseEnter);
-            this.picProfile.MouseLeave += new System.EventHandler(this.picProfile_MouseLeave);
+            this.picProfile.MouseEnter += new System.EventHandler(PanelSlider.EnterShadow);
+            this.picProfile.MouseLeave += new System.EventHandler(PanelSlider.LeaveShadow);
             // 
             // picClose
             // 
@@ -272,8 +272,8 @@ namespace Client.Panels
             this.picClose.TabIndex = 6;
             this.picClose.TabStop = false;
             this.picClose.Click += new System.EventHandler(this.picClose_Click);
-            this.picClose.MouseEnter += new System.EventHandler(this.picClose_MouseEnter);
-            this.picClose.MouseLeave += new System.EventHandler(this.picClose_MouseLeave);
+            this.picClose.MouseEnter += new System.EventHandler(PanelSlider.EnterShadow);
+            this.picClose.MouseLeave += new System.EventHandler(PanelSlider.LeaveShadow);
             // 
             // tleSubmit
             // 

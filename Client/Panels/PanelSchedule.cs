@@ -22,13 +22,14 @@ namespace Client.Panels
             });
         }
 
-        private void picClose_MouseEnter(object sender, EventArgs e)
+        private void picClose_Click(object sender, EventArgs e)
         {
-            EnterShadow(sender, e);
+            Swipe(false);
         }
-        private void picClose_MouseLeave(object sender, EventArgs e)
+
+        private void picClose_Click(object sender, EventArgs e)
         {
-            LeaveShadow(sender, e);
+            Swipe(false);
         }
     }
 }
