@@ -1,7 +1,7 @@
 ﻿
 namespace Client.Forms
 {
-    partial class FormInfoPeople
+    partial class FormInfo
     {
         /// <summary>
         /// Required designer variable.
@@ -132,7 +132,7 @@ namespace Client.Forms
             this.lblName.TabIndex = 25;
             this.lblName.Text = "홍길동";
             // 
-            // FormInfoPeople
+            // FormInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -147,10 +147,11 @@ namespace Client.Forms
             this.Controls.Add(this.lblPhone);
             this.Controls.Add(this.lblName);
             this.KeyPreview = true;
-            this.Name = "FormInfoPeople";
+            this.Name = "FormInfo";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.Text = "Information";
+            this.Load += new System.EventHandler(this.FormInfo_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormInfoPeople_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
             this.ResumeLayout(false);

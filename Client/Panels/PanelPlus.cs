@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Client.Panels
@@ -16,6 +9,15 @@ namespace Client.Panels
         {
             InitializeComponent();
             Init();
+        }
+
+        private void pic_MouseEnter(object sender, EventArgs e)
+        {
+            EnterShadow(sender, e);
+        }
+        private void pic_MouseLeave(object sender, EventArgs e)
+        {
+            LeaveShadow(sender, e);
         }
     }
 }

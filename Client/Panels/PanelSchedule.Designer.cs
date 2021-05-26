@@ -201,6 +201,8 @@ namespace Client.Panels
             this.picClose.TabIndex = 7;
             this.picClose.TabStop = false;
             this.picClose.Click += new System.EventHandler(this.picClose_Click);
+            this.picClose.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
+            this.picClose.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
             // 
             // PanelSchedule
             // 

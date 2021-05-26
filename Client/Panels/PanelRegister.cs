@@ -19,6 +19,14 @@ namespace Client.Panels
             cmbCentral.SelectedIndex = 0;
         }
 
+        private void pic_MouseEnter(object sender, EventArgs e)
+        {
+            EnterShadow(sender, e);
+        }
+        private void pic_MouseLeave(object sender, EventArgs e)
+        {
+            LeaveShadow(sender, e);
+        }
         private void picClose_Click(object sender, EventArgs e)
         {
             Swipe(false);

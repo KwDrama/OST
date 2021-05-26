@@ -1,4 +1,5 @@
-﻿using MetroFramework.Forms;
+﻿using Client.Panels;
+using MetroFramework.Forms;
 using System;
 using System.Windows.Forms;
 
@@ -9,6 +10,15 @@ namespace Client.Forms
         public FormChat()
         {
             InitializeComponent();
+        }
+
+        private void pic_MouseEnter(object sender, EventArgs e)
+        {
+            PanelSlider.EnterShadow(sender, e);
+        }
+        private void pic_MouseLeave(object sender, EventArgs e)
+        {
+            PanelSlider.LeaveShadow(sender, e);
         }
 
         private void txtChat_KeyDown(object sender, KeyEventArgs e)

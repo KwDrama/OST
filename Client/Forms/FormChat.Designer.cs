@@ -65,6 +65,8 @@ namespace Client.Forms
             this.picSend.TabIndex = 10;
             this.picSend.TabStop = false;
             this.picSend.Click += new System.EventHandler(this.picSend_Click);
+            this.picSend.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
+            this.picSend.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
             // 
             // picSetting
             // 
@@ -79,6 +81,8 @@ namespace Client.Forms
             this.picSetting.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picSetting.TabIndex = 8;
             this.picSetting.TabStop = false;
+            this.picSetting.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
+            this.picSetting.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
             // 
             // picPlus
             // 
@@ -93,48 +97,8 @@ namespace Client.Forms
             this.picPlus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picPlus.TabIndex = 10;
             this.picPlus.TabStop = false;
-            // 
-            // txtChat
-            // 
-            // 
-            // 
-            // 
-            this.txtChat.CustomButton.Image = null;
-            this.txtChat.CustomButton.Location = new System.Drawing.Point(214, 1);
-            this.txtChat.CustomButton.Name = "";
-            this.txtChat.CustomButton.Size = new System.Drawing.Size(49, 49);
-            this.txtChat.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtChat.CustomButton.TabIndex = 1;
-            this.txtChat.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtChat.CustomButton.UseSelectable = true;
-            this.txtChat.CustomButton.Visible = false;
-            this.txtChat.Lines = new string[0];
-            this.txtChat.Location = new System.Drawing.Point(48, 543);
-            this.txtChat.MaxLength = 32767;
-            this.txtChat.Multiline = true;
-            this.txtChat.Name = "txtChat";
-            this.txtChat.PasswordChar = '\0';
-            this.txtChat.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtChat.SelectedText = "";
-            this.txtChat.SelectionLength = 0;
-            this.txtChat.SelectionStart = 0;
-            this.txtChat.ShortcutsEnabled = true;
-            this.txtChat.Size = new System.Drawing.Size(264, 51);
-            this.txtChat.TabIndex = 11;
-            this.txtChat.UseSelectable = true;
-            this.txtChat.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtChat.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.txtChat.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChat_KeyDown);
-            // 
-            // cms
-            // 
-            this.cms.Name = "cms";
-            this.cms.Size = new System.Drawing.Size(61, 4);
-            // 
-            // metroStyleManager1
-            // 
-            this.metroStyleManager1.Owner = this;
-            this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Yellow;
+            this.picPlus.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
+            this.picPlus.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
             // 
             // txtChat
             // 

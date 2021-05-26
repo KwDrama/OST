@@ -44,6 +44,8 @@ namespace Client.Panels
             this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picClose.TabIndex = 8;
             this.picClose.TabStop = false;
+            this.picClose.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
+            this.picClose.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
             // 
             // PanelPlus
             // 

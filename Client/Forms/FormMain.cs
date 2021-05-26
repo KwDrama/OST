@@ -48,8 +48,24 @@ namespace Client.Forms
                 foreach (string team in organization[central])
                     tvwOrganization.Nodes[central].Nodes.Add(team).ContextMenuStrip = cms;
             }
+
+            if (tabMenu.SelectedTab.Text == "일정")
+                lnkSchAdd.Visible = true;
         }
 
+        private void pic_MouseEnter(object sender, EventArgs e)
+        {
+            PanelSlider.EnterShadow(sender, e);
+        }
+        private void pic_MouseLeave(object sender, EventArgs e)
+        {
+            PanelSlider.LeaveShadow(sender, e);
+        }
+        private void picProfile_Click(object sender, EventArgs e)
+        {
+            FormInfo formInfoP = new FormInfo(FormInfo.InfoType.Employee, Program.employee);
+            formInfoP.Show();
+        }
         private void picLogout_Click(object sender, EventArgs e)
         {
             Program.Send(new Packet(PacketType.Close));
@@ -64,7 +80,7 @@ namespace Client.Forms
         private void tsmiInfo_Click(object sender, EventArgs e)
         {
             //사람클릭시와 부서클릭시를 차별화 둘 예정(0524기준)
-            FormInfoPeople formInfoP = new FormInfoPeople();
+            FormInfo formInfoP = new FormInfo(FormInfo.InfoType.Employee, Program.employee);
             formInfoP.Show();
         }
         private void tsmiChat_Click(object sender, EventArgs e)
@@ -76,12 +92,6 @@ namespace Client.Forms
         {
             PanelSchedule pnl = new PanelSchedule(this, SlidingType.Left);
             pnl.Swipe();
-        }
-
-        private void picProfile_Click(object sender, EventArgs e)
-        {
-            FormInfoPeople formInfoP = new FormInfoPeople();
-            formInfoP.Show();
         }
     }
 }
