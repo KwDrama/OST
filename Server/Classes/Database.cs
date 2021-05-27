@@ -163,8 +163,8 @@ namespace Server.Classes
                         return new Schedule(
                             rdr.GetInt32("author"),
                             rdr.GetString("range"),
-                            rdr.GetMySqlDateTime("start"),
-                            rdr.GetMySqlDateTime("end"),
+                            rdr.GetDateTime("start"),
+                            rdr.GetDateTime("end"),
                             rdr.GetInt32("range"),
                             rdr.GetString("contents"));
                 }

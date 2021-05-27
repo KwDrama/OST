@@ -1,5 +1,4 @@
 ﻿using System;
-using MySql.Data.Types;
 namespace OSTLibrary.Classes
 {
     [Serializable]
@@ -7,14 +6,14 @@ namespace OSTLibrary.Classes
     {
         public int author;
         public string title;
-        public MySqlDateTime start;
-        public MySqlDateTime end;
+        public DateTime start;
+        public DateTime end;
         public int range;
         public string contents;
 
 
 
-        public Schedule(int author, string title, MySqlDateTime start, MySqlDateTime end,int range, string contents)
+        public Schedule(int author, string title, DateTime start, DateTime end,int range, string contents)
         {
             this.author = author;
             this.title = title;
