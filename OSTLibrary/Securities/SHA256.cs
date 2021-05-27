@@ -11,7 +11,8 @@ namespace OSTLibrary.Securities
             byte[] hashValue;
             string result = string.Empty;
 
-            using (System.Security.Cryptography.SHA256 mySHA256 = System.Security.Cryptography.SHA256.Create())
+            using (System.Security.Cryptography.SHA256 mySHA256 =
+                System.Security.Cryptography.SHA256.Create())
             {
                 hashValue = mySHA256.ComputeHash(array);
             }
