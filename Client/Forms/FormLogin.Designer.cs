@@ -27,17 +27,115 @@ namespace Client.Forms
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        #pragma warning disable CS0618 // 형식 또는 멤버는 사용되지 않습니다.
         private void InitializeComponent()
         {
-            this.txtPassword = new MetroFramework.Controls.MetroTextBox();
-            this.txtEmpNum = new MetroFramework.Controls.MetroTextBox();
+            this.components = new System.ComponentModel.Container();
             this.chkAutoLogin = new MetroFramework.Controls.MetroCheckBox();
             this.btnLogin = new MetroFramework.Controls.MetroButton();
             this.lnkResetPw = new MetroFramework.Controls.MetroLink();
-            this.picLogo = new System.Windows.Forms.PictureBox();
             this.lblResult = new MetroFramework.Controls.MetroLabel();
+            this.lnkRegist = new MetroFramework.Controls.MetroLink();
+            this.lblSeperate = new MetroFramework.Controls.MetroLink();
+            this.spnLogin = new MetroFramework.Controls.MetroProgressSpinner();
+            this.picLogo = new System.Windows.Forms.PictureBox();
+            this.txtPassword = new MetroFramework.Controls.MetroTextBox();
+            this.txtempId = new MetroFramework.Controls.MetroTextBox();
+            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // chkAutoLogin
+            // 
+            this.chkAutoLogin.AutoSize = true;
+            this.chkAutoLogin.Checked = true;
+            this.chkAutoLogin.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAutoLogin.Location = new System.Drawing.Point(80, 365);
+            this.chkAutoLogin.Name = "chkAutoLogin";
+            this.chkAutoLogin.Size = new System.Drawing.Size(83, 15);
+            this.chkAutoLogin.TabIndex = 3;
+            this.chkAutoLogin.Text = "자동로그인";
+            this.chkAutoLogin.UseSelectable = true;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(80, 334);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(200, 25);
+            this.btnLogin.TabIndex = 2;
+            this.btnLogin.Text = "로그인";
+            this.btnLogin.UseSelectable = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // lnkResetPw
+            // 
+            this.lnkResetPw.AutoSize = true;
+            this.lnkResetPw.Location = new System.Drawing.Point(173, 520);
+            this.lnkResetPw.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
+            this.lnkResetPw.Name = "lnkResetPw";
+            this.lnkResetPw.Size = new System.Drawing.Size(105, 25);
+            this.lnkResetPw.TabIndex = 7;
+            this.lnkResetPw.Text = "비밀번호 재설정";
+            this.lnkResetPw.UseSelectable = true;
+            this.lnkResetPw.Click += new System.EventHandler(this.lnkResetPw_Click);
+            // 
+            // lblResult
+            // 
+            this.lblResult.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblResult.Location = new System.Drawing.Point(80, 423);
+            this.lblResult.Margin = new System.Windows.Forms.Padding(3, 40, 3, 30);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(200, 64);
+            this.lblResult.TabIndex = 4;
+            this.lblResult.UseStyleColors = true;
+            this.lblResult.WrapToLine = true;
+            // 
+            // lnkRegist
+            // 
+            this.lnkRegist.AutoSize = true;
+            this.lnkRegist.Location = new System.Drawing.Point(82, 520);
+            this.lnkRegist.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
+            this.lnkRegist.Name = "lnkRegist";
+            this.lnkRegist.Size = new System.Drawing.Size(69, 25);
+            this.lnkRegist.TabIndex = 5;
+            this.lnkRegist.Text = "사원 등록";
+            this.lnkRegist.UseSelectable = true;
+            this.lnkRegist.Click += new System.EventHandler(this.lnkRegist_Click);
+            // 
+            // lblSeperate
+            // 
+            this.lblSeperate.Enabled = false;
+            this.lblSeperate.FontWeight = MetroFramework.MetroLinkWeight.Light;
+            this.lblSeperate.Location = new System.Drawing.Point(157, 520);
+            this.lblSeperate.Name = "lblSeperate";
+            this.lblSeperate.Size = new System.Drawing.Size(10, 23);
+            this.lblSeperate.TabIndex = 6;
+            this.lblSeperate.Text = "|";
+            this.lblSeperate.UseSelectable = true;
+            // 
+            // spnLogin
+            // 
+            this.spnLogin.EnsureVisible = false;
+            this.spnLogin.Location = new System.Drawing.Point(168, 334);
+            this.spnLogin.Maximum = 100;
+            this.spnLogin.Name = "spnLogin";
+            this.spnLogin.Size = new System.Drawing.Size(25, 25);
+            this.spnLogin.Speed = 2F;
+            this.spnLogin.TabIndex = 8;
+            this.spnLogin.UseSelectable = true;
+            this.spnLogin.Value = 60;
+            this.spnLogin.Visible = false;
+            // 
+            // picLogo
+            // 
+            this.picLogo.Image = global::Client.Properties.Resources.logo;
+            this.picLogo.Location = new System.Drawing.Point(80, 66);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(200, 200);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picLogo.TabIndex = 6;
+            this.picLogo.TabStop = false;
             // 
             // txtPassword
             // 
@@ -45,9 +143,9 @@ namespace Client.Forms
             // 
             // 
             this.txtPassword.CustomButton.Image = null;
-            this.txtPassword.CustomButton.Location = new System.Drawing.Point(178, 1);
+            this.txtPassword.CustomButton.Location = new System.Drawing.Point(176, 1);
             this.txtPassword.CustomButton.Name = "";
-            this.txtPassword.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtPassword.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtPassword.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtPassword.CustomButton.TabIndex = 1;
             this.txtPassword.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -56,7 +154,7 @@ namespace Client.Forms
             this.txtPassword.DisplayIcon = true;
             this.txtPassword.Icon = global::Client.Properties.Resources.key;
             this.txtPassword.Lines = new string[0];
-            this.txtPassword.Location = new System.Drawing.Point(80, 284);
+            this.txtPassword.Location = new System.Drawing.Point(80, 303);
             this.txtPassword.MaxLength = 20;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
@@ -66,7 +164,7 @@ namespace Client.Forms
             this.txtPassword.SelectionLength = 0;
             this.txtPassword.SelectionStart = 0;
             this.txtPassword.ShortcutsEnabled = true;
-            this.txtPassword.Size = new System.Drawing.Size(200, 23);
+            this.txtPassword.Size = new System.Drawing.Size(200, 25);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSelectable = true;
             this.txtPassword.UseSystemPasswordChar = true;
@@ -74,111 +172,66 @@ namespace Client.Forms
             this.txtPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPassword.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
-            this.txtPassword.Enter += new System.EventHandler(this.txt_Enter);
             this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
+            this.txtPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_KeyUp);
             // 
-            // txtEmpNum
+            // txtempId
             // 
             // 
             // 
             // 
-            this.txtEmpNum.CustomButton.Image = null;
-            this.txtEmpNum.CustomButton.Location = new System.Drawing.Point(178, 1);
-            this.txtEmpNum.CustomButton.Name = "";
-            this.txtEmpNum.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtEmpNum.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtEmpNum.CustomButton.TabIndex = 1;
-            this.txtEmpNum.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtEmpNum.CustomButton.UseSelectable = true;
-            this.txtEmpNum.CustomButton.Visible = false;
-            this.txtEmpNum.DisplayIcon = true;
-            this.txtEmpNum.Icon = global::Client.Properties.Resources.user;
-            this.txtEmpNum.Lines = new string[0];
-            this.txtEmpNum.Location = new System.Drawing.Point(80, 255);
-            this.txtEmpNum.MaxLength = 20;
-            this.txtEmpNum.Name = "txtEmpNum";
-            this.txtEmpNum.PasswordChar = '\0';
-            this.txtEmpNum.PromptText = "사원번호";
-            this.txtEmpNum.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtEmpNum.SelectedText = "";
-            this.txtEmpNum.SelectionLength = 0;
-            this.txtEmpNum.SelectionStart = 0;
-            this.txtEmpNum.ShortcutsEnabled = true;
-            this.txtEmpNum.Size = new System.Drawing.Size(200, 23);
-            this.txtEmpNum.TabIndex = 0;
-            this.txtEmpNum.UseSelectable = true;
-            this.txtEmpNum.WaterMark = "사원번호";
-            this.txtEmpNum.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtEmpNum.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmpNum.TextChanged += new System.EventHandler(this.txtEmpNum_TextChanged);
-            this.txtEmpNum.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtEmpNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
+            this.txtempId.CustomButton.Image = null;
+            this.txtempId.CustomButton.Location = new System.Drawing.Point(176, 1);
+            this.txtempId.CustomButton.Name = "";
+            this.txtempId.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.txtempId.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtempId.CustomButton.TabIndex = 1;
+            this.txtempId.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtempId.CustomButton.UseSelectable = true;
+            this.txtempId.CustomButton.Visible = false;
+            this.txtempId.DisplayIcon = true;
+            this.txtempId.Icon = global::Client.Properties.Resources.manager;
+            this.txtempId.Lines = new string[0];
+            this.txtempId.Location = new System.Drawing.Point(80, 272);
+            this.txtempId.MaxLength = 6;
+            this.txtempId.Name = "txtempId";
+            this.txtempId.PasswordChar = '\0';
+            this.txtempId.PromptText = "사원번호";
+            this.txtempId.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtempId.SelectedText = "";
+            this.txtempId.SelectionLength = 0;
+            this.txtempId.SelectionStart = 0;
+            this.txtempId.ShortcutsEnabled = true;
+            this.txtempId.Size = new System.Drawing.Size(200, 25);
+            this.txtempId.TabIndex = 0;
+            this.txtempId.UseSelectable = true;
+            this.txtempId.WaterMark = "사원번호";
+            this.txtempId.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtempId.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtempId.TextChanged += new System.EventHandler(this.txtempId_TextChanged);
+            this.txtempId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
+            this.txtempId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_KeyUp);
             // 
-            // chkAutoLogin
+            // metroStyleManager1
             // 
-            this.chkAutoLogin.AutoSize = true;
-            this.chkAutoLogin.Checked = true;
-            this.chkAutoLogin.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAutoLogin.Location = new System.Drawing.Point(80, 342);
-            this.chkAutoLogin.Name = "chkAutoLogin";
-            this.chkAutoLogin.Size = new System.Drawing.Size(83, 15);
-            this.chkAutoLogin.TabIndex = 3;
-            this.chkAutoLogin.Text = "자동로그인";
-            this.chkAutoLogin.UseSelectable = true;
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Location = new System.Drawing.Point(80, 313);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(200, 23);
-            this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "로그인";
-            this.btnLogin.UseSelectable = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // lnkResetPw
-            // 
-            this.lnkResetPw.AutoSize = true;
-            this.lnkResetPw.Location = new System.Drawing.Point(128, 510);
-            this.lnkResetPw.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
-            this.lnkResetPw.Name = "lnkResetPw";
-            this.lnkResetPw.Size = new System.Drawing.Size(105, 25);
-            this.lnkResetPw.TabIndex = 5;
-            this.lnkResetPw.Text = "비밀번호 재설정";
-            this.lnkResetPw.UseSelectable = true;
-            // 
-            // picLogo
-            // 
-            this.picLogo.Location = new System.Drawing.Point(80, 49);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(200, 200);
-            this.picLogo.TabIndex = 6;
-            this.picLogo.TabStop = false;
-            // 
-            // lblResult
-            // 
-            this.lblResult.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblResult.Location = new System.Drawing.Point(80, 380);
-            this.lblResult.Margin = new System.Windows.Forms.Padding(3, 20, 3, 20);
-            this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(200, 107);
-            this.lblResult.TabIndex = 4;
-            this.lblResult.UseStyleColors = true;
-            this.lblResult.WrapToLine = true;
+            this.metroStyleManager1.Owner = this;
+            this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Yellow;
             // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(360, 590);
+            this.ClientSize = new System.Drawing.Size(360, 600);
+            this.Controls.Add(this.spnLogin);
+            this.Controls.Add(this.lblSeperate);
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.picLogo);
+            this.Controls.Add(this.lnkRegist);
             this.Controls.Add(this.lnkResetPw);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.chkAutoLogin);
             this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.txtEmpNum);
+            this.Controls.Add(this.txtempId);
             this.DisplayHeader = false;
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -187,10 +240,11 @@ namespace Client.Forms
             this.Padding = new System.Windows.Forms.Padding(20, 38, 20, 25);
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
+            this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.Text = "로그인";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLogin_FormClosing);
             this.Shown += new System.EventHandler(this.FormLogin_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,12 +252,16 @@ namespace Client.Forms
 
         #endregion
 
-        private MetroFramework.Controls.MetroTextBox txtEmpNum;
+        private MetroFramework.Controls.MetroTextBox txtempId;
         private MetroFramework.Controls.MetroTextBox txtPassword;
         private MetroFramework.Controls.MetroCheckBox chkAutoLogin;
         private MetroFramework.Controls.MetroButton btnLogin;
         private MetroFramework.Controls.MetroLink lnkResetPw;
         private System.Windows.Forms.PictureBox picLogo;
         private MetroFramework.Controls.MetroLabel lblResult;
+        private MetroFramework.Controls.MetroLink lnkRegist;
+        private MetroFramework.Controls.MetroLink lblSeperate;
+        private MetroFramework.Controls.MetroProgressSpinner spnLogin;
+        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
     }
 }
