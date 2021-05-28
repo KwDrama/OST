@@ -45,9 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chats\Chat.cs" />
-    <Compile Include="Chats\ImageChat.cs" />
     <Compile Include="Chats\Room.cs" />
-    <Compile Include="Chats\TextChat.cs" />
     <Compile Include="Classes\Employee.cs" />
     <Compile Include="Classes\Schedule.cs" />
     <Compile Include="Networks\ChatsPacket.cs" />

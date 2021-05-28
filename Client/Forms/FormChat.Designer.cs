@@ -50,7 +50,6 @@ namespace Client.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlChat.BackColor = System.Drawing.Color.Ivory;
             this.pnlChat.Location = new System.Drawing.Point(0, 72);
-            this.pnlChat.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.pnlChat.Name = "pnlChat";
             this.pnlChat.Size = new System.Drawing.Size(360, 465);
             this.pnlChat.TabIndex = 0;

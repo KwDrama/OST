@@ -8,18 +8,18 @@ namespace OSTLibrary.Classes
         public string title;
         public DateTime start;
         public DateTime end;
-        public int range;
+        public int scope;
         public string contents;
 
 
 
-        public Schedule(int author, string title, DateTime start, DateTime end,int range, string contents)
+        public Schedule(int author, string title, DateTime start, DateTime end,int scope, string contents)
         {
             this.author = author;
             this.title = title;
             this.start = start;
             this.end = end;
-            this.range = range;
+            this.scope = scope;
             this.contents = contents;
         }
     }

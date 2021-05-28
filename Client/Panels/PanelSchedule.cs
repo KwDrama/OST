@@ -13,7 +13,7 @@ namespace Client.Panels
         }
         private void PanelSchedule_Load(object sender, EventArgs e)
         {
-            cmbRange.Items.AddRange(Room.Range);
+            cmbScope.Items.AddRange(Room.Scope);
         }
 
         private void pic_MouseEnter(object sender, EventArgs e)

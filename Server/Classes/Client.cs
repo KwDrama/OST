@@ -1,5 +1,6 @@
 ﻿using OSTLibrary.Classes;
 using OSTLibrary.Networks;
+using OSTLibrary.Securities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -115,6 +116,26 @@ namespace Server.Classes
                     }
                     else
                         Log("Register", "회원가입 실패");
+                }
+                else if (packet.type == PacketType.Room)
+                {
+                    RoomPacket p = packet as RoomPacket;
+                    if (p.roomType == RoomType.New)
+                    {
+                        do p.room.id = MD5.NextRandom();
+                        while (!Database.AddRoom(p.room));
+                        Send(p);
+                        Log("Room", "채팅방 생성 " + (p.room.scopeIdx == 3 ?
+                            Program.employees.Find(e => e.id.ToString().Equals(p.room.target.Split(',')[0])).name + ", " +
+                            Program.employees.Find(e => e.id.ToString().Equals(p.room.target.Split(',')[1])).name :
+                            p.room.target));
+                    }
+                }
+                else if (packet.type == PacketType.Chat)
+                {
+                    ChatsPacket p = packet as ChatsPacket;
+
+                    p.chats.ForEach(Database.AddChat);
                 }
                 else
                 {

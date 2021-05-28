@@ -47,8 +47,10 @@ namespace Client.Forms
             this.picSetting = new System.Windows.Forms.PictureBox();
             this.picLogout = new System.Windows.Forms.PictureBox();
             this.picProfile = new System.Windows.Forms.PictureBox();
+            this.pnlChat = new System.Windows.Forms.FlowLayoutPanel();
             this.tabMenu.SuspendLayout();
             this.tpOrganization.SuspendLayout();
+            this.tpChat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSetting)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogout)).BeginInit();
@@ -65,7 +67,7 @@ namespace Client.Forms
             this.tabMenu.Controls.Add(this.tpChat);
             this.tabMenu.Location = new System.Drawing.Point(6, 83);
             this.tabMenu.Name = "tabMenu";
-            this.tabMenu.SelectedIndex = 0;
+            this.tabMenu.SelectedIndex = 2;
             this.tabMenu.Size = new System.Drawing.Size(348, 511);
             this.tabMenu.TabIndex = 1;
             this.tabMenu.UseSelectable = true;
@@ -194,6 +196,7 @@ namespace Client.Forms
             // 
             // tpChat
             // 
+            this.tpChat.Controls.Add(this.pnlChat);
             this.tpChat.HorizontalScrollbarBarColor = true;
             this.tpChat.HorizontalScrollbarHighlightOnWheel = false;
             this.tpChat.HorizontalScrollbarSize = 2;
@@ -226,6 +229,7 @@ namespace Client.Forms
             // 
             // lblName
             // 
+            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblName.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblName.Location = new System.Drawing.Point(60, 33);
             this.lblName.Name = "lblName";
@@ -236,6 +240,7 @@ namespace Client.Forms
             // 
             // lblTeamRank
             // 
+            this.lblTeamRank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTeamRank.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblTeamRank.Location = new System.Drawing.Point(60, 62);
             this.lblTeamRank.Name = "lblTeamRank";
@@ -277,6 +282,7 @@ namespace Client.Forms
             // 
             // picProfile
             // 
+            this.picProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picProfile.Image = global::Client.Properties.Resources.profile;
             this.picProfile.Location = new System.Drawing.Point(226, 33);
             this.picProfile.Name = "picProfile";
@@ -287,6 +293,15 @@ namespace Client.Forms
             this.picProfile.Click += new System.EventHandler(this.picProfile_Click);
             this.picProfile.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
             this.picProfile.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
+            // 
+            // pnlChat
+            // 
+            this.pnlChat.BackColor = System.Drawing.Color.White;
+            this.pnlChat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlChat.Location = new System.Drawing.Point(0, 0);
+            this.pnlChat.Name = "pnlChat";
+            this.pnlChat.Size = new System.Drawing.Size(340, 469);
+            this.pnlChat.TabIndex = 3;
             // 
             // FormMain
             // 
@@ -313,6 +328,7 @@ namespace Client.Forms
             this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.tabMenu.ResumeLayout(false);
             this.tpOrganization.ResumeLayout(false);
+            this.tpChat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSetting)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogout)).EndInit();
@@ -338,6 +354,7 @@ namespace Client.Forms
         private System.Windows.Forms.PictureBox picSetting;
         private MetroFramework.Controls.MetroTextBox txtOrgSearch;
         private System.Windows.Forms.ImageList ilistEmployee;
+        private System.Windows.Forms.FlowLayoutPanel pnlChat;
     }
 }
 

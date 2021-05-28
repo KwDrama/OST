@@ -127,7 +127,7 @@ namespace Server.Classes
         public static bool AddSchedule(Schedule schedule)
         {
             MySqlCommand cmd = new MySqlCommand(
-                "INSERT INTO schedule VALUES (@author, @title, @start, @end, @range, @contents);",
+                "INSERT INTO schedule VALUES (@author, @title, @start, @end, @scope, @contents);",
                 con);
             using(MemoryStream ms = new MemoryStream())
             {
@@ -142,7 +142,7 @@ namespace Server.Classes
                 cmd.Parameters.AddWithValue("@title", schedule.title);
                 cmd.Parameters.Add(start);
                 cmd.Parameters.Add(end);
-                cmd.Parameters.AddWithValue("@range", schedule.range);
+                cmd.Parameters.AddWithValue("@scope", schedule.scope);
                 cmd.Parameters.Add(contents);
             }
             try
@@ -157,7 +157,7 @@ namespace Server.Classes
         }
         public static Schedule GetSchedule(int authorID)
         {
-            string sql = $"SELECT author, title, start, end, range, contents FROM employee WHERE id={authorID}";
+            string sql = $"SELECT author, title, start, end, scope, contents FROM employee WHERE id={authorID}";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             using (MySqlDataReader rdr = cmd.ExecuteReader())
@@ -167,10 +167,10 @@ namespace Server.Classes
                     using (MemoryStream ms = new MemoryStream())
                         return new Schedule(
                             rdr.GetInt32("author"),
-                            rdr.GetString("range"),
+                            rdr.GetString("scope"),
                             rdr.GetDateTime("start"),
                             rdr.GetDateTime("end"),
-                            rdr.GetInt32("range"),
+                            rdr.GetInt32("scope"),
                             rdr.GetString("contents"));
                 }
             }
@@ -181,12 +181,12 @@ namespace Server.Classes
         public static bool AddRoom(Room room)
         {
             MySqlCommand cmd = new MySqlCommand(
-                   "INSERT INTO room VALUES (@id, @range, @target);",
+                   "INSERT INTO room VALUES ('@id', @scope, '@target');",
                    con);
 
             cmd.Parameters.AddWithValue("@id", room.id);
-            cmd.Parameters.AddWithValue("@range", room.rangeIdx);
-            cmd.Parameters.AddWithValue("@range", room.target);
+            cmd.Parameters.AddWithValue("@scope", room.scopeIdx);
+            cmd.Parameters.AddWithValue("@target", room.target);
             try
             {
                 cmd.ExecuteNonQuery();
@@ -201,20 +201,22 @@ namespace Server.Classes
         {
             List<Room> rooms = new List<Room>();
 
-            string sql = $"SELECT * FROM room WHERE range=0" +
-                $" UNION SELECT * FROM room WHERE range=1 AND target=" + emp.central +
-                $" UNION SELECT * FROM room WHERE range=2 AND target=" + emp.team +
-                $" UNION SELECT * FROM room WHERE range=3 AND target LIKE '%" + emp.id + "%'";
+            string sql =
+                $"(SELECT * FROM room WHERE scope=0)" +
+                $" UNION (SELECT * FROM room WHERE scope=1 AND target='{Filter(emp.central)}')" +
+                $" UNION (SELECT * FROM room WHERE scope=2 AND target='{Filter(emp.team)}')" +
+                $" UNION (SELECT * FROM room WHERE scope=3 AND target LIKE '%{emp.id}%')";
+
             using (MySqlDataReader rdr = new MySqlCommand(sql, con).ExecuteReader())
                 while (rdr.Read())
-                    rooms.Add(new Room(rdr.GetString("id"), rdr.GetInt32("range"), rdr.GetString("target")));
+                    rooms.Add(new Room(rdr.GetString("id"), rdr.GetInt32("scope"), rdr.GetString("target")));
 
             return rooms;
         }
-        public static void AddChatText(Chat chat)
+        public static void AddChat(Chat chat)
         {
         }
-        public static List<Chat> GetChatText(DateTime begin, DateTime end)
+        public static List<Chat> GetChats(DateTime begin, DateTime end)
         {
             return null;
         }

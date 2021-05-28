@@ -9,7 +9,7 @@ namespace Client.Forms
 {
     public partial class FormChat : MetroForm
     {
-        Room room;
+        public Room room;
 
         public FormChat(Room room)
         {
@@ -18,11 +18,6 @@ namespace Client.Forms
         }
         private void FormChat_Load(object sender, EventArgs e)
         {
-            // 새로운 채팅방
-            if (string.IsNullOrEmpty(room.id))
-            {
-                Program.Send(new RoomPacket(RoomType.New, room));
-            }
         }
 
         private void pic_MouseEnter(object sender, EventArgs e)
@@ -40,6 +35,10 @@ namespace Client.Forms
                 picSend_Click(sender, new EventArgs());
         }
         private void picSend_Click(object sender, EventArgs e)
+        {
+        }
+
+        public void ReceiveChat(ChatsPacket p)
         {
 
         }
