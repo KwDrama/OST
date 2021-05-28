@@ -31,7 +31,6 @@ namespace Client.Panels
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelSchedule));
-            this.txtTitle = new MetroFramework.Controls.MetroTextBox();
             this.dtpStart = new MetroFramework.Controls.MetroDateTime();
             this.dtpEnd = new MetroFramework.Controls.MetroDateTime();
             this.lblStart = new MetroFramework.Controls.MetroLabel();
@@ -41,38 +40,9 @@ namespace Client.Panels
             this.txtContent = new MetroFramework.Controls.MetroTextBox();
             this.cmbRange = new MetroFramework.Controls.MetroComboBox();
             this.picClose = new System.Windows.Forms.PictureBox();
+            this.txtTitle = new MetroFramework.Controls.MetroTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtTitle
-            // 
-            // 
-            // 
-            // 
-            this.txtTitle.CustomButton.Image = null;
-            this.txtTitle.CustomButton.Location = new System.Drawing.Point(-20, 2);
-            this.txtTitle.CustomButton.Name = "";
-            this.txtTitle.CustomButton.Size = new System.Drawing.Size(17, 17);
-            this.txtTitle.CustomButton.Style = MetroFramework.MetroColorStyle.Yellow;
-            this.txtTitle.CustomButton.TabIndex = 1;
-            this.txtTitle.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtTitle.CustomButton.UseSelectable = true;
-            this.txtTitle.CustomButton.Visible = false;
-            this.txtTitle.Lines = new string[0];
-            this.txtTitle.Location = new System.Drawing.Point(0, 0);
-            this.txtTitle.MaxLength = 32767;
-            this.txtTitle.Name = "txtTitle";
-            this.txtTitle.PasswordChar = '\0';
-            this.txtTitle.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtTitle.SelectedText = "";
-            this.txtTitle.SelectionLength = 0;
-            this.txtTitle.SelectionStart = 0;
-            this.txtTitle.ShortcutsEnabled = true;
-            this.txtTitle.Size = new System.Drawing.Size(0, 22);
-            this.txtTitle.TabIndex = 22;
-            this.txtTitle.UseSelectable = true;
-            this.txtTitle.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtTitle.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // dtpStart
             // 
@@ -177,11 +147,6 @@ namespace Client.Panels
             // 
             this.cmbRange.FormattingEnabled = true;
             this.cmbRange.ItemHeight = 23;
-            this.cmbRange.Items.AddRange(new object[] {
-            "회사 전체",
-            "본부 전체",
-            "팀 전체",
-            "개인"});
             this.cmbRange.Location = new System.Drawing.Point(60, 206);
             this.cmbRange.Name = "cmbRange";
             this.cmbRange.Size = new System.Drawing.Size(240, 29);
@@ -204,10 +169,45 @@ namespace Client.Panels
             this.picClose.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
             this.picClose.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
             // 
+            // txtTitle
+            // 
+            // 
+            // 
+            // 
+            this.txtTitle.CustomButton.Image = null;
+            this.txtTitle.CustomButton.Location = new System.Drawing.Point(216, 1);
+            this.txtTitle.CustomButton.Name = "";
+            this.txtTitle.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.txtTitle.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtTitle.CustomButton.TabIndex = 1;
+            this.txtTitle.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtTitle.CustomButton.UseSelectable = true;
+            this.txtTitle.CustomButton.Visible = false;
+            this.txtTitle.DisplayIcon = true;
+            this.txtTitle.Icon = global::Client.Properties.Resources.calendar;
+            this.txtTitle.Lines = new string[0];
+            this.txtTitle.Location = new System.Drawing.Point(60, 32);
+            this.txtTitle.MaxLength = 32767;
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.PasswordChar = '\0';
+            this.txtTitle.PromptText = "제목";
+            this.txtTitle.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtTitle.SelectedText = "";
+            this.txtTitle.SelectionLength = 0;
+            this.txtTitle.SelectionStart = 0;
+            this.txtTitle.ShortcutsEnabled = true;
+            this.txtTitle.Size = new System.Drawing.Size(240, 25);
+            this.txtTitle.TabIndex = 22;
+            this.txtTitle.UseSelectable = true;
+            this.txtTitle.WaterMark = "제목";
+            this.txtTitle.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtTitle.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            // 
             // PanelSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.cmbRange);
             this.Controls.Add(this.txtContent);
             this.Controls.Add(this.tleSubmit);
@@ -216,7 +216,6 @@ namespace Client.Panels
             this.Controls.Add(this.lblStart);
             this.Controls.Add(this.dtpEnd);
             this.Controls.Add(this.dtpStart);
-            this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.picClose);
             this.Location = new System.Drawing.Point(0, 30);
             this.Name = "PanelSchedule";
@@ -231,7 +230,6 @@ namespace Client.Panels
         #endregion
 
         private System.Windows.Forms.PictureBox picClose;
-        private MetroFramework.Controls.MetroTextBox txtTitle;
         private MetroFramework.Controls.MetroDateTime dtpStart;
         private MetroFramework.Controls.MetroDateTime dtpEnd;
         private MetroFramework.Controls.MetroLabel lblStart;
@@ -240,5 +238,6 @@ namespace Client.Panels
         private MetroFramework.Controls.MetroTile tleSubmit;
         private MetroFramework.Controls.MetroTextBox txtContent;
         private MetroFramework.Controls.MetroComboBox cmbRange;
+        private MetroFramework.Controls.MetroTextBox txtTitle;
     }
 }

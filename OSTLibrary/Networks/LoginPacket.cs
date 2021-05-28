@@ -1,4 +1,5 @@
-﻿using OSTLibrary.Classes;
+﻿using OSTLibrary.Chats;
+using OSTLibrary.Classes;
 using System;
 using System.Collections.Generic;
 
@@ -8,6 +9,7 @@ namespace OSTLibrary.Networks
     public class LoginPacket : Packet
     {
         public List<Employee> employees;
+        public List<Room> rooms;
 
         public bool success = false;
 
@@ -18,12 +20,13 @@ namespace OSTLibrary.Networks
             employees = new List<Employee>();
             employees.Add(new Employee(empId, password));
         }
-        public LoginPacket(bool success, List<Employee> employees)
+        public LoginPacket(bool success, List<Employee> employees, List<Room> rooms)
         {
             type = PacketType.Login;
 
             this.success = success;
             this.employees = employees;
+            this.rooms = rooms;
         }
     }
 }

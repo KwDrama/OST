@@ -97,7 +97,7 @@ namespace Server.Classes
                     }
 
                     Thread.Sleep(200);  // 클라이언트 스피너 보기 위함
-                    Send(new LoginPacket(emp != null, Program.employees));
+                    Send(new LoginPacket(emp != null, Program.employees, Database.GetRooms(emp)));
                 }
                 else if (packet.type == PacketType.Logout)
                 {

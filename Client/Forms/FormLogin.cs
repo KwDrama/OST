@@ -147,6 +147,7 @@ namespace Client.Forms
                 if (chkAutoLogin.Checked)
                     File.WriteAllText("login.txt", Program.employee.id + "\n" + Program.employee.password);
                 Program.employee = p.employees.Find(emp => emp.id == Program.employee.id);
+                Program.rooms = p.rooms;
                 Program.employees = p.employees;
                 BeginInvoke(new MethodInvoker(() => Close()));
             }

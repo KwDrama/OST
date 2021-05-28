@@ -178,12 +178,38 @@ namespace Server.Classes
             
         }
 
-        public static void AddRoom(Room room)
+        public static bool AddRoom(Room room)
         {
+            MySqlCommand cmd = new MySqlCommand(
+                   "INSERT INTO room VALUES (@id, @range, @target);",
+                   con);
+
+            cmd.Parameters.AddWithValue("@id", room.id);
+            cmd.Parameters.AddWithValue("@range", room.rangeIdx);
+            cmd.Parameters.AddWithValue("@range", room.target);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (MySqlException)
+            {
+                return false;
+            }
         }
-        public static List<Room> GetRoom(Employee emp)
+        public static List<Room> GetRooms(Employee emp)
         {
-            return null;
+            List<Room> rooms = new List<Room>();
+
+            string sql = $"SELECT * FROM room WHERE range=0" +
+                $" UNION SELECT * FROM room WHERE range=1 AND target=" + emp.central +
+                $" UNION SELECT * FROM room WHERE range=2 AND target=" + emp.team +
+                $" UNION SELECT * FROM room WHERE range=3 AND target LIKE '%" + emp.id + "%'";
+            using (MySqlDataReader rdr = new MySqlCommand(sql, con).ExecuteReader())
+                while (rdr.Read())
+                    rooms.Add(new Room(rdr.GetString("id"), rdr.GetInt32("range"), rdr.GetString("target")));
+
+            return rooms;
         }
         public static void AddChatText(Chat chat)
         {

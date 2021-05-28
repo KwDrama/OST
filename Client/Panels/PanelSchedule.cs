@@ -1,4 +1,4 @@
-﻿using Client.Forms;
+﻿using OSTLibrary.Chats;
 using System;
 using System.Windows.Forms;
 
@@ -13,13 +13,7 @@ namespace Client.Panels
         }
         private void PanelSchedule_Load(object sender, EventArgs e)
         {
-            cmbRange.Items.AddRange(new string[]
-            {
-                "사내 전체",
-                Program.employee.central,
-                Program.employee.team,
-                Program.employee.name,
-            });
+            cmbRange.Items.AddRange(Room.Range);
         }
 
         private void pic_MouseEnter(object sender, EventArgs e)

@@ -1,6 +1,7 @@
 ﻿using Client.Panels;
 using MetroFramework.Forms;
 using OSTLibrary.Chats;
+using OSTLibrary.Networks;
 using System;
 using System.Windows.Forms;
 
@@ -14,6 +15,14 @@ namespace Client.Forms
         {
             InitializeComponent();
             this.room = room;
+        }
+        private void FormChat_Load(object sender, EventArgs e)
+        {
+            // 새로운 채팅방
+            if (string.IsNullOrEmpty(room.id))
+            {
+                Program.Send(new RoomPacket(RoomType.New, room));
+            }
         }
 
         private void pic_MouseEnter(object sender, EventArgs e)

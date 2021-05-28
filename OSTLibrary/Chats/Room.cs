@@ -7,13 +7,13 @@ namespace OSTLibrary.Chats
     {
         public static string[] Range = { "회사 전체", "본부 전체", "팀 전체", "개인" };
 
-        public string roomId;
+        public string id;
         public int rangeIdx;
         public string target;
 
-        public Room(string roomId, int rangeIdx, string target)
+        public Room(string id, int rangeIdx, string target)
         {
-            this.roomId = roomId;
+            this.id = id;
             this.rangeIdx = rangeIdx;
             this.target = target;
         }

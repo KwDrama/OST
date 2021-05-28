@@ -4,6 +4,7 @@ using MetroFramework.Forms;
 using OSTLibrary.Chats;
 using OSTLibrary.Networks;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -50,7 +51,8 @@ namespace Client.Forms
                 ToolStripItem tsiInfo = node.ContextMenuStrip.Items.Add("정보");
                 ToolStripItem tsiChat = node.ContextMenuStrip.Items.Add("채팅");
                 tsiInfo.Click += (nodeSender, nodeE) => new FormInfo(emp).Show();
-                tsiChat.Click += (nodeSender, nodeE) => new FormChat(new Room("", 0, "")).Show();
+                tsiChat.Click += (nodeSender, nodeE) => new FormChat(
+                    new Room("", 3, emp.id + "," + Program.employee.id)).Show();
 
                 node.ImageIndex = node.SelectedImageIndex =
                     tvwOrganization.ImageList.Images.Count - 1;
