@@ -5,6 +5,7 @@ using OSTLibrary.Chats;
 using OSTLibrary.Networks;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Client.Forms
@@ -75,6 +76,7 @@ namespace Client.Forms
         private void picLogout_Click(object sender, EventArgs e)
         {
             Program.Send(new Packet(PacketType.Close));
+            if (File.Exists("login.txt")) File.Delete("login.txt");
             Application.Exit();
             Process.Start(Application.ExecutablePath);
         }

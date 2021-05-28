@@ -78,7 +78,7 @@ namespace Client.Forms
                     btnLogin.Visible = loginable = false;
                 lblResult.Style = MetroFramework.MetroColorStyle.Black;
                 lblResult.Text = "로그인 중..";
-                Program.employee = new Employee(int.Parse(txtEmpId.Text), string.Empty);
+                Program.employee = new Employee(int.Parse(txtEmpId.Text), txtPassword.Text);
                 Program.Send(new LoginPacket(int.Parse(txtEmpId.Text), txtPassword.Text));
             }
             else
@@ -86,7 +86,6 @@ namespace Client.Forms
                 lblResult.Style = MetroFramework.MetroColorStyle.Red;
                 lblResult.Text = "서버와 연결 되어있지 않습니다.";
             }
-
         }
         private void lnkRegist_Click(object sender, EventArgs e)
         {
@@ -135,6 +134,7 @@ namespace Client.Forms
                 {
                     txtEmpId.Text = savedLoginInfo.Split('\n')[0];
                     txtPassword.Text = savedLoginInfo.Split('\n')[1];
+                    btnLogin.PerformClick();
                 }
             }));
         }
@@ -145,7 +145,7 @@ namespace Client.Forms
             {
                 DialogResult = DialogResult.OK;
                 if (chkAutoLogin.Checked)
-                    File.WriteAllText("login.txt", txtEmpId.Text + '\n' + txtPassword.Text);
+                    File.WriteAllText("login.txt", Program.employee.id + "\n" + Program.employee.password);
                 Program.employee = p.employees.Find(emp => emp.id == Program.employee.id);
                 Program.employees = p.employees;
                 BeginInvoke(new MethodInvoker(() => Close()));

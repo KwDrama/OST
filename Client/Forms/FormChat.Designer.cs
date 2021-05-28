@@ -36,7 +36,6 @@ namespace Client.Forms
             this.picSetting = new System.Windows.Forms.PictureBox();
             this.picPlus = new System.Windows.Forms.PictureBox();
             this.txtChat = new MetroFramework.Controls.MetroTextBox();
-            this.cms = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picSend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSetting)).BeginInit();
@@ -46,6 +45,9 @@ namespace Client.Forms
             // 
             // pnlChat
             // 
+            this.pnlChat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlChat.BackColor = System.Drawing.Color.Ivory;
             this.pnlChat.Location = new System.Drawing.Point(0, 72);
             this.pnlChat.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
@@ -55,7 +57,7 @@ namespace Client.Forms
             // 
             // picSend
             // 
-            this.picSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.picSend.BackColor = System.Drawing.Color.Transparent;
             this.picSend.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picSend.Image = global::Client.Properties.Resources.send;
@@ -90,7 +92,7 @@ namespace Client.Forms
             // 
             // picPlus
             // 
-            this.picPlus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picPlus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.picPlus.BackColor = System.Drawing.Color.Transparent;
             this.picPlus.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picPlus.Image = global::Client.Properties.Resources.plus;
@@ -107,6 +109,8 @@ namespace Client.Forms
             // 
             // txtChat
             // 
+            this.txtChat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
@@ -136,11 +140,6 @@ namespace Client.Forms
             this.txtChat.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtChat.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtChat.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChat_KeyDown);
-            // 
-            // cms
-            // 
-            this.cms.Name = "cms";
-            this.cms.Size = new System.Drawing.Size(61, 4);
             // 
             // metroStyleManager1
             // 
@@ -180,7 +179,6 @@ namespace Client.Forms
         private System.Windows.Forms.PictureBox picSend;
         private System.Windows.Forms.PictureBox picPlus;
         private MetroFramework.Controls.MetroTextBox txtChat;
-        private MetroFramework.Controls.MetroContextMenu cms;
         private MetroFramework.Components.MetroStyleManager metroStyleManager1;
     }
 }
