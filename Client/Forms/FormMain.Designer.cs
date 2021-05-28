@@ -31,30 +31,28 @@ namespace Client.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabMenu = new MetroFramework.Controls.MetroTabControl();
             this.tpOrganization = new MetroFramework.Controls.MetroTabPage();
             this.txtOrgSearch = new MetroFramework.Controls.MetroTextBox();
             this.txtSearch = new MetroFramework.Controls.MetroTextBox();
             this.tvwOrganization = new System.Windows.Forms.TreeView();
+            this.ilistEmployee = new System.Windows.Forms.ImageList(this.components);
             this.tpSchedule = new MetroFramework.Controls.MetroTabPage();
             this.tpChat = new MetroFramework.Controls.MetroTabPage();
-            this.cms = new MetroFramework.Controls.MetroContextMenu(this.components);
-            this.tsmiInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiChat = new System.Windows.Forms.ToolStripMenuItem();
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.lnkSchAdd = new MetroFramework.Controls.MetroLink();
             this.lblName = new MetroFramework.Controls.MetroLabel();
             this.lblTeamRank = new MetroFramework.Controls.MetroLabel();
+            this.picSetting = new System.Windows.Forms.PictureBox();
             this.picLogout = new System.Windows.Forms.PictureBox();
             this.picProfile = new System.Windows.Forms.PictureBox();
-            this.picSetting = new System.Windows.Forms.PictureBox();
             this.tabMenu.SuspendLayout();
             this.tpOrganization.SuspendLayout();
-            this.cms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSetting)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSetting)).BeginInit();
             this.SuspendLayout();
             // 
             // tabMenu
@@ -163,10 +161,19 @@ namespace Client.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tvwOrganization.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tvwOrganization.ImageIndex = 0;
+            this.tvwOrganization.ImageList = this.ilistEmployee;
             this.tvwOrganization.Location = new System.Drawing.Point(3, 32);
             this.tvwOrganization.Name = "tvwOrganization";
+            this.tvwOrganization.SelectedImageIndex = 0;
             this.tvwOrganization.Size = new System.Drawing.Size(334, 437);
             this.tvwOrganization.TabIndex = 2;
+            // 
+            // ilistEmployee
+            // 
+            this.ilistEmployee.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilistEmployee.ImageStream")));
+            this.ilistEmployee.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilistEmployee.Images.SetKeyName(0, "treenode.png");
             // 
             // tpSchedule
             // 
@@ -198,28 +205,6 @@ namespace Client.Forms
             this.tpChat.VerticalScrollbarBarColor = true;
             this.tpChat.VerticalScrollbarHighlightOnWheel = false;
             this.tpChat.VerticalScrollbarSize = 10;
-            // 
-            // cms
-            // 
-            this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiInfo,
-            this.tsmiChat});
-            this.cms.Name = "metroContextMenu1";
-            this.cms.Size = new System.Drawing.Size(99, 48);
-            // 
-            // tsmiInfo
-            // 
-            this.tsmiInfo.Name = "tsmiInfo";
-            this.tsmiInfo.Size = new System.Drawing.Size(98, 22);
-            this.tsmiInfo.Text = "정보";
-            this.tsmiInfo.Click += new System.EventHandler(this.tsmiInfo_Click);
-            // 
-            // tsmiChat
-            // 
-            this.tsmiChat.Name = "tsmiChat";
-            this.tsmiChat.Size = new System.Drawing.Size(98, 22);
-            this.tsmiChat.Text = "채팅";
-            this.tsmiChat.Click += new System.EventHandler(this.tsmiChat_Click);
             // 
             // metroStyleManager1
             // 
@@ -259,6 +244,21 @@ namespace Client.Forms
             this.lblTeamRank.Text = "팀 직위";
             this.lblTeamRank.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // picSetting
+            // 
+            this.picSetting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picSetting.BackColor = System.Drawing.Color.White;
+            this.picSetting.Image = global::Client.Properties.Resources.settings;
+            this.picSetting.Location = new System.Drawing.Point(276, 41);
+            this.picSetting.Name = "picSetting";
+            this.picSetting.Padding = new System.Windows.Forms.Padding(10);
+            this.picSetting.Size = new System.Drawing.Size(36, 36);
+            this.picSetting.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picSetting.TabIndex = 8;
+            this.picSetting.TabStop = false;
+            this.picSetting.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
+            this.picSetting.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
+            // 
             // picLogout
             // 
             this.picLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -284,23 +284,9 @@ namespace Client.Forms
             this.picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picProfile.TabIndex = 2;
             this.picProfile.TabStop = false;
+            this.picProfile.Click += new System.EventHandler(this.picProfile_Click);
             this.picProfile.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
             this.picProfile.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
-            // 
-            // picSetting
-            // 
-            this.picSetting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picSetting.BackColor = System.Drawing.Color.White;
-            this.picSetting.Image = global::Client.Properties.Resources.settings;
-            this.picSetting.Location = new System.Drawing.Point(276, 41);
-            this.picSetting.Name = "picSetting";
-            this.picSetting.Padding = new System.Windows.Forms.Padding(10);
-            this.picSetting.Size = new System.Drawing.Size(36, 36);
-            this.picSetting.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.picSetting.TabIndex = 8;
-            this.picSetting.TabStop = false;
-            this.picSetting.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
-            this.picSetting.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
             // 
             // FormMain
             // 
@@ -327,11 +313,10 @@ namespace Client.Forms
             this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.tabMenu.ResumeLayout(false);
             this.tpOrganization.ResumeLayout(false);
-            this.cms.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSetting)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSetting)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,18 +328,16 @@ namespace Client.Forms
         private MetroFramework.Controls.MetroTabPage tpSchedule;
         private System.Windows.Forms.TreeView tvwOrganization;
         private MetroFramework.Controls.MetroTextBox txtSearch;
-        private MetroFramework.Controls.MetroContextMenu cms;
-        private System.Windows.Forms.ToolStripMenuItem tsmiChat;
         private MetroFramework.Components.MetroStyleManager metroStyleManager1;
         private MetroFramework.Controls.MetroTabPage tpChat;
         private MetroFramework.Controls.MetroLink lnkSchAdd;
-        private System.Windows.Forms.ToolStripMenuItem tsmiInfo;
         private System.Windows.Forms.PictureBox picProfile;
         private MetroFramework.Controls.MetroLabel lblName;
         private MetroFramework.Controls.MetroLabel lblTeamRank;
         private System.Windows.Forms.PictureBox picLogout;
         private System.Windows.Forms.PictureBox picSetting;
         private MetroFramework.Controls.MetroTextBox txtOrgSearch;
+        private System.Windows.Forms.ImageList ilistEmployee;
     }
 }
 

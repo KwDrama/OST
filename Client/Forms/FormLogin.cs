@@ -1,8 +1,10 @@
 ﻿using Client.Panels;
 using MetroFramework.Controls;
 using MetroFramework.Forms;
+using OSTLibrary.Classes;
 using OSTLibrary.Networks;
 using System;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -31,7 +33,7 @@ namespace Client.Forms
         private void txtempId_TextChanged(object sender, EventArgs e)
         {
             // 숫자가 아닌 문자들 전부 제거하는 Regex 패턴
-            txtempId.Text = Regex.Replace(txtempId.Text, @"\D", "");
+            txtEmpId.Text = Regex.Replace(txtEmpId.Text, @"\D", "");
             lblResult.Text = "";
         }
         private void txtPassword_TextChanged(object sender, EventArgs e)
@@ -55,7 +57,7 @@ namespace Client.Forms
             if (!loginable) return;
 
             // 빈 항목 있을 경우 입력 요구
-            foreach (MetroTextBox mtb in new MetroTextBox[] { txtempId, txtPassword })
+            foreach (MetroTextBox mtb in new MetroTextBox[] { txtEmpId, txtPassword })
                 if (string.IsNullOrWhiteSpace(mtb.Text))
                 {
                     mtb.Focus();
@@ -72,11 +74,12 @@ namespace Client.Forms
             if (Program.client.Connected)
             {
                 spnLogin.Visible = true;
-                txtempId.Enabled = txtPassword.Enabled =
+                txtEmpId.Enabled = txtPassword.Enabled =
                     btnLogin.Visible = loginable = false;
                 lblResult.Style = MetroFramework.MetroColorStyle.Black;
                 lblResult.Text = "로그인 중..";
-                Program.Send(new LoginPacket(int.Parse(txtempId.Text), txtPassword.Text));
+                Program.employee = new Employee(int.Parse(txtEmpId.Text), string.Empty);
+                Program.Send(new LoginPacket(int.Parse(txtEmpId.Text), txtPassword.Text));
             }
             else
             {
@@ -118,6 +121,8 @@ namespace Client.Forms
                 Program.recvThread.Start();
             }
 
+            string savedLoginInfo = File.Exists("login.txt") ? File.ReadAllText("login.txt") : "";
+
             loginable = true;
             Invoke(new MethodInvoker(() =>
             {
@@ -125,6 +130,12 @@ namespace Client.Forms
                     MetroFramework.MetroColorStyle.Black :
                     MetroFramework.MetroColorStyle.Red;
                 lblResult.Text = resultText;
+
+                if (savedLoginInfo.Contains("\n"))
+                {
+                    txtEmpId.Text = savedLoginInfo.Split('\n')[0];
+                    txtPassword.Text = savedLoginInfo.Split('\n')[1];
+                }
             }));
         }
         public void EndLogin(Packet packet)
@@ -133,17 +144,21 @@ namespace Client.Forms
             if (p.success)
             {
                 DialogResult = DialogResult.OK;
-                Program.employee = p.employee;
+                if (chkAutoLogin.Checked)
+                    File.WriteAllText("login.txt", txtEmpId.Text + '\n' + txtPassword.Text);
+                Program.employee = p.employees.Find(emp => emp.id == Program.employee.id);
+                Program.employees = p.employees;
                 BeginInvoke(new MethodInvoker(() => Close()));
             }
             else
                 Invoke(new MethodInvoker(() =>
                 {
                     spnLogin.Visible = false;
-                    txtempId.Enabled = txtPassword.Enabled =
+                    txtEmpId.Enabled = txtPassword.Enabled =
                         btnLogin.Visible = loginable = true;
                     lblResult.Style = MetroFramework.MetroColorStyle.Red;
                     lblResult.Text = "사원번호 또는 비밀번호를 다시 확인해주세요.";
+                    txtPassword.Text = "";
                 }));
         }
     }

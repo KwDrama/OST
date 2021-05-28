@@ -1,12 +1,13 @@
 ﻿using OSTLibrary.Classes;
 using System;
+using System.Collections.Generic;
 
 namespace OSTLibrary.Networks
 {
     [Serializable]
     public class LoginPacket : Packet
     {
-        public Employee employee;
+        public List<Employee> employees;
 
         public bool success = false;
 
@@ -14,13 +15,15 @@ namespace OSTLibrary.Networks
         {
             type = PacketType.Login;
 
-            employee = new Employee(empId, password);
+            employees = new List<Employee>();
+            employees.Add(new Employee(empId, password));
         }
-        public LoginPacket(bool success, Employee employee)
+        public LoginPacket(bool success, List<Employee> employees)
         {
             type = PacketType.Login;
+
             this.success = success;
-            this.employee = employee;
+            this.employees = employees;
         }
     }
 }

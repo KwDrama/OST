@@ -1,5 +1,6 @@
 ﻿using Client.Panels;
 using MetroFramework.Forms;
+using OSTLibrary.Chats;
 using System;
 using System.Windows.Forms;
 
@@ -7,9 +8,12 @@ namespace Client.Forms
 {
     public partial class FormChat : MetroForm
     {
-        public FormChat()
+        Room room;
+
+        public FormChat(Room room)
         {
             InitializeComponent();
+            this.room = room;
         }
 
         private void pic_MouseEnter(object sender, EventArgs e)

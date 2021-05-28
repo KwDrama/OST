@@ -5,6 +5,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Text.RegularExpressions;
 using System;
+using OSTLibrary.Chats;
+using System.Collections.Generic;
 
 namespace Server.Classes
 {
@@ -36,6 +38,33 @@ namespace Server.Classes
                 return false;
             }
         }
+
+        public static List<Employee> GetEmployees()
+        {
+            string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee";
+            MySqlCommand cmd = new MySqlCommand(sql, con);
+            List<Employee> employees = new List<Employee>();
+
+            using (MySqlDataReader rdr = cmd.ExecuteReader())
+                while (rdr.Read())
+                {
+                    byte[] profileBytes = new byte[rdr.GetUInt32("profile_length")];
+                    rdr.GetBytes(rdr.GetOrdinal("profile"), 0, profileBytes, 0, profileBytes.Length);
+
+                    using (MemoryStream ms = new MemoryStream(profileBytes))
+                        employees.Add(new Employee(
+                            Image.FromStream(ms),
+                            rdr.GetInt32("id"),
+                            string.Empty,
+                            rdr.GetString("name"),
+                            rdr.GetString("phone"),
+                            rdr.GetString("central"),
+                            rdr.GetString("team"),
+                            rdr.GetString("rank")));
+                }
+
+            return employees;
+        }
         public static Employee Login(int empId, string password)
         {
             string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee WHERE id={empId} AND password={Filter(password)}";
@@ -45,31 +74,6 @@ namespace Server.Classes
                 if (rdr.Read())
                 {
                     byte[] profileBytes = new byte[rdr.GetInt32("profile_length")];
-                    rdr.GetBytes(rdr.GetOrdinal("profile"), 0, profileBytes, 0, profileBytes.Length);
-
-                    using (MemoryStream ms = new MemoryStream(profileBytes))
-                        return new Employee(
-                            Image.FromStream(ms),
-                            rdr.GetInt32("id"),
-                            string.Empty,
-                            rdr.GetString("name"),
-                            rdr.GetString("phone"),
-                            rdr.GetString("central"),
-                            rdr.GetString("team"),
-                            rdr.GetString("rank"));
-                }
-
-            return null;
-        }
-        public static Employee GetEmployee(int empId)
-        {
-            string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee WHERE id={empId}";
-            MySqlCommand cmd = new MySqlCommand(sql, con);
-
-            using (MySqlDataReader rdr = cmd.ExecuteReader())
-                if (rdr.Read())
-                {
-                    byte[] profileBytes = new byte[rdr.GetUInt32("profile_length")];
                     rdr.GetBytes(rdr.GetOrdinal("profile"), 0, profileBytes, 0, profileBytes.Length);
 
                     using (MemoryStream ms = new MemoryStream(profileBytes))
@@ -119,6 +123,7 @@ namespace Server.Classes
                 }
             }
         }
+
         public static bool AddSchedule(Schedule schedule)
         {
             MySqlCommand cmd = new MySqlCommand(
@@ -172,19 +177,18 @@ namespace Server.Classes
             return null;
             
         }
-        public static void AddChatText()
+
+        public static void AddRoom(Room room)
         {
-            return;
         }
-        public static string[] GetChatText()
+        public static List<Room> GetRoom(Employee emp)
         {
             return null;
         }
-        public static void AddChatBlob(Image image)
+        public static void AddChatText(Chat chat)
         {
-            return;
         }
-        public static Image GetChatBlob()
+        public static List<Chat> GetChatText(DateTime begin, DateTime end)
         {
             return null;
         }

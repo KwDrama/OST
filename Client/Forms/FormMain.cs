@@ -1,8 +1,9 @@
 ﻿using Client.Panels;
+using MetroFramework.Controls;
 using MetroFramework.Forms;
+using OSTLibrary.Chats;
 using OSTLibrary.Networks;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -10,18 +11,10 @@ namespace Client.Forms
 {
     public partial class FormMain : MetroForm
     {
-        public static Dictionary<string, string[]> organization;
-
         public FormMain()
         {
             InitializeComponent();
             Opacity = 0;
-
-            organization = new Dictionary<string, string[]>();
-            organization.Add("지원본부", new string[] { "지원1팀", "지원2팀", "지원3팀" });
-            organization.Add("철강본부", new string[] { "철강1팀", "철강2팀", "철강3팀" });
-            organization.Add("섬유본부", new string[] { "섬유1팀", "섬유2팀", "섬유3팀" });
-            organization.Add("영업본부", new string[] { "영업1팀", "영업2팀", "영업3팀" });
         }
         private void FormMain_Shown(object sender, EventArgs e)
         {
@@ -40,14 +33,27 @@ namespace Client.Forms
             lblName.Text = Program.employee.name;
             lblTeamRank.Text = $"{Program.employee.team} {Program.employee.rank}";
 
-            //각 노드마다 추가 시 이름,key값(사원번호)를 둬서 정보조회 시 key값에 따라
-            //DB에서 정보를 다르게 불러오는 것으로 구현할 예정(0524기준)
-            foreach (string central in organization.Keys)
+            Program.employees.ForEach(emp =>
             {
-                tvwOrganization.Nodes.Add(central, central).ContextMenuStrip = cms;
-                foreach (string team in organization[central])
-                    tvwOrganization.Nodes[central].Nodes.Add(team).ContextMenuStrip = cms;
-            }
+                if (!tvwOrganization.Nodes.ContainsKey(emp.central))
+                    tvwOrganization.Nodes.Add(emp.central, emp.central);
+                tvwOrganization.Nodes[emp.central].ImageIndex = -1;
+                if (!tvwOrganization.Nodes[emp.central].Nodes.ContainsKey(emp.team))
+                    tvwOrganization.Nodes[emp.central].Nodes.Add(emp.team, emp.team);
+
+                tvwOrganization.ImageList.Images.Add(emp.profile);
+                TreeNode node = tvwOrganization.Nodes[emp.central].Nodes[emp.team].Nodes.Add(emp.name);
+
+                node.ContextMenuStrip = new MetroContextMenu(components);
+                node.ContextMenuStrip.Text = emp.id.ToString();
+                ToolStripItem tsiInfo = node.ContextMenuStrip.Items.Add("정보");
+                ToolStripItem tsiChat = node.ContextMenuStrip.Items.Add("채팅");
+                tsiInfo.Click += (nodeSender, nodeE) => new FormInfo(emp).Show();
+                tsiChat.Click += (nodeSender, nodeE) => new FormChat(new Room("", 0, "")).Show();
+
+                node.ImageIndex = node.SelectedImageIndex =
+                    tvwOrganization.ImageList.Images.Count - 1;
+            });
 
             if (tabMenu.SelectedTab.Text == "일정")
                 lnkSchAdd.Visible = true;
@@ -63,7 +69,7 @@ namespace Client.Forms
         }
         private void picProfile_Click(object sender, EventArgs e)
         {
-            FormInfo formInfoP = new FormInfo(FormInfo.InfoType.Employee, Program.employee);
+            FormInfo formInfoP = new FormInfo(Program.employee);
             formInfoP.Show();
         }
         private void picLogout_Click(object sender, EventArgs e)
@@ -76,17 +82,6 @@ namespace Client.Forms
         private void tabMenu_SelectedIndexChanged(object sender, EventArgs e)
         {
             lnkSchAdd.Visible = tabMenu.SelectedTab.Text == "일정";
-        }
-        private void tsmiInfo_Click(object sender, EventArgs e)
-        {
-            //사람클릭시와 부서클릭시를 차별화 둘 예정(0524기준)
-            FormInfo formInfoP = new FormInfo(FormInfo.InfoType.Employee, Program.employee);
-            formInfoP.Show();
-        }
-        private void tsmiChat_Click(object sender, EventArgs e)
-        {
-            FormChat formChat = new FormChat();
-            formChat.Show();
         }
         private void lnkSchAdd_Click(object sender, EventArgs e)
         {

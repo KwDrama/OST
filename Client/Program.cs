@@ -17,7 +17,8 @@ namespace Client.Forms
         public static Thread recvThread;                                // 서버로부터 수신을 대기하는 스레드
         public static Dictionary<PacketType, Action<Packet>> callback;  // 타입에 따른 콜백 메소드
 
-        public static Employee employee;                                // 나의 사원 정호
+        public static Employee employee;                                // 나의 사원 정보
+        public static List<Employee> employees;                         // 사원들 정보
         public static FormMain formMain;                                // 적당한 폼 상호작용을 위한 메인폼
 
         [STAThread]

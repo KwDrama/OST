@@ -6,33 +6,15 @@ namespace Client.Forms
 {
     public partial class FormInfo : MetroForm
     {
-        public InfoType type;
-
-        public enum InfoType
-        {
-            Employee, Central
-        }
-
-        public FormInfo(InfoType type, Employee employee)
+        public FormInfo(Employee employee)
         {
             InitializeComponent();
-            this.type = type;
-        }
-        //public FormInfo(InfoType type, Central central)
-        //{
-        //    InitializeComponent();
-        //    this.type = type;
-        //}
-        private void FormInfo_Load(object sender, System.EventArgs e)
-        {
-            if (type == InfoType.Employee)
-            {
-                Text = "사원 프로필";
-            }
-            else
-            {
-                Text = "본부 정보";
-            }
+
+            picProfile.Image = employee.profile;
+            lblName.Text = employee.name;
+            lblPhone.Text = employee.phone;
+            lblRank.Text = employee.rank;
+            lblTeam.Text = employee.team;
         }
 
         private void FormInfoPeople_KeyDown(object sender, KeyEventArgs e)

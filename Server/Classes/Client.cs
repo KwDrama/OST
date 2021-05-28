@@ -86,9 +86,9 @@ namespace Server.Classes
                 {
                     LoginPacket p = packet as LoginPacket;
 
-                    Employee emp = Database.Login(p.employee.id, p.employee.password);
+                    Employee emp = Database.Login(p.employees[0].id, p.employees[0].password);
                     if (emp == null)
-                        Log("Login", string.Format("{0} 로그인 실패", p.employee.id));
+                        Log("Login", string.Format("{0} 로그인 실패", p.employees[0].id));
                     else
                     {
                         employee = emp;
@@ -97,7 +97,7 @@ namespace Server.Classes
                     }
 
                     Thread.Sleep(200);  // 클라이언트 스피너 보기 위함
-                    Send(new LoginPacket(emp != null, emp));
+                    Send(new LoginPacket(emp != null, Program.employees));
                 }
                 else if (packet.type == PacketType.Logout)
                 {
@@ -110,7 +110,7 @@ namespace Server.Classes
                     RegisterPacket p = packet as RegisterPacket;
                     if (Database.Register(p.employee))
                     {
-                        employee = p.employee;
+                        Program.employees.Add(employee = p.employee);
                         Log("Register", "회원가입 성공");
                     }
                     else

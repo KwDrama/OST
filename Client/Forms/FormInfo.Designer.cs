@@ -147,11 +147,13 @@ namespace Client.Forms
             this.Controls.Add(this.lblPhone);
             this.Controls.Add(this.lblName);
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormInfo";
+            this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Yellow;
-            this.Text = "Information";
-            this.Load += new System.EventHandler(this.FormInfo_Load);
+            this.Text = "사원 정보";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormInfoPeople_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
             this.ResumeLayout(false);

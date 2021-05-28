@@ -46,9 +46,11 @@ namespace Client.Forms
             // 
             // pnlChat
             // 
-            this.pnlChat.Location = new System.Drawing.Point(6, 72);
+            this.pnlChat.BackColor = System.Drawing.Color.Ivory;
+            this.pnlChat.Location = new System.Drawing.Point(0, 72);
+            this.pnlChat.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.pnlChat.Name = "pnlChat";
-            this.pnlChat.Size = new System.Drawing.Size(348, 465);
+            this.pnlChat.Size = new System.Drawing.Size(360, 465);
             this.pnlChat.TabIndex = 0;
             // 
             // picSend
@@ -58,6 +60,7 @@ namespace Client.Forms
             this.picSend.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picSend.Image = global::Client.Properties.Resources.send;
             this.picSend.Location = new System.Drawing.Point(318, 543);
+            this.picSend.Margin = new System.Windows.Forms.Padding(3, 3, 6, 3);
             this.picSend.Name = "picSend";
             this.picSend.Padding = new System.Windows.Forms.Padding(10);
             this.picSend.Size = new System.Drawing.Size(36, 36);
@@ -75,6 +78,7 @@ namespace Client.Forms
             this.picSetting.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picSetting.Image = ((System.Drawing.Image)(resources.GetObject("picSetting.Image")));
             this.picSetting.Location = new System.Drawing.Point(318, 30);
+            this.picSetting.Margin = new System.Windows.Forms.Padding(3, 3, 6, 3);
             this.picSetting.Name = "picSetting";
             this.picSetting.Padding = new System.Windows.Forms.Padding(10);
             this.picSetting.Size = new System.Drawing.Size(36, 36);
@@ -91,6 +95,7 @@ namespace Client.Forms
             this.picPlus.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picPlus.Image = global::Client.Properties.Resources.plus;
             this.picPlus.Location = new System.Drawing.Point(6, 543);
+            this.picPlus.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.picPlus.Name = "picPlus";
             this.picPlus.Padding = new System.Windows.Forms.Padding(10);
             this.picPlus.Size = new System.Drawing.Size(36, 36);
@@ -156,7 +161,7 @@ namespace Client.Forms
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(360, 600);
             this.Name = "FormChat";
-            this.Padding = new System.Windows.Forms.Padding(3, 60, 3, 3);
+            this.Padding = new System.Windows.Forms.Padding(0, 60, 0, 3);
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.Text = "섬유2팀";
