@@ -80,12 +80,14 @@ namespace Client.Forms
             // 
             // ControlRoom
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lblChat);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.picProfile);
             this.Controls.Add(this.metroLabel1);
+            this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ControlRoom";
             this.Size = new System.Drawing.Size(330, 80);
             this.MouseEnter += new System.EventHandler(this.ControlRoom_MouseEnter);

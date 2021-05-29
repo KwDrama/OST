@@ -296,8 +296,12 @@ namespace Client.Forms
             // 
             // pnlChat
             // 
+            this.pnlChat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlChat.AutoScroll = true;
             this.pnlChat.BackColor = System.Drawing.Color.White;
-            this.pnlChat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlChat.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnlChat.Location = new System.Drawing.Point(0, 0);
             this.pnlChat.Name = "pnlChat";
             this.pnlChat.Size = new System.Drawing.Size(340, 469);

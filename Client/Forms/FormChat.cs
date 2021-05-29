@@ -18,6 +18,14 @@ namespace Client.Forms
         }
         private void FormChat_Load(object sender, EventArgs e)
         {
+            if (room.scopeIdx == 0)
+                Text = Room.Scope[room.scopeIdx];
+            else if (room.scopeIdx == 1)
+                Text = Program.employee.central;
+            else if (room.scopeIdx == 2)
+                Text = Program.employee.team;
+            else if (room.scopeIdx == 3)
+                Text = Program.employees.Find(emp => emp.id.ToString() == room.target.Split(',')[1]).name;
         }
 
         private void pic_MouseEnter(object sender, EventArgs e)

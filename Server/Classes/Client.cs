@@ -1,4 +1,5 @@
-﻿using OSTLibrary.Classes;
+﻿using OSTLibrary.Chats;
+using OSTLibrary.Classes;
 using OSTLibrary.Networks;
 using OSTLibrary.Securities;
 using System;
@@ -125,10 +126,14 @@ namespace Server.Classes
                         do p.room.id = MD5.NextRandom();
                         while (!Database.AddRoom(p.room));
                         Send(p);
-                        Log("Room", "채팅방 생성 " + (p.room.scopeIdx == 3 ?
-                            Program.employees.Find(e => e.id.ToString().Equals(p.room.target.Split(',')[0])).name + ", " +
-                            Program.employees.Find(e => e.id.ToString().Equals(p.room.target.Split(',')[1])).name :
-                            p.room.target));
+
+                        if (p.room.scopeIdx == 3)
+                        {
+                            Employee targetEmp = Program.employees.Find(e => e.id.ToString().Equals(p.room.target.Split(',')[1]));
+                            Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 생성 : {targetEmp.name}({targetEmp.id})");
+                        }
+                        else
+                            Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 생성 : {p.room.target}");
                     }
                 }
                 else if (packet.type == PacketType.Chat)

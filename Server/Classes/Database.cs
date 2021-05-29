@@ -181,7 +181,7 @@ namespace Server.Classes
         public static bool AddRoom(Room room)
         {
             MySqlCommand cmd = new MySqlCommand(
-                   "INSERT INTO room VALUES ('@id', @scope, '@target');",
+                   "INSERT INTO room VALUES (@id, @scope, @target);",
                    con);
 
             cmd.Parameters.AddWithValue("@id", room.id);

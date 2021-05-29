@@ -1,6 +1,6 @@
-﻿using Client.Panels;
-using MetroFramework.Controls;
+﻿using MetroFramework.Controls;
 using System;
+using System.Drawing;
 
 namespace Client.Forms
 {
@@ -13,12 +13,11 @@ namespace Client.Forms
 
         private void ControlRoom_MouseEnter(object sender, EventArgs e)
         {
-            PanelSlider.EnterShadow(sender, e);
+            BackColor = Color.Transparent;
         }
-
         private void ControlRoom_MouseLeave(object sender, EventArgs e)
         {
-            PanelSlider.LeaveShadow(sender, e);
+            BackColor = Color.FromArgb(238, 238, 238);
         }
     }
 }

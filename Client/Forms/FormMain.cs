@@ -38,6 +38,7 @@ namespace Client.Forms
             picProfile.Image = Program.employee.profile;
             lblName.Text = Program.employee.name;
             lblTeamRank.Text = $"{Program.employee.team} {Program.employee.rank}";
+            formChats = new List<FormChat>();
 
             // 최초 룸 모두 추가
             Program.rooms.ForEach(AddRoomCard);
@@ -76,10 +77,17 @@ namespace Client.Forms
                 tsiChat.Click += (nodeSender, nodeE) =>
                 {
                     Room room = Program.rooms.Find(r => r.scopeIdx == 3 && r.target.Contains(emp.id.ToString()));
-                    formChats.Add(new FormChat(room));
 
                     if (room == null)
+                    {
+                        room = new Room("", 3, $"{Program.employee.id},{emp.id}");
+                        formChats.Add(new FormChat(room));
                         Program.Send(new RoomPacket(RoomType.New, room));
+                    }
+                    else
+                        formChats.Add(new FormChat(room));
+
+                    formChats[formChats.Count - 1].Show();
                 };
 
                 // 이미지 인덱스
@@ -124,7 +132,12 @@ namespace Client.Forms
 
         void AddRoomCard(Room room)
         {
+            ControlRoom cardRoom = new ControlRoom();
+            cardRoom.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pnlChat.Controls.Add(cardRoom);
 
+            cardRoom = new ControlRoom();
+            pnlChat.Controls.Add(cardRoom);
         }
         void ReceiveRoom(Packet p)
         {
@@ -132,7 +145,9 @@ namespace Client.Forms
 
             Program.rooms.Add(rp.room);
             AddRoomCard(rp.room);
-            formChats.Find(form => form.room == null).room = rp.room;
+
+            FormChat fc = formChats.Find(form => form.room == null);
+            if (fc != null) fc.room = rp.room;
         }
         void ReceiveChat(Packet p)
         {
