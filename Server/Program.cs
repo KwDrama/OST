@@ -1,4 +1,5 @@
 ﻿using OSTLibrary.Classes;
+using OSTLibrary.Securities;
 using Server.Classes;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,12 @@ namespace Server
                 Log("DB", $"Server {Database.hostname} connect failed.");
                 return;
             }
+
+            // 테스트 코드
+            //Log("Test", SHA512.Encrypt("990224"));
+            //Log("Test", SHA512.Encrypt("980716"));
+            //Log("Test", SHA512.Encrypt("990101"));
+            //Log("Test", SHA512.Encrypt("980210"));
 
             // 서버 시작
             listener = new TcpListener(IPAddress.Any, port);

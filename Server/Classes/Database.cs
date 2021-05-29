@@ -67,7 +67,7 @@ namespace Server.Classes
         }
         public static Employee Login(int empId, string password)
         {
-            string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee WHERE id={empId} AND password={Filter(password)}";
+            string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee WHERE id={empId} AND password='{Filter(password)}'";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             using (MySqlDataReader rdr = cmd.ExecuteReader())

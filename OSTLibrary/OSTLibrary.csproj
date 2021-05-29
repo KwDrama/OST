@@ -57,7 +57,7 @@
     <Compile Include="Networks\RegisterPacket.cs" />
     <Compile Include="Securities\AES256.cs" />
     <Compile Include="Securities\MD5.cs" />
-    <Compile Include="Securities\SHA256.cs" />
+    <Compile Include="Securities\SHA.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

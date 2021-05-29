@@ -3,6 +3,7 @@ using MetroFramework.Controls;
 using MetroFramework.Forms;
 using OSTLibrary.Classes;
 using OSTLibrary.Networks;
+using OSTLibrary.Securities;
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -78,8 +79,8 @@ namespace Client.Forms
                     btnLogin.Visible = loginable = false;
                 lblResult.Style = MetroFramework.MetroColorStyle.Black;
                 lblResult.Text = "로그인 중..";
-                Program.employee = new Employee(int.Parse(txtEmpId.Text), txtPassword.Text);
-                Program.Send(new LoginPacket(int.Parse(txtEmpId.Text), txtPassword.Text));
+                Program.employee = new Employee(int.Parse(txtEmpId.Text), SHA512.Encrypt(txtPassword.Text));
+                Program.Send(new LoginPacket(int.Parse(txtEmpId.Text), SHA512.Encrypt(txtPassword.Text)));
             }
             else
             {
@@ -170,9 +171,9 @@ namespace Client.Forms
                     spnLogin.Visible = false;
                     txtEmpId.Enabled = txtPassword.Enabled =
                         btnLogin.Visible = loginable = true;
+                    txtPassword.Text = "";
                     lblResult.Style = MetroFramework.MetroColorStyle.Red;
                     lblResult.Text = "사원번호 또는 비밀번호를 다시 확인해주세요.";
-                    txtPassword.Text = "";
                 }));
         }
     }

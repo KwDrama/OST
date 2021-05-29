@@ -89,16 +89,20 @@ namespace Server.Classes
 
                     Employee emp = Database.Login(p.employees[0].id, p.employees[0].password);
                     if (emp == null)
+                    {
                         Log("Login", string.Format("{0} 로그인 실패", p.employees[0].id));
+                        p.success = false;
+                    }
                     else
                     {
                         employee = emp;
                         Log("Login", "로그인 성공");
                         Program.MoveLoginClient(this);
+                        p = new LoginPacket(true, Program.employees, Database.GetRooms(emp));
                     }
 
                     Thread.Sleep(200);  // 클라이언트 스피너 보기 위함
-                    Send(new LoginPacket(emp != null, Program.employees, Database.GetRooms(emp)));
+                    Send(p);
                 }
                 else if (packet.type == PacketType.Logout)
                 {

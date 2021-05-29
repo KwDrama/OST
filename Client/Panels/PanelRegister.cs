@@ -1,6 +1,7 @@
 ﻿using Client.Forms;
 using OSTLibrary.Classes;
 using OSTLibrary.Networks;
+using OSTLibrary.Securities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -62,8 +63,8 @@ namespace Client.Panels
             try
             {
                 Program.Send(new RegisterPacket(new Employee(picProfile.Image, int.Parse(txtempId.Text),
-                    txtPassword.Text, txtName.Text, txtPhone.Text, cmbCentral.SelectedItem as string,
-                    cmbTeam.SelectedItem as string, txtRank.Text)));
+                    SHA512.Encrypt(txtPassword.Text), txtName.Text, txtPhone.Text,
+                    cmbCentral.SelectedItem as string, cmbTeam.SelectedItem as string, txtRank.Text)));
             }
             catch (FormatException) { }
         }

@@ -32,7 +32,7 @@ namespace Client.Forms
                 lblTitle.Text = Room.Scope[room.scopeIdx];
 
                 lblTeamRank.Text =
-                    room.scopeIdx == 0 ? "원인터네셔널" :
+                    room.scopeIdx == 0 ? "KwDrama" :
                     room.scopeIdx == 1 ? Program.employee.central :
                     room.scopeIdx == 2 ? Program.employee.team : "";
             }
