@@ -223,10 +223,16 @@
     <None Include="Resources\back.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\department.png" />
+    <None Include="Resources\treenode.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\treenode.png" />
+    <None Include="Resources\central.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\office-building.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\team.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

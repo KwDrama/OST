@@ -32,7 +32,7 @@ namespace Client.Forms
             this.picProfile = new System.Windows.Forms.PictureBox();
             this.lblTitle = new MetroFramework.Controls.MetroLabel();
             this.lblChat = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.lblTime = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,46 +50,44 @@ namespace Client.Forms
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
             this.lblTitle.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.lblTitle.Location = new System.Drawing.Point(83, 16);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(38, 19);
+            this.lblTitle.Size = new System.Drawing.Size(132, 19);
             this.lblTitle.TabIndex = 19;
             this.lblTitle.Text = "Title";
             this.lblTitle.UseCustomBackColor = true;
             // 
             // lblChat
             // 
-            this.lblChat.AutoSize = true;
             this.lblChat.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblChat.Location = new System.Drawing.Point(83, 45);
             this.lblChat.Name = "lblChat";
-            this.lblChat.Size = new System.Drawing.Size(64, 19);
+            this.lblChat.Size = new System.Drawing.Size(132, 19);
             this.lblChat.TabIndex = 19;
             this.lblChat.Text = "Last chat";
             this.lblChat.UseCustomBackColor = true;
             // 
-            // metroLabel1
+            // lblTime
             // 
-            this.metroLabel1.Location = new System.Drawing.Point(204, 16);
-            this.metroLabel1.Margin = new System.Windows.Forms.Padding(16);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(100, 48);
-            this.metroLabel1.TabIndex = 19;
-            this.metroLabel1.Text = "A.M 12:02";
-            this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.metroLabel1.UseCustomBackColor = true;
+            this.lblTime.Location = new System.Drawing.Point(234, 16);
+            this.lblTime.Margin = new System.Windows.Forms.Padding(16);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(70, 48);
+            this.lblTime.TabIndex = 19;
+            this.lblTime.Text = "오전 12:38";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTime.UseCustomBackColor = true;
             // 
             // ControlRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.lblChat);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.picProfile);
-            this.Controls.Add(this.metroLabel1);
+            this.Controls.Add(this.lblTime);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ControlRoom";
@@ -99,7 +97,6 @@ namespace Client.Forms
             this.MouseLeave += new System.EventHandler(this.ControlRoom_MouseLeave);
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -108,6 +105,6 @@ namespace Client.Forms
         private System.Windows.Forms.PictureBox picProfile;
         private MetroFramework.Controls.MetroLabel lblTitle;
         private MetroFramework.Controls.MetroLabel lblChat;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroLabel lblTime;
     }
 }

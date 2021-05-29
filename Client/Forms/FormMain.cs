@@ -13,13 +13,12 @@ namespace Client.Forms
 {
     public partial class FormMain : MetroForm
     {
-        List<FormChat> formChats;
+        Dictionary<string, FormChat> formChats;
+        Dictionary<string, ControlRoom> controlRooms;
 
         public FormMain()
         {
             InitializeComponent();
-
-            formChats = new List<FormChat>();
             Opacity = 0;
         }
         private void FormMain_Shown(object sender, EventArgs e)
@@ -38,7 +37,10 @@ namespace Client.Forms
             picProfile.Image = Program.employee.profile;
             lblName.Text = Program.employee.name;
             lblTeamRank.Text = $"{Program.employee.team} {Program.employee.rank}";
-            formChats = new List<FormChat>();
+
+            // 채팅 관련 컨트롤들 배열 초기화
+            formChats = new Dictionary<string, FormChat>();
+            controlRooms = new Dictionary<string, ControlRoom>();
 
             // 최초 룸 모두 추가
             Program.rooms.ForEach(AddRoomCard);
@@ -81,13 +83,13 @@ namespace Client.Forms
                     if (room == null)
                     {
                         room = new Room("", 3, $"{Program.employee.id},{emp.id}");
-                        formChats.Add(new FormChat(room));
+                        formChats.Add(room.id, new FormChat(room));
                         Program.Send(new RoomPacket(RoomType.New, room));
                     }
                     else
-                        formChats.Add(new FormChat(room));
+                        formChats.Add(room.id, new FormChat(room));
 
-                    formChats[formChats.Count - 1].Show();
+                    formChats[room.id].Show();
                 };
 
                 // 이미지 인덱스
@@ -132,12 +134,22 @@ namespace Client.Forms
 
         void AddRoomCard(Room room)
         {
-            ControlRoom cardRoom = new ControlRoom();
-            cardRoom.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnlChat.Controls.Add(cardRoom);
+            ControlRoom cardRoom = new ControlRoom(room);
+            cardRoom.DoubleClick += (sender, e) => {
+                if (formChats.ContainsKey(room.id))
+                {
+                    formChats[room.id].Focus();
+                    return;
+                }
 
-            cardRoom = new ControlRoom();
+                formChats.Add(room.id, new FormChat(room));
+                formChats[room.id].Show();
+            };
+            if (room.chats.Count > 0)
+                cardRoom.UpdateInfo(room.chats[room.chats.Count - 1]);
+
             pnlChat.Controls.Add(cardRoom);
+            controlRooms.Add(room.id, cardRoom);
         }
         void ReceiveRoom(Packet p)
         {
@@ -146,13 +158,20 @@ namespace Client.Forms
             Program.rooms.Add(rp.room);
             AddRoomCard(rp.room);
 
-            FormChat fc = formChats.Find(form => form.room == null);
-            if (fc != null) fc.room = rp.room;
+            if (formChats.ContainsKey(""))
+            {
+                FormChat fc = formChats[""];
+                formChats.Remove("");
+                fc.room = rp.room;
+                formChats.Add(fc.room.id, fc);
+            }
         }
         void ReceiveChat(Packet p)
         {
             ChatsPacket cp = p as ChatsPacket;
-            formChats.Find(fc => fc.room.id == cp.chats[0].room.id).ReceiveChat(cp);
+
+            if (formChats.ContainsKey(""))
+                formChats[cp.chats[0].room.id].ReceiveChat(cp);
         }
     }
 }
