@@ -1,8 +1,9 @@
 ﻿using MetroFramework.Controls;
 using OSTLibrary.Chats;
+using OSTLibrary.Classes;
 using System.Drawing;
 
-namespace Client.Panels
+namespace Client.Forms
 {
     public partial class ControlChat : MetroUserControl
     {
@@ -15,13 +16,16 @@ namespace Client.Panels
 
             this.chat = chat;
 
+            Employee emp = Program.employees[chat.empId];
+            picProfile.Image = emp.profile;
+            lblName.Text = emp.name;
+
             if (chat.type == ChatType.Image)
             {
 
             }
             else
             {
-
                 // Resize를 대비해 초기 채팅 여백 측정
                 verticalSpace = Height - lblText.Height;
 

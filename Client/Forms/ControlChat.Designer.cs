@@ -1,5 +1,5 @@
 ﻿
-namespace Client.Panels
+namespace Client.Forms
 {
     partial class ControlChat
     {
