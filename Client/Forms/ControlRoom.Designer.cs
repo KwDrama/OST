@@ -38,7 +38,7 @@ namespace Client.Forms
             // 
             // picProfile
             // 
-            this.picProfile.BackColor = System.Drawing.Color.White;
+            this.picProfile.BackColor = System.Drawing.Color.Transparent;
             this.picProfile.Image = global::Client.Properties.Resources.profile;
             this.picProfile.Location = new System.Drawing.Point(16, 16);
             this.picProfile.Margin = new System.Windows.Forms.Padding(16);
@@ -57,6 +57,7 @@ namespace Client.Forms
             this.lblTitle.Size = new System.Drawing.Size(38, 19);
             this.lblTitle.TabIndex = 19;
             this.lblTitle.Text = "Title";
+            this.lblTitle.UseCustomBackColor = true;
             // 
             // lblChat
             // 
@@ -67,29 +68,33 @@ namespace Client.Forms
             this.lblChat.Size = new System.Drawing.Size(64, 19);
             this.lblChat.TabIndex = 19;
             this.lblChat.Text = "Last chat";
+            this.lblChat.UseCustomBackColor = true;
             // 
             // metroLabel1
             // 
-            this.metroLabel1.Location = new System.Drawing.Point(214, 16);
+            this.metroLabel1.Location = new System.Drawing.Point(204, 16);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(16);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(100, 48);
             this.metroLabel1.TabIndex = 19;
             this.metroLabel1.Text = "A.M 12:02";
             this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroLabel1.UseCustomBackColor = true;
             // 
             // ControlRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.lblChat);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.picProfile);
             this.Controls.Add(this.metroLabel1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ControlRoom";
-            this.Size = new System.Drawing.Size(330, 80);
+            this.Size = new System.Drawing.Size(320, 80);
+            this.UseCustomBackColor = true;
             this.MouseEnter += new System.EventHandler(this.ControlRoom_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.ControlRoom_MouseLeave);
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();

@@ -13,11 +13,11 @@ namespace Client.Forms
 
         private void ControlRoom_MouseEnter(object sender, EventArgs e)
         {
-            BackColor = Color.Transparent;
+            BackColor = Color.FromArgb(238, 238, 238);
         }
         private void ControlRoom_MouseLeave(object sender, EventArgs e)
         {
-            BackColor = Color.FromArgb(238, 238, 238);
+            BackColor = Color.Transparent;
         }
     }
 }

@@ -40,6 +40,7 @@ namespace Client.Forms
             this.ilistEmployee = new System.Windows.Forms.ImageList(this.components);
             this.tpSchedule = new MetroFramework.Controls.MetroTabPage();
             this.tpChat = new MetroFramework.Controls.MetroTabPage();
+            this.pnlChat = new System.Windows.Forms.FlowLayoutPanel();
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.lnkSchAdd = new MetroFramework.Controls.MetroLink();
             this.lblName = new MetroFramework.Controls.MetroLabel();
@@ -47,7 +48,6 @@ namespace Client.Forms
             this.picSetting = new System.Windows.Forms.PictureBox();
             this.picLogout = new System.Windows.Forms.PictureBox();
             this.picProfile = new System.Windows.Forms.PictureBox();
-            this.pnlChat = new System.Windows.Forms.FlowLayoutPanel();
             this.tabMenu.SuspendLayout();
             this.tpOrganization.SuspendLayout();
             this.tpChat.SuspendLayout();
@@ -197,7 +197,7 @@ namespace Client.Forms
             // tpChat
             // 
             this.tpChat.Controls.Add(this.pnlChat);
-            this.tpChat.HorizontalScrollbarBarColor = true;
+            this.tpChat.HorizontalScrollbarBarColor = false;
             this.tpChat.HorizontalScrollbarHighlightOnWheel = false;
             this.tpChat.HorizontalScrollbarSize = 2;
             this.tpChat.Location = new System.Drawing.Point(4, 38);
@@ -205,9 +205,22 @@ namespace Client.Forms
             this.tpChat.Size = new System.Drawing.Size(340, 469);
             this.tpChat.TabIndex = 3;
             this.tpChat.Text = "채팅";
-            this.tpChat.VerticalScrollbarBarColor = true;
+            this.tpChat.VerticalScrollbarBarColor = false;
             this.tpChat.VerticalScrollbarHighlightOnWheel = false;
             this.tpChat.VerticalScrollbarSize = 10;
+            // 
+            // pnlChat
+            // 
+            this.pnlChat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlChat.AutoScroll = true;
+            this.pnlChat.BackColor = System.Drawing.Color.White;
+            this.pnlChat.Location = new System.Drawing.Point(1, 1);
+            this.pnlChat.Margin = new System.Windows.Forms.Padding(1);
+            this.pnlChat.Name = "pnlChat";
+            this.pnlChat.Size = new System.Drawing.Size(338, 467);
+            this.pnlChat.TabIndex = 3;
             // 
             // metroStyleManager1
             // 
@@ -293,19 +306,6 @@ namespace Client.Forms
             this.picProfile.Click += new System.EventHandler(this.picProfile_Click);
             this.picProfile.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
             this.picProfile.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
-            // 
-            // pnlChat
-            // 
-            this.pnlChat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlChat.AutoScroll = true;
-            this.pnlChat.BackColor = System.Drawing.Color.White;
-            this.pnlChat.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.pnlChat.Location = new System.Drawing.Point(0, 0);
-            this.pnlChat.Name = "pnlChat";
-            this.pnlChat.Size = new System.Drawing.Size(340, 469);
-            this.pnlChat.TabIndex = 3;
             // 
             // FormMain
             // 
