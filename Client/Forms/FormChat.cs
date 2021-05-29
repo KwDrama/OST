@@ -47,8 +47,13 @@ namespace Client.Forms
         }
         private void picSend_Click(object sender, EventArgs e)
         {
-            Program.Send(new ChatsPacket(new Chat(ChatType.Text,
-                DateTime.Now, room, Program.employee.id, txtChat.Text)));
+            Chat chat = new Chat(ChatType.Text, DateTime.Now, room.id,
+                Program.employee.id, txtChat.Text);
+
+            pnlChat.Controls.Add(new ControlChat(chat));
+            Program.Send(new ChatsPacket(chat));
+
+            txtChat.Text = "";
         }
 
         public void ReceiveChat(ChatsPacket p)

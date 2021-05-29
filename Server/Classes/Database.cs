@@ -224,14 +224,14 @@ namespace Server.Classes
         public static bool AddChat(Chat chat)
         {
             MySqlCommand cmd = new MySqlCommand(
-                "INSERT INTO chat VALUES (@date, @employee_id, @room_id, @data, @data_length, @data_type);",
+                "INSERT INTO chat VALUES (@room_id, @date, @employee_id, @data, @data_length, @data_type);",
                 con);
 
             using (MemoryStream ms = new MemoryStream())
             {
+                cmd.Parameters.AddWithValue("@room_id", chat.roomId);
                 cmd.Parameters.AddWithValue("@date", chat.date);
                 cmd.Parameters.AddWithValue("@employee_id", chat.empId);
-                cmd.Parameters.AddWithValue("@room_id", chat.room.id);
 
                 // 데이터 byte[]로 만들어서 sql에 집어넣기
                 if (chat.type == ChatType.Image)
@@ -269,12 +269,15 @@ namespace Server.Classes
 
             using (MySqlDataReader rdr = new MySqlCommand(sql, con).ExecuteReader())
                 if (rdr.Read())
-                    return new Chat((ChatType)rdr.GetInt32("data_type"), rdr.GetDateTime("date"), ;
-
+                {
+                    return new Chat((ChatType)rdr.GetInt32("data_type"), rdr.GetDateTime("date"),
+                        rdr.GetString("room_id"), rdr.GetInt32("employee_id"), "will change");
+                }
             return null;
         }
         public static List<Chat> GetChats(Room room, DateTime begin, DateTime end)
         {
+            return null;
         }
     }
 }

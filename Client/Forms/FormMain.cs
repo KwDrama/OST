@@ -168,7 +168,7 @@ namespace Client.Forms
             cardRoom.ContextMenuStrip.Items.Add("채팅").Click += showFormChat;
 
             if (room.lastChat == null)
-                cardRoom.UpdateInfo(new Chat(ChatType.Text, DateTime.MinValue, room, 0, ""));
+                cardRoom.UpdateInfo(new Chat(ChatType.Text, DateTime.MinValue, room.id, 0, ""));
             else
                 cardRoom.UpdateInfo(room.lastChat);
 
@@ -195,7 +195,7 @@ namespace Client.Forms
             ChatsPacket cp = p as ChatsPacket;
 
             if (formChats.ContainsKey(""))
-                formChats[cp.chats[0].room.id].ReceiveChat(cp);
+                formChats[cp.chats[0].roomId].ReceiveChat(cp);
         }
     }
 }

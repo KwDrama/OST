@@ -1,20 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using MetroFramework.Controls;
+using OSTLibrary.Chats;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Client.Panels
 {
-    public partial class ControlChat : UserControl
+    public partial class ControlChat : MetroUserControl
     {
-        public ControlChat()
+        Chat chat;
+        int verticalSpace;
+
+        public ControlChat(Chat chat)
         {
             InitializeComponent();
+
+            this.chat = chat;
+
+            if (chat.type == ChatType.Image)
+            {
+
+            }
+            else
+            {
+
+                // Resize를 대비해 초기 채팅 여백 측정
+                verticalSpace = Height - lblText.Height;
+
+                // 텍스트 사이즈 측정 및 적용
+                SizeF sizef = CreateGraphics().MeasureString(lblText.Text, Font, lblText.Width);
+                lblText.Height = (int)sizef.Height;
+                Height = lblText.Height + verticalSpace;
+            }
         }
     }
 }

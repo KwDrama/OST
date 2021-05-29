@@ -7,6 +7,7 @@ using OSTLibrary.Securities;
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Client.Forms
@@ -26,7 +27,7 @@ namespace Client.Forms
             else
             {
                 lblResult.Style = MetroFramework.MetroColorStyle.Blue;
-                lblResult.Text = $"기본 서버에 연결 중입니다.\n{Program.hostname}:{Program.port}";
+                lblResult.Text = $"서버에 연결 중입니다.\n{Program.hostname}:{Program.port}";
                 Program.client.BeginConnect(Program.hostname, Program.port, EndConnect, null);
             }
         }
@@ -122,7 +123,10 @@ namespace Client.Forms
             {
                 Program.ns = Program.client.GetStream();
                 Program.recvThread.Start();
+                resultText = "서버와 연결되었습니다.";
             }
+            else
+                resultText += "\n5초 뒤 연결을 재시도 합니다.";
 
             // 로그인 정보가 저장되어 있을경우 불러오기
             string savedLoginInfo = File.Exists("login.txt") ? File.ReadAllText("login.txt") : "";
@@ -131,7 +135,7 @@ namespace Client.Forms
             Invoke(new MethodInvoker(() =>
             {
                 lblResult.Style = Program.client.Connected ?
-                    MetroFramework.MetroColorStyle.Black :
+                    MetroFramework.MetroColorStyle.Green :
                     MetroFramework.MetroColorStyle.Red;
                 lblResult.Text = resultText;
 
@@ -143,6 +147,12 @@ namespace Client.Forms
                     btnLogin.PerformClick();
                 }
             }));
+
+            if (!string.IsNullOrEmpty(resultText))
+            {
+                Thread.Sleep(5000);
+                FormLogin_Shown(null, new EventArgs());
+            }
         }
         public void EndLogin(Packet packet)
         {

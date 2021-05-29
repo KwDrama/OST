@@ -177,9 +177,8 @@ namespace Server.Classes
                         Log("Chat", "채팅 내역 DB 저장 실패");
 
                     // 같은 Room에 있는 다른 클라들한테 채팅 전송
-                    Room room = p.chats[0].room;
-                    if (Program.roomEmps.ContainsKey(room.id))
-                        Program.roomEmps[room.id]
+                    if (Program.roomEmps.ContainsKey(p.chats[0].roomId))
+                        Program.roomEmps[p.chats[0].roomId]
                             .FindAll(eid => eid != employee.id)
                             .ForEach(eid => {
                                 if (Program.clients.ContainsKey(eid))

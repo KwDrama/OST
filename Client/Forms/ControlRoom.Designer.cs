@@ -62,7 +62,6 @@ namespace Client.Forms
             // 
             // lblChat
             // 
-            this.lblChat.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblChat.Location = new System.Drawing.Point(83, 45);
             this.lblChat.Name = "lblChat";
             this.lblChat.Size = new System.Drawing.Size(145, 19);
@@ -84,7 +83,7 @@ namespace Client.Forms
             // 
             // lblTeamRank
             // 
-            this.lblTeamRank.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblTeamRank.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblTeamRank.ForeColor = System.Drawing.Color.DimGray;
             this.lblTeamRank.Location = new System.Drawing.Point(184, 16);
             this.lblTeamRank.Name = "lblTeamRank";

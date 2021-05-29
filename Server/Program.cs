@@ -38,7 +38,6 @@ namespace Server
             }
 
             // 테스트
-            Log("Test", OSTLibrary.Securities.MD5.Encrypt("test"));
 
             // 서버 시작
             listener = new TcpListener(IPAddress.Any, port);
