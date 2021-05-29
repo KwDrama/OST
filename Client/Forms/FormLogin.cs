@@ -13,7 +13,7 @@ namespace Client.Forms
 {
     public partial class FormLogin : MetroForm
     {
-        bool loginable = false, enableEnter = true;
+        bool loginable = false, enableEnter = true, isAutoLogin = false;
 
         public FormLogin()
         {
@@ -79,8 +79,11 @@ namespace Client.Forms
                     btnLogin.Visible = loginable = false;
                 lblResult.Style = MetroFramework.MetroColorStyle.Black;
                 lblResult.Text = "로그인 중..";
-                Program.employee = new Employee(int.Parse(txtEmpId.Text), SHA512.Encrypt(txtPassword.Text));
-                Program.Send(new LoginPacket(int.Parse(txtEmpId.Text), SHA512.Encrypt(txtPassword.Text)));
+
+                string EncryptedPassword = isAutoLogin ? txtPassword.Text : SHA512.Encrypt(txtPassword.Text);
+
+                Program.employee = new Employee(int.Parse(txtEmpId.Text), EncryptedPassword);
+                Program.Send(new LoginPacket(int.Parse(txtEmpId.Text), EncryptedPassword));
             }
             else
             {
@@ -121,6 +124,7 @@ namespace Client.Forms
                 Program.recvThread.Start();
             }
 
+            // 로그인 정보가 저장되어 있을경우 불러오기
             string savedLoginInfo = File.Exists("login.txt") ? File.ReadAllText("login.txt") : "";
 
             loginable = true;
@@ -135,6 +139,7 @@ namespace Client.Forms
                 {
                     txtEmpId.Text = savedLoginInfo.Split('\n')[0];
                     txtPassword.Text = savedLoginInfo.Split('\n')[1];
+                    isAutoLogin = true;
                     btnLogin.PerformClick();
                 }
             }));

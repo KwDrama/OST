@@ -3,6 +3,7 @@ using OSTLibrary.Classes;
 using OSTLibrary.Networks;
 using OSTLibrary.Securities;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
@@ -11,6 +12,8 @@ namespace Server.Classes
 {
     public class Client
     {
+        object locker = new object();       // For lock
+
         public TcpClient socket;            // 클라이언트 소켓
         NetworkStream ns;                   // 네트워크 스트림
         public Thread recvThread;           // 클라이언트로부터 수신을 대기하는 스레드
@@ -98,7 +101,16 @@ namespace Server.Classes
                         employee = emp;
                         Log("Login", "로그인 성공");
                         Program.MoveLoginClient(this);
-                        p = new LoginPacket(true, Program.employees, Database.GetRooms(emp));
+
+                        // 로그인 하면서 불러온 사원의 룸 정보를 모두 룸과 사원 관계의 Map에 저장
+                        List<Room> myRooms = Database.GetRooms(emp);
+                        foreach (Room room in myRooms)
+                            if (Program.roomEmps.ContainsKey(room.id))
+                                Program.roomEmps[room.id].Add(employee.id);
+                            else
+                                Program.roomEmps.Add(room.id, new List<int>(new int[] { employee.id }));
+
+                        p = new LoginPacket(true, Program.employees, myRooms);
                     }
 
                     Thread.Sleep(200);  // 클라이언트 스피너 보기 위함
@@ -146,13 +158,33 @@ namespace Server.Classes
                         }
                         else
                             Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 생성 : {p.room.target}");
+
+                        // 룸과 사원 관계 Map에도 저장, 새로 만드는 방이니깐 기존에 정보가 없었을 것임
+                        Program.roomEmps.Add(p.room.id, new List<int>(new int[] { employee.id }));
                     }
                 }
                 else if (packet.type == PacketType.Chat)
                 {
                     ChatsPacket p = packet as ChatsPacket;
+                    if (p.chats.Count == 0) continue;
 
-                    p.chats.ForEach(Database.AddChat);
+                    // 클라한테 받은 채팅 내역 DB에 저장
+                    if (Database.AddChat(p.chats[0]))
+                        Log("Chat",
+                            p.chats[0].type == ChatType.Text ? p.chats[0].text :
+                            p.chats[0].type == ChatType.Image ? "사진" : "Blob");
+                    else
+                        Log("Chat", "채팅 내역 DB 저장 실패");
+
+                    // 같은 Room에 있는 다른 클라들한테 채팅 전송
+                    Room room = p.chats[0].room;
+                    if (Program.roomEmps.ContainsKey(room.id))
+                        Program.roomEmps[room.id]
+                            .FindAll(eid => eid != employee.id)
+                            .ForEach(eid => {
+                                if (Program.clients.ContainsKey(eid))
+                                    Program.clients[eid].Send(new ChatsPacket(p.chats[0]));
+                            });
                 }
                 else
                 {
@@ -165,25 +197,28 @@ namespace Server.Classes
             if (socket.Connected) socket.Close();
             Program.RemoveClient(this);
         }
-        void Send(Packet packet)
+        public void Send(Packet packet)
         {
-            byte[] sendBuffer = new byte[Packet.BUFFER_SIZE];
-            byte[] packetBytes = packet.Serialize();
-
-            // 기존 버퍼 크기보다 클 경우 (이미지 등)
-            if (packetBytes.Length > Packet.BUFFER_SIZE)
+            lock (locker)
             {
-                new Packet(packetBytes.Length).Serialize().CopyTo(sendBuffer, 0);
-                ns.Write(sendBuffer, 0, sendBuffer.Length);
-                ns.Write(packetBytes, 0, packetBytes.Length);
-            }
-            else
-            {
-                packetBytes.CopyTo(sendBuffer, 0);
-                ns.Write(sendBuffer, 0, sendBuffer.Length);
-            }
+                byte[] sendBuffer = new byte[Packet.BUFFER_SIZE];
+                byte[] packetBytes = packet.Serialize();
 
-            ns.Flush();
+                // 기존 버퍼 크기보다 클 경우 (이미지 등)
+                if (packetBytes.Length > Packet.BUFFER_SIZE)
+                {
+                    new Packet(packetBytes.Length).Serialize().CopyTo(sendBuffer, 0);
+                    ns.Write(sendBuffer, 0, sendBuffer.Length);
+                    ns.Write(packetBytes, 0, packetBytes.Length);
+                }
+                else
+                {
+                    packetBytes.CopyTo(sendBuffer, 0);
+                    ns.Write(sendBuffer, 0, sendBuffer.Length);
+                }
+
+                ns.Flush();
+            }
         }
         void Log(string type, string content)
         {

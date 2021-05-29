@@ -86,7 +86,14 @@ namespace Client.Forms
                             Program.Send(new RoomPacket(RoomType.New, room));
                         }
                         else
+                        {
+                            if (formChats.ContainsKey(room.id))
+                            {
+                                formChats[room.id].Focus();
+                                return;
+                            }
                             AddFormChat(room);
+                        }
 
                         formChats[room.id].Show();
                     };
@@ -160,10 +167,10 @@ namespace Client.Forms
             cardRoom.ContextMenuStrip = new MetroContextMenu(components);
             cardRoom.ContextMenuStrip.Items.Add("채팅").Click += showFormChat;
 
-            if (room.chats.Count > 0)
-                cardRoom.UpdateInfo(room.chats[room.chats.Count - 1]);
-            else
+            if (room.lastChat == null)
                 cardRoom.UpdateInfo(new Chat(ChatType.Text, DateTime.MinValue, room, 0, ""));
+            else
+                cardRoom.UpdateInfo(room.lastChat);
 
             pnlChat.Controls.Add(cardRoom);
             controlRooms.Add(room.id, cardRoom);
@@ -173,7 +180,7 @@ namespace Client.Forms
             RoomPacket rp = p as RoomPacket;
 
             Program.rooms.Add(rp.room);
-            AddRoomCard(rp.room);
+            Invoke(new MethodInvoker(() => AddRoomCard(rp.room)));
 
             if (formChats.ContainsKey(""))
             {

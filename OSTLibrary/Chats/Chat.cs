@@ -37,7 +37,6 @@ namespace OSTLibrary.Chats
             this.text = text;
         }
 
-
         public int CompareTo(Chat other)
             => date.CompareTo(other);
     }

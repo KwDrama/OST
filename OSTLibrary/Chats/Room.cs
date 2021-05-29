@@ -1,6 +1,5 @@
 ﻿using OSTLibrary.Classes;
 using System;
-using System.Collections.Generic;
 
 namespace OSTLibrary.Chats
 {
@@ -13,14 +12,14 @@ namespace OSTLibrary.Chats
         public int scopeIdx;
         public string target;
 
-        public List<Chat> chats;
+        public Chat lastChat;
 
-        public Room(string id, int scopeIdx, string target)
+        public Room(string id, int scopeIdx, string target, Chat lastChat = null)
         {
             this.id = id;
             this.scopeIdx = scopeIdx;
             this.target = target;
-            chats = new List<Chat>();
+            this.lastChat = lastChat;
         }
 
         public int FindOtherEmployeeId(Employee myEmp)

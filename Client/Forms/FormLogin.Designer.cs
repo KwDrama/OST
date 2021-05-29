@@ -31,6 +31,7 @@ namespace Client.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.chkAutoLogin = new MetroFramework.Controls.MetroCheckBox();
             this.btnLogin = new MetroFramework.Controls.MetroButton();
             this.lnkResetPw = new MetroFramework.Controls.MetroLink();
@@ -234,6 +235,7 @@ namespace Client.Forms
             this.Controls.Add(this.txtEmpId);
             this.DisplayHeader = false;
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "FormLogin";

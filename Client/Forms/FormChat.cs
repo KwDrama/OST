@@ -3,6 +3,7 @@ using MetroFramework.Forms;
 using OSTLibrary.Chats;
 using OSTLibrary.Networks;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Client.Forms
@@ -10,11 +11,13 @@ namespace Client.Forms
     public partial class FormChat : MetroForm
     {
         public Room room;
+        public List<Chat> chats;
 
         public FormChat(Room room)
         {
             InitializeComponent();
             this.room = room;
+            chats = new List<Chat>();
         }
         private void FormChat_Load(object sender, EventArgs e)
         {
@@ -44,6 +47,8 @@ namespace Client.Forms
         }
         private void picSend_Click(object sender, EventArgs e)
         {
+            Program.Send(new ChatsPacket(new Chat(ChatType.Text,
+                DateTime.Now, room, Program.employee.id, txtChat.Text)));
         }
 
         public void ReceiveChat(ChatsPacket p)

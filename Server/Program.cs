@@ -1,5 +1,4 @@
 ﻿using OSTLibrary.Classes;
-using OSTLibrary.Securities;
 using Server.Classes;
 using System;
 using System.Collections.Generic;
@@ -10,11 +9,13 @@ namespace Server
 {
     class Program
     {
-        static ushort port = 6756;                          // OST 서버 포트
-        static TcpListener listener;                        // 서버 소켓
-        static Dictionary<int, Client> clients;             // 로그인 후 클라이언트
-        static List<Client> unloginedClients;               // 로그인 전 클라이언트
-        public static Dictionary<int, Employee> employees;  // 사원들 정보
+        static ushort port = 6756;                              // OST 서버 포트
+        static TcpListener listener;                            // 서버 소켓
+        static List<Client> unloginedClients;                   // 로그인 전 클라이언트들
+
+        public static Dictionary<int, Client> clients;          // 로그인 후 클라이언트들
+        public static Dictionary<int, Employee> employees;      // 사원들 정보
+        public static Dictionary<string, List<int>> roomEmps;   // 각 룸에 있는 접속된 사원 번호
 
         static void Main(string[] args)
         {
@@ -22,6 +23,7 @@ namespace Server
 
             clients = new Dictionary<int, Client>();
             unloginedClients = new List<Client>();
+            roomEmps = new Dictionary<string, List<int>>();
 
             // 데이터 베이스 접속
             if (Database.Connect())
@@ -35,11 +37,8 @@ namespace Server
                 return;
             }
 
-            // 테스트 코드
-            //Log("Test", SHA512.Encrypt("990224"));
-            //Log("Test", SHA512.Encrypt("980716"));
-            //Log("Test", SHA512.Encrypt("990101"));
-            //Log("Test", SHA512.Encrypt("980210"));
+            // 테스트
+            Log("Test", OSTLibrary.Securities.MD5.Encrypt("test"));
 
             // 서버 시작
             listener = new TcpListener(IPAddress.Any, port);
