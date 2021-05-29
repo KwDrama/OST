@@ -1,4 +1,5 @@
 ﻿using OSTLibrary.Classes;
+using OSTLibrary.Securities;
 using Server.Classes;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,11 @@ namespace Server
 {
     class Program
     {
-        static ushort port = 6756;                  // OST 서버 포트
-        static TcpListener listener;                // 서버 소켓
-        static Dictionary<int, Client> clients;     // 로그인 후 클라이언트
-        static List<Client> unloginedClients;       // 로그인 전 클라이언트
-        public static List<Employee> employees;     // 사원들 정보
+        static ushort port = 6756;                          // OST 서버 포트
+        static TcpListener listener;                        // 서버 소켓
+        static Dictionary<int, Client> clients;             // 로그인 후 클라이언트
+        static List<Client> unloginedClients;               // 로그인 전 클라이언트
+        public static Dictionary<int, Employee> employees;  // 사원들 정보
 
         static void Main(string[] args)
         {
@@ -33,6 +34,12 @@ namespace Server
                 Log("DB", $"Server {Database.hostname} connect failed.");
                 return;
             }
+
+            // 테스트 코드
+            //Log("Test", SHA512.Encrypt("990224"));
+            //Log("Test", SHA512.Encrypt("980716"));
+            //Log("Test", SHA512.Encrypt("990101"));
+            //Log("Test", SHA512.Encrypt("980210"));
 
             // 서버 시작
             listener = new TcpListener(IPAddress.Any, port);

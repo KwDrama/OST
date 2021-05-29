@@ -58,6 +58,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\ControlRoom.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ControlRoom.Designer.cs">
+      <DependentUpon>ControlRoom.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormChat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,10 +88,10 @@
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panels\ControlChat.cs">
+    <Compile Include="Forms\ControlChat.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panels\ControlChat.Designer.cs">
+    <Compile Include="Forms\ControlChat.Designer.cs">
       <DependentUpon>ControlChat.cs</DependentUpon>
     </Compile>
     <Compile Include="Panels\PanelPlus.cs">
@@ -114,6 +120,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\ControlRoom.resx">
+      <DependentUpon>ControlRoom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormChat.resx">
       <DependentUpon>FormChat.cs</DependentUpon>
     </EmbeddedResource>
@@ -214,10 +223,16 @@
     <None Include="Resources\back.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\department.png" />
+    <None Include="Resources\treenode.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\treenode.png" />
+    <None Include="Resources\central.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\office-building.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\team.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

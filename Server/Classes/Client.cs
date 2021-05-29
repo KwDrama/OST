@@ -1,7 +1,8 @@
-﻿using OSTLibrary.Classes;
+﻿using OSTLibrary.Chats;
+using OSTLibrary.Classes;
 using OSTLibrary.Networks;
+using OSTLibrary.Securities;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
@@ -88,16 +89,20 @@ namespace Server.Classes
 
                     Employee emp = Database.Login(p.employees[0].id, p.employees[0].password);
                     if (emp == null)
+                    {
                         Log("Login", string.Format("{0} 로그인 실패", p.employees[0].id));
+                        p.success = false;
+                    }
                     else
                     {
                         employee = emp;
                         Log("Login", "로그인 성공");
                         Program.MoveLoginClient(this);
+                        p = new LoginPacket(true, Program.employees, Database.GetRooms(emp));
                     }
 
                     Thread.Sleep(200);  // 클라이언트 스피너 보기 위함
-                    Send(new LoginPacket(emp != null, Program.employees));
+                    Send(p);
                 }
                 else if (packet.type == PacketType.Logout)
                 {
@@ -110,11 +115,44 @@ namespace Server.Classes
                     RegisterPacket p = packet as RegisterPacket;
                     if (Database.Register(p.employee))
                     {
-                        Program.employees.Add(employee = p.employee);
+                        Program.employees.Add(p.employee.id, employee = p.employee);
                         Log("Register", "회원가입 성공");
                     }
                     else
                         Log("Register", "회원가입 실패");
+                }
+                else if (packet.type == PacketType.Room)
+                {
+                    RoomPacket p = packet as RoomPacket;
+                    if (p.roomType == RoomType.New)
+                    {
+                        do p.room.id = MD5.NextRandom();
+                        while (!Database.AddRoom(p.room));
+                        Send(p);
+
+                        if (p.room.scopeIdx == 3)
+                        {
+
+                            int otherEmpId = p.room.FindOtherEmployeeId(employee);
+                            if (Program.employees.ContainsKey(otherEmpId))
+                            {
+                                Employee targetEmp = Program.employees[p.room.FindOtherEmployeeId(employee)];
+                                Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 생성 : {targetEmp.name}({targetEmp.id})");
+                            }
+                            else
+                            {
+                                Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 생성 실패");
+                            }
+                        }
+                        else
+                            Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 생성 : {p.room.target}");
+                    }
+                }
+                else if (packet.type == PacketType.Chat)
+                {
+                    ChatsPacket p = packet as ChatsPacket;
+
+                    p.chats.ForEach(Database.AddChat);
                 }
                 else
                 {

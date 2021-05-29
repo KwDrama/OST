@@ -1,21 +1,41 @@
-﻿using System;
+﻿using OSTLibrary.Classes;
+using System;
+using System.Collections.Generic;
 
 namespace OSTLibrary.Chats
 {
     [Serializable]
     public class Room
     {
-        public static string[] Range = { "회사 전체", "본부 전체", "팀 전체", "개인" };
+        public static string[] Scope = { "회사 전체", "본부 전체", "팀 전체", "개인" };
 
-        public string roomId;
-        public int rangeIdx;
+        public string id;
+        public int scopeIdx;
         public string target;
 
-        public Room(string roomId, int rangeIdx, string target)
+        public List<Chat> chats;
+
+        public Room(string id, int scopeIdx, string target)
         {
-            this.roomId = roomId;
-            this.rangeIdx = rangeIdx;
+            this.id = id;
+            this.scopeIdx = scopeIdx;
             this.target = target;
+            chats = new List<Chat>();
+        }
+
+        public int FindOtherEmployeeId(Employee myEmp)
+        {
+            if (scopeIdx != 3)
+                return 0;
+
+            foreach(string empStr in target.Split(','))
+            {
+                if (empStr == myEmp.id.ToString())
+                    continue;
+
+                return int.Parse(empStr);
+            }
+            return 0;
         }
     }
 }

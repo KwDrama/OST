@@ -39,11 +39,11 @@ namespace Server.Classes
             }
         }
 
-        public static List<Employee> GetEmployees()
+        public static Dictionary<int, Employee> GetEmployees()
         {
             string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee";
             MySqlCommand cmd = new MySqlCommand(sql, con);
-            List<Employee> employees = new List<Employee>();
+            Dictionary<int, Employee> employees = new Dictionary<int, Employee>();
 
             using (MySqlDataReader rdr = cmd.ExecuteReader())
                 while (rdr.Read())
@@ -52,7 +52,7 @@ namespace Server.Classes
                     rdr.GetBytes(rdr.GetOrdinal("profile"), 0, profileBytes, 0, profileBytes.Length);
 
                     using (MemoryStream ms = new MemoryStream(profileBytes))
-                        employees.Add(new Employee(
+                        employees.Add(rdr.GetInt32("id"), new Employee(
                             Image.FromStream(ms),
                             rdr.GetInt32("id"),
                             string.Empty,
@@ -67,7 +67,7 @@ namespace Server.Classes
         }
         public static Employee Login(int empId, string password)
         {
-            string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee WHERE id={empId} AND password={Filter(password)}";
+            string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee WHERE id={empId} AND password='{Filter(password)}'";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             using (MySqlDataReader rdr = cmd.ExecuteReader())
@@ -127,7 +127,7 @@ namespace Server.Classes
         public static bool AddSchedule(Schedule schedule)
         {
             MySqlCommand cmd = new MySqlCommand(
-                "INSERT INTO schedule VALUES (@author, @title, @start, @end, @range, @contents);",
+                "INSERT INTO schedule VALUES (@author, @title, @start, @end, @scope, @contents);",
                 con);
             using(MemoryStream ms = new MemoryStream())
             {
@@ -142,7 +142,7 @@ namespace Server.Classes
                 cmd.Parameters.AddWithValue("@title", schedule.title);
                 cmd.Parameters.Add(start);
                 cmd.Parameters.Add(end);
-                cmd.Parameters.AddWithValue("@range", schedule.range);
+                cmd.Parameters.AddWithValue("@scope", schedule.scope);
                 cmd.Parameters.Add(contents);
             }
             try
@@ -157,7 +157,7 @@ namespace Server.Classes
         }
         public static Schedule GetSchedule(int authorID)
         {
-            string sql = $"SELECT author, title, start, end, range, contents FROM employee WHERE id={authorID}";
+            string sql = $"SELECT author, title, start, end, scope, contents FROM employee WHERE id={authorID}";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             using (MySqlDataReader rdr = cmd.ExecuteReader())
@@ -167,10 +167,10 @@ namespace Server.Classes
                     using (MemoryStream ms = new MemoryStream())
                         return new Schedule(
                             rdr.GetInt32("author"),
-                            rdr.GetString("range"),
+                            rdr.GetString("scope"),
                             rdr.GetDateTime("start"),
                             rdr.GetDateTime("end"),
-                            rdr.GetInt32("range"),
+                            rdr.GetInt32("scope"),
                             rdr.GetString("contents"));
                 }
             }
@@ -178,17 +178,45 @@ namespace Server.Classes
             
         }
 
-        public static void AddRoom(Room room)
+        public static bool AddRoom(Room room)
+        {
+            MySqlCommand cmd = new MySqlCommand(
+                   "INSERT INTO room VALUES (@id, @scope, @target);",
+                   con);
+
+            cmd.Parameters.AddWithValue("@id", room.id);
+            cmd.Parameters.AddWithValue("@scope", room.scopeIdx);
+            cmd.Parameters.AddWithValue("@target", room.target);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (MySqlException)
+            {
+                return false;
+            }
+        }
+        public static List<Room> GetRooms(Employee emp)
+        {
+            List<Room> rooms = new List<Room>();
+
+            string sql =
+                $"(SELECT * FROM room WHERE scope=0)" +
+                $" UNION (SELECT * FROM room WHERE scope=1 AND target='{Filter(emp.central)}')" +
+                $" UNION (SELECT * FROM room WHERE scope=2 AND target='{Filter(emp.team)}')" +
+                $" UNION (SELECT * FROM room WHERE scope=3 AND target LIKE '%{emp.id}%')";
+
+            using (MySqlDataReader rdr = new MySqlCommand(sql, con).ExecuteReader())
+                while (rdr.Read())
+                    rooms.Add(new Room(rdr.GetString("id"), rdr.GetInt32("scope"), rdr.GetString("target")));
+
+            return rooms;
+        }
+        public static void AddChat(Chat chat)
         {
         }
-        public static List<Room> GetRoom(Employee emp)
-        {
-            return null;
-        }
-        public static void AddChatText(Chat chat)
-        {
-        }
-        public static List<Chat> GetChatText(DateTime begin, DateTime end)
+        public static List<Chat> GetChats(DateTime begin, DateTime end)
         {
             return null;
         }
