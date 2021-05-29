@@ -25,7 +25,7 @@ namespace Client.Forms
             else if (room.scopeIdx == 2)
                 Text = Program.employee.team;
             else if (room.scopeIdx == 3)
-                Text = Program.employees.Find(emp => emp.id.ToString() == room.target.Split(',')[1]).name;
+                Text = Program.employees[room.FindOtherEmployeeId(Program.employee)].name;
         }
 
         private void pic_MouseEnter(object sender, EventArgs e)

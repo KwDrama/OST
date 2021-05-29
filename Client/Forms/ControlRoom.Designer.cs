@@ -33,6 +33,7 @@ namespace Client.Forms
             this.lblTitle = new MetroFramework.Controls.MetroLabel();
             this.lblChat = new MetroFramework.Controls.MetroLabel();
             this.lblTime = new MetroFramework.Controls.MetroLabel();
+            this.lblTeamRank = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,12 +51,13 @@ namespace Client.Forms
             // 
             // lblTitle
             // 
+            this.lblTitle.AutoSize = true;
             this.lblTitle.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.lblTitle.Location = new System.Drawing.Point(83, 16);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(132, 19);
+            this.lblTitle.Size = new System.Drawing.Size(51, 19);
             this.lblTitle.TabIndex = 19;
-            this.lblTitle.Text = "Title";
+            this.lblTitle.Text = "홍길동";
             this.lblTitle.UseCustomBackColor = true;
             // 
             // lblChat
@@ -63,21 +65,35 @@ namespace Client.Forms
             this.lblChat.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblChat.Location = new System.Drawing.Point(83, 45);
             this.lblChat.Name = "lblChat";
-            this.lblChat.Size = new System.Drawing.Size(132, 19);
+            this.lblChat.Size = new System.Drawing.Size(145, 19);
             this.lblChat.TabIndex = 19;
             this.lblChat.Text = "Last chat";
             this.lblChat.UseCustomBackColor = true;
             // 
             // lblTime
             // 
-            this.lblTime.Location = new System.Drawing.Point(234, 16);
-            this.lblTime.Margin = new System.Windows.Forms.Padding(16);
+            this.lblTime.ForeColor = System.Drawing.Color.Gray;
+            this.lblTime.Location = new System.Drawing.Point(234, 45);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(70, 48);
+            this.lblTime.Size = new System.Drawing.Size(70, 19);
             this.lblTime.TabIndex = 19;
             this.lblTime.Text = "오전 12:38";
             this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblTime.UseCustomBackColor = true;
+            this.lblTime.UseCustomForeColor = true;
+            // 
+            // lblTeamRank
+            // 
+            this.lblTeamRank.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblTeamRank.ForeColor = System.Drawing.Color.DimGray;
+            this.lblTeamRank.Location = new System.Drawing.Point(184, 16);
+            this.lblTeamRank.Name = "lblTeamRank";
+            this.lblTeamRank.Size = new System.Drawing.Size(120, 19);
+            this.lblTeamRank.TabIndex = 19;
+            this.lblTeamRank.Text = "자원본부 본부장";
+            this.lblTeamRank.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblTeamRank.UseCustomBackColor = true;
+            this.lblTeamRank.UseCustomForeColor = true;
             // 
             // ControlRoom
             // 
@@ -85,6 +101,7 @@ namespace Client.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.lblChat);
+            this.Controls.Add(this.lblTeamRank);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.picProfile);
             this.Controls.Add(this.lblTime);
@@ -97,6 +114,7 @@ namespace Client.Forms
             this.MouseLeave += new System.EventHandler(this.ControlRoom_MouseLeave);
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -106,5 +124,6 @@ namespace Client.Forms
         private MetroFramework.Controls.MetroLabel lblTitle;
         private MetroFramework.Controls.MetroLabel lblChat;
         private MetroFramework.Controls.MetroLabel lblTime;
+        private MetroFramework.Controls.MetroLabel lblTeamRank;
     }
 }

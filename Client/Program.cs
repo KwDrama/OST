@@ -20,7 +20,7 @@ namespace Client.Forms
 
         public static Employee employee;                                // 나의 사원 정보
         public static List<Room> rooms;                                 // 채팅방 정보
-        public static List<Employee> employees;                         // 사원들 정보
+        public static Dictionary<int, Employee> employees;              // 사원들 정보
         public static FormMain formMain;                                // 적당한 폼 상호작용을 위한 메인폼
 
         [STAThread]

@@ -23,7 +23,7 @@ namespace OSTLibrary.Chats
             chats = new List<Chat>();
         }
 
-        public int GetOtherEmployeeId(Employee myEmp)
+        public int FindOtherEmployeeId(Employee myEmp)
         {
             if (scopeIdx != 3)
                 return 0;

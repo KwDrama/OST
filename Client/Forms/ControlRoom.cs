@@ -1,6 +1,7 @@
 ﻿using Client.Properties;
 using MetroFramework.Controls;
 using OSTLibrary.Chats;
+using OSTLibrary.Classes;
 using System;
 using System.Drawing;
 
@@ -14,12 +15,27 @@ namespace Client.Forms
         {
             InitializeComponent();
 
-            picProfile.Image =
-                room.scopeIdx == 0 ? Resources.office_building :
-                room.scopeIdx == 1 ? Resources.central :
-                room.scopeIdx == 2 ? Resources.team :
-                room.scopeIdx == 3 ? room.GetOtherEmployee(Program.employee).profile :
-                Resources.profile;
+            if (room.scopeIdx == 3)
+            {
+                Employee otherEmp = Program.employees[room.FindOtherEmployeeId(Program.employee)];
+                picProfile.Image = otherEmp.profile;
+                lblTitle.Text = otherEmp.name;
+                lblTeamRank.Text = otherEmp.team + " " + otherEmp.rank;
+            }
+            else
+            {
+                picProfile.Image =
+                    room.scopeIdx == 0 ? Resources.office_building :
+                    room.scopeIdx == 1 ? Resources.central :
+                    room.scopeIdx == 2 ? Resources.team : Resources.profile;
+
+                lblTitle.Text = Room.Scope[room.scopeIdx];
+
+                lblTeamRank.Text =
+                    room.scopeIdx == 0 ? "원인터네셔널" :
+                    room.scopeIdx == 1 ? Program.employee.central :
+                    room.scopeIdx == 2 ? Program.employee.team : "";
+            }
         }
 
         private void ControlRoom_MouseEnter(object sender, EventArgs e)
@@ -35,6 +51,13 @@ namespace Client.Forms
 
         public void UpdateInfo(Chat chat)
         {
+            if (chat.empId == 0)
+            {
+                lblChat.Text = "채팅내역 없음";
+                lblTime.Text = "";
+                return;
+            }
+
             lblChat.Text =
                 chat.type == ChatType.Text ? chat.text :
                 chat.type == ChatType.Image ? "사진" : "";

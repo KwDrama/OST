@@ -8,7 +8,7 @@ namespace OSTLibrary.Networks
     [Serializable]
     public class LoginPacket : Packet
     {
-        public List<Employee> employees;
+        public Dictionary<int, Employee> employees;
         public List<Room> rooms;
 
         public bool success = false;
@@ -17,10 +17,10 @@ namespace OSTLibrary.Networks
         {
             type = PacketType.Login;
 
-            employees = new List<Employee>();
-            employees.Add(new Employee(empId, password));
+            employees = new Dictionary<int, Employee>();
+            employees.Add(0, new Employee(empId, password));
         }
-        public LoginPacket(bool success, List<Employee> employees, List<Room> rooms)
+        public LoginPacket(bool success, Dictionary<int, Employee> employees, List<Room> rooms)
         {
             type = PacketType.Login;
 

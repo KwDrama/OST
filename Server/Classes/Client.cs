@@ -3,7 +3,6 @@ using OSTLibrary.Classes;
 using OSTLibrary.Networks;
 using OSTLibrary.Securities;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
@@ -112,7 +111,7 @@ namespace Server.Classes
                     RegisterPacket p = packet as RegisterPacket;
                     if (Database.Register(p.employee))
                     {
-                        Program.employees.Add(employee = p.employee);
+                        Program.employees.Add(p.employee.id, employee = p.employee);
                         Log("Register", "회원가입 성공");
                     }
                     else
@@ -129,8 +128,17 @@ namespace Server.Classes
 
                         if (p.room.scopeIdx == 3)
                         {
-                            Employee targetEmp = Program.employees.Find(e => e.id.ToString().Equals(p.room.target.Split(',')[1]));
-                            Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 생성 : {targetEmp.name}({targetEmp.id})");
+
+                            int otherEmpId = p.room.FindOtherEmployeeId(employee);
+                            if (Program.employees.ContainsKey(otherEmpId))
+                            {
+                                Employee targetEmp = Program.employees[p.room.FindOtherEmployeeId(employee)];
+                                Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 생성 : {targetEmp.name}({targetEmp.id})");
+                            }
+                            else
+                            {
+                                Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 생성 실패");
+                            }
                         }
                         else
                             Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 생성 : {p.room.target}");

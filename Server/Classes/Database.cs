@@ -39,11 +39,11 @@ namespace Server.Classes
             }
         }
 
-        public static List<Employee> GetEmployees()
+        public static Dictionary<int, Employee> GetEmployees()
         {
             string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee";
             MySqlCommand cmd = new MySqlCommand(sql, con);
-            List<Employee> employees = new List<Employee>();
+            Dictionary<int, Employee> employees = new Dictionary<int, Employee>();
 
             using (MySqlDataReader rdr = cmd.ExecuteReader())
                 while (rdr.Read())
@@ -52,7 +52,7 @@ namespace Server.Classes
                     rdr.GetBytes(rdr.GetOrdinal("profile"), 0, profileBytes, 0, profileBytes.Length);
 
                     using (MemoryStream ms = new MemoryStream(profileBytes))
-                        employees.Add(new Employee(
+                        employees.Add(rdr.GetInt32("id"), new Employee(
                             Image.FromStream(ms),
                             rdr.GetInt32("id"),
                             string.Empty,

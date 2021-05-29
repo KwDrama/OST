@@ -144,11 +144,24 @@ namespace Client.Forms
             if (p.success)
             {
                 DialogResult = DialogResult.OK;
+
+                // 자동 로그인일 경우 로그인 정보를 저장
                 if (chkAutoLogin.Checked)
                     File.WriteAllText("login.txt", Program.employee.id + "\n" + Program.employee.password);
-                Program.employee = p.employees.Find(emp => emp.id == Program.employee.id);
+
+                // 받은 로그인 패킷에서 내 사원 정보 찾기
+                foreach (Employee emp in p.employees.Values)
+                    if (emp.id == Program.employee.id)
+                    {
+                        Program.employee = emp;
+                        break;
+                    }
+
+                // 나에 대한 채팅방 정보들과 다른 사원들의 정보를 저장
                 Program.rooms = p.rooms;
                 Program.employees = p.employees;
+
+                // 로그인 창 닫기
                 BeginInvoke(new MethodInvoker(() => Close()));
             }
             else
