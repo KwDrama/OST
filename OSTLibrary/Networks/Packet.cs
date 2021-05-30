@@ -6,7 +6,9 @@ namespace OSTLibrary.Networks
 {
     public enum PacketType
     {
-        Header, Close, Login, Logout, Register, Chat, Room
+        Header, Close,                              // 연결
+        Login, DuplicateLogin, Logout, Register,    // 로그인
+        Chat, Room,                                 // 채팅
     }
 
     [Serializable]

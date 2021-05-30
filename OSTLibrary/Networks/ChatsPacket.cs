@@ -14,5 +14,12 @@ namespace OSTLibrary.Networks
             type = PacketType.Chat;
             this.chats = chats;
         }
+        public ChatsPacket(Chat chat)
+        {
+            type = PacketType.Chat;
+
+            chats = new List<Chat>();
+            chats.Add(chat);
+        }
     }
 }

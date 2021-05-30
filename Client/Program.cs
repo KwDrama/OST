@@ -3,6 +3,8 @@ using OSTLibrary.Classes;
 using OSTLibrary.Networks;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
@@ -65,9 +67,18 @@ namespace Client.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(formMain, ex.Message, "Recieve", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Array.Clear(readBuffer, 0, readBuffer.Length);
-                    return;
+                    formMain.Invoke(new MethodInvoker(() =>
+                        MessageBox.Show(formMain, ex.Message, "Recieve",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error)));
+
+                    // 패킷 받는 도중 예외가 발생했을 때
+                    // 서버와 연결이 종료되었다면 재시작 후 접속 시도
+                    if (!client.Connected)
+                    {
+                        Application.Exit();
+                        Process.Start(Application.ExecutablePath);
+                        return;
+                    }
                 }
 
                 // 큰 버퍼 읽었으면 다시 버퍼 크기 원상 복귀

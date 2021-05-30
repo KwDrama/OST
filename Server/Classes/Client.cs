@@ -3,6 +3,7 @@ using OSTLibrary.Classes;
 using OSTLibrary.Networks;
 using OSTLibrary.Securities;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
@@ -11,6 +12,8 @@ namespace Server.Classes
 {
     public class Client
     {
+        object locker = new object();       // For lock
+
         public TcpClient socket;            // 클라이언트 소켓
         NetworkStream ns;                   // 네트워크 스트림
         public Thread recvThread;           // 클라이언트로부터 수신을 대기하는 스레드
@@ -69,7 +72,7 @@ namespace Server.Classes
                 Packet packet = pakcetObj as Packet;
                 Array.Clear(readBuffer, 0, readBuffer.Length);
 
-                // 패킷 타입에 따라 진행
+                // 연결
                 if (packet.type == PacketType.Header)
                 {
                     if (packet.Length == 0)
@@ -83,6 +86,8 @@ namespace Server.Classes
                     socket.Close();
                     break;
                 }
+
+                // 로그인
                 else if (packet.type == PacketType.Login)
                 {
                     LoginPacket p = packet as LoginPacket;
@@ -96,9 +101,41 @@ namespace Server.Classes
                     else
                     {
                         employee = emp;
+                        // 이미 접속되어 있었다면 이전에 접속한 클라이언트를 추방
+                        if (!Program.MoveLoginClient(this))
+                        {
+                            Log("Login", "중복 로그인 발생하여 기존 클라이언트 추방");
+                            Program.clients[emp.id].Send(new Packet(PacketType.DuplicateLogin));
+                            Thread.Sleep(1000);
+
+                            // 1초 후에도 살아있을 경우 강제 접속 종료
+                            if (Program.clients.ContainsKey(emp.id) &&
+                                Program.clients[emp.id].socket.Connected)
+                                Program.clients[emp.id].socket.Close();
+
+                            // 내가 로그인 처리가 될 때 까지 대기
+                            while (Program.MoveLoginClient(this)) Thread.Sleep(400);
+                        }
+
                         Log("Login", "로그인 성공");
-                        Program.MoveLoginClient(this);
-                        p = new LoginPacket(true, Program.employees, Database.GetRooms(emp));
+
+                        // 로그인 하면서 불러온 사원의 룸 정보를 모두 룸과 사원 관계의 Map에 저장
+                        List<Room> myRooms = Database.GetRooms(emp);
+                        foreach (Room room in myRooms)
+                        {
+                            // 룸-사원 관계 리스트에서 사원이 없을 경우 추가
+                            if (Program.roomEmps.ContainsKey(room.id))
+                            {
+                                if (!Program.roomEmps[room.id].Contains(employee.id))
+                                    Program.roomEmps[room.id].Add(employee.id);
+                            }
+                            else
+                                Program.roomEmps.Add(room.id, new List<int>(new int[] { employee.id }));
+
+                            room.lastChat = Database.GetLastChat(room);
+                        }
+
+                        p = new LoginPacket(true, Program.employees, myRooms);
                     }
 
                     Thread.Sleep(200);  // 클라이언트 스피너 보기 위함
@@ -121,6 +158,8 @@ namespace Server.Classes
                     else
                         Log("Register", "회원가입 실패");
                 }
+
+                // 채팅
                 else if (packet.type == PacketType.Room)
                 {
                     RoomPacket p = packet as RoomPacket;
@@ -146,14 +185,57 @@ namespace Server.Classes
                         }
                         else
                             Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 생성 : {p.room.target}");
+
+                        // 룸과 사원 관계 Map에도 저장, 새로 만드는 방이니깐 기존에 정보가 없었을 것임
+                        Program.roomEmps.Add(p.room.id, new List<int>(new int[] { employee.id }));
+                    }
+                    else if (p.roomType == RoomType.Chats)
+                    {
+                        // 로깅
+                        if (p.room.scopeIdx == 3)
+                        {
+                            int otherEmpId = p.room.FindOtherEmployeeId(employee);
+                            if (Program.employees.ContainsKey(otherEmpId))
+                            {
+                                Employee targetEmp = Program.employees[p.room.FindOtherEmployeeId(employee)];
+                                Log("Room", $"{targetEmp.name}({targetEmp.id}) 채팅방 조회");
+                            }
+                            else
+                            {
+                                Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 조회 실패");
+                            }
+                        }
+                        else
+                            Log("Room", $"{p.room.target} 채팅방 조회");
+
+                        Send(new ChatsPacket(Database.GetChats(p.room, p.until)));
                     }
                 }
                 else if (packet.type == PacketType.Chat)
                 {
                     ChatsPacket p = packet as ChatsPacket;
+                    if (p.chats.Count == 0) continue;
 
-                    p.chats.ForEach(Database.AddChat);
+                    // 클라한테 받은 채팅 내역 DB에 저장
+                    if (!Database.AddChat(p.chats[0]))
+                        Log("Chat", "채팅 내역 DB 저장 실패");
+                    // 채팅 굳이 로깅할 필요 없을 것 같아서 주석 처리 함
+                    //else
+                    //    Log("Chat",
+                    //        p.chats[0].type == ChatType.Text ? p.chats[0].text :
+                    //        p.chats[0].type == ChatType.Image ? "사진" : "Blob");
+
+                    // 같은 Room에 있는 다른 클라들한테 채팅 전송
+                    if (Program.roomEmps.ContainsKey(p.chats[0].roomId))
+                        Program.roomEmps[p.chats[0].roomId]
+                            .FindAll(eid => eid != employee.id)
+                            .ForEach(eid => {
+                                if (Program.clients.ContainsKey(eid))
+                                    Program.clients[eid].Send(new ChatsPacket(p.chats[0]));
+                            });
                 }
+
+                // 그 외
                 else
                 {
                     Log("Warning", "Receieved packetType is unknown");
@@ -165,25 +247,28 @@ namespace Server.Classes
             if (socket.Connected) socket.Close();
             Program.RemoveClient(this);
         }
-        void Send(Packet packet)
+        public void Send(Packet packet)
         {
-            byte[] sendBuffer = new byte[Packet.BUFFER_SIZE];
-            byte[] packetBytes = packet.Serialize();
-
-            // 기존 버퍼 크기보다 클 경우 (이미지 등)
-            if (packetBytes.Length > Packet.BUFFER_SIZE)
+            lock (locker)
             {
-                new Packet(packetBytes.Length).Serialize().CopyTo(sendBuffer, 0);
-                ns.Write(sendBuffer, 0, sendBuffer.Length);
-                ns.Write(packetBytes, 0, packetBytes.Length);
-            }
-            else
-            {
-                packetBytes.CopyTo(sendBuffer, 0);
-                ns.Write(sendBuffer, 0, sendBuffer.Length);
-            }
+                byte[] sendBuffer = new byte[Packet.BUFFER_SIZE];
+                byte[] packetBytes = packet.Serialize();
 
-            ns.Flush();
+                // 기존 버퍼 크기보다 클 경우 (이미지 등)
+                if (packetBytes.Length > Packet.BUFFER_SIZE)
+                {
+                    new Packet(packetBytes.Length).Serialize().CopyTo(sendBuffer, 0);
+                    ns.Write(sendBuffer, 0, sendBuffer.Length);
+                    ns.Write(packetBytes, 0, packetBytes.Length);
+                }
+                else
+                {
+                    packetBytes.CopyTo(sendBuffer, 0);
+                    ns.Write(sendBuffer, 0, sendBuffer.Length);
+                }
+
+                ns.Flush();
+            }
         }
         void Log(string type, string content)
         {

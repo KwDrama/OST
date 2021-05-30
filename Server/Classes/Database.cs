@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System;
 using OSTLibrary.Chats;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Server.Classes
 {
@@ -18,6 +19,7 @@ namespace Server.Classes
         public static readonly string password = "dr@M@0st";    // DB 비밀 번호
         public static readonly string dbName = "ost";           // DB 기본 데베
 
+        // 필터 및 연결
         static string Filter(string str)
         {
             return Regex.Replace(str, @"[-<>()'""\;=+|&#.]", "");
@@ -39,6 +41,7 @@ namespace Server.Classes
             }
         }
 
+        // 사원
         public static Dictionary<int, Employee> GetEmployees()
         {
             string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee";
@@ -117,13 +120,15 @@ namespace Server.Classes
                     cmd.ExecuteNonQuery();
                     return true;
                 }
-                catch (MySqlException)
+                catch (MySqlException e)
                 {
+                    Program.Log("DB", e.ToString());
                     return false;
                 }
             }
         }
 
+        // 일정
         public static bool AddSchedule(Schedule schedule)
         {
             MySqlCommand cmd = new MySqlCommand(
@@ -150,8 +155,9 @@ namespace Server.Classes
                 cmd.ExecuteNonQuery();
                 return true;
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
+                Program.Log("DB", e.ToString());
                 return false;
             }
         }
@@ -178,6 +184,7 @@ namespace Server.Classes
             
         }
 
+        // 채팅
         public static bool AddRoom(Room room)
         {
             MySqlCommand cmd = new MySqlCommand(
@@ -192,8 +199,9 @@ namespace Server.Classes
                 cmd.ExecuteNonQuery();
                 return true;
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
+                Program.Log("DB", e.ToString());
                 return false;
             }
         }
@@ -213,12 +221,101 @@ namespace Server.Classes
 
             return rooms;
         }
-        public static void AddChat(Chat chat)
+        public static bool AddChat(Chat chat)
         {
+            MySqlCommand cmd = new MySqlCommand(
+                "INSERT INTO chat VALUES (@room_id, @chat_date, @employee_id, @data, @data_length, @data_type);",
+                con);
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                cmd.Parameters.AddWithValue("@room_id", chat.roomId);
+                cmd.Parameters.AddWithValue("@chat_date", chat.date);
+                cmd.Parameters.AddWithValue("@employee_id", chat.empId);
+
+                // 데이터 byte[]로 만들어서 sql에 집어넣기
+                if (chat.type == ChatType.Image)
+                {
+                    chat.image.Save(ms, ImageFormat.Png);
+                    cmd.Parameters.Add(new MySqlParameter("@data", MySqlDbType.LongBlob, (int)ms.Length))
+                        .Value = ms.ToArray();
+                    cmd.Parameters.AddWithValue("@data_length", (int)ms.Length);
+                }
+                else
+                {
+                    byte[] textBytes = Encoding.UTF8.GetBytes(chat.text);
+                    cmd.Parameters.Add(new MySqlParameter("@data", MySqlDbType.LongBlob, textBytes.Length))
+                        .Value = textBytes;
+                    cmd.Parameters.AddWithValue("@data_length", textBytes.Length);
+                }
+                cmd.Parameters.AddWithValue("@data_type", chat.type);
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (MySqlException e)
+                {
+                    Program.Log("DB", e.ToString());
+                    return false;
+                }
+            }
         }
-        public static List<Chat> GetChats(DateTime begin, DateTime end)
+        public static Chat GetLastChat(Room room)
         {
+            MySqlCommand cmd = new MySqlCommand(
+                $"SELECT * FROM chat WHERE room_id='{Filter(room.id)}' ORDER BY chat_date DESC LIMIT 1",
+                con);
+
+            using (MySqlDataReader rdr = cmd.ExecuteReader())
+                if (rdr.Read())
+                {
+                    ChatType ct = (ChatType)rdr.GetInt32("data_type");
+                    byte[] dataBytes = new byte[rdr.GetInt32("data_length")];
+                    rdr.GetBytes(rdr.GetOrdinal("data"), 0, dataBytes, 0, dataBytes.Length);
+
+                    Chat chat = new Chat(ct, rdr.GetDateTime("chat_date"), rdr.GetString("room_id"),
+                        rdr.GetInt32("employee_id"), "");
+
+                    if (ct == ChatType.Image)
+                        using (MemoryStream ms = new MemoryStream(dataBytes))
+                            chat.image = Image.FromStream(ms);
+                    else
+                        chat.text = Encoding.UTF8.GetString(dataBytes);
+
+                    return chat;
+                }
             return null;
+        }
+        public static List<Chat> GetChats(Room room, DateTime until)
+        {
+            List<Chat> chats = new List<Chat>();
+            MySqlCommand cmd = new MySqlCommand(
+                $"SELECT * FROM chat WHERE room_id='{Filter(room.id)}'"
+                + "AND chat_date < @chat_date_until LIMIT 100",
+                con);
+            cmd.Parameters.AddWithValue("@chat_date_until", until);
+
+            using (MySqlDataReader rdr = cmd.ExecuteReader())
+                while (rdr.Read())
+                {
+                    ChatType ct = (ChatType)rdr.GetInt32("data_type");
+                    byte[] dataBytes = new byte[rdr.GetInt32("data_length")];
+                    rdr.GetBytes(rdr.GetOrdinal("data"), 0, dataBytes, 0, dataBytes.Length);
+
+                    Chat chat = new Chat(ct, rdr.GetDateTime("chat_date"), rdr.GetString("room_id"),
+                        rdr.GetInt32("employee_id"), "");
+
+                    if (ct == ChatType.Image)
+                        using (MemoryStream ms = new MemoryStream(dataBytes))
+                            chat.image = Image.FromStream(ms);
+                    else
+                        chat.text = Encoding.UTF8.GetString(dataBytes);
+
+                    chats.Add(chat);
+                }
+            return chats;
         }
     }
 }

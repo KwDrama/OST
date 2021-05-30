@@ -4,14 +4,15 @@ using OSTLibrary.Chats;
 using OSTLibrary.Classes;
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Client.Forms
 {
-    public partial class ControlRoom : MetroUserControl
+    public partial class ControlRoomCard : MetroUserControl
     {
         public DateTime dclick;
 
-        public ControlRoom(Room room)
+        public ControlRoomCard(Room room)
         {
             InitializeComponent();
 
@@ -51,25 +52,28 @@ namespace Client.Forms
 
         public void UpdateInfo(Chat chat)
         {
-            if (chat.empId == 0)
+            Invoke(new MethodInvoker(() =>
             {
-                lblChat.Text = "채팅내역 없음";
-                lblTime.Text = "";
-                return;
-            }
+                if (chat.empId == 0)
+                {
+                    lblChat.Text = "채팅내역 없음";
+                    lblTime.Text = "";
+                    return;
+                }
 
-            lblChat.Text =
-                chat.type == ChatType.Text ? chat.text :
-                chat.type == ChatType.Image ? "사진" : "";
+                lblChat.Text =
+                    chat.type == ChatType.Text ? chat.text :
+                    chat.type == ChatType.Image ? "사진" : "";
 
-            if (chat.date.Year < DateTime.Now.Year)
-                lblTime.Text = $"{DateTime.Now.Year - chat.date.Year}년 전";
-            else if (chat.date.Month < DateTime.Now.Month)
-                lblTime.Text = $"{DateTime.Now.Month - chat.date.Month}달 전";
-            else if (chat.date.Day < DateTime.Now.Day)
-                lblTime.Text = $"{DateTime.Now.Month - chat.date.Month}일 전";
-            else
-                lblTime.Text = chat.date.ToShortTimeString();
+                if (chat.date.Year < DateTime.Now.Year)
+                    lblTime.Text = $"{DateTime.Now.Year - chat.date.Year}년 전";
+                else if (chat.date.Month < DateTime.Now.Month)
+                    lblTime.Text = $"{DateTime.Now.Month - chat.date.Month}달 전";
+                else if (chat.date.Day < DateTime.Now.Day)
+                    lblTime.Text = $"{DateTime.Now.Month - chat.date.Month}일 전";
+                else
+                    lblTime.Text = chat.date.ToShortTimeString();
+            }));
         }
     }
 }

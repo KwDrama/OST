@@ -1,5 +1,5 @@
 ﻿
-namespace Client.Panels
+namespace Client.Forms
 {
     partial class ControlChat
     {
@@ -29,10 +29,93 @@ namespace Client.Panels
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.lblText = new MetroFramework.Controls.MetroLabel();
+            this.lblName = new MetroFramework.Controls.MetroLabel();
+            this.lblTime = new MetroFramework.Controls.MetroLabel();
+            this.picProfile = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // lblText
+            // 
+            this.lblText.BackColor = System.Drawing.SystemColors.Control;
+            this.lblText.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblText.Location = new System.Drawing.Point(48, 35);
+            this.lblText.Margin = new System.Windows.Forms.Padding(0);
+            this.lblText.Name = "lblText";
+            this.lblText.Size = new System.Drawing.Size(274, 50);
+            this.lblText.TabIndex = 0;
+            this.lblText.Text = "This returns";
+            this.lblText.WrapToLine = true;
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.BackColor = System.Drawing.SystemColors.Control;
+            this.lblName.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblName.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblName.Location = new System.Drawing.Point(48, 16);
+            this.lblName.Margin = new System.Windows.Forms.Padding(0, 0, 0, 4);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(43, 15);
+            this.lblName.TabIndex = 20;
+            this.lblName.Text = "홍길동";
+            // 
+            // lblTime
+            // 
+            this.lblTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTime.AutoSize = true;
+            this.lblTime.BackColor = System.Drawing.Color.Transparent;
+            this.lblTime.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblTime.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblTime.Location = new System.Drawing.Point(263, 85);
+            this.lblTime.Margin = new System.Windows.Forms.Padding(0);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(59, 15);
+            this.lblTime.TabIndex = 20;
+            this.lblTime.Text = "오전 12:38";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblTime.UseCustomBackColor = true;
+            this.lblTime.UseCustomForeColor = true;
+            // 
+            // picProfile
+            // 
+            this.picProfile.BackColor = System.Drawing.Color.Transparent;
+            this.picProfile.Image = global::Client.Properties.Resources.profile;
+            this.picProfile.Location = new System.Drawing.Point(8, 16);
+            this.picProfile.Margin = new System.Windows.Forms.Padding(0, 0, 8, 0);
+            this.picProfile.Name = "picProfile";
+            this.picProfile.Size = new System.Drawing.Size(32, 32);
+            this.picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picProfile.TabIndex = 19;
+            this.picProfile.TabStop = false;
+            // 
+            // ControlChat
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.lblTime);
+            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.picProfile);
+            this.Controls.Add(this.lblText);
+            this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Margin = new System.Windows.Forms.Padding(0);
+            this.Name = "ControlChat";
+            this.Padding = new System.Windows.Forms.Padding(8, 16, 8, 0);
+            this.Size = new System.Drawing.Size(340, 100);
+            this.UseCustomBackColor = true;
+            ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private MetroFramework.Controls.MetroLabel lblText;
+        private System.Windows.Forms.PictureBox picProfile;
+        private MetroFramework.Controls.MetroLabel lblName;
+        private MetroFramework.Controls.MetroLabel lblTime;
     }
 }

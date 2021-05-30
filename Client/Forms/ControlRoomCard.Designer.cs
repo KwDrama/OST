@@ -1,7 +1,7 @@
 ﻿
 namespace Client.Forms
 {
-    partial class ControlRoom
+    partial class ControlRoomCard
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -42,7 +42,7 @@ namespace Client.Forms
             this.picProfile.BackColor = System.Drawing.Color.Transparent;
             this.picProfile.Image = global::Client.Properties.Resources.profile;
             this.picProfile.Location = new System.Drawing.Point(16, 16);
-            this.picProfile.Margin = new System.Windows.Forms.Padding(16);
+            this.picProfile.Margin = new System.Windows.Forms.Padding(0, 0, 16, 0);
             this.picProfile.Name = "picProfile";
             this.picProfile.Size = new System.Drawing.Size(48, 48);
             this.picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -62,33 +62,37 @@ namespace Client.Forms
             // 
             // lblChat
             // 
-            this.lblChat.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblChat.Location = new System.Drawing.Point(83, 45);
+            this.lblChat.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblChat.Location = new System.Drawing.Point(83, 35);
             this.lblChat.Name = "lblChat";
-            this.lblChat.Size = new System.Drawing.Size(145, 19);
+            this.lblChat.Size = new System.Drawing.Size(152, 29);
             this.lblChat.TabIndex = 19;
             this.lblChat.Text = "Last chat";
+            this.lblChat.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.lblChat.UseCustomBackColor = true;
+            this.lblChat.WrapToLine = true;
             // 
             // lblTime
             // 
+            this.lblTime.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblTime.ForeColor = System.Drawing.Color.Gray;
-            this.lblTime.Location = new System.Drawing.Point(234, 45);
+            this.lblTime.Location = new System.Drawing.Point(241, 49);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(70, 19);
+            this.lblTime.Size = new System.Drawing.Size(60, 15);
             this.lblTime.TabIndex = 19;
             this.lblTime.Text = "오전 12:38";
-            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.lblTime.UseCustomBackColor = true;
             this.lblTime.UseCustomForeColor = true;
             // 
             // lblTeamRank
             // 
-            this.lblTeamRank.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblTeamRank.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblTeamRank.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblTeamRank.ForeColor = System.Drawing.Color.DimGray;
-            this.lblTeamRank.Location = new System.Drawing.Point(184, 16);
+            this.lblTeamRank.Location = new System.Drawing.Point(201, 16);
             this.lblTeamRank.Name = "lblTeamRank";
-            this.lblTeamRank.Size = new System.Drawing.Size(120, 19);
+            this.lblTeamRank.Size = new System.Drawing.Size(100, 15);
             this.lblTeamRank.TabIndex = 19;
             this.lblTeamRank.Text = "자원본부 본부장";
             this.lblTeamRank.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -100,14 +104,15 @@ namespace Client.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblChat);
             this.Controls.Add(this.lblTeamRank);
-            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.picProfile);
             this.Controls.Add(this.lblTime);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ControlRoom";
+            this.Padding = new System.Windows.Forms.Padding(16);
             this.Size = new System.Drawing.Size(320, 80);
             this.UseCustomBackColor = true;
             this.MouseEnter += new System.EventHandler(this.ControlRoom_MouseEnter);
