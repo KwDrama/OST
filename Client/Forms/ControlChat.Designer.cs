@@ -63,7 +63,7 @@ namespace Client.Forms
             // 
             // lblTime
             // 
-            this.lblTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTime.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblTime.AutoSize = true;
             this.lblTime.BackColor = System.Drawing.Color.Transparent;
             this.lblTime.FontSize = MetroFramework.MetroLabelSize.Small;
