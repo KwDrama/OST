@@ -279,7 +279,7 @@ namespace Server.Classes
                         rdr.GetInt32("employee_id"), "");
 
                     if (ct == ChatType.Image)
-                        using (MemoryStream ms = new MemoryStream())
+                        using (MemoryStream ms = new MemoryStream(dataBytes))
                             chat.image = Image.FromStream(ms);
                     else
                         chat.text = Encoding.UTF8.GetString(dataBytes);
@@ -308,7 +308,7 @@ namespace Server.Classes
                         rdr.GetInt32("employee_id"), "");
 
                     if (ct == ChatType.Image)
-                        using (MemoryStream ms = new MemoryStream())
+                        using (MemoryStream ms = new MemoryStream(dataBytes))
                             chat.image = Image.FromStream(ms);
                     else
                         chat.text = Encoding.UTF8.GetString(dataBytes);

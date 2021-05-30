@@ -213,12 +213,13 @@ namespace Server.Classes
                     if (p.chats.Count == 0) continue;
 
                     // 클라한테 받은 채팅 내역 DB에 저장
-                    if (Database.AddChat(p.chats[0]))
-                        Log("Chat",
-                            p.chats[0].type == ChatType.Text ? p.chats[0].text :
-                            p.chats[0].type == ChatType.Image ? "사진" : "Blob");
-                    else
+                    if (!Database.AddChat(p.chats[0]))
                         Log("Chat", "채팅 내역 DB 저장 실패");
+                    // 채팅 굳이 로깅할 필요 없을 것 같아서 주석 처리 함
+                    //else
+                    //    Log("Chat",
+                    //        p.chats[0].type == ChatType.Text ? p.chats[0].text :
+                    //        p.chats[0].type == ChatType.Image ? "사진" : "Blob");
 
                     // 같은 Room에 있는 다른 클라들한테 채팅 전송
                     if (Program.roomEmps.ContainsKey(p.chats[0].roomId))

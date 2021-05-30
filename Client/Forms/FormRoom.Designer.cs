@@ -117,6 +117,7 @@ namespace Client.Forms
             this.picImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.picImage.BackColor = System.Drawing.Color.Transparent;
             this.picImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picImage.Image = global::Client.Properties.Resources.picture;
             this.picImage.Location = new System.Drawing.Point(6, 543);
             this.picImage.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.picImage.Name = "picImage";
@@ -125,6 +126,7 @@ namespace Client.Forms
             this.picImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picImage.TabIndex = 10;
             this.picImage.TabStop = false;
+            this.picImage.Click += new System.EventHandler(this.picImage_Click);
             this.picImage.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
             this.picImage.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
             // 

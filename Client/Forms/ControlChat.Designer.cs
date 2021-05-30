@@ -30,9 +30,9 @@ namespace Client.Forms
         private void InitializeComponent()
         {
             this.lblText = new MetroFramework.Controls.MetroLabel();
-            this.picProfile = new System.Windows.Forms.PictureBox();
             this.lblName = new MetroFramework.Controls.MetroLabel();
             this.lblTime = new MetroFramework.Controls.MetroLabel();
+            this.picProfile = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,25 +40,13 @@ namespace Client.Forms
             // 
             this.lblText.BackColor = System.Drawing.SystemColors.Control;
             this.lblText.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblText.Location = new System.Drawing.Point(48, 25);
+            this.lblText.Location = new System.Drawing.Point(48, 23);
             this.lblText.Margin = new System.Windows.Forms.Padding(0);
             this.lblText.Name = "lblText";
-            this.lblText.Size = new System.Drawing.Size(264, 50);
+            this.lblText.Size = new System.Drawing.Size(264, 54);
             this.lblText.TabIndex = 0;
             this.lblText.Text = "This returns";
             this.lblText.WrapToLine = true;
-            // 
-            // picProfile
-            // 
-            this.picProfile.BackColor = System.Drawing.Color.Transparent;
-            this.picProfile.Image = global::Client.Properties.Resources.profile;
-            this.picProfile.Location = new System.Drawing.Point(8, 10);
-            this.picProfile.Margin = new System.Windows.Forms.Padding(0, 0, 8, 0);
-            this.picProfile.Name = "picProfile";
-            this.picProfile.Size = new System.Drawing.Size(32, 32);
-            this.picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picProfile.TabIndex = 19;
-            this.picProfile.TabStop = false;
             // 
             // lblName
             // 
@@ -66,7 +54,7 @@ namespace Client.Forms
             this.lblName.BackColor = System.Drawing.SystemColors.Control;
             this.lblName.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblName.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblName.Location = new System.Drawing.Point(48, 10);
+            this.lblName.Location = new System.Drawing.Point(48, 8);
             this.lblName.Margin = new System.Windows.Forms.Padding(0);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(43, 15);
@@ -79,7 +67,7 @@ namespace Client.Forms
             this.lblTime.BackColor = System.Drawing.Color.Transparent;
             this.lblTime.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblTime.ForeColor = System.Drawing.Color.DarkGray;
-            this.lblTime.Location = new System.Drawing.Point(252, 75);
+            this.lblTime.Location = new System.Drawing.Point(252, 77);
             this.lblTime.Margin = new System.Windows.Forms.Padding(0);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(60, 15);
@@ -88,6 +76,18 @@ namespace Client.Forms
             this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.lblTime.UseCustomBackColor = true;
             this.lblTime.UseCustomForeColor = true;
+            // 
+            // picProfile
+            // 
+            this.picProfile.BackColor = System.Drawing.Color.Transparent;
+            this.picProfile.Image = global::Client.Properties.Resources.profile;
+            this.picProfile.Location = new System.Drawing.Point(8, 8);
+            this.picProfile.Margin = new System.Windows.Forms.Padding(0, 0, 8, 0);
+            this.picProfile.Name = "picProfile";
+            this.picProfile.Size = new System.Drawing.Size(32, 32);
+            this.picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picProfile.TabIndex = 19;
+            this.picProfile.TabStop = false;
             // 
             // ControlChat
             // 
@@ -101,7 +101,7 @@ namespace Client.Forms
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ControlChat";
-            this.Padding = new System.Windows.Forms.Padding(8, 10, 8, 10);
+            this.Padding = new System.Windows.Forms.Padding(8);
             this.Size = new System.Drawing.Size(320, 100);
             this.UseCustomBackColor = true;
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();

@@ -4,6 +4,7 @@ using OSTLibrary.Chats;
 using OSTLibrary.Networks;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Client.Forms
@@ -47,6 +48,27 @@ namespace Client.Forms
         {
             // 스크롤 끝까지 올릴 경우 예전 채팅들 요청
         }
+        private void picImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            ofd.Filter = "Image files (*.jpg, *.jpeg, *.png, *.bmp) | *.jpg; *.jpeg; *.png; *.bmp |" +
+                "All Files (*.*) | *.*";
+            ofd.Title = "사진 선택";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                Chat chat = new Chat(ChatType.Image, DateTime.Now, room.id,
+                Program.employee.id, Image.FromFile(ofd.FileName));
+
+                pnlChat.Controls.Add(new ControlChat(chat));
+                pnlChat.VerticalScroll.Value = pnlChat.VerticalScroll.Maximum;
+                Program.Send(new ChatsPacket(chat));
+
+                // 채팅 추가되면 부모가 준 이벤트 처리
+                ChatAdd(this, new ChatEventArgs(chat));
+            }
+        }
         private void txtChat_KeyDown(object sender, KeyEventArgs e)
         {
             if (!e.Shift && e.KeyCode == Keys.Enter)
@@ -67,7 +89,7 @@ namespace Client.Forms
             pnlChat.VerticalScroll.Value = pnlChat.VerticalScroll.Maximum;
             Program.Send(new ChatsPacket(chat));
 
-            // 채팅 추가되면 이벤트로 보내기
+            // 채팅 추가되면 부모가 준 이벤트 처리
             ChatAdd(this, new ChatEventArgs(chat));
 
             txtChat.Text = "";
