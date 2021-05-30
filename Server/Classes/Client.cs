@@ -123,8 +123,12 @@ namespace Server.Classes
                         List<Room> myRooms = Database.GetRooms(emp);
                         foreach (Room room in myRooms)
                         {
+                            // 룸-사원 관계 리스트에서 사원이 없을 경우 추가
                             if (Program.roomEmps.ContainsKey(room.id))
-                                Program.roomEmps[room.id].Add(employee.id);
+                            {
+                                if (!Program.roomEmps[room.id].Contains(employee.id))
+                                    Program.roomEmps[room.id].Add(employee.id);
+                            }
                             else
                                 Program.roomEmps.Add(room.id, new List<int>(new int[] { employee.id }));
 
