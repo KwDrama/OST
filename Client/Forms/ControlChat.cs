@@ -68,8 +68,6 @@ namespace Client.Forms
             }
             else
             {
-                dataControl = lblText;
-
                 // 텍스트부터 컨트롤에 넣기
                 lblText.Text = chat.text;
 
@@ -88,9 +86,12 @@ namespace Client.Forms
 
                     lblTime.Left = Math.Max(lblText.Location.X, lblText.Location.X + lblText.Width - lblTime.Width);
                 }
+                dataControl = lblText;
             }
 
-            if (continuous)
+            // 연속적일 경우 프로필, 이름을 제거
+            // 시계는 다음 채팅이 들어왔을 때 SetContinuous() 호출 되서 제거 됨
+            if (continuous || chat.empId == Program.employee.id)
             {
                 dataControl.Top = 4;
                 Height = dataControl.Top + dataControl.Height + lblTime.Height;
@@ -101,47 +102,17 @@ namespace Client.Forms
             }
 
             // 내가 보낸 것일 경우
-            //if (chat.empId == Program.employee.id)
-            //{
-            //    // 전체 높이에 대한 Offset 다시 지정
-            //    int needSubstractheight = lblName.Height + lblName.Margin.Bottom;
-            //    verticalSpace -= needSubstractheight;
+            if (chat.empId == Program.employee.id)
+            {
+                // 데이터 위치
+                dataControl.Left = Width - dataControl.Width - Padding.Right;
+                dataControl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                dataControl.BackColor = Color.LemonChiffon;
 
-            //    // 데이터 위치
-            //    if (chat.type == ChatType.Image)
-            //    {
-            //        // 우측 정렬 후 lblName 높이만큼 위로 올리기
-            //        pic.Location = new Point(Width - Padding.Right - pic.Width, pic.Location.Y - needSubstractheight);
-            //        pic.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-
-            //        // 전체 높이 지정
-            //        Height = pic.Height + verticalSpace;
-            //    }
-            //    else
-            //    {
-            //        // 우측 정렬 후 lblName 높이만큼 위로 올리기
-            //        lblText.Location = new Point(Width - Padding.Right - lblText.Width, lblText.Location.Y - needSubstractheight);
-            //        lblText.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            //        lblText.BackColor = Color.LemonChiffon;
-
-            //        // 전체 높이 지정
-            //        Height = lblText.Height + verticalSpace;
-            //    }
-
-            //    // 시계 위치
-            //    lblTime.TextAlign = ContentAlignment.TopLeft;
-            //    lblTime.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            //    lblTime.Location = new Point(Math.Min(
-            //        chat.type == ChatType.Image ? pic.Location.X : lblText.Location.X,
-            //        Width - Padding.Right - lblTime.Width),
-            //        lblTime.Location.Y);
-
-            //    // 불필요 컨트롤 지우기
-            //    Controls.Remove(picProfile);
-            //    Controls.Remove(lblName);
-            //}
-
-            BackColor = Color.FromArgb(new Random(DateTime.Now.Millisecond).Next());
+                // 시계 위치
+                lblTime.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+                lblTime.Left = Math.Min(dataControl.Left, Width - Padding.Right - lblTime.Width);
+            }
         }
         
         public void SetContinuous()

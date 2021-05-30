@@ -38,7 +38,7 @@ namespace Client.Forms
             // 
             // lblText
             // 
-            this.lblText.BackColor = System.Drawing.SystemColors.Control;
+            this.lblText.BackColor = System.Drawing.Color.White;
             this.lblText.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblText.Location = new System.Drawing.Point(48, 35);
             this.lblText.Margin = new System.Windows.Forms.Padding(0);
@@ -46,6 +46,7 @@ namespace Client.Forms
             this.lblText.Size = new System.Drawing.Size(274, 50);
             this.lblText.TabIndex = 0;
             this.lblText.Text = "This returns";
+            this.lblText.UseCustomBackColor = true;
             this.lblText.WrapToLine = true;
             // 
             // lblName
@@ -63,7 +64,7 @@ namespace Client.Forms
             // 
             // lblTime
             // 
-            this.lblTime.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lblTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTime.AutoSize = true;
             this.lblTime.BackColor = System.Drawing.Color.Transparent;
             this.lblTime.FontSize = MetroFramework.MetroLabelSize.Small;
@@ -74,7 +75,6 @@ namespace Client.Forms
             this.lblTime.Size = new System.Drawing.Size(59, 15);
             this.lblTime.TabIndex = 20;
             this.lblTime.Text = "오전 12:38";
-            this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.lblTime.UseCustomBackColor = true;
             this.lblTime.UseCustomForeColor = true;
             // 
