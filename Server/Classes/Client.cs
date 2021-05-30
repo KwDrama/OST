@@ -43,6 +43,7 @@ namespace Server.Classes
                 try
                 {
                     ns.Read(readBuffer, 0, readBuffer.Length);
+                    Thread.Sleep(200);
                 }
                 catch (IOException socketEx)
                 {
