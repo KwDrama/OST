@@ -270,6 +270,7 @@ namespace Server.Classes
                 ns.Flush();
             }
         }
+
         void Log(string type, string content)
         {
             Program.Log(employee.id, type, content);
