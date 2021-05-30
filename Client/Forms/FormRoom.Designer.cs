@@ -50,10 +50,13 @@ namespace Client.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlChat.AutoScroll = true;
             this.pnlChat.BackColor = System.Drawing.Color.Ivory;
+            this.pnlChat.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnlChat.Location = new System.Drawing.Point(0, 72);
             this.pnlChat.Name = "pnlChat";
+            this.pnlChat.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
             this.pnlChat.Size = new System.Drawing.Size(360, 465);
             this.pnlChat.TabIndex = 0;
+            this.pnlChat.WrapContents = false;
             this.pnlChat.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlChat_Scroll);
             // 
             // txtChat

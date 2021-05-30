@@ -40,10 +40,10 @@ namespace Client.Forms
             // 
             this.lblText.BackColor = System.Drawing.SystemColors.Control;
             this.lblText.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblText.Location = new System.Drawing.Point(48, 23);
+            this.lblText.Location = new System.Drawing.Point(48, 31);
             this.lblText.Margin = new System.Windows.Forms.Padding(0);
             this.lblText.Name = "lblText";
-            this.lblText.Size = new System.Drawing.Size(264, 54);
+            this.lblText.Size = new System.Drawing.Size(274, 54);
             this.lblText.TabIndex = 0;
             this.lblText.Text = "This returns";
             this.lblText.WrapToLine = true;
@@ -54,7 +54,7 @@ namespace Client.Forms
             this.lblName.BackColor = System.Drawing.SystemColors.Control;
             this.lblName.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblName.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblName.Location = new System.Drawing.Point(48, 8);
+            this.lblName.Location = new System.Drawing.Point(48, 16);
             this.lblName.Margin = new System.Windows.Forms.Padding(0);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(43, 15);
@@ -64,13 +64,14 @@ namespace Client.Forms
             // lblTime
             // 
             this.lblTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTime.AutoSize = true;
             this.lblTime.BackColor = System.Drawing.Color.Transparent;
             this.lblTime.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblTime.ForeColor = System.Drawing.Color.DarkGray;
-            this.lblTime.Location = new System.Drawing.Point(252, 77);
+            this.lblTime.Location = new System.Drawing.Point(263, 85);
             this.lblTime.Margin = new System.Windows.Forms.Padding(0);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(60, 15);
+            this.lblTime.Size = new System.Drawing.Size(59, 15);
             this.lblTime.TabIndex = 20;
             this.lblTime.Text = "오전 12:38";
             this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -81,7 +82,7 @@ namespace Client.Forms
             // 
             this.picProfile.BackColor = System.Drawing.Color.Transparent;
             this.picProfile.Image = global::Client.Properties.Resources.profile;
-            this.picProfile.Location = new System.Drawing.Point(8, 8);
+            this.picProfile.Location = new System.Drawing.Point(8, 16);
             this.picProfile.Margin = new System.Windows.Forms.Padding(0, 0, 8, 0);
             this.picProfile.Name = "picProfile";
             this.picProfile.Size = new System.Drawing.Size(32, 32);
@@ -99,10 +100,10 @@ namespace Client.Forms
             this.Controls.Add(this.picProfile);
             this.Controls.Add(this.lblText);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ControlChat";
-            this.Padding = new System.Windows.Forms.Padding(8);
-            this.Size = new System.Drawing.Size(320, 100);
+            this.Padding = new System.Windows.Forms.Padding(8, 16, 8, 0);
+            this.Size = new System.Drawing.Size(340, 100);
             this.UseCustomBackColor = true;
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
             this.ResumeLayout(false);

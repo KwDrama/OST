@@ -151,7 +151,7 @@ namespace Client.Forms
         {
             FormRoom fc = new FormRoom(room);
             fc.FormClosed += (sender, e) => formChats.Remove(room.id);
-            fc.ChatAdd += (sender, e) => controlRooms[room.id].UpdateInfo((e as ChatEventArgs).chat);
+            fc.onChatAdd += (sender, e) => controlRooms[room.id].UpdateInfo((e as ChatEventArgs).chat);
 
             formChats.Add(room.id, fc);
         }

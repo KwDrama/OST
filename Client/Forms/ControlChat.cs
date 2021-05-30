@@ -9,13 +9,12 @@ namespace Client.Forms
 {
     public partial class ControlChat : MetroUserControl
     {
-        Chat chat;
         int verticalSpace;
+        public Chat chat;
 
-        public ControlChat(Chat chat)
+        public ControlChat(Chat chat, bool continuous)
         {
             InitializeComponent();
-
             this.chat = chat;
 
             // 채팅을 보낸 사원 정보 표시
@@ -29,10 +28,13 @@ namespace Client.Forms
             // Resize를 대비해 초기 채팅 여백 측정
             verticalSpace = Height - lblText.Height;
 
+            // 이전 채팅에 연속적일 경우 요소 제거
+
+            PictureBox pic = null;
             // 데이터 표시
             if (chat.type == ChatType.Image)
             {
-                PictureBox pic = new PictureBox();
+                pic = new PictureBox();
 
                 // 이미지
                 pic.Image = chat.image;
@@ -88,6 +90,90 @@ namespace Client.Forms
                         lblTime.Location.Y);
                 }
             }
+
+            // 내가 보낸 것일 경우
+            if (chat.empId == Program.employee.id)
+            {
+                // 전체 높이에 대한 Offset 다시 지정
+                verticalSpace -= lblName.Height;
+
+                // 데이터 위치
+                if (chat.type == ChatType.Image)
+                {
+                    // 우측 정렬 후 lblName 높이만큼 위로 올리기
+                    pic.Location = new Point(Width - Padding.Right - pic.Width, pic.Location.Y - lblName.Height);
+                    pic.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+
+                    // 전체 높이 지정
+                    Height = pic.Height + verticalSpace;
+                }
+                else
+                {
+                    // 우측 정렬 후 lblName 높이만큼 위로 올리기
+                    lblText.Location = new Point(Width - Padding.Right - lblText.Width, lblText.Location.Y - lblName.Height);
+                    lblText.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                    lblText.BackColor = Color.LemonChiffon;
+
+                    // 전체 높이 지정
+                    Height = lblText.Height + verticalSpace;
+                }
+
+                // 시계 위치
+                lblTime.TextAlign = ContentAlignment.TopLeft;
+                lblTime.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                lblTime.Location = new Point(Math.Min(
+                    chat.type == ChatType.Image ? pic.Location.X : lblText.Location.X,
+                    Width - Padding.Right - lblTime.Width),
+                    lblTime.Location.Y);
+
+                // 불필요 컨트롤 지우기
+                Controls.Remove(picProfile);
+                Controls.Remove(lblName);
+            }
+            else
+            {
+                // 다른 사람이 보낸 것이 연속적일 경우
+                if (continuous)
+                {
+                    // 데이터 위치
+                    if (chat.type == ChatType.Image)
+                    {
+                        // 우측 정렬 후 lblName 높이만큼 위로 올리기
+                        pic.Location = new Point(Width - Padding.Right - pic.Width, pic.Location.Y - lblName.Height);
+                        pic.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+
+                        // 전체 높이 지정
+                        Height = pic.Height + verticalSpace;
+                    }
+                    else
+                    {
+                        // 우측 정렬 후 lblName 높이만큼 위로 올리기
+                        lblText.Location = new Point(Width - Padding.Right - lblText.Width, lblText.Location.Y - lblName.Height);
+                        lblText.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                        lblText.BackColor = Color.LemonChiffon;
+
+                        // 전체 높이 지정
+                        Height = lblText.Height + verticalSpace;
+                    }
+
+                    // 불필요 컨트롤 지우기
+                    Controls.Remove(picProfile);
+                    Controls.Remove(lblName);
+                }
+            }
+
+            if (continuous) BackColor = Color.Red;
+        }
+        
+        public void SetContinuous()
+        {
+            // 다음 채팅 내역이 연속되므로 시간을 지움
+            Height -= lblTime.Height;
+            Controls.Remove(lblTime);
+        }
+        public void OwnerRoom_Resize(object sender, EventArgs e)
+        {
+            Width = (sender as Form).Width - 20;
         }
     }
 }

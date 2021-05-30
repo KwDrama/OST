@@ -11,15 +11,15 @@ namespace Client.Forms
 {
     public partial class FormRoom : MetroForm
     {
+        ControlChat lastChatCard;
+
         public Room room;
-        public List<Chat> chats;
-        public EventHandler ChatAdd;
+        public EventHandler onChatAdd;
 
         public FormRoom(Room room)
         {
             InitializeComponent();
             this.room = room;
-            chats = new List<Chat>();
         }
         private void FormChat_Load(object sender, EventArgs e)
         {
@@ -61,12 +61,11 @@ namespace Client.Forms
                 Chat chat = new Chat(ChatType.Image, DateTime.Now, room.id,
                 Program.employee.id, Image.FromFile(ofd.FileName));
 
-                pnlChat.Controls.Add(new ControlChat(chat));
-                pnlChat.VerticalScroll.Value = pnlChat.VerticalScroll.Maximum;
+                AddChatCard(chat);
                 Program.Send(new ChatsPacket(chat));
 
                 // 채팅 추가되면 부모가 준 이벤트 처리
-                ChatAdd(this, new ChatEventArgs(chat));
+                onChatAdd(this, new ChatEventArgs(chat));
             }
         }
         private void txtChat_KeyDown(object sender, KeyEventArgs e)
@@ -85,30 +84,44 @@ namespace Client.Forms
             Chat chat = new Chat(ChatType.Text, DateTime.Now, room.id,
                 Program.employee.id, txtChat.Text);
 
-            pnlChat.Controls.Add(new ControlChat(chat));
-            pnlChat.VerticalScroll.Value = pnlChat.VerticalScroll.Maximum;
+            AddChatCard(chat);
             Program.Send(new ChatsPacket(chat));
 
             // 채팅 추가되면 부모가 준 이벤트 처리
-            ChatAdd(this, new ChatEventArgs(chat));
+            onChatAdd(this, new ChatEventArgs(chat));
 
             txtChat.Text = "";
         }
 
         public void ReceiveChat(List<Chat> chats)
         {
-            Invoke(new MethodInvoker(() =>
-            {
-                // 채팅창에 모든 채팅 추가
-                foreach (Chat chat in chats)
-                {
-                    pnlChat.Controls.Add(new ControlChat(chat));
-                    pnlChat.VerticalScroll.Value = pnlChat.VerticalScroll.Maximum;
-                }
-            }));
+            Invoke(new MethodInvoker(() => chats.ForEach(c => AddChatCard(c))));
 
             // 제일 최근 시간 채팅 이벤트로 보내기
-            ChatAdd(this, new ChatEventArgs(chats[chats.Count - 1]));
+            onChatAdd(this, new ChatEventArgs(chats[chats.Count - 1]));
+        }
+        void AddChatCard(Chat chat)
+        {
+            // 가장 최근 채팅과 연속적인지 파악
+            bool continuous = lastChatCard == null ? false :
+                lastChatCard.chat.empId == chat.empId &&
+                lastChatCard.chat.date.ToShortDateString() == chat.date.ToShortDateString() &&
+                lastChatCard.chat.date.ToShortTimeString() == chat.date.ToShortTimeString();
+
+            // 새로운 채팅 카드 만들고
+            ControlChat cc = new ControlChat(chat, continuous);
+
+            // 연속적일 경우 최근 채팅 카드한테 알려주기
+            if (continuous)
+                lastChatCard.SetContinuous();
+
+            // 새로운 채팅 카드 추가
+            Resize += cc.OwnerRoom_Resize;
+            pnlChat.Controls.Add(cc);
+            pnlChat.VerticalScroll.Value = pnlChat.VerticalScroll.Maximum;
+
+            // 다음을 위해서 가장 최근 채팅 내역 기록
+            lastChatCard = cc;
         }
     }
 
