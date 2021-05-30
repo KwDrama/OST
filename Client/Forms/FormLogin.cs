@@ -39,7 +39,7 @@ namespace Client.Forms
                 loginable = true;
             else
             {
-                lblResult.Style = MetroFramework.MetroColorStyle.Blue;
+                lblResult.Style = MetroColorStyle.Blue;
                 lblResult.Text = $"서버에 연결 중입니다.\n{Program.hostname}:{Program.port}";
                 Program.client.BeginConnect(Program.hostname, Program.port, EndConnect, null);
             }
@@ -132,6 +132,7 @@ namespace Client.Forms
             // 연결 도중 폼을 닫으면 함수 실행 안함
             if (this == null) return;
 
+            // 연결에 따른 결과 메세지 설정 및 연결 성공 시 수신 스레드 시작
             if (Program.client.Connected)
             {
                 Program.ns = Program.client.GetStream();
@@ -144,12 +145,13 @@ namespace Client.Forms
             // 로그인 정보가 저장되어 있을경우 불러오기
             string savedLoginInfo = File.Exists("login.txt") ? File.ReadAllText("login.txt") : "";
 
+            // 연결에 따른 컨트롤 변화
             loginable = true;
             Invoke(new MethodInvoker(() =>
             {
                 lblResult.Style = Program.client.Connected ?
-                    MetroFramework.MetroColorStyle.Green :
-                    MetroFramework.MetroColorStyle.Red;
+                    MetroColorStyle.Green :
+                    MetroColorStyle.Red;
                 lblResult.Text = resultText;
 
                 if (savedLoginInfo.Contains("\n"))
@@ -161,7 +163,8 @@ namespace Client.Forms
                 }
             }));
 
-            if (!string.IsNullOrEmpty(resultText))
+            // 연결 실패했을 경우 5초 뒤 연결 재시도
+            if (!Program.client.Connected)
             {
                 Thread.Sleep(5000);
                 FormLogin_Shown(null, new EventArgs());

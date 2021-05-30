@@ -72,7 +72,7 @@ namespace Server.Classes
                 Packet packet = pakcetObj as Packet;
                 Array.Clear(readBuffer, 0, readBuffer.Length);
 
-                // 패킷 타입에 따라 진행
+                // 연결
                 if (packet.type == PacketType.Header)
                 {
                     if (packet.Length == 0)
@@ -86,6 +86,8 @@ namespace Server.Classes
                     socket.Close();
                     break;
                 }
+
+                // 로그인
                 else if (packet.type == PacketType.Login)
                 {
                     LoginPacket p = packet as LoginPacket;
@@ -152,6 +154,8 @@ namespace Server.Classes
                     else
                         Log("Register", "회원가입 실패");
                 }
+
+                // 채팅
                 else if (packet.type == PacketType.Room)
                 {
                     RoomPacket p = packet as RoomPacket;
@@ -181,6 +185,27 @@ namespace Server.Classes
                         // 룸과 사원 관계 Map에도 저장, 새로 만드는 방이니깐 기존에 정보가 없었을 것임
                         Program.roomEmps.Add(p.room.id, new List<int>(new int[] { employee.id }));
                     }
+                    else if (p.roomType == RoomType.Chats)
+                    {
+                        // 로깅
+                        if (p.room.scopeIdx == 3)
+                        {
+                            int otherEmpId = p.room.FindOtherEmployeeId(employee);
+                            if (Program.employees.ContainsKey(otherEmpId))
+                            {
+                                Employee targetEmp = Program.employees[p.room.FindOtherEmployeeId(employee)];
+                                Log("Room", $"{targetEmp.name}({targetEmp.id}) 채팅방 조회");
+                            }
+                            else
+                            {
+                                Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 조회 실패");
+                            }
+                        }
+                        else
+                            Log("Room", $"{p.room.target} 채팅방 조회");
+
+                        Send(new ChatsPacket(Database.GetChats(p.room, p.until)));
+                    }
                 }
                 else if (packet.type == PacketType.Chat)
                 {
@@ -204,6 +229,8 @@ namespace Server.Classes
                                     Program.clients[eid].Send(new ChatsPacket(p.chats[0]));
                             });
                 }
+
+                // 그 외
                 else
                 {
                     Log("Warning", "Receieved packetType is unknown");

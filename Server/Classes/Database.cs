@@ -224,13 +224,13 @@ namespace Server.Classes
         public static bool AddChat(Chat chat)
         {
             MySqlCommand cmd = new MySqlCommand(
-                "INSERT INTO chat VALUES (@room_id, @date, @employee_id, @data, @data_length, @data_type);",
+                "INSERT INTO chat VALUES (@room_id, @chat_date, @employee_id, @data, @data_length, @data_type);",
                 con);
 
             using (MemoryStream ms = new MemoryStream())
             {
                 cmd.Parameters.AddWithValue("@room_id", chat.roomId);
-                cmd.Parameters.AddWithValue("@date", chat.date);
+                cmd.Parameters.AddWithValue("@chat_date", chat.date);
                 cmd.Parameters.AddWithValue("@employee_id", chat.empId);
 
                 // 데이터 byte[]로 만들어서 sql에 집어넣기
@@ -264,17 +264,18 @@ namespace Server.Classes
         }
         public static Chat GetLastChat(Room room)
         {
-            string sql =
-                $"SELECT * FROM chat WHERE room_id='{Filter(room.id)}' ORDER BY date DESC LIMIT 1";
+            MySqlCommand cmd = new MySqlCommand(
+                $"SELECT * FROM chat WHERE room_id='{Filter(room.id)}' ORDER BY chat_date DESC LIMIT 1",
+                con);
 
-            using (MySqlDataReader rdr = new MySqlCommand(sql, con).ExecuteReader())
+            using (MySqlDataReader rdr = cmd.ExecuteReader())
                 if (rdr.Read())
                 {
                     ChatType ct = (ChatType)rdr.GetInt32("data_type");
                     byte[] dataBytes = new byte[rdr.GetInt32("data_length")];
                     rdr.GetBytes(rdr.GetOrdinal("data"), 0, dataBytes, 0, dataBytes.Length);
 
-                    Chat chat = new Chat(ct, rdr.GetDateTime("date"), rdr.GetString("room_id"),
+                    Chat chat = new Chat(ct, rdr.GetDateTime("chat_date"), rdr.GetString("room_id"),
                         rdr.GetInt32("employee_id"), "");
 
                     if (ct == ChatType.Image)
@@ -287,9 +288,34 @@ namespace Server.Classes
                 }
             return null;
         }
-        public static List<Chat> GetChats(Room room, DateTime begin, DateTime end)
+        public static List<Chat> GetChats(Room room, DateTime until)
         {
-            return null;
+            List<Chat> chats = new List<Chat>();
+            MySqlCommand cmd = new MySqlCommand(
+                $"SELECT * FROM chat WHERE room_id='{Filter(room.id)}'"
+                + "AND chat_date < @chat_date_until LIMIT 100",
+                con);
+            cmd.Parameters.AddWithValue("@chat_date_until", until);
+
+            using (MySqlDataReader rdr = cmd.ExecuteReader())
+                while (rdr.Read())
+                {
+                    ChatType ct = (ChatType)rdr.GetInt32("data_type");
+                    byte[] dataBytes = new byte[rdr.GetInt32("data_length")];
+                    rdr.GetBytes(rdr.GetOrdinal("data"), 0, dataBytes, 0, dataBytes.Length);
+
+                    Chat chat = new Chat(ct, rdr.GetDateTime("chat_date"), rdr.GetString("room_id"),
+                        rdr.GetInt32("employee_id"), "");
+
+                    if (ct == ChatType.Image)
+                        using (MemoryStream ms = new MemoryStream())
+                            chat.image = Image.FromStream(ms);
+                    else
+                        chat.text = Encoding.UTF8.GetString(dataBytes);
+
+                    chats.Add(chat);
+                }
+            return chats;
         }
     }
 }

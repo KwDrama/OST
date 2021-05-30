@@ -14,8 +14,8 @@ namespace Client.Forms
 {
     public partial class FormMain : MetroForm
     {
-        Dictionary<string, FormChat> formChats;
-        Dictionary<string, ControlRoom> controlRooms;
+        Dictionary<string, FormRoom> formChats;         // 켜져있는 채팅방들
+        Dictionary<string, ControlRoomCard> controlRooms;   // 나의 채팅방 카드들
 
         public FormMain()
         {
@@ -49,8 +49,8 @@ namespace Client.Forms
             lblTeamRank.Text = $"{Program.employee.team} {Program.employee.rank}";
 
             // 채팅 관련 컨트롤들 배열 초기화
-            formChats = new Dictionary<string, FormChat>();
-            controlRooms = new Dictionary<string, ControlRoom>();
+            formChats = new Dictionary<string, FormRoom>();
+            controlRooms = new Dictionary<string, ControlRoomCard>();
 
             // 최초 룸 모두 추가
             Program.rooms.ForEach(AddRoomCard);
@@ -149,7 +149,7 @@ namespace Client.Forms
 
         void AddFormChat(Room room)
         {
-            FormChat fc = new FormChat(room);
+            FormRoom fc = new FormRoom(room);
             fc.FormClosed += (sender, e) => formChats.Remove(room.id);
             fc.ChatAdd += (sender, e) => controlRooms[room.id].UpdateInfo((e as ChatEventArgs).chat);
 
@@ -157,7 +157,7 @@ namespace Client.Forms
         }
         void AddRoomCard(Room room)
         {
-            ControlRoom cardRoom = new ControlRoom(room);
+            ControlRoomCard cardRoom = new ControlRoomCard(room);
 
             // 채팅방이 이미 있을 경우 포커싱 하고 없을 경우 채팅방 폼 생성
             EventHandler showFormChat = (sender, e) =>
@@ -177,11 +177,13 @@ namespace Client.Forms
             cardRoom.ContextMenuStrip = new MetroContextMenu(components);
             cardRoom.ContextMenuStrip.Items.Add("채팅").Click += showFormChat;
 
+            // 최근 채팅 존재 유무에 따른 표시
             if (room.lastChat == null)
                 cardRoom.UpdateInfo(new Chat(ChatType.Text, DateTime.MinValue, room.id, 0, ""));
             else
                 cardRoom.UpdateInfo(room.lastChat);
 
+            // 채팅 카드 추가
             pnlChat.Controls.Add(cardRoom);
             controlRooms.Add(room.id, cardRoom);
         }
@@ -192,9 +194,11 @@ namespace Client.Forms
             Program.rooms.Add(rp.room);
             Invoke(new MethodInvoker(() => AddRoomCard(rp.room)));
 
+            // 처음 룸이 만들어 졌을 경우 id가 비어있는 룸이 추가가 되었을 것이다
+            // 서버가 룸을 중복을 피한id로 룸을 만들어 보내줬으니 그걸 토대로 룸을 다시 Map에 저장
             if (formChats.ContainsKey(""))
             {
-                FormChat fc = formChats[""];
+                FormRoom fc = formChats[""];
                 formChats.Remove("");
                 fc.room = rp.room;
                 formChats.Add(fc.room.id, fc);
@@ -203,9 +207,15 @@ namespace Client.Forms
         void ReceiveChat(Packet p)
         {
             ChatsPacket cp = p as ChatsPacket;
+            if (cp.chats.Count == 0) return;
 
-            if (formChats.ContainsKey(""))
-                formChats[cp.chats[0].roomId].ReceiveChat(cp);
+            // 채팅 패킷을 받으면 해당 룸이 켜져있을 경우 해당 룸으로 채팅들을 넘겨줌
+            if (formChats.ContainsKey(cp.chats[0].roomId))
+                formChats[cp.chats[0].roomId].ReceiveChat(cp.chats);
+
+            // 해당 룸이 안켜져 있을 경우 카드만 업데이트 한다
+            else
+                controlRooms[cp.chats[0].roomId].UpdateInfo(cp.chats[cp.chats.Count - 1]);
         }
     }
 }

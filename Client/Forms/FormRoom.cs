@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace Client.Forms
 {
-    public partial class FormChat : MetroForm
+    public partial class FormRoom : MetroForm
     {
         public Room room;
         public List<Chat> chats;
         public EventHandler ChatAdd;
 
-        public FormChat(Room room)
+        public FormRoom(Room room)
         {
             InitializeComponent();
             this.room = room;
@@ -30,6 +30,8 @@ namespace Client.Forms
                 Text = Program.employee.team;
             else if (room.scopeIdx == 3)
                 Text = Program.employees[room.FindOtherEmployeeId(Program.employee)].name;
+
+            Program.Send(new RoomPacket(room, DateTime.Now));
         }
 
         private void pic_MouseEnter(object sender, EventArgs e)
@@ -41,6 +43,10 @@ namespace Client.Forms
             PanelSlider.LeaveShadow(sender, e);
         }
 
+        private void pnlChat_Scroll(object sender, ScrollEventArgs e)
+        {
+            // 스크롤 끝까지 올릴 경우 예전 채팅들 요청
+        }
         private void txtChat_KeyDown(object sender, KeyEventArgs e)
         {
             if (!e.Shift && e.KeyCode == Keys.Enter)
@@ -67,10 +73,20 @@ namespace Client.Forms
             txtChat.Text = "";
         }
 
-        public void ReceiveChat(ChatsPacket p)
+        public void ReceiveChat(List<Chat> chats)
         {
+            Invoke(new MethodInvoker(() =>
+            {
+                // 채팅창에 모든 채팅 추가
+                foreach (Chat chat in chats)
+                {
+                    pnlChat.Controls.Add(new ControlChat(chat));
+                    pnlChat.VerticalScroll.Value = pnlChat.VerticalScroll.Maximum;
+                }
+            }));
+
             // 제일 최근 시간 채팅 이벤트로 보내기
-            ChatAdd(this, new ChatEventArgs(p.chats[p.chats.Count - 1]));
+            ChatAdd(this, new ChatEventArgs(chats[chats.Count - 1]));
         }
     }
 

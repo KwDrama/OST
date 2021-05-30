@@ -1,7 +1,7 @@
 ﻿
 namespace Client.Forms
 {
-    partial class ControlRoom
+    partial class ControlRoomCard
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.

@@ -1,7 +1,7 @@
 ﻿
 namespace Client.Forms
 {
-    partial class FormChat
+    partial class FormRoom
     {
         /// <summary>
         /// Required designer variable.
@@ -30,16 +30,16 @@ namespace Client.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormChat));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRoom));
             this.pnlChat = new System.Windows.Forms.FlowLayoutPanel();
             this.txtChat = new MetroFramework.Controls.MetroTextBox();
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.picSetting = new System.Windows.Forms.PictureBox();
-            this.picPlus = new System.Windows.Forms.PictureBox();
+            this.picImage = new System.Windows.Forms.PictureBox();
             this.picSend = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSetting)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSend)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,6 +54,7 @@ namespace Client.Forms
             this.pnlChat.Name = "pnlChat";
             this.pnlChat.Size = new System.Drawing.Size(360, 465);
             this.pnlChat.TabIndex = 0;
+            this.pnlChat.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlChat_Scroll);
             // 
             // txtChat
             // 
@@ -111,22 +112,21 @@ namespace Client.Forms
             this.picSetting.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
             this.picSetting.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
             // 
-            // picPlus
+            // picImage
             // 
-            this.picPlus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.picPlus.BackColor = System.Drawing.Color.Transparent;
-            this.picPlus.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picPlus.Image = global::Client.Properties.Resources.plus;
-            this.picPlus.Location = new System.Drawing.Point(6, 543);
-            this.picPlus.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
-            this.picPlus.Name = "picPlus";
-            this.picPlus.Padding = new System.Windows.Forms.Padding(10);
-            this.picPlus.Size = new System.Drawing.Size(36, 36);
-            this.picPlus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.picPlus.TabIndex = 10;
-            this.picPlus.TabStop = false;
-            this.picPlus.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
-            this.picPlus.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
+            this.picImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.picImage.BackColor = System.Drawing.Color.Transparent;
+            this.picImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picImage.Location = new System.Drawing.Point(6, 543);
+            this.picImage.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
+            this.picImage.Name = "picImage";
+            this.picImage.Padding = new System.Windows.Forms.Padding(10);
+            this.picImage.Size = new System.Drawing.Size(36, 36);
+            this.picImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picImage.TabIndex = 10;
+            this.picImage.TabStop = false;
+            this.picImage.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
+            this.picImage.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
             // 
             // picSend
             // 
@@ -146,7 +146,7 @@ namespace Client.Forms
             this.picSend.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
             this.picSend.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
             // 
-            // FormChat
+            // FormRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -154,13 +154,13 @@ namespace Client.Forms
             this.Controls.Add(this.txtChat);
             this.Controls.Add(this.pnlChat);
             this.Controls.Add(this.picSetting);
-            this.Controls.Add(this.picPlus);
+            this.Controls.Add(this.picImage);
             this.Controls.Add(this.picSend);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(360, 600);
-            this.Name = "FormChat";
+            this.Name = "FormRoom";
             this.Padding = new System.Windows.Forms.Padding(0, 60, 0, 3);
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -168,7 +168,7 @@ namespace Client.Forms
             this.Load += new System.EventHandler(this.FormChat_Load);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSetting)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSend)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -179,7 +179,7 @@ namespace Client.Forms
         private System.Windows.Forms.PictureBox picSetting;
         private System.Windows.Forms.FlowLayoutPanel pnlChat;
         private System.Windows.Forms.PictureBox picSend;
-        private System.Windows.Forms.PictureBox picPlus;
+        private System.Windows.Forms.PictureBox picImage;
         private MetroFramework.Controls.MetroTextBox txtChat;
         private MetroFramework.Components.MetroStyleManager metroStyleManager1;
     }

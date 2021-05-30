@@ -61,17 +61,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\ControlRoom.cs">
+    <Compile Include="Forms\ControlRoomCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\ControlRoom.Designer.cs">
-      <DependentUpon>ControlRoom.cs</DependentUpon>
+    <Compile Include="Forms\ControlRoomCard.Designer.cs">
+      <DependentUpon>ControlRoomCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormChat.cs">
+    <Compile Include="Forms\FormRoom.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormChat.Designer.cs">
-      <DependentUpon>FormChat.cs</DependentUpon>
+    <Compile Include="Forms\FormRoom.Designer.cs">
+      <DependentUpon>FormRoom.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormInfo.cs">
       <SubType>Form</SubType>
@@ -126,11 +126,11 @@
     <EmbeddedResource Include="Forms\ControlChat.resx">
       <DependentUpon>ControlChat.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ControlRoom.resx">
-      <DependentUpon>ControlRoom.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ControlRoomCard.resx">
+      <DependentUpon>ControlRoomCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormChat.resx">
-      <DependentUpon>FormChat.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormRoom.resx">
+      <DependentUpon>FormRoom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormInfo.resx">
       <DependentUpon>FormInfo.cs</DependentUpon>
@@ -217,9 +217,6 @@
     <None Include="Resources\settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\plus.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\send.png" />
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +239,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.ico" />
+    <None Include="Resources\picture.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
