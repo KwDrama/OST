@@ -99,16 +99,35 @@ namespace Server.Classes
                     else
                     {
                         employee = emp;
+                        // 이미 접속되어 있었다면 이전에 접속한 클라이언트를 추방
+                        if (!Program.MoveLoginClient(this))
+                        {
+                            Log("Login", "중복 로그인 발생하여 기존 클라이언트 추방");
+                            Program.clients[emp.id].Send(new Packet(PacketType.DuplicateLogin));
+                            Thread.Sleep(1000);
+
+                            // 1초 후에도 살아있을 경우 강제 접속 종료
+                            if (Program.clients.ContainsKey(emp.id) &&
+                                Program.clients[emp.id].socket.Connected)
+                                Program.clients[emp.id].socket.Close();
+
+                            // 내가 로그인 처리가 될 때 까지 대기
+                            while (Program.MoveLoginClient(this)) Thread.Sleep(400);
+                        }
+
                         Log("Login", "로그인 성공");
-                        Program.MoveLoginClient(this);
 
                         // 로그인 하면서 불러온 사원의 룸 정보를 모두 룸과 사원 관계의 Map에 저장
                         List<Room> myRooms = Database.GetRooms(emp);
                         foreach (Room room in myRooms)
+                        {
                             if (Program.roomEmps.ContainsKey(room.id))
                                 Program.roomEmps[room.id].Add(employee.id);
                             else
                                 Program.roomEmps.Add(room.id, new List<int>(new int[] { employee.id }));
+
+                            room.lastChat = Database.GetLastChat(room);
+                        }
 
                         p = new LoginPacket(true, Program.employees, myRooms);
                     }

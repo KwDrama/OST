@@ -265,13 +265,25 @@ namespace Server.Classes
         public static Chat GetLastChat(Room room)
         {
             string sql =
-                $"SELECT * FROM room WHERE scope=0";
+                $"SELECT * FROM chat WHERE room_id='{Filter(room.id)}' ORDER BY date DESC LIMIT 1";
 
             using (MySqlDataReader rdr = new MySqlCommand(sql, con).ExecuteReader())
                 if (rdr.Read())
                 {
-                    return new Chat((ChatType)rdr.GetInt32("data_type"), rdr.GetDateTime("date"),
-                        rdr.GetString("room_id"), rdr.GetInt32("employee_id"), "will change");
+                    ChatType ct = (ChatType)rdr.GetInt32("data_type");
+                    byte[] dataBytes = new byte[rdr.GetInt32("data_length")];
+                    rdr.GetBytes(rdr.GetOrdinal("data"), 0, dataBytes, 0, dataBytes.Length);
+
+                    Chat chat = new Chat(ct, rdr.GetDateTime("date"), rdr.GetString("room_id"),
+                        rdr.GetInt32("employee_id"), "");
+
+                    if (ct == ChatType.Image)
+                        using (MemoryStream ms = new MemoryStream())
+                            chat.image = Image.FromStream(ms);
+                    else
+                        chat.text = Encoding.UTF8.GetString(dataBytes);
+
+                    return chat;
                 }
             return null;
         }

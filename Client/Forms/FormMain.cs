@@ -27,6 +27,15 @@ namespace Client.Forms
             Hide();
             Opacity = 1;
 
+            // 다른 내가 접속 시 중복 로그인 발생으로 나 종료
+            if (!Program.callback.ContainsKey(PacketType.Room))
+                Program.callback.Add(PacketType.DuplicateLogin, p => {
+                    File.WriteAllText("DuplicateLogin", "");
+                    Program.Send(new Packet(PacketType.Close));
+                    Application.Exit();
+                    Process.Start(Application.ExecutablePath);
+                });
+
             FormLogin form = new FormLogin();
             if (form.ShowDialog() == DialogResult.OK) Show();
             else
@@ -142,6 +151,7 @@ namespace Client.Forms
         {
             FormChat fc = new FormChat(room);
             fc.FormClosed += (sender, e) => formChats.Remove(room.id);
+            fc.ChatAdd += (sender, e) => controlRooms[room.id].UpdateInfo((e as ChatEventArgs).chat);
 
             formChats.Add(room.id, fc);
         }

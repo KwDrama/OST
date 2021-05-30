@@ -117,8 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblText.Text" xml:space="preserve">
-    <value>This returns mostly double the height that im looking for most of the time, but not always. The e object is the System.Drawing.Printing.PrintPageEventArgs handed to the PrintDocument.PrintPage-event. I want the box to fit the text tightly, wasting no dead trees for printing white empty spaces.
-I've searched for solutions but maybe theres something I didn't understand because I couldn't make them work for me.</value>
-  </data>
 </root>

@@ -12,6 +12,7 @@ namespace Client.Forms
     {
         public Room room;
         public List<Chat> chats;
+        public EventHandler ChatAdd;
 
         public FormChat(Room room)
         {
@@ -43,22 +44,43 @@ namespace Client.Forms
         private void txtChat_KeyDown(object sender, KeyEventArgs e)
         {
             if (!e.Shift && e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
                 picSend_Click(sender, new EventArgs());
+            }
         }
         private void picSend_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtChat.Text))
+                return;
+
             Chat chat = new Chat(ChatType.Text, DateTime.Now, room.id,
                 Program.employee.id, txtChat.Text);
 
             pnlChat.Controls.Add(new ControlChat(chat));
+            pnlChat.VerticalScroll.Value = pnlChat.VerticalScroll.Maximum;
             Program.Send(new ChatsPacket(chat));
+
+            // 채팅 추가되면 이벤트로 보내기
+            ChatAdd(this, new ChatEventArgs(chat));
 
             txtChat.Text = "";
         }
 
         public void ReceiveChat(ChatsPacket p)
         {
-
+            // 제일 최근 시간 채팅 이벤트로 보내기
+            ChatAdd(this, new ChatEventArgs(p.chats[p.chats.Count - 1]));
         }
     }
+
+    public class ChatEventArgs : EventArgs
+    {
+        public Chat chat;
+        public ChatEventArgs(Chat chat)
+        {
+            this.chat = chat;
+        }
+    }
+
 }

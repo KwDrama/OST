@@ -29,7 +29,6 @@ namespace Client.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ControlChat));
             this.lblText = new MetroFramework.Controls.MetroLabel();
             this.picProfile = new System.Windows.Forms.PictureBox();
             this.lblName = new MetroFramework.Controls.MetroLabel();
@@ -46,7 +45,7 @@ namespace Client.Forms
             this.lblText.Name = "lblText";
             this.lblText.Size = new System.Drawing.Size(264, 50);
             this.lblText.TabIndex = 0;
-            this.lblText.Text = resources.GetString("lblText.Text");
+            this.lblText.Text = "This returns";
             this.lblText.WrapToLine = true;
             // 
             // picProfile
@@ -76,7 +75,7 @@ namespace Client.Forms
             // 
             // lblTime
             // 
-            this.lblTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTime.BackColor = System.Drawing.Color.Transparent;
             this.lblTime.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblTime.ForeColor = System.Drawing.Color.DarkGray;

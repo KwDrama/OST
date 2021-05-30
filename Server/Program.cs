@@ -67,16 +67,20 @@ namespace Server
                 type, content));
         }
 
-        public static void MoveLoginClient(Client c)
+        public static bool MoveLoginClient(Client c)
         {
             if (c.employee.id == 0)
             {
                 Log("System", "사원 정보가 없는 클라이언트가 로그인을 했다고 함");
-                return;
+                return false;
             }
+
+            if (clients.ContainsKey(c.employee.id))
+                return false;
 
             clients.Add(c.employee.id, c);
             unloginedClients.Remove(c);
+            return true;
         }
         public static void MoveLogoutClient(Client c)
         {

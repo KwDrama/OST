@@ -1,4 +1,5 @@
 ﻿using Client.Panels;
+using MetroFramework;
 using MetroFramework.Controls;
 using MetroFramework.Forms;
 using OSTLibrary.Classes;
@@ -22,6 +23,18 @@ namespace Client.Forms
         }
         private void FormLogin_Shown(object sender, EventArgs e)
         {
+            // 중복 로그인 처리
+            bool duplicateLogin = File.Exists("DuplicateLogin");
+            File.Delete("DuplicateLogin");
+
+            if (duplicateLogin &&
+                MetroMessageBox.Show(this,
+                "다른 곳에서 내 계정으로 접속하여 로그아웃 되었습니다.\n"
+                + "다시 로그인 하시겠습니까?", "중복 로그인",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) !=
+                DialogResult.Yes)
+                File.Delete("login.txt");
+
             if (Program.client.Connected)
                 loginable = true;
             else
