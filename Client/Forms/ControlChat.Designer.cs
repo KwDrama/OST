@@ -40,10 +40,10 @@ namespace Client.Forms
             // 
             this.lblText.BackColor = System.Drawing.SystemColors.Control;
             this.lblText.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblText.Location = new System.Drawing.Point(48, 31);
+            this.lblText.Location = new System.Drawing.Point(48, 35);
             this.lblText.Margin = new System.Windows.Forms.Padding(0);
             this.lblText.Name = "lblText";
-            this.lblText.Size = new System.Drawing.Size(274, 54);
+            this.lblText.Size = new System.Drawing.Size(274, 50);
             this.lblText.TabIndex = 0;
             this.lblText.Text = "This returns";
             this.lblText.WrapToLine = true;
@@ -55,7 +55,7 @@ namespace Client.Forms
             this.lblName.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblName.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.lblName.Location = new System.Drawing.Point(48, 16);
-            this.lblName.Margin = new System.Windows.Forms.Padding(0);
+            this.lblName.Margin = new System.Windows.Forms.Padding(0, 0, 0, 4);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(43, 15);
             this.lblName.TabIndex = 20;

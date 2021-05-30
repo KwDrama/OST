@@ -95,13 +95,14 @@ namespace Client.Forms
             if (chat.empId == Program.employee.id)
             {
                 // 전체 높이에 대한 Offset 다시 지정
-                verticalSpace -= lblName.Height;
+                int needSubstractheight = lblName.Height + lblName.Margin.Bottom;
+                verticalSpace -= needSubstractheight;
 
                 // 데이터 위치
                 if (chat.type == ChatType.Image)
                 {
                     // 우측 정렬 후 lblName 높이만큼 위로 올리기
-                    pic.Location = new Point(Width - Padding.Right - pic.Width, pic.Location.Y - lblName.Height);
+                    pic.Location = new Point(Width - Padding.Right - pic.Width, pic.Location.Y - needSubstractheight);
                     pic.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 
                     // 전체 높이 지정
@@ -110,7 +111,7 @@ namespace Client.Forms
                 else
                 {
                     // 우측 정렬 후 lblName 높이만큼 위로 올리기
-                    lblText.Location = new Point(Width - Padding.Right - lblText.Width, lblText.Location.Y - lblName.Height);
+                    lblText.Location = new Point(Width - Padding.Right - lblText.Width, lblText.Location.Y - needSubstractheight);
                     lblText.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                     lblText.BackColor = Color.LemonChiffon;
 
@@ -135,12 +136,15 @@ namespace Client.Forms
                 // 다른 사람이 보낸 것이 연속적일 경우
                 if (continuous)
                 {
+                    // 전체 높이에 대한 Offset 다시 지정
+                    int needSubstractheight = lblName.Height + lblName.Margin.Bottom;
+                    verticalSpace -= needSubstractheight;
+
                     // 데이터 위치
                     if (chat.type == ChatType.Image)
                     {
                         // 우측 정렬 후 lblName 높이만큼 위로 올리기
-                        pic.Location = new Point(Width - Padding.Right - pic.Width, pic.Location.Y - lblName.Height);
-                        pic.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                        pic.Location = new Point(pic.Location.X, pic.Location.Y - needSubstractheight);
 
                         // 전체 높이 지정
                         Height = pic.Height + verticalSpace;
@@ -148,13 +152,13 @@ namespace Client.Forms
                     else
                     {
                         // 우측 정렬 후 lblName 높이만큼 위로 올리기
-                        lblText.Location = new Point(Width - Padding.Right - lblText.Width, lblText.Location.Y - lblName.Height);
-                        lblText.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                        lblText.BackColor = Color.LemonChiffon;
+                        lblText.Location = new Point(lblText.Location.X, lblText.Location.Y - needSubstractheight);
 
                         // 전체 높이 지정
                         Height = lblText.Height + verticalSpace;
                     }
+
+
 
                     // 불필요 컨트롤 지우기
                     Controls.Remove(picProfile);
@@ -162,7 +166,16 @@ namespace Client.Forms
                 }
             }
 
-            if (continuous) BackColor = Color.Red;
+            // 연속될 경우 패딩 제거
+            if (continuous)
+            {
+                int needSubstractHeight = Padding.Top - 4;
+
+                Height -= needSubstractHeight;
+                Padding = new Padding(Padding.Left, 4, Padding.Right, Padding.Bottom);
+            }
+
+            BackColor = Color.FromArgb(new Random(DateTime.Now.Millisecond).Next());
         }
         
         public void SetContinuous()
