@@ -1,7 +1,10 @@
-﻿using OSTLibrary.Classes;
+﻿using OSTLibrary.Chats;
+using OSTLibrary.Classes;
 using OSTLibrary.Networks;
+using OSTLibrary.Securities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
@@ -10,14 +13,17 @@ namespace Client.Forms
 {
     static class Program
     {
+        public static object locker = new object();                     // 송신 뮤택스
         public static TcpClient client;                                 // 서버와 연결된 TCP 소켓
         public static NetworkStream ns;                                 // 네트워크 스트림
-        public static readonly string hostname = "127.0.0.1";           // 접속할 서버 주소
+        public static readonly string hostname = "www.ygh.kr";           // 접속할 서버 주소
         public static readonly ushort port = 6756;                      // 접속할 서버 포트
         public static Thread recvThread;                                // 서버로부터 수신을 대기하는 스레드
         public static Dictionary<PacketType, Action<Packet>> callback;  // 타입에 따른 콜백 메소드
 
-        public static Employee employee;                                // 나의 사원 정호
+        public static Employee employee;                                // 나의 사원 정보
+        public static List<Room> rooms;                                 // 채팅방 정보
+        public static Dictionary<int, Employee> employees;              // 사원들 정보
         public static FormMain formMain;                                // 적당한 폼 상호작용을 위한 메인폼
 
         [STAThread]
@@ -43,18 +49,28 @@ namespace Client.Forms
 
         static void Recieve()
         {
-            byte[] readBuffer = new byte[Packet.BUFFER_SIZE];
-            int readLength = Packet.BUFFER_SIZE;
+            byte[] readBuffer = null, lengthBuffer = new byte[4];
             while (true)
             {
-                // 읽어야 하는 길이가 버퍼 사이즈랑 다를 경우
-                if (readLength != readBuffer.Length)
-                    readBuffer = new byte[readLength];
-
                 // 패킷 읽기
                 try
                 {
-                    ns.Read(readBuffer, 0, readBuffer.Length);
+                    // 패킷 길이 먼저 읽기
+                    if (ns.Read(lengthBuffer, 0, 4) < 4)
+                    {
+                        formMain.Invoke(new MethodInvoker(() =>
+                            MessageBox.Show(formMain, "패킷 길이를 읽지 못하였습니다", "Recieve",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)));
+
+                        // 수신 버퍼 리셋
+                        while (ns.ReadByte() != -1) ;
+                    }
+                    readBuffer = new byte[BitConverter.ToInt32(lengthBuffer, 0)];
+                    int position = 0;
+
+                    // 길이를 토대로 데이터 읽기 잘려서 와도 끝까지 읽음
+                    while (position < readBuffer.Length)
+                        position += ns.Read(readBuffer, position, readBuffer.Length - position);
                 }
                 catch (ThreadAbortException)
                 {
@@ -62,27 +78,38 @@ namespace Client.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(formMain, ex.Message, "Recieve", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Array.Clear(readBuffer, 0, readBuffer.Length);
-                    return;
-                }
+                    formMain.Invoke(new MethodInvoker(() =>
+                        MessageBox.Show(formMain, ex.ToString(), "Recieve",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error)));
 
-                // 큰 버퍼 읽었으면 다시 버퍼 크기 원상 복귀
-                if (readLength > Packet.BUFFER_SIZE)
-                    readLength = Packet.BUFFER_SIZE;
+                    // 패킷 받는 도중 예외가 발생했을 때
+                    // 서버와 연결이 종료되었다면 재시작 후 접속 시도
+                    if (!client.Connected)
+                    {
+                        Application.Exit();
+                        Process.Start(Application.ExecutablePath);
+                        return;
+                    }
+                }
 
                 // 패킷 번역
-                object pakcetObj = Packet.Deserialize(readBuffer);
-                if (pakcetObj == null) continue;
-                Packet packet = pakcetObj as Packet;
-
-                // 패킷 길이가 클 경우 큰 데이터를 받기
-                if (packet.Length > 0)
+                object pakcetObj = null;
+                try
                 {
-                    readLength = packet.Length;
-                    continue;
+                    pakcetObj = Packet.Deserialize(AES256.Decrypt(readBuffer));
                 }
-                Array.Clear(readBuffer, 0, readBuffer.Length);
+                catch (Exception ex)
+                {
+                    formMain.Invoke(new MethodInvoker(() =>
+                        MessageBox.Show(formMain, ex.ToString(), "Deserialize",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error)));
+
+                    // 수신 버퍼 리셋
+                    while (ns.ReadByte() != -1) ;
+                }
+                if (pakcetObj == null) continue;
+
+                Packet packet = pakcetObj as Packet;
 
                 // 패킷 타입에 따라 호출 가능한 콜백 메서드 실행
                 if (callback.ContainsKey(packet.type))
@@ -91,23 +118,15 @@ namespace Client.Forms
         }
         public static void Send(Packet packet)
         {
-            byte[] sendBuffer = new byte[Packet.BUFFER_SIZE];
-            byte[] packetBytes = packet.Serialize();
-
-            // 기존 버퍼 크기보다 클 경우 (이미지 등)
-            if (packetBytes.Length > Packet.BUFFER_SIZE)
+            lock (locker)
             {
-                new Packet(packetBytes.Length).Serialize().CopyTo(sendBuffer, 0);
-                ns.Write(sendBuffer, 0, sendBuffer.Length);
-                ns.Write(packetBytes, 0, packetBytes.Length);
-            }
-            else
-            {
-                packetBytes.CopyTo(sendBuffer, 0);
-                ns.Write(sendBuffer, 0, sendBuffer.Length);
-            }
+                byte[] sendBuffer = AES256.Encrypt(packet.Serialize());
+                byte[] lengthBuffer = BitConverter.GetBytes(sendBuffer.Length);
 
-            ns.Flush();
+                ns.Write(lengthBuffer, 0, 4);
+                ns.Write(sendBuffer, 0, sendBuffer.Length);
+                ns.Flush();
+            }
         }
     }
 }

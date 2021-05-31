@@ -29,6 +29,7 @@ namespace Client.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInfo));
             this.lblPhoneT = new MetroFramework.Controls.MetroLabel();
             this.lblTeamT = new MetroFramework.Controls.MetroLabel();
             this.lblRankT = new MetroFramework.Controls.MetroLabel();
@@ -146,12 +147,15 @@ namespace Client.Forms
             this.Controls.Add(this.lblRank);
             this.Controls.Add(this.lblPhone);
             this.Controls.Add(this.lblName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormInfo";
+            this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Yellow;
-            this.Text = "Information";
-            this.Load += new System.EventHandler(this.FormInfo_Load);
+            this.Text = "사원 정보";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormInfoPeople_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
             this.ResumeLayout(false);

@@ -1,4 +1,5 @@
-﻿using Server.Classes;
+﻿using OSTLibrary.Classes;
+using Server.Classes;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -8,10 +9,13 @@ namespace Server
 {
     class Program
     {
-        static ushort port = 6756;                  // OST 서버 포트
-        static TcpListener listener;                // 서버 소켓
-        static Dictionary<int, Client> clients;     // 로그인 후 클라이언트
-        static List<Client> unloginedClients;       // 로그인 전 클라이언트
+        static ushort port = 6756;                              // OST 서버 포트
+        static TcpListener listener;                            // 서버 소켓
+        static List<Client> unloginedClients;                   // 로그인 전 클라이언트들
+
+        public static Dictionary<int, Client> clients;          // 로그인 후 클라이언트들
+        public static Dictionary<int, Employee> employees;      // 사원들 정보
+        public static Dictionary<string, List<int>> roomEmps;   // 각 룸에 있는 접속된 사원 번호
 
         static void Main(string[] args)
         {
@@ -19,17 +23,21 @@ namespace Server
 
             clients = new Dictionary<int, Client>();
             unloginedClients = new List<Client>();
+            roomEmps = new Dictionary<string, List<int>>();
 
             // 데이터 베이스 접속
             if (Database.Connect())
             {
                 Log("DB", $"Server {Database.hostname} is connected.");
+                employees = Database.GetEmployees();
             }
             else
             {
                 Log("DB", $"Server {Database.hostname} connect failed.");
                 return;
             }
+
+            // 테스트
 
             // 서버 시작
             listener = new TcpListener(IPAddress.Any, port);
@@ -59,16 +67,20 @@ namespace Server
                 type, content));
         }
 
-        public static void MoveLoginClient(Client c)
+        public static bool MoveLoginClient(Client c)
         {
             if (c.employee.id == 0)
             {
                 Log("System", "사원 정보가 없는 클라이언트가 로그인을 했다고 함");
-                return;
+                return false;
             }
+
+            if (clients.ContainsKey(c.employee.id))
+                return false;
 
             clients.Add(c.employee.id, c);
             unloginedClients.Remove(c);
+            return true;
         }
         public static void MoveLogoutClient(Client c)
         {

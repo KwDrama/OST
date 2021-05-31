@@ -7,12 +7,19 @@ namespace OSTLibrary.Networks
     [Serializable]
     public class ChatsPacket : Packet
     {
-        public List<Chat> chat;
+        public List<Chat> chats;
 
-        public ChatsPacket(List<Chat> chat)
+        public ChatsPacket(List<Chat> chats)
         {
             type = PacketType.Chat;
-            this.chat = chat;
+            this.chats = chats;
+        }
+        public ChatsPacket(Chat chat)
+        {
+            type = PacketType.Chat;
+
+            chats = new List<Chat>();
+            chats.Add(chat);
         }
     }
 }

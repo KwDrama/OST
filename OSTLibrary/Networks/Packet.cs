@@ -6,7 +6,9 @@ namespace OSTLibrary.Networks
 {
     public enum PacketType
     {
-        Header, Close, Login, Logout, Register, Chat
+        Header, Close,                              // 연결
+        Login, DuplicateLogin, Logout, Register,    // 로그인
+        Chat, Room,                                 // 채팅
     }
 
     [Serializable]
@@ -15,17 +17,9 @@ namespace OSTLibrary.Networks
         public const int BUFFER_SIZE = 4096;
 
         public PacketType type;
-        public int Length = 0;
 
-        public Packet()
-        {
-            type = PacketType.Header;
-        }
-        public Packet(int length)
-        {
-            type = PacketType.Header;
-            Length = length;
-        }
+
+        public Packet() { }
         public Packet(PacketType type)
         {
             this.type = type;
@@ -34,7 +28,7 @@ namespace OSTLibrary.Networks
         public byte[] Serialize() => Serialize(this);
         public static byte[] Serialize(object o)
         {
-            using (MemoryStream ms = new MemoryStream(BUFFER_SIZE))
+            using (MemoryStream ms = new MemoryStream())
             {
                 new BinaryFormatter().Serialize(ms, o);
                 return ms.ToArray();
@@ -42,20 +36,8 @@ namespace OSTLibrary.Networks
         }
         public static object Deserialize(byte[] buffer)
         {
-            using (MemoryStream ms = new MemoryStream(BUFFER_SIZE))
-            {
-                ms.Write(buffer, 0, buffer.Length);
-                ms.Position = 0;
-
-                try
-                {
-                    return new BinaryFormatter().Deserialize(ms);
-                }
-                catch
-                {
-                    return null;
-                }
-            }
+            using (MemoryStream ms = new MemoryStream(buffer, 0, buffer.Length))
+                return new BinaryFormatter().Deserialize(ms);
         }
     }
 }
