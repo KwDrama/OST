@@ -14,8 +14,8 @@ namespace Client.Forms
 {
     public partial class FormMain : MetroForm
     {
-        Dictionary<string, FormRoom> formChats;         // 켜져있는 채팅방들
-        Dictionary<string, ControlRoomCard> controlRooms;   // 나의 채팅방 카드들
+        Dictionary<string, FormRoom> formChats;             // 켜져있는 채팅방들
+        Dictionary<string, ControlRoomCard> roomCards;   // 나의 채팅방 카드들
 
         public FormMain()
         {
@@ -50,7 +50,7 @@ namespace Client.Forms
 
             // 채팅 관련 컨트롤들 배열 초기화
             formChats = new Dictionary<string, FormRoom>();
-            controlRooms = new Dictionary<string, ControlRoomCard>();
+            roomCards = new Dictionary<string, ControlRoomCard>();
 
             // 최초 룸 모두 추가
             Program.rooms.ForEach(AddRoomCard);
@@ -151,7 +151,10 @@ namespace Client.Forms
         {
             FormRoom fc = new FormRoom(room);
             fc.FormClosed += (sender, e) => formChats.Remove(room.id);
-            fc.onChatAdd += (sender, e) => controlRooms[room.id].UpdateInfo((e as ChatEventArgs).chat);
+            fc.onChatAdd += (sender, e) => {
+                ChatEventArgs args = e as ChatEventArgs;
+                roomCards[args.roomId].UpdateInfo(args.chat);
+            };
 
             formChats.Add(room.id, fc);
         }
@@ -185,7 +188,7 @@ namespace Client.Forms
 
             // 채팅 카드 추가
             pnlChat.Controls.Add(cardRoom);
-            controlRooms.Add(room.id, cardRoom);
+            roomCards.Add(room.id, cardRoom);
         }
         void ReceiveRoom(Packet p)
         {
@@ -214,8 +217,16 @@ namespace Client.Forms
                 formChats[cp.chats[0].roomId].ReceiveChat(cp.chats);
 
             // 해당 룸이 안켜져 있을 경우 카드만 업데이트 한다
+            // 이때 카드도 없을 경우 생성 한다
             else
-                controlRooms[cp.chats[0].roomId].UpdateInfo(cp.chats[cp.chats.Count - 1]);
+            {
+                if (roomCards.ContainsKey(cp.chats[0].roomId))
+                    roomCards[cp.chats[0].roomId].UpdateInfo(cp.chats[cp.chats.Count - 1]);
+                else
+                {
+                    // TODO ChatsPacket 안에 Room 정보 넣어서 그걸로 새로운 룸 카드 만들기
+                }
+            }
         }
     }
 }

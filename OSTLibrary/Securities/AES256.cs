@@ -24,8 +24,8 @@ namespace OSTLibrary.Securities
 
 
             //PBKDF2(Password-Based Key Derivation Function)
-            //반복은 65535번
-            var PBKDF2Key = new Rfc2898DeriveBytes(key, salt, 65535, HashAlgorithmName.SHA256);
+            //반복은 255번
+            var PBKDF2Key = new Rfc2898DeriveBytes(key, salt, 255, HashAlgorithmName.SHA256);
             var secretKey = PBKDF2Key.GetBytes(aes.KeySize / 8);
             var iv = PBKDF2Key.GetBytes(aes.BlockSize / 8);
 
@@ -47,8 +47,8 @@ namespace OSTLibrary.Securities
             var salt = sha256Managed.ComputeHash(Encoding.UTF8.GetBytes(key.Length.ToString()));
 
             //PBKDF2(Password-Based Key Derivation Function)
-            //반복은 65535번
-            var PBKDF2Key = new Rfc2898DeriveBytes(key, salt, 65535, HashAlgorithmName.SHA256);
+            //반복은 255번
+            var PBKDF2Key = new Rfc2898DeriveBytes(key, salt, 255, HashAlgorithmName.SHA256);
             var secretKey = PBKDF2Key.GetBytes(aes.KeySize / 8);
             var iv = PBKDF2Key.GetBytes(aes.BlockSize / 8);
 
