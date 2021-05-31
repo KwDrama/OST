@@ -30,11 +30,11 @@ namespace Client.Forms
 
             // 이전 채팅에 연속적일 경우 요소 제거
 
-            PictureBox pic = null;
+            Control dataControl = null;
             // 데이터 표시
             if (chat.type == ChatType.Image)
             {
-                pic = new PictureBox();
+                PictureBox pic = new PictureBox();
 
                 // 이미지
                 pic.Image = chat.image;
@@ -59,13 +59,12 @@ namespace Client.Forms
                 Height = pic.Height + verticalSpace;
 
                 // 시간 라벨 위치
-                lblTime.Location = new Point(Math.Max(
-                    pic.Location.X, pic.Location.X + pic.Width - lblTime.Width),
-                    lblTime.Location.Y);
+                lblTime.Left = Math.Max(pic.Location.X, pic.Location.X + pic.Width - lblTime.Width);
 
                 // 컨트롤 추가 및 제거
                 Controls.Remove(lblText);
                 Controls.Add(pic);
+                dataControl = pic;
             }
             else
             {
@@ -85,97 +84,35 @@ namespace Client.Forms
                     sizef = g.MeasureString(lblText.Text, Font);
                     lblText.Width = (int)sizef.Width + 3;
 
-                    lblTime.Location = new Point(Math.Max(
-                        lblText.Location.X, lblText.Location.X + lblText.Width - lblTime.Width),
-                        lblTime.Location.Y);
+                    lblTime.Left = Math.Max(lblText.Location.X, lblText.Location.X + lblText.Width - lblTime.Width);
                 }
+                dataControl = lblText;
             }
 
-            // 내가 보낸 것일 경우
-            if (chat.empId == Program.employee.id)
+            // 연속적일 경우 프로필, 이름을 제거
+            // 시계는 다음 채팅이 들어왔을 때 SetContinuous() 호출 되서 제거 됨
+            if (continuous || chat.empId == Program.employee.id)
             {
-                // 전체 높이에 대한 Offset 다시 지정
-                int needSubstractheight = lblName.Height + lblName.Margin.Bottom;
-                verticalSpace -= needSubstractheight;
-
-                // 데이터 위치
-                if (chat.type == ChatType.Image)
-                {
-                    // 우측 정렬 후 lblName 높이만큼 위로 올리기
-                    pic.Location = new Point(Width - Padding.Right - pic.Width, pic.Location.Y - needSubstractheight);
-                    pic.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-
-                    // 전체 높이 지정
-                    Height = pic.Height + verticalSpace;
-                }
-                else
-                {
-                    // 우측 정렬 후 lblName 높이만큼 위로 올리기
-                    lblText.Location = new Point(Width - Padding.Right - lblText.Width, lblText.Location.Y - needSubstractheight);
-                    lblText.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                    lblText.BackColor = Color.LemonChiffon;
-
-                    // 전체 높이 지정
-                    Height = lblText.Height + verticalSpace;
-                }
-
-                // 시계 위치
-                lblTime.TextAlign = ContentAlignment.TopLeft;
-                lblTime.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                lblTime.Location = new Point(Math.Min(
-                    chat.type == ChatType.Image ? pic.Location.X : lblText.Location.X,
-                    Width - Padding.Right - lblTime.Width),
-                    lblTime.Location.Y);
+                dataControl.Top = 4;
+                Height = dataControl.Top + dataControl.Height + lblTime.Height;
 
                 // 불필요 컨트롤 지우기
                 Controls.Remove(picProfile);
                 Controls.Remove(lblName);
             }
-            else
+
+            // 내가 보낸 것일 경우
+            if (chat.empId == Program.employee.id)
             {
-                // 다른 사람이 보낸 것이 연속적일 경우
-                if (continuous)
-                {
-                    // 전체 높이에 대한 Offset 다시 지정
-                    int needSubstractheight = lblName.Height + lblName.Margin.Bottom;
-                    verticalSpace -= needSubstractheight;
+                // 데이터 위치
+                dataControl.Left = Width - dataControl.Width - Padding.Right;
+                dataControl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                dataControl.BackColor = Color.LemonChiffon;
 
-                    // 데이터 위치
-                    if (chat.type == ChatType.Image)
-                    {
-                        // 우측 정렬 후 lblName 높이만큼 위로 올리기
-                        pic.Location = new Point(pic.Location.X, pic.Location.Y - needSubstractheight);
-
-                        // 전체 높이 지정
-                        Height = pic.Height + verticalSpace;
-                    }
-                    else
-                    {
-                        // 우측 정렬 후 lblName 높이만큼 위로 올리기
-                        lblText.Location = new Point(lblText.Location.X, lblText.Location.Y - needSubstractheight);
-
-                        // 전체 높이 지정
-                        Height = lblText.Height + verticalSpace;
-                    }
-
-
-
-                    // 불필요 컨트롤 지우기
-                    Controls.Remove(picProfile);
-                    Controls.Remove(lblName);
-                }
+                // 시계 위치
+                lblTime.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+                lblTime.Left = Math.Min(dataControl.Left, Width - Padding.Right - lblTime.Width);
             }
-
-            // 연속될 경우 패딩 제거
-            if (continuous)
-            {
-                int needSubstractHeight = Padding.Top - 4;
-
-                Height -= needSubstractHeight;
-                Padding = new Padding(Padding.Left, 4, Padding.Right, Padding.Bottom);
-            }
-
-            BackColor = Color.FromArgb(new Random(DateTime.Now.Millisecond).Next());
         }
         
         public void SetContinuous()

@@ -12,8 +12,6 @@ namespace Server.Classes
 {
     public class Client
     {
-        object locker = new object();       // For lock
-
         public TcpClient socket;            // 클라이언트 소켓
         NetworkStream ns;                   // 네트워크 스트림
         public Thread recvThread;           // 클라이언트로부터 수신을 대기하는 스레드
@@ -31,54 +29,61 @@ namespace Server.Classes
 
         public void Recieve()
         {
-            byte[] readBuffer = new byte[Packet.BUFFER_SIZE];
-            int readLength = Packet.BUFFER_SIZE;
+            byte[] readBuffer = null, lengthBuffer = new byte[4];
             while (true)
             {
-                // 읽어야 하는 길이가 버퍼 사이즈랑 다를 경우
-                if (readLength != readBuffer.Length)
-                    readBuffer = new byte[readLength];
-
                 // 패킷 읽기
                 try
                 {
-                    ns.Read(readBuffer, 0, readBuffer.Length);
+                    // 패킷 길이 먼저 읽기
+                    if (ns.Read(lengthBuffer, 0, 4) < 4)
+                    {
+                        Log("Receive", "패킷 길이를 읽지 못하였습니다.\n");
+
+                        // 수신 버퍼 리셋
+                        while (ns.ReadByte() != -1) ;
+                    }
+                    readBuffer = new byte[BitConverter.ToInt32(lengthBuffer, 0)];
+                    int position = 0;
+
+                    // 길이를 토대로 데이터 읽기 잘려서 와도 끝까지 읽음
+                    while (position < readBuffer.Length)
+                        position += ns.Read(readBuffer, position, readBuffer.Length - position);
                 }
                 catch (IOException socketEx)
                 {
                     Log("IOException", socketEx.Message);
-                    Array.Clear(readBuffer, 0, readBuffer.Length);
+                    Program.RemoveClient(this);
                     break;
                 }
                 catch (Exception ex)
                 {
                     Log("Exception", ex.ToString());
-                    Array.Clear(readBuffer, 0, readBuffer.Length);
+                    Program.RemoveClient(this);
                     break;
                 }
-
-                // 큰 버퍼 읽었으면 다시 버퍼 크기 원상 복귀
-                if (readLength > Packet.BUFFER_SIZE)
-                    readLength = Packet.BUFFER_SIZE;
 
                 // 패킷 번역
-                object pakcetObj = Packet.Deserialize(readBuffer);
-                if (pakcetObj == null)
+                object pakcetObj = null;
+                try
                 {
-                    Log("Warning", "Cannot deserialize packet");
-                    Array.Clear(readBuffer, 0, readBuffer.Length);
-                    break;
+                    pakcetObj = Packet.Deserialize(readBuffer);
                 }
+                catch (Exception ex)
+                {
+                    Log("Deserialize", ex.ToString());
+
+                    // 수신 버퍼 리셋
+                    while (ns.ReadByte() != -1) ;
+                }
+                if (pakcetObj == null) continue;
+
                 Packet packet = pakcetObj as Packet;
-                Array.Clear(readBuffer, 0, readBuffer.Length);
 
                 // 연결
                 if (packet.type == PacketType.Header)
                 {
-                    if (packet.Length == 0)
-                        Log("Warning", "Receieved no length HeaderPacket");
-                    else
-                        readLength = packet.Length;
+                    Log("Warning", "Receieved no length HeaderPacket");
                 }
                 else if (packet.type == PacketType.Close)
                 {
@@ -249,24 +254,13 @@ namespace Server.Classes
         }
         public void Send(Packet packet)
         {
-            lock (locker)
+            lock (this)
             {
-                byte[] sendBuffer = new byte[Packet.BUFFER_SIZE];
-                byte[] packetBytes = packet.Serialize();
+                byte[] sendBuffer = packet.Serialize();
+                byte[] lengthBuffer = BitConverter.GetBytes(sendBuffer.Length);
 
-                // 기존 버퍼 크기보다 클 경우 (이미지 등)
-                if (packetBytes.Length > Packet.BUFFER_SIZE)
-                {
-                    new Packet(packetBytes.Length).Serialize().CopyTo(sendBuffer, 0);
-                    ns.Write(sendBuffer, 0, sendBuffer.Length);
-                    ns.Write(packetBytes, 0, packetBytes.Length);
-                }
-                else
-                {
-                    packetBytes.CopyTo(sendBuffer, 0);
-                    ns.Write(sendBuffer, 0, sendBuffer.Length);
-                }
-
+                ns.Write(lengthBuffer, 0, 4);
+                ns.Write(sendBuffer, 0, sendBuffer.Length);
                 ns.Flush();
             }
         }
