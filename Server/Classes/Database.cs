@@ -289,11 +289,11 @@ namespace Server.Classes
                 }
             return null;
         }
-        public static List<Chat> GetChats(string roomId, DateTime until)
+        public static List<Chat> GetChats(Room room, DateTime until)
         {
             List<Chat> chats = new List<Chat>();
             MySqlCommand cmd = new MySqlCommand(
-                $"SELECT * FROM chat WHERE room_id='{Filter(roomId)}'"
+                $"SELECT * FROM chat WHERE room_id='{Filter(room.id)}'"
                 + "AND chat_date < @chat_date_until LIMIT 100",
                 con);
             cmd.Parameters.AddWithValue("@chat_date_until", until);
