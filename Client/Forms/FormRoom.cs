@@ -58,7 +58,7 @@ namespace Client.Forms
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                Chat chat = new Chat(ChatType.Image, DateTime.Now, room.id,
+                Chat chat = new Chat(ChatType.Image, DateTime.Now, room,
                 Program.employee.id, Image.FromFile(ofd.FileName));
 
                 AddChatCard(chat);
@@ -81,7 +81,7 @@ namespace Client.Forms
             if (string.IsNullOrEmpty(txtChat.Text))
                 return;
 
-            Chat chat = new Chat(ChatType.Text, DateTime.Now, room.id,
+            Chat chat = new Chat(ChatType.Text, DateTime.Now, room,
                 Program.employee.id, txtChat.Text);
 
             AddChatCard(chat);

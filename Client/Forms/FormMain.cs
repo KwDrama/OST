@@ -247,7 +247,7 @@ namespace Client.Forms
 
             // 최근 채팅 존재 유무에 따른 표시
             if (room.lastChat == null)
-                cardRoom.UpdateInfo(new Chat(ChatType.Text, DateTime.MinValue, room.id, 0, ""));
+                cardRoom.UpdateInfo(new Chat(ChatType.Text, DateTime.MinValue, room, 0, ""));
             else
                 cardRoom.UpdateInfo(room.lastChat);
 
@@ -278,18 +278,19 @@ namespace Client.Forms
             if (cp.chats.Count == 0) return;
 
             // 채팅 패킷을 받으면 해당 룸이 켜져있을 경우 해당 룸으로 채팅들을 넘겨줌
-            if (formChats.ContainsKey(cp.chats[0].roomId))
-                formChats[cp.chats[0].roomId].ReceiveChat(cp.chats);
+            if (formChats.ContainsKey(cp.chats[0].room.id))
+                formChats[cp.chats[0].room.id].ReceiveChat(cp.chats);
 
             // 해당 룸이 안켜져 있을 경우 카드만 업데이트 한다
             // 이때 카드도 없을 경우 생성 한다
             else
             {
-                if (roomCards.ContainsKey(cp.chats[0].roomId))
-                    roomCards[cp.chats[0].roomId].UpdateInfo(cp.chats[cp.chats.Count - 1]);
+                if (roomCards.ContainsKey(cp.chats[0].room.id))
+                    roomCards[cp.chats[0].room.id].UpdateInfo(cp.chats[cp.chats.Count - 1]);
                 else
                 {
-                    // TODO ChatsPacket 안에 Room 정보 넣어서 그걸로 새로운 룸 카드 만들기
+                    cp.chats[0].room.lastChat = cp.chats[0];
+                    Invoke(new MethodInvoker(() => AddRoomCard(cp.chats[0].room)));
                 }
             }
         }
