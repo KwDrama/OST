@@ -65,7 +65,7 @@ namespace Client.Forms
                 Program.Send(new ChatsPacket(chat));
 
                 // 채팅 추가되면 부모가 준 이벤트 처리
-                onChatAdd(this, new ChatEventArgs(chat));
+                onChatAdd(this, new ChatEventArgs(chat, room.id));
             }
         }
         private void txtChat_KeyDown(object sender, KeyEventArgs e)
@@ -88,7 +88,7 @@ namespace Client.Forms
             Program.Send(new ChatsPacket(chat));
 
             // 채팅 추가되면 부모가 준 이벤트 처리
-            onChatAdd(this, new ChatEventArgs(chat));
+            onChatAdd(this, new ChatEventArgs(chat, room.id));
 
             txtChat.Text = "";
         }
@@ -98,7 +98,7 @@ namespace Client.Forms
             Invoke(new MethodInvoker(() => chats.ForEach(c => AddChatCard(c))));
 
             // 제일 최근 시간 채팅 이벤트로 보내기
-            onChatAdd(this, new ChatEventArgs(chats[chats.Count - 1]));
+            onChatAdd(this, new ChatEventArgs(chats[chats.Count - 1], room.id));
         }
         void AddChatCard(Chat chat)
         {
@@ -128,10 +128,12 @@ namespace Client.Forms
     public class ChatEventArgs : EventArgs
     {
         public Chat chat;
-        public ChatEventArgs(Chat chat)
+        public string roomId;
+
+        public ChatEventArgs(Chat chat, string roomId)
         {
             this.chat = chat;
+            this.roomId = roomId;
         }
     }
-
 }

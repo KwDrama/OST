@@ -6,6 +6,7 @@ namespace OSTLibrary.Networks
     public enum RoomType
     {
         New,    // 최초 룸 생성
+        Get,    // 룸 정보 받기
         Chats   // 채팅 내역 요청
     }
 
