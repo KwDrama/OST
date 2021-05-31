@@ -63,26 +63,91 @@ namespace Client.Forms
             if (!Program.callback.ContainsKey(PacketType.Chat))
                 Program.callback.Add(PacketType.Chat, ReceiveChat);
 
-            // 사원 정보 받고 그에 관한 모든 것 처리
+            // 사원 정보 받고 트리뷰 처리
             foreach (Employee emp in Program.employees.Values)
             {
-                // 본부와 팀 없을 경우 추가
+                TreeNode node;
+
+                // 본부 노드 없을 경우 추가
                 if (!tvwOrganization.Nodes.ContainsKey(emp.central))
+                {
                     tvwOrganization.Nodes.Add(emp.central, emp.central);
-                tvwOrganization.Nodes[emp.central].ImageIndex = -1;
+                    node = tvwOrganization.Nodes[emp.central];
+
+                    // 본부 노드 컨택스트 메뉴
+                    if (node.Text == Program.employee.central)
+                    {
+                        node.ContextMenuStrip = new MetroContextMenu(components);
+                        node.ContextMenuStrip.Items.Add("채팅").Click +=
+                            (nodeSender, nodeE) =>
+                            {
+                                Room room = Program.rooms.Find(r => r.scopeIdx == 1 && r.target.Contains(emp.central));
+
+                                if (room == null)
+                                {
+                                    room = new Room("", 1, emp.central);
+                                    AddFormChat(room);
+                                    Program.Send(new RoomPacket(RoomType.New, room));
+                                }
+                                else
+                                {
+                                    if (formChats.ContainsKey(room.id))
+                                    {
+                                        formChats[room.id].Focus();
+                                        return;
+                                    }
+                                    AddFormChat(room);
+                                }
+
+                                formChats[room.id].Show();
+                            };
+                    }
+                }
+
+                // 팀 노드 없을 경우 추가
                 if (!tvwOrganization.Nodes[emp.central].Nodes.ContainsKey(emp.team))
+                {
                     tvwOrganization.Nodes[emp.central].Nodes.Add(emp.team, emp.team);
+                    node = tvwOrganization.Nodes[emp.central].Nodes[emp.team];
 
-                // 프로필 이미지
+                    // 팀 노드 컨택스트 메뉴
+                    if (node.Text == Program.employee.team)
+                    {
+                        node.ContextMenuStrip = new MetroContextMenu(components);
+                        node.ContextMenuStrip.Items.Add("채팅").Click +=
+                            (nodeSender, nodeE) =>
+                            {
+                                Room room = Program.rooms.Find(r => r.scopeIdx == 2 && r.target.Contains(emp.team));
+
+                                if (room == null)
+                                {
+                                    room = new Room("", 2, emp.team);
+                                    AddFormChat(room);
+                                    Program.Send(new RoomPacket(RoomType.New, room));
+                                }
+                                else
+                                {
+                                    if (formChats.ContainsKey(room.id))
+                                    {
+                                        formChats[room.id].Focus();
+                                        return;
+                                    }
+                                    AddFormChat(room);
+                                }
+
+                                formChats[room.id].Show();
+                            };
+                    }
+                }
+
+                // 사원 노드 프로필 이미지 아이콘으로 추가
                 tvwOrganization.ImageList.Images.Add(emp.profile);
-                TreeNode node = tvwOrganization.Nodes[emp.central].Nodes[emp.team].Nodes.Add(emp.name);
+                node = tvwOrganization.Nodes[emp.central].Nodes[emp.team].Nodes.Add(emp.name);
 
-                // 컨택스트 메뉴
+                // 사원 노드 컨택스트 메뉴
                 node.ContextMenuStrip = new MetroContextMenu(components);
-
                 node.ContextMenuStrip.Items.Add("정보").Click +=
                     (nodeSender, nodeE) => new FormInfo(emp).Show();
-
                 node.ContextMenuStrip.Items.Add("채팅").Click +=
                     (nodeSender, nodeE) =>
                     {
@@ -107,7 +172,7 @@ namespace Client.Forms
                         formChats[room.id].Show();
                     };
 
-                // 이미지 인덱스
+                // 사원 노드 아이콘
                 node.ImageIndex = node.SelectedImageIndex =
                     tvwOrganization.ImageList.Images.Count - 1;
             }
