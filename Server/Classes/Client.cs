@@ -213,7 +213,7 @@ namespace Server.Classes
                         else
                             Log("Room", $"{p.room.target} 채팅방 조회");
 
-                        Send(new ChatsPacket(Database.GetChats(p.room, p.until)));
+                        Send(new ChatsPacket(Database.GetChats(p.room.id, p.until)));
                     }
                 }
                 else if (packet.type == PacketType.Chat)

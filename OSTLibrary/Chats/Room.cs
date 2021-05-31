@@ -27,14 +27,13 @@ namespace OSTLibrary.Chats
             if (scopeIdx != 3)
                 return 0;
 
-            foreach(string empStr in target.Split(','))
-            {
-                if (empStr == myEmp.id.ToString())
-                    continue;
+            string[] targetArr = target.Split(',');
 
-                return int.Parse(empStr);
-            }
-            return 0;
+            if (targetArr[0] == myEmp.id.ToString())
+                return int.Parse(targetArr[1]);
+            else
+                return int.Parse(targetArr[0]);
+
         }
     }
 }

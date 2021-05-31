@@ -75,6 +75,8 @@ namespace Client.Forms
                 e.SuppressKeyPress = true;
                 picSend_Click(sender, new EventArgs());
             }
+            else if (e.KeyCode == Keys.Escape)
+                Close();
         }
         private void picSend_Click(object sender, EventArgs e)
         {
