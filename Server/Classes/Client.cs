@@ -67,7 +67,7 @@ namespace Server.Classes
                 object pakcetObj = null;
                 try
                 {
-                    pakcetObj = Packet.Deserialize(readBuffer);
+                    pakcetObj = Packet.Deserialize(AES256.Decrypt(readBuffer));
                 }
                 catch (Exception ex)
                 {
@@ -256,7 +256,7 @@ namespace Server.Classes
         {
             lock (this)
             {
-                byte[] sendBuffer = packet.Serialize();
+                byte[] sendBuffer = AES256.Encrypt(packet.Serialize());
                 byte[] lengthBuffer = BitConverter.GetBytes(sendBuffer.Length);
 
                 ns.Write(lengthBuffer, 0, 4);
