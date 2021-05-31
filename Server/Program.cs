@@ -28,7 +28,9 @@ namespace Server
             // 데이터 베이스 접속
             if (Database.Connect())
             {
-                Log("DB", $"Server {Database.hostname} is connected.");
+                Log("DB", $"Server {Database.hostname} is connected");
+                if (Database.CreateOfficeRoom())
+                    Log("DB", $"Office room is created");
                 employees = Database.GetEmployees();
             }
             else

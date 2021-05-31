@@ -8,6 +8,7 @@ using System;
 using OSTLibrary.Chats;
 using System.Collections.Generic;
 using System.Text;
+using OSTLibrary.Securities;
 
 namespace Server.Classes
 {
@@ -202,6 +203,26 @@ namespace Server.Classes
             catch (MySqlException e)
             {
                 Program.Log("DB", e.ToString());
+                return false;
+            }
+        }
+        public static bool CreateOfficeRoom()
+        {
+            // 회사 전체 톡방이 없을 경우 만듦
+            MySqlCommand cmd = new MySqlCommand(
+                   "INSERT INTO room VALUES (@id, @scope, @target);",
+                   con);
+
+            cmd.Parameters.AddWithValue("@id", MD5.NextRandom());
+            cmd.Parameters.AddWithValue("@scope", 0);
+            cmd.Parameters.AddWithValue("@target", Room.Scope[0]);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
                 return false;
             }
         }
