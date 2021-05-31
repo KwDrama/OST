@@ -101,7 +101,7 @@ namespace Client.Forms
             }
             else
             {
-                lblResult.Style = MetroFramework.MetroColorStyle.Red;
+                lblResult.Style = MetroColorStyle.Red;
                 lblResult.Text = "서버와 연결 되어있지 않습니다.";
             }
         }
@@ -154,7 +154,7 @@ namespace Client.Forms
                     MetroColorStyle.Red;
                 lblResult.Text = resultText;
 
-                if (savedLoginInfo.Contains("\n"))
+                if (Program.client.Connected && savedLoginInfo.Contains("\n"))
                 {
                     txtEmpId.Text = savedLoginInfo.Split('\n')[0];
                     txtPassword.Text = savedLoginInfo.Split('\n')[1];
