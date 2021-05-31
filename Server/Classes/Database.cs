@@ -229,7 +229,7 @@ namespace Server.Classes
 
             using (MemoryStream ms = new MemoryStream())
             {
-                cmd.Parameters.AddWithValue("@room_id", chat.roomId);
+                cmd.Parameters.AddWithValue("@room_id", chat.room.id);
                 cmd.Parameters.AddWithValue("@chat_date", chat.date);
                 cmd.Parameters.AddWithValue("@employee_id", chat.empId);
 
@@ -275,7 +275,8 @@ namespace Server.Classes
                     byte[] dataBytes = new byte[rdr.GetInt32("data_length")];
                     rdr.GetBytes(rdr.GetOrdinal("data"), 0, dataBytes, 0, dataBytes.Length);
 
-                    Chat chat = new Chat(ct, rdr.GetDateTime("chat_date"), rdr.GetString("room_id"),
+                    room.id = rdr.GetString("room_id");
+                    Chat chat = new Chat(ct, rdr.GetDateTime("chat_date"), room,
                         rdr.GetInt32("employee_id"), "");
 
                     if (ct == ChatType.Image)
@@ -304,7 +305,8 @@ namespace Server.Classes
                     byte[] dataBytes = new byte[rdr.GetInt32("data_length")];
                     rdr.GetBytes(rdr.GetOrdinal("data"), 0, dataBytes, 0, dataBytes.Length);
 
-                    Chat chat = new Chat(ct, rdr.GetDateTime("chat_date"), rdr.GetString("room_id"),
+                    room.id = rdr.GetString("room_id");
+                    Chat chat = new Chat(ct, rdr.GetDateTime("chat_date"), room,
                         rdr.GetInt32("employee_id"), "");
 
                     if (ct == ChatType.Image)

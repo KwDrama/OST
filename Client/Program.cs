@@ -16,7 +16,7 @@ namespace Client.Forms
         public static object locker = new object();                     // 송신 뮤택스
         public static TcpClient client;                                 // 서버와 연결된 TCP 소켓
         public static NetworkStream ns;                                 // 네트워크 스트림
-        public static readonly string hostname = "www.ygh.kr";           // 접속할 서버 주소
+        public static readonly string hostname = "127.0.0.1";           // 접속할 서버 주소
         public static readonly ushort port = 6756;                      // 접속할 서버 포트
         public static Thread recvThread;                                // 서버로부터 수신을 대기하는 스레드
         public static Dictionary<PacketType, Action<Packet>> callback;  // 타입에 따른 콜백 메소드

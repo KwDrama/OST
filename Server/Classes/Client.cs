@@ -174,13 +174,13 @@ namespace Server.Classes
                         while (!Database.AddRoom(p.room));
                         Send(p);
 
+                        Employee targetEmp = null;
                         if (p.room.scopeIdx == 3)
                         {
-
                             int otherEmpId = p.room.FindOtherEmployeeId(employee);
                             if (Program.employees.ContainsKey(otherEmpId))
                             {
-                                Employee targetEmp = Program.employees[p.room.FindOtherEmployeeId(employee)];
+                                targetEmp = Program.employees[p.room.FindOtherEmployeeId(employee)];
                                 Log("Room", $"{Room.Scope[p.room.scopeIdx]} 채팅방 생성 : {targetEmp.name}({targetEmp.id})");
                             }
                             else
@@ -193,6 +193,10 @@ namespace Server.Classes
 
                         // 룸과 사원 관계 Map에도 저장, 새로 만드는 방이니깐 기존에 정보가 없었을 것임
                         Program.roomEmps.Add(p.room.id, new List<int>(new int[] { employee.id }));
+                        if (targetEmp != null && Program.clients.ContainsKey(targetEmp.id) &&
+                            !Program.roomEmps[p.room.id].Exists(e => e == targetEmp.id))
+                            Program.roomEmps[p.room.id].Add(targetEmp.id);
+                        
                     }
                     else if (p.roomType == RoomType.Chats)
                     {
@@ -231,8 +235,8 @@ namespace Server.Classes
                     //        p.chats[0].type == ChatType.Image ? "사진" : "Blob");
 
                     // 같은 Room에 있는 다른 클라들한테 채팅 전송
-                    if (Program.roomEmps.ContainsKey(p.chats[0].roomId))
-                        Program.roomEmps[p.chats[0].roomId]
+                    if (Program.roomEmps.ContainsKey(p.chats[0].room.id))
+                        Program.roomEmps[p.chats[0].room.id]
                             .FindAll(eid => eid != employee.id)
                             .ForEach(eid => {
                                 if (Program.clients.ContainsKey(eid))
