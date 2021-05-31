@@ -30,7 +30,7 @@ namespace Server
             {
                 Log("DB", $"Server {Database.hostname} is connected");
                 if (Database.CreateOfficeRoom())
-                    Log("DB", $"Office room is created");
+                    Log("DB", "Office room is created");
                 employees = Database.GetEmployees();
             }
             else
