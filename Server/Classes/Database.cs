@@ -140,15 +140,15 @@ namespace Server.Classes
                 MySqlParameter start = new MySqlParameter("@start", MySqlDbType.DateTime, (int)ms.Length);
                 MySqlParameter end = new MySqlParameter("@end", MySqlDbType.DateTime, (int)ms.Length);
                 MySqlParameter contents = new MySqlParameter("@contents", MySqlDbType.LongText, (int)ms.Length);
-                start.Value = ms.ToArray(); // MetroDateTime 연결할 것
-                end.Value = ms.ToArray(); // MetroDateTime 연결할 것
-                contents.Value = ms.ToArray();
+                start.Value = schedule.start; // MetroDateTime 연결할 것
+                end.Value = schedule.end; // MetroDateTime 연결할 것
+                contents.Value = schedule.contents;
 
                 cmd.Parameters.AddWithValue("@author", schedule.author);
                 cmd.Parameters.AddWithValue("@title", schedule.title);
                 cmd.Parameters.Add(start);
                 cmd.Parameters.Add(end);
-                cmd.Parameters.AddWithValue("@scope", schedule.scope);
+                cmd.Parameters.AddWithValue("@scope", schedule.range);
                 cmd.Parameters.Add(contents);
             }
             try
@@ -166,7 +166,7 @@ namespace Server.Classes
         {
             List<Schedule> schedules = new List<Schedule>();
 
-            string sql = $"SELECT author, title, start, end, scope, contents FROM employee WHERE id={emp}";
+            string sql = $"SELECT author, title, start, end, range, contents FROM employee WHERE id={emp}";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             using (MySqlDataReader rdr = cmd.ExecuteReader())
@@ -176,10 +176,10 @@ namespace Server.Classes
                     using (MemoryStream ms = new MemoryStream())
                         schedules.Add(new Schedule(
                             rdr.GetInt32("author"),
-                            rdr.GetString("scope"),
+                            rdr.GetString("title"),
                             rdr.GetDateTime("start"),
                             rdr.GetDateTime("end"),
-                            rdr.GetInt32("scope"),
+                            rdr.GetString("range"),
                             rdr.GetString("contents")));
                 }
             }
@@ -190,7 +190,7 @@ namespace Server.Classes
         public static bool AddRoom(Room room)
         {
             MySqlCommand cmd = new MySqlCommand(
-                   "INSERT INTO room VALUES (@id, @scope, @target);",
+                   "INSERT INTO room VALUES (@id, @range, @target);",
                    con);
 
             cmd.Parameters.AddWithValue("@id", room.id);
