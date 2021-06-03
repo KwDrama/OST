@@ -29,25 +29,13 @@ namespace Client.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.picProfile = new System.Windows.Forms.PictureBox();
             this.lblTitle = new MetroFramework.Controls.MetroLabel();
             this.lblChat = new MetroFramework.Controls.MetroLabel();
             this.lblTime = new MetroFramework.Controls.MetroLabel();
             this.lblTeamRank = new MetroFramework.Controls.MetroLabel();
+            this.picProfile = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
             this.SuspendLayout();
-            // 
-            // picProfile
-            // 
-            this.picProfile.BackColor = System.Drawing.Color.Transparent;
-            this.picProfile.Image = global::Client.Properties.Resources.profile;
-            this.picProfile.Location = new System.Drawing.Point(16, 16);
-            this.picProfile.Margin = new System.Windows.Forms.Padding(0, 0, 16, 0);
-            this.picProfile.Name = "picProfile";
-            this.picProfile.Size = new System.Drawing.Size(48, 48);
-            this.picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picProfile.TabIndex = 18;
-            this.picProfile.TabStop = false;
             // 
             // lblTitle
             // 
@@ -99,7 +87,19 @@ namespace Client.Forms
             this.lblTeamRank.UseCustomBackColor = true;
             this.lblTeamRank.UseCustomForeColor = true;
             // 
-            // ControlRoom
+            // picProfile
+            // 
+            this.picProfile.BackColor = System.Drawing.Color.Transparent;
+            this.picProfile.Image = global::Client.Properties.Resources.profile;
+            this.picProfile.Location = new System.Drawing.Point(16, 16);
+            this.picProfile.Margin = new System.Windows.Forms.Padding(0, 0, 16, 0);
+            this.picProfile.Name = "picProfile";
+            this.picProfile.Size = new System.Drawing.Size(48, 48);
+            this.picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picProfile.TabIndex = 18;
+            this.picProfile.TabStop = false;
+            // 
+            // ControlRoomCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -111,7 +111,7 @@ namespace Client.Forms
             this.Controls.Add(this.lblTime);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "ControlRoom";
+            this.Name = "ControlRoomCard";
             this.Padding = new System.Windows.Forms.Padding(16);
             this.Size = new System.Drawing.Size(320, 80);
             this.UseCustomBackColor = true;

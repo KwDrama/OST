@@ -100,6 +100,12 @@
     <Compile Include="Forms\ControlRoomCard.Designer.cs">
       <DependentUpon>ControlRoomCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ControlSchedule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ControlSchedule.Designer.cs">
+      <DependentUpon>ControlSchedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormRoom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ControlRoomCard.resx">
       <DependentUpon>ControlRoomCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ControlSchedule.resx">
+      <DependentUpon>ControlSchedule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormRoom.resx">
       <DependentUpon>FormRoom.cs</DependentUpon>
@@ -273,6 +282,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.ico" />
+    <None Include="Resources\add.png" />
     <None Include="Resources\picture.png" />
   </ItemGroup>
   <ItemGroup>

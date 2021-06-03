@@ -108,6 +108,7 @@ namespace Client.Panels
             this.tleSubmit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.tleSubmit.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
             this.tleSubmit.UseSelectable = true;
+            this.tleSubmit.Click += new System.EventHandler(this.tleSubmit_Click);
             // 
             // txtContent
             // 
@@ -147,6 +148,11 @@ namespace Client.Panels
             // 
             this.cmbScope.FormattingEnabled = true;
             this.cmbScope.ItemHeight = 23;
+            this.cmbScope.Items.AddRange(new object[] {
+            "회사 전체",
+            "본부 전체",
+            "팀 전체",
+            "개인"});
             this.cmbScope.Location = new System.Drawing.Point(60, 206);
             this.cmbScope.Name = "cmbScope";
             this.cmbScope.Size = new System.Drawing.Size(240, 29);

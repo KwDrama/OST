@@ -1,6 +1,12 @@
 ﻿using OSTLibrary.Chats;
+using OSTLibrary.Classes;
+using OSTLibrary.Networks;
+using OSTLibrary.Securities;
+using Client.Forms;
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace Client.Panels
 {
@@ -27,6 +33,16 @@ namespace Client.Panels
         private void picClose_Click(object sender, EventArgs e)
         {
             Swipe(false);
+        }
+
+        private void tleSubmit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.Send(new SchedulePacket(new Schedule(Program.employee.id, txtTitle.Text, dtpStart.Value, dtpEnd.Value,
+                    cmbScope.SelectedItem as string, txtContent.Text)));
+            }
+            catch (FormatException) { }
         }
     }
 }

@@ -9,6 +9,7 @@ namespace OSTLibrary.Networks
         Header, Close,                              // 연결
         Login, DuplicateLogin, Logout, Register,    // 로그인
         Chat, Room,                                 // 채팅
+        Schedule,                                   //스케줄
     }
 
     [Serializable]
