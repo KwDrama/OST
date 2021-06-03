@@ -138,11 +138,11 @@ namespace Server.Classes
             using(MemoryStream ms = new MemoryStream())
             {
                 MySqlParameter start = new MySqlParameter("@start", MySqlDbType.DateTime, (int)ms.Length);
-                MySqlParameter end = new MySqlParameter("@start", MySqlDbType.DateTime, (int)ms.Length);
-                MySqlParameter contents = new MySqlParameter("@start", MySqlDbType.LongText, (int)ms.Length);
+                MySqlParameter end = new MySqlParameter("@end", MySqlDbType.DateTime, (int)ms.Length);
+                MySqlParameter contents = new MySqlParameter("@contents", MySqlDbType.LongText, (int)ms.Length);
                 start.Value = ms.ToArray(); // MetroDateTime 연결할 것
                 end.Value = ms.ToArray(); // MetroDateTime 연결할 것
-                end.Value = ms.ToArray();
+                contents.Value = ms.ToArray();
 
                 cmd.Parameters.AddWithValue("@author", schedule.author);
                 cmd.Parameters.AddWithValue("@title", schedule.title);
@@ -162,9 +162,11 @@ namespace Server.Classes
                 return false;
             }
         }
-        public static Schedule GetSchedule(int authorID)
+        public static List<Schedule> GetSchedule(Employee emp)
         {
-            string sql = $"SELECT author, title, start, end, scope, contents FROM employee WHERE id={authorID}";
+            List<Schedule> schedules = new List<Schedule>();
+
+            string sql = $"SELECT author, title, start, end, scope, contents FROM employee WHERE id={emp}";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             using (MySqlDataReader rdr = cmd.ExecuteReader())
@@ -172,19 +174,18 @@ namespace Server.Classes
                 if (rdr.Read())
                 {
                     using (MemoryStream ms = new MemoryStream())
-                        return new Schedule(
+                        schedules.Add(new Schedule(
                             rdr.GetInt32("author"),
                             rdr.GetString("scope"),
                             rdr.GetDateTime("start"),
                             rdr.GetDateTime("end"),
                             rdr.GetInt32("scope"),
-                            rdr.GetString("contents"));
+                            rdr.GetString("contents")));
                 }
             }
-            return null;
+            return schedules;
             
         }
-
         // 채팅
         public static bool AddRoom(Room room)
         {
