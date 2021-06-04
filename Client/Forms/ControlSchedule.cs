@@ -15,6 +15,7 @@ namespace Client.Forms
 {
     public partial class ControlSchedule : MetroUserControl
     {
+        string ctent;
         public ControlSchedule(Schedule schedule)
         {
             InitializeComponent();
@@ -31,20 +32,20 @@ namespace Client.Forms
             lblSche_Name.Text = schedule.title;
             lblStart.Text = schedule.start.ToString("MM-dd");
             lblEnd.Text = schedule.end.ToString("MM-dd");
-
+            ctent = schedule.contents;
         }
-        
 
         private void picContent_Click(object sender, EventArgs e)
         {
             //'+' 아이콘 클릭 시 일정 내용 메세지박스로 출력
             //MessageBox.Show();
-
+            MessageBox.Show(ctent, "스케줄 내용", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void picDelete_Click(object sender, EventArgs e)
         {
             //클릭 시 스케줄 수동 삭제
+            //기간 만기 시 자동삭제는 어디서해야할까?
         }
     }
 }

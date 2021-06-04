@@ -56,7 +56,7 @@ namespace Client.Forms
             // lblStart
             // 
             this.lblStart.AutoSize = true;
-            this.lblStart.Location = new System.Drawing.Point(37, 27);
+            this.lblStart.Location = new System.Drawing.Point(37, 30);
             this.lblStart.Name = "lblStart";
             this.lblStart.Size = new System.Drawing.Size(72, 19);
             this.lblStart.TabIndex = 2;

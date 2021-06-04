@@ -258,9 +258,9 @@ namespace Client.Forms
         }
         void AddScheduleCard(Schedule schedule)
         {
-            ControlSchedule Cschedule = new ControlSchedule(schedule);
+            ControlSchedule Cardschedule = new ControlSchedule(schedule);
 
-            
+            //scheduleCards.Add(, Cardschedule);
         }
         void ReceiveRoom(Packet p)
         {
@@ -306,6 +306,7 @@ namespace Client.Forms
             SchedulePacket sp = p as SchedulePacket;
 
             Program.schedules.Add(sp.schedule);
+            Invoke(new MethodInvoker(() => AddScheduleCard(sp.schedule)));
         }
     }
 }
