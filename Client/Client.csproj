@@ -282,6 +282,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.ico" />
+    <None Include="Resources\trash.png" />
+    <None Include="Resources\light_green.jpg" />
+    <None Include="Resources\light_blue.jpg" />
+    <None Include="Resources\lavendar.jpg" />
+    <None Include="Resources\gold.png" />
     <None Include="Resources\add.png" />
     <None Include="Resources\picture.png" />
   </ItemGroup>

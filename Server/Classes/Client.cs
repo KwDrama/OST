@@ -243,6 +243,11 @@ namespace Server.Classes
                                     Program.clients[eid].Send(new ChatsPacket(p.chats[0]));
                             });
                 }
+                else if(packet.type == PacketType.Schedule)
+                {
+                    SchedulePacket sp = packet as SchedulePacket;
+                    
+                }
 
                 // 그 외
                 else

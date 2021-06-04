@@ -15,7 +15,8 @@ namespace Client.Forms
     public partial class FormMain : MetroForm
     {
         Dictionary<string, FormRoom> formChats;             // 켜져있는 채팅방들
-        Dictionary<string, ControlRoomCard> roomCards;   // 나의 채팅방 카드들
+        Dictionary<string, ControlRoomCard> roomCards;      // 나의 채팅방 카드들
+        Dictionary<string, ControlSchedule> scheduleCards;  //나의 스케줄 카드들
 
         public FormMain()
         {
@@ -255,6 +256,12 @@ namespace Client.Forms
             pnlChat.Controls.Add(cardRoom);
             roomCards.Add(room.id, cardRoom);
         }
+        void AddScheduleCard(Schedule schedule)
+        {
+            ControlSchedule Cschedule = new ControlSchedule(schedule);
+
+            
+        }
         void ReceiveRoom(Packet p)
         {
             RoomPacket rp = p as RoomPacket;
@@ -293,6 +300,12 @@ namespace Client.Forms
                     Invoke(new MethodInvoker(() => AddRoomCard(cp.chats[0].room)));
                 }
             }
+        }
+        void ReceiveSchedule(Packet p)
+        {
+            SchedulePacket sp = p as SchedulePacket;
+
+            Program.schedules.Add(sp.schedule);
         }
     }
 }

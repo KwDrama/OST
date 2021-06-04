@@ -35,10 +35,12 @@ namespace Client.Forms
             this.lblStart = new MetroFramework.Controls.MetroLabel();
             this.lblEnd = new MetroFramework.Controls.MetroLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.picDelete = new System.Windows.Forms.PictureBox();
             this.picContent = new System.Windows.Forms.PictureBox();
-            this.picSchedule = new System.Windows.Forms.PictureBox();
+            this.picRangeColor = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picContent)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSchedule)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRangeColor)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSche_Name
@@ -78,39 +80,52 @@ namespace Client.Forms
             this.imageList1.Images.SetKeyName(2, "rank3");
             this.imageList1.Images.SetKeyName(3, "rank4");
             // 
+            // picDelete
+            // 
+            this.picDelete.Image = global::Client.Properties.Resources.trash;
+            this.picDelete.Location = new System.Drawing.Point(292, 5);
+            this.picDelete.Name = "picDelete";
+            this.picDelete.Size = new System.Drawing.Size(25, 25);
+            this.picDelete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picDelete.TabIndex = 5;
+            this.picDelete.TabStop = false;
+            this.picDelete.Click += new System.EventHandler(this.picDelete_Click);
+            // 
             // picContent
             // 
             this.picContent.Image = global::Client.Properties.Resources.add;
-            this.picContent.Location = new System.Drawing.Point(277, 37);
+            this.picContent.Location = new System.Drawing.Point(292, 52);
             this.picContent.Name = "picContent";
-            this.picContent.Size = new System.Drawing.Size(40, 40);
+            this.picContent.Size = new System.Drawing.Size(25, 25);
             this.picContent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picContent.TabIndex = 4;
             this.picContent.TabStop = false;
             this.picContent.Click += new System.EventHandler(this.picContent_Click);
             // 
-            // picSchedule
+            // picRangeColor
             // 
-            this.picSchedule.Location = new System.Drawing.Point(0, 0);
-            this.picSchedule.Name = "picSchedule";
-            this.picSchedule.Size = new System.Drawing.Size(31, 80);
-            this.picSchedule.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picSchedule.TabIndex = 0;
-            this.picSchedule.TabStop = false;
+            this.picRangeColor.Location = new System.Drawing.Point(0, 0);
+            this.picRangeColor.Name = "picRangeColor";
+            this.picRangeColor.Size = new System.Drawing.Size(31, 80);
+            this.picRangeColor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picRangeColor.TabIndex = 0;
+            this.picRangeColor.TabStop = false;
             // 
             // ControlSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.picDelete);
             this.Controls.Add(this.picContent);
             this.Controls.Add(this.lblEnd);
             this.Controls.Add(this.lblStart);
             this.Controls.Add(this.lblSche_Name);
-            this.Controls.Add(this.picSchedule);
+            this.Controls.Add(this.picRangeColor);
             this.Name = "ControlSchedule";
             this.Size = new System.Drawing.Size(320, 80);
+            ((System.ComponentModel.ISupportInitialize)(this.picDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picContent)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSchedule)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRangeColor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -118,11 +133,12 @@ namespace Client.Forms
 
         #endregion
 
-        private System.Windows.Forms.PictureBox picSchedule;
+        private System.Windows.Forms.PictureBox picRangeColor;
         private MetroFramework.Controls.MetroLabel lblSche_Name;
         private MetroFramework.Controls.MetroLabel lblStart;
         private MetroFramework.Controls.MetroLabel lblEnd;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox picContent;
+        private System.Windows.Forms.PictureBox picDelete;
     }
 }

@@ -7,6 +7,7 @@ namespace OSTLibrary.Networks
     [Serializable]
     public class SchedulePacket : Packet
     {
+        public Schedule schedule;
         public List<Schedule> schedules;
 
         public SchedulePacket(List<Schedule> schedules)
