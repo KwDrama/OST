@@ -133,7 +133,7 @@ namespace Server.Classes
         public static bool AddSchedule(Schedule schedule)
         {
             MySqlCommand cmd = new MySqlCommand(
-                "INSERT INTO schedule VALUES (@author, @title, @start, @end, @scope, @contents);",
+                "INSERT INTO schedule VALUES (@author, @title, @start, @end, @scope, @contents, @target);",
                 con);
             using(MemoryStream ms = new MemoryStream())
             {
@@ -150,6 +150,7 @@ namespace Server.Classes
                 cmd.Parameters.Add(end);
                 cmd.Parameters.AddWithValue("@scope", schedule.scope);
                 cmd.Parameters.Add(contents);
+                cmd.Parameters.AddWithValue("@target", schedule.target); ;
             }
             try
             {
@@ -166,7 +167,7 @@ namespace Server.Classes
         {
             List<Schedule> schedules = new List<Schedule>();
 
-            string sql = $"SELECT author, title, start, end, scope, contents FROM schedule WHERE author={emp.id}";
+            string sql = $"SELECT author, title, start, end, scope, contents, target FROM schedule WHERE author={emp.id}";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             using (MySqlDataReader rdr = cmd.ExecuteReader())
@@ -180,7 +181,8 @@ namespace Server.Classes
                             rdr.GetDateTime("start"),
                             rdr.GetDateTime("end"),
                             rdr.GetString("scope"),
-                            rdr.GetString("contents")));
+                            rdr.GetString("contents"),
+                            rdr.GetString("target")));
                 }
             }
             return schedules;

@@ -41,6 +41,7 @@ namespace Client.Panels
             this.cmbScope = new MetroFramework.Controls.MetroComboBox();
             this.picClose = new System.Windows.Forms.PictureBox();
             this.txtTitle = new MetroFramework.Controls.MetroTextBox();
+            this.cmbTarget = new MetroFramework.Controls.MetroComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
             this.SuspendLayout();
             // 
@@ -149,7 +150,7 @@ namespace Client.Panels
             this.cmbScope.ItemHeight = 23;
             this.cmbScope.Location = new System.Drawing.Point(60, 206);
             this.cmbScope.Name = "cmbScope";
-            this.cmbScope.Size = new System.Drawing.Size(240, 29);
+            this.cmbScope.Size = new System.Drawing.Size(112, 29);
             this.cmbScope.TabIndex = 21;
             this.cmbScope.UseSelectable = true;
             // 
@@ -203,10 +204,21 @@ namespace Client.Panels
             this.txtTitle.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtTitle.WaterMarkFont = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             // 
+            // cmbTarget
+            // 
+            this.cmbTarget.FormattingEnabled = true;
+            this.cmbTarget.ItemHeight = 23;
+            this.cmbTarget.Location = new System.Drawing.Point(189, 206);
+            this.cmbTarget.Name = "cmbTarget";
+            this.cmbTarget.Size = new System.Drawing.Size(111, 29);
+            this.cmbTarget.TabIndex = 23;
+            this.cmbTarget.UseSelectable = true;
+            // 
             // PanelSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmbTarget);
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.cmbScope);
             this.Controls.Add(this.txtContent);
@@ -239,5 +251,6 @@ namespace Client.Panels
         private MetroFramework.Controls.MetroTextBox txtContent;
         private MetroFramework.Controls.MetroComboBox cmbScope;
         private MetroFramework.Controls.MetroTextBox txtTitle;
+        private MetroFramework.Controls.MetroComboBox cmbTarget;
     }
 }

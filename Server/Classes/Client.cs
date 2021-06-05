@@ -138,7 +138,7 @@ namespace Server.Classes
                                 Program.roomEmps.Add(room.id, new List<int>(new int[] { employee.id }));
 
                             room.lastChat = Database.GetLastChat(room);
-                        }
+                        }       
 
                         List<Schedule> mySchedule = Database.GetSchedule(emp);
                         p = new LoginPacket(true, Program.employees, myRooms, mySchedule);

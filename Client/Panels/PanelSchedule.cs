@@ -12,6 +12,12 @@ namespace Client.Panels
 {
     public partial class PanelSchedule : PanelSlider
     {
+        public static string[] target1 = { "자원본부", "철강본부", "섬유본부", "영업본부" };
+        public static string[] target2 = { "자원1팀", "자원2팀", "자원3팀" };
+        public static string[] target3 = { "철강1팀", "철강2팀", "철강3팀" };
+        public static string[] target4 = { "섬유1팀", "섬유2팀", "섬유3팀" };
+        public static string[] target5 = { "영업1팀", "영업2팀", "영업3팀" };
+
         FormMain owner;
         public PanelSchedule(Form owner, SlidingType type) : base(owner, type)
         {
@@ -23,6 +29,27 @@ namespace Client.Panels
         private void PanelSchedule_Load(object sender, EventArgs e)
         {
             cmbScope.Items.AddRange(Room.Scope);
+            if (cmbScope.SelectedItem == null)
+            {
+                cmbTarget.Enabled = false;
+            }
+            else if (cmbScope.SelectedItem as string == "본부 전체")
+            {
+                cmbTarget.Items.AddRange(target1);
+            }
+            else if (cmbScope.SelectedItem as string == "팀 전체")
+            {
+                if (Program.employee.central == "자원본부")
+                    cmbTarget.Items.AddRange(target2);
+                else if (Program.employee.central == "철강본부")
+                    cmbTarget.Items.AddRange(target3);
+                else if (Program.employee.central == "섬유본부")
+                    cmbTarget.Items.AddRange(target4);
+                else if (Program.employee.central == "영업본부")
+                    cmbTarget.Items.AddRange(target5);
+            }
+            else
+                cmbTarget.Enabled = false;
         }
 
         private void pic_MouseEnter(object sender, EventArgs e)
@@ -51,7 +78,7 @@ namespace Client.Panels
             try
             {
                 Program.Send(new SchedulePacket(new Schedule(Program.employee.id, txtTitle.Text, dtpStart.Value, dtpEnd.Value,
-                    cmbScope.SelectedItem as string, txtContent.Text)));
+                    cmbScope.SelectedItem as string, txtContent.Text, cmbTarget.SelectedItem as string)));
             }
             catch (FormatException) { }
             Swipe(false);
