@@ -38,7 +38,6 @@ namespace Client.Forms
             this.txtSearch = new MetroFramework.Controls.MetroTextBox();
             this.tvwOrganization = new System.Windows.Forms.TreeView();
             this.ilistEmployee = new System.Windows.Forms.ImageList(this.components);
-            this.tpSchedule = new MetroFramework.Controls.MetroTabPage();
             this.tpChat = new MetroFramework.Controls.MetroTabPage();
             this.pnlChat = new System.Windows.Forms.FlowLayoutPanel();
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
@@ -48,6 +47,8 @@ namespace Client.Forms
             this.picSetting = new System.Windows.Forms.PictureBox();
             this.picLogout = new System.Windows.Forms.PictureBox();
             this.picProfile = new System.Windows.Forms.PictureBox();
+            this.pnlSchedule = new System.Windows.Forms.FlowLayoutPanel();
+            this.tpSchedule = new MetroFramework.Controls.MetroTabPage();
             this.tabMenu.SuspendLayout();
             this.tpOrganization.SuspendLayout();
             this.tpChat.SuspendLayout();
@@ -55,6 +56,7 @@ namespace Client.Forms
             ((System.ComponentModel.ISupportInitialize)(this.picSetting)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
+            this.tpSchedule.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabMenu
@@ -67,7 +69,7 @@ namespace Client.Forms
             this.tabMenu.Controls.Add(this.tpChat);
             this.tabMenu.Location = new System.Drawing.Point(6, 83);
             this.tabMenu.Name = "tabMenu";
-            this.tabMenu.SelectedIndex = 2;
+            this.tabMenu.SelectedIndex = 1;
             this.tabMenu.Size = new System.Drawing.Size(348, 511);
             this.tabMenu.TabIndex = 1;
             this.tabMenu.UseSelectable = true;
@@ -176,23 +178,6 @@ namespace Client.Forms
             this.ilistEmployee.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilistEmployee.ImageStream")));
             this.ilistEmployee.TransparentColor = System.Drawing.Color.Transparent;
             this.ilistEmployee.Images.SetKeyName(0, "treenode.png");
-            // 
-            // tpSchedule
-            // 
-            this.tpSchedule.AutoScroll = true;
-            this.tpSchedule.HorizontalScrollbar = true;
-            this.tpSchedule.HorizontalScrollbarBarColor = true;
-            this.tpSchedule.HorizontalScrollbarHighlightOnWheel = false;
-            this.tpSchedule.HorizontalScrollbarSize = 2;
-            this.tpSchedule.Location = new System.Drawing.Point(4, 38);
-            this.tpSchedule.Name = "tpSchedule";
-            this.tpSchedule.Size = new System.Drawing.Size(340, 469);
-            this.tpSchedule.TabIndex = 2;
-            this.tpSchedule.Text = "일정";
-            this.tpSchedule.VerticalScrollbar = true;
-            this.tpSchedule.VerticalScrollbarBarColor = true;
-            this.tpSchedule.VerticalScrollbarHighlightOnWheel = false;
-            this.tpSchedule.VerticalScrollbarSize = 11;
             // 
             // tpChat
             // 
@@ -307,6 +292,37 @@ namespace Client.Forms
             this.picProfile.MouseEnter += new System.EventHandler(this.pic_MouseEnter);
             this.picProfile.MouseLeave += new System.EventHandler(this.pic_MouseLeave);
             // 
+            // pnlSchedule
+            // 
+            this.pnlSchedule.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlSchedule.AutoScroll = true;
+            this.pnlSchedule.BackColor = System.Drawing.Color.White;
+            this.pnlSchedule.Location = new System.Drawing.Point(1, 1);
+            this.pnlSchedule.Margin = new System.Windows.Forms.Padding(1);
+            this.pnlSchedule.Name = "pnlSchedule";
+            this.pnlSchedule.Size = new System.Drawing.Size(338, 467);
+            this.pnlSchedule.TabIndex = 3;
+            // 
+            // tpSchedule
+            // 
+            this.tpSchedule.AutoScroll = true;
+            this.tpSchedule.Controls.Add(this.pnlSchedule);
+            this.tpSchedule.HorizontalScrollbar = true;
+            this.tpSchedule.HorizontalScrollbarBarColor = true;
+            this.tpSchedule.HorizontalScrollbarHighlightOnWheel = false;
+            this.tpSchedule.HorizontalScrollbarSize = 2;
+            this.tpSchedule.Location = new System.Drawing.Point(4, 38);
+            this.tpSchedule.Name = "tpSchedule";
+            this.tpSchedule.Size = new System.Drawing.Size(340, 469);
+            this.tpSchedule.TabIndex = 2;
+            this.tpSchedule.Text = "일정";
+            this.tpSchedule.VerticalScrollbar = true;
+            this.tpSchedule.VerticalScrollbarBarColor = true;
+            this.tpSchedule.VerticalScrollbarHighlightOnWheel = false;
+            this.tpSchedule.VerticalScrollbarSize = 11;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -338,6 +354,7 @@ namespace Client.Forms
             ((System.ComponentModel.ISupportInitialize)(this.picSetting)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
+            this.tpSchedule.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,7 +363,6 @@ namespace Client.Forms
         #endregion
         private MetroFramework.Controls.MetroTabControl tabMenu;
         private MetroFramework.Controls.MetroTabPage tpOrganization;
-        private MetroFramework.Controls.MetroTabPage tpSchedule;
         private System.Windows.Forms.TreeView tvwOrganization;
         private MetroFramework.Controls.MetroTextBox txtSearch;
         private MetroFramework.Components.MetroStyleManager metroStyleManager1;
@@ -360,6 +376,8 @@ namespace Client.Forms
         private MetroFramework.Controls.MetroTextBox txtOrgSearch;
         private System.Windows.Forms.ImageList ilistEmployee;
         private System.Windows.Forms.FlowLayoutPanel pnlChat;
+        private MetroFramework.Controls.MetroTabPage tpSchedule;
+        private System.Windows.Forms.FlowLayoutPanel pnlSchedule;
     }
 }
 

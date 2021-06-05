@@ -12,10 +12,13 @@ namespace Client.Panels
 {
     public partial class PanelSchedule : PanelSlider
     {
+        FormMain owner;
         public PanelSchedule(Form owner, SlidingType type) : base(owner, type)
         {
             InitializeComponent();
             Init();
+
+            this.owner = owner as FormMain;
         }
         private void PanelSchedule_Load(object sender, EventArgs e)
         {

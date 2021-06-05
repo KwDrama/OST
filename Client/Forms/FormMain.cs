@@ -271,7 +271,7 @@ namespace Client.Forms
             //스케줄 카드 추가
             if (DateTime.Now < schedule.end)
             {
-                tpSchedule.Controls.Add(Cardschedule);
+                pnlSchedule.Controls.Add(Cardschedule);
                 ScheduleCards.Add(schedule);
             }
         }
