@@ -132,25 +132,20 @@ namespace Server.Classes
         // 일정
         public static bool AddSchedule(Schedule schedule)
         {
+        
+            DateTime Start = schedule.start;
+            DateTime End = schedule.end;
             MySqlCommand cmd = new MySqlCommand(
                 "INSERT INTO schedule VALUES (@author, @title, @start, @end, @scope, @contents);",
                 con);
-            using(MemoryStream ms = new MemoryStream())
-            {
-                MySqlParameter start = new MySqlParameter("@start", MySqlDbType.DateTime, (int)ms.Length);
-                MySqlParameter end = new MySqlParameter("@end", MySqlDbType.DateTime, (int)ms.Length);
-                MySqlParameter contents = new MySqlParameter("@contents", MySqlDbType.LongText, (int)ms.Length);
-                start.Value = schedule.start; // MetroDateTime 연결할 것
-                end.Value = schedule.end; // MetroDateTime 연결할 것
-                contents.Value = schedule.contents;
-
-                cmd.Parameters.AddWithValue("@author", schedule.author);
-                cmd.Parameters.AddWithValue("@title", schedule.title);
-                cmd.Parameters.Add(start);
-                cmd.Parameters.Add(end);
-                cmd.Parameters.AddWithValue("@scope", schedule.scope);
-                cmd.Parameters.Add(contents);
-            }
+     
+            cmd.Parameters.AddWithValue("@author", schedule.author);
+            cmd.Parameters.AddWithValue("@title", schedule.title);
+            cmd.Parameters.Add("@start", MySqlDbType.DateTime, 50).Value = Start;
+            cmd.Parameters.Add("@end", MySqlDbType.DateTime, 50).Value = End;
+            cmd.Parameters.AddWithValue("@scope", schedule.scope);
+            cmd.Parameters.AddWithValue("@contents", schedule.contents);
+            
             try
             {
                 cmd.ExecuteNonQuery();
