@@ -15,6 +15,7 @@ namespace Server
 
         public static Dictionary<int, Client> clients;          // 로그인 후 클라이언트들
         public static Dictionary<int, Employee> employees;      // 사원들 정보
+        public static Dictionary<int, Schedule> schedules;      // 스케줄 정보들
         public static Dictionary<string, List<int>> roomEmps;   // 각 룸에 있는 접속된 사원 번호
 
         static void Main(string[] args)
@@ -24,6 +25,7 @@ namespace Server
             clients = new Dictionary<int, Client>();
             unloginedClients = new List<Client>();
             roomEmps = new Dictionary<string, List<int>>();
+            schedules = new Dictionary<int, Schedule>();
 
             // 데이터 베이스 접속
             if (Database.Connect())

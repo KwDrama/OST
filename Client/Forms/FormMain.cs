@@ -16,7 +16,7 @@ namespace Client.Forms
     {
         Dictionary<string, FormRoom> formChats;             // 켜져있는 채팅방들
         Dictionary<string, ControlRoomCard> roomCards;      // 나의 채팅방 카드들
-        Dictionary<string, ControlSchedule> scheduleCards;  //나의 스케줄 카드들
+        Dictionary<int, ControlSchedule> scheduleCards;  //나의 스케줄 카드들
 
         public FormMain()
         {
@@ -52,9 +52,14 @@ namespace Client.Forms
             // 채팅 관련 컨트롤들 배열 초기화
             formChats = new Dictionary<string, FormRoom>();
             roomCards = new Dictionary<string, ControlRoomCard>();
+            // 스케줄 관련 컨트롤들 배열 초기화
+            scheduleCards = new Dictionary<int, ControlSchedule>();
 
             // 최초 룸 모두 추가
             Program.rooms.ForEach(AddRoomCard);
+
+            // 최초 스케줄 모두 추가 (여기서 에러 발생)
+            Program.schedules.ForEach(AddScheduleCard);
 
             // 룸 받기 콜백
             if (!Program.callback.ContainsKey(PacketType.Room))
@@ -63,6 +68,10 @@ namespace Client.Forms
             // 챗 받기 콜백
             if (!Program.callback.ContainsKey(PacketType.Chat))
                 Program.callback.Add(PacketType.Chat, ReceiveChat);
+
+            // 스케줄 받기 콜백
+            if (!Program.callback.ContainsKey(PacketType.Schedule))
+                Program.callback.Add(PacketType.Schedule, ReceiveSchedule);
 
             // 사원 정보 받고 트리뷰 처리
             foreach (Employee emp in Program.employees.Values)
@@ -256,11 +265,11 @@ namespace Client.Forms
             pnlChat.Controls.Add(cardRoom);
             roomCards.Add(room.id, cardRoom);
         }
-        void AddScheduleCard(Schedule schedule)
+        void AddScheduleCard(Schedule schedule) //스케줄카드 생성
         {
             ControlSchedule Cardschedule = new ControlSchedule(schedule);
 
-            //scheduleCards.Add(, Cardschedule);
+            scheduleCards.Add(Program.employee.id, Cardschedule);
         }
         void ReceiveRoom(Packet p)
         {
@@ -301,7 +310,7 @@ namespace Client.Forms
                 }
             }
         }
-        void ReceiveSchedule(Packet p)
+        void ReceiveSchedule(Packet p)  //스케줄카드로 받아와 저장
         {
             SchedulePacket sp = p as SchedulePacket;
 

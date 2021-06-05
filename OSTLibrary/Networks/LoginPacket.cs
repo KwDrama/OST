@@ -10,6 +10,7 @@ namespace OSTLibrary.Networks
     {
         public Dictionary<int, Employee> employees;
         public List<Room> rooms;
+        public List<Schedule> schedules;
 
         public bool success = false;
 
@@ -20,13 +21,14 @@ namespace OSTLibrary.Networks
             employees = new Dictionary<int, Employee>();
             employees.Add(0, new Employee(empId, password));
         }
-        public LoginPacket(bool success, Dictionary<int, Employee> employees, List<Room> rooms)
+        public LoginPacket(bool success, Dictionary<int, Employee> employees, List<Room> rooms, List<Schedule> schedules)
         {
             type = PacketType.Login;
 
             this.success = success;
             this.employees = employees;
             this.rooms = rooms;
+            this.schedules = schedules;
         }
     }
 }

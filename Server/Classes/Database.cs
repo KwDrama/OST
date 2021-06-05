@@ -148,7 +148,7 @@ namespace Server.Classes
                 cmd.Parameters.AddWithValue("@title", schedule.title);
                 cmd.Parameters.Add(start);
                 cmd.Parameters.Add(end);
-                cmd.Parameters.AddWithValue("@scope", schedule.range);
+                cmd.Parameters.AddWithValue("@scope", schedule.scope);
                 cmd.Parameters.Add(contents);
             }
             try
@@ -166,12 +166,12 @@ namespace Server.Classes
         {
             List<Schedule> schedules = new List<Schedule>();
 
-            string sql = $"SELECT author, title, start, end, range, contents FROM employee WHERE id={emp}";
+            string sql = $"SELECT author, title, start, end, range, contents FROM schedule WHERE author={emp.id}";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             using (MySqlDataReader rdr = cmd.ExecuteReader())
             {
-                if (rdr.Read())
+                while (rdr.Read())
                 {
                     using (MemoryStream ms = new MemoryStream())
                         schedules.Add(new Schedule(

@@ -99,7 +99,6 @@ namespace Client.Panels
             this.tleSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tleSubmit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tleSubmit.Enabled = false;
             this.tleSubmit.Location = new System.Drawing.Point(0, 522);
             this.tleSubmit.Name = "tleSubmit";
             this.tleSubmit.Size = new System.Drawing.Size(360, 48);
@@ -148,11 +147,6 @@ namespace Client.Panels
             // 
             this.cmbScope.FormattingEnabled = true;
             this.cmbScope.ItemHeight = 23;
-            this.cmbScope.Items.AddRange(new object[] {
-            "회사 전체",
-            "본부 전체",
-            "팀 전체",
-            "개인"});
             this.cmbScope.Location = new System.Drawing.Point(60, 206);
             this.cmbScope.Name = "cmbScope";
             this.cmbScope.Size = new System.Drawing.Size(240, 29);

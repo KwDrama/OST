@@ -140,7 +140,9 @@ namespace Server.Classes
                             room.lastChat = Database.GetLastChat(room);
                         }
 
-                        p = new LoginPacket(true, Program.employees, myRooms);
+                        List<Schedule> mySchedule = Database.GetSchedule(emp);
+
+                        p = new LoginPacket(true, Program.employees, myRooms, mySchedule);
                     }
 
                     Thread.Sleep(200);  // 클라이언트 스피너 보기 위함
@@ -245,7 +247,14 @@ namespace Server.Classes
                 }
                 else if(packet.type == PacketType.Schedule)
                 {
+                    // Panel(Client) -> Client.cs(Server) -> DB add
                     SchedulePacket sp = packet as SchedulePacket;
+                    if (Database.AddSchedule(sp.schedules[0]))
+                    {
+                        Log("Schedule", "스케줄 DB 저장 성공");
+                    }
+                    else
+                        Log("Schedule", "스케줄 DB 저장 실패");
                     
                 }
 

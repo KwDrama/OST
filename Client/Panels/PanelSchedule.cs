@@ -37,12 +37,14 @@ namespace Client.Panels
 
         private void tleSubmit_Click(object sender, EventArgs e)
         {
+            // Panel -> Client.cs(Server)
             try
             {
                 Program.Send(new SchedulePacket(new Schedule(Program.employee.id, txtTitle.Text, dtpStart.Value, dtpEnd.Value,
                     cmbScope.SelectedItem as string, txtContent.Text)));
             }
             catch (FormatException) { }
+            Swipe(false);
         }
     }
 }

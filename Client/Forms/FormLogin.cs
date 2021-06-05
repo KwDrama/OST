@@ -192,6 +192,7 @@ namespace Client.Forms
                 // 나에 대한 채팅방 정보들과 다른 사원들의 정보를 저장
                 Program.rooms = p.rooms;
                 Program.employees = p.employees;
+                Program.schedules = p.schedules;
 
                 // 로그인 창 닫기
                 BeginInvoke(new MethodInvoker(() => Close()));
