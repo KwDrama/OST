@@ -166,7 +166,7 @@ namespace Server.Classes
         {
             List<Schedule> schedules = new List<Schedule>();
 
-            string sql = $"SELECT author, title, start, end, range, contents FROM schedule WHERE author={emp.id}";
+            string sql = $"SELECT author, title, start, end, scope, contents FROM schedule WHERE author={emp.id}";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             using (MySqlDataReader rdr = cmd.ExecuteReader())
@@ -179,7 +179,7 @@ namespace Server.Classes
                             rdr.GetString("title"),
                             rdr.GetDateTime("start"),
                             rdr.GetDateTime("end"),
-                            rdr.GetString("range"),
+                            rdr.GetString("scope"),
                             rdr.GetString("contents")));
                 }
             }

@@ -16,7 +16,6 @@ namespace Client.Forms
     {
         Dictionary<string, FormRoom> formChats;             // 켜져있는 채팅방들
         Dictionary<string, ControlRoomCard> roomCards;      // 나의 채팅방 카드들
-        Dictionary<int, ControlSchedule> scheduleCards;  //나의 스케줄 카드들
 
         public FormMain()
         {
@@ -53,7 +52,7 @@ namespace Client.Forms
             formChats = new Dictionary<string, FormRoom>();
             roomCards = new Dictionary<string, ControlRoomCard>();
             // 스케줄 관련 컨트롤들 배열 초기화
-            scheduleCards = new Dictionary<int, ControlSchedule>();
+            List<Schedule> scheduleCards = new List<Schedule>();
 
             // 최초 룸 모두 추가
             Program.rooms.ForEach(AddRoomCard);
@@ -268,8 +267,13 @@ namespace Client.Forms
         void AddScheduleCard(Schedule schedule) //스케줄카드 생성
         {
             ControlSchedule Cardschedule = new ControlSchedule(schedule);
-
-            scheduleCards.Add(Program.employee.id, Cardschedule);
+            List<Schedule> ScheduleCards = new List<Schedule>();
+            //스케줄 카드 추가
+            if (DateTime.Now < schedule.end)
+            {
+                tpSchedule.Controls.Add(Cardschedule);
+                ScheduleCards.Add(schedule);
+            }
         }
         void ReceiveRoom(Packet p)
         {

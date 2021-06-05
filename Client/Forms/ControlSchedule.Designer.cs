@@ -35,10 +35,8 @@ namespace Client.Forms
             this.lblStart = new MetroFramework.Controls.MetroLabel();
             this.lblEnd = new MetroFramework.Controls.MetroLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.picDelete = new System.Windows.Forms.PictureBox();
             this.picContent = new System.Windows.Forms.PictureBox();
             this.picRangeColor = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.picDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRangeColor)).BeginInit();
             this.SuspendLayout();
@@ -80,17 +78,6 @@ namespace Client.Forms
             this.imageList1.Images.SetKeyName(2, "rank3");
             this.imageList1.Images.SetKeyName(3, "rank4");
             // 
-            // picDelete
-            // 
-            this.picDelete.Image = global::Client.Properties.Resources.trash;
-            this.picDelete.Location = new System.Drawing.Point(292, 5);
-            this.picDelete.Name = "picDelete";
-            this.picDelete.Size = new System.Drawing.Size(25, 25);
-            this.picDelete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picDelete.TabIndex = 5;
-            this.picDelete.TabStop = false;
-            this.picDelete.Click += new System.EventHandler(this.picDelete_Click);
-            // 
             // picContent
             // 
             this.picContent.Image = global::Client.Properties.Resources.add;
@@ -115,7 +102,6 @@ namespace Client.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.picDelete);
             this.Controls.Add(this.picContent);
             this.Controls.Add(this.lblEnd);
             this.Controls.Add(this.lblStart);
@@ -123,7 +109,6 @@ namespace Client.Forms
             this.Controls.Add(this.picRangeColor);
             this.Name = "ControlSchedule";
             this.Size = new System.Drawing.Size(320, 80);
-            ((System.ComponentModel.ISupportInitialize)(this.picDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picContent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRangeColor)).EndInit();
             this.ResumeLayout(false);
@@ -139,6 +124,5 @@ namespace Client.Forms
         private MetroFramework.Controls.MetroLabel lblEnd;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox picContent;
-        private System.Windows.Forms.PictureBox picDelete;
     }
 }

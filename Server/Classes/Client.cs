@@ -141,7 +141,6 @@ namespace Server.Classes
                         }
 
                         List<Schedule> mySchedule = Database.GetSchedule(emp);
-
                         p = new LoginPacket(true, Program.employees, myRooms, mySchedule);
                     }
 

@@ -38,6 +38,13 @@ namespace Client.Panels
         private void tleSubmit_Click(object sender, EventArgs e)
         {
             // Panel -> Client.cs(Server)
+            if(dtpStart.Value < DateTime.Now || dtpStart.Value > dtpEnd.Value)
+            {
+                MessageBox.Show("잘못된 날짜 형식입니다. 날짜를 올바르게 다시 설정해주십시오.",
+                    "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
                 Program.Send(new SchedulePacket(new Schedule(Program.employee.id, txtTitle.Text, dtpStart.Value, dtpEnd.Value,
