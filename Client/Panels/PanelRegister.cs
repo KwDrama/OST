@@ -1,4 +1,5 @@
 ﻿using Client.Forms;
+using MetroFramework;
 using OSTLibrary.Classes;
 using OSTLibrary.Networks;
 using OSTLibrary.Securities;
@@ -19,7 +20,7 @@ namespace Client.Panels
             Init();
 
             organization = new Dictionary<string, string[]>();
-            organization.Add("지원본부", new string[] { "지원1팀", "지원2팀", "지원3팀" });
+            organization.Add("자원본부", new string[] { "자원1팀", "자원2팀", "자원3팀" });
             organization.Add("철강본부", new string[] { "철강1팀", "철강2팀", "철강3팀" });
             organization.Add("섬유본부", new string[] { "섬유1팀", "섬유2팀", "섬유3팀" });
             organization.Add("영업본부", new string[] { "영업1팀", "영업2팀", "영업3팀" });
@@ -62,11 +63,28 @@ namespace Client.Panels
         {
             try
             {
+                Program.callback.Add(PacketType.Register, ReceiveChat);
                 Program.Send(new RegisterPacket(new Employee(picProfile.Image, int.Parse(txtempId.Text),
                     SHA512.Encrypt(txtPassword.Text), txtName.Text, txtPhone.Text,
                     cmbCentral.SelectedItem as string, cmbTeam.SelectedItem as string, txtRank.Text)));
             }
             catch (FormatException) { }
+        }
+
+        void ReceiveChat(Packet p)
+        {
+            Program.callback.Remove(PacketType.Register);
+
+            Invoke(new MethodInvoker(() =>
+            {
+                if ((p as RegisterPacket).success)
+                {
+                    MetroMessageBox.Show(this, "성공", "회원가입", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Swipe(false);
+                }
+                else
+                    MetroMessageBox.Show(this, "실패", "회원가입", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }));
         }
     }
 }
