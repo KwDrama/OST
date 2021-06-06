@@ -10,10 +10,9 @@ namespace OSTLibrary.Classes
         public DateTime end;
         public string scope;
         public string contents;
+        public string target;
 
-
-
-        public Schedule(int author, string title, DateTime start, DateTime end,string scope, string contents)
+        public Schedule(int author, string title, DateTime start, DateTime end,string scope, string contents, string target)
         {
             this.author = author;
             this.title = title;
@@ -21,6 +20,7 @@ namespace OSTLibrary.Classes
             this.end = end;
             this.scope = scope;
             this.contents = contents;
+            this.target = target;
         }
     }
 }

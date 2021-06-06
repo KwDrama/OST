@@ -136,7 +136,7 @@ namespace Server.Classes
             DateTime Start = schedule.start;
             DateTime End = schedule.end;
             MySqlCommand cmd = new MySqlCommand(
-                "INSERT INTO schedule VALUES (@author, @title, @start, @end, @scope, @contents);",
+                "INSERT INTO schedule VALUES (@author, @title, @start, @end, @scope, @contents, @target);",
                 con);
      
             cmd.Parameters.AddWithValue("@author", schedule.author);
@@ -145,7 +145,8 @@ namespace Server.Classes
             cmd.Parameters.Add("@end", MySqlDbType.DateTime, 50).Value = End;
             cmd.Parameters.AddWithValue("@scope", schedule.scope);
             cmd.Parameters.AddWithValue("@contents", schedule.contents);
-            
+            cmd.Parameters.AddWithValue("@target", schedule.target);
+
             try
             {
                 cmd.ExecuteNonQuery();
@@ -175,7 +176,8 @@ namespace Server.Classes
                             rdr.GetDateTime("start"),
                             rdr.GetDateTime("end"),
                             rdr.GetString("scope"),
-                            rdr.GetString("contents")));
+                            rdr.GetString("contents"),
+                            rdr.GetString("target")));
                 }
             }
             return schedules;
