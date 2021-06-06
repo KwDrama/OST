@@ -54,7 +54,7 @@ namespace Client.Forms
         static void Recieve()
         {
             byte[] readBuffer = null, lengthBuffer = new byte[4];
-            while (true)
+            while (client.Connected)
             {
                 // 패킷 읽기
                 try
@@ -88,12 +88,7 @@ namespace Client.Forms
 
                     // 패킷 받는 도중 예외가 발생했을 때
                     // 서버와 연결이 종료되었다면 재시작 후 접속 시도
-                    if (!client.Connected)
-                    {
-                        Application.Exit();
-                        Process.Start(Application.ExecutablePath);
-                        return;
-                    }
+                    break;
                 }
 
                 // 패킷 번역
@@ -108,8 +103,9 @@ namespace Client.Forms
                         MessageBox.Show(formMain, ex.ToString(), "Deserialize",
                         MessageBoxButtons.OK, MessageBoxIcon.Error)));
 
-                    // 수신 버퍼 리셋
-                    while (ns.ReadByte() != -1) ;
+                    // 패킷 받는 도중 예외가 발생했을 때
+                    // 서버와 연결이 종료되었다면 재시작 후 접속 시도
+                    break;
                 }
                 if (pakcetObj == null) continue;
 
@@ -119,6 +115,9 @@ namespace Client.Forms
                 if (callback.ContainsKey(packet.type))
                     callback[packet.type].Invoke(packet);
             }
+
+            Application.Exit();
+            Process.Start(Application.ExecutablePath);
         }
         public static void Send(Packet packet)
         {

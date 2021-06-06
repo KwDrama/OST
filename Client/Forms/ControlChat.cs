@@ -4,7 +4,6 @@ using OSTLibrary.Classes;
 using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 
 namespace Client.Forms
@@ -117,6 +116,9 @@ namespace Client.Forms
                 lblTime.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
                 lblTime.Left = Math.Min(dataControl.Left, Width - Padding.Right - lblTime.Width);
             }
+
+            // 채팅 하나하나가 분리 되게 보일수 있는 코드
+            //BackColor = Color.FromArgb(new Random(DateTime.Now.Millisecond).Next());
         }
         
         public void SetContinuous()

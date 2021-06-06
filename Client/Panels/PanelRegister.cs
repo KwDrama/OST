@@ -79,11 +79,11 @@ namespace Client.Panels
             {
                 if ((p as RegisterPacket).success)
                 {
-                    MetroMessageBox.Show(this, "성공", "회원가입", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MetroMessageBox.Show(this, "성공", "사원 등록", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Swipe(false);
                 }
                 else
-                    MetroMessageBox.Show(this, "실패", "회원가입", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this, "실패", "사원 등록", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }));
         }
     }
