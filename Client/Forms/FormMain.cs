@@ -57,7 +57,7 @@ namespace Client.Forms
             // 최초 룸 모두 추가
             Program.rooms.ForEach(AddRoomCard);
 
-            // 최초 스케줄 모두 추가 (여기서 에러 발생)
+            // 최초 스케줄 모두 추가
             Program.schedules.ForEach(AddScheduleCard);
 
             // 룸 받기 콜백

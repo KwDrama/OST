@@ -29,27 +29,6 @@ namespace Client.Panels
         private void PanelSchedule_Load(object sender, EventArgs e)
         {
             cmbScope.Items.AddRange(Room.Scope);
-            if (cmbScope.SelectedItem == null)
-            {
-                cmbTarget.Enabled = false;
-            }
-            else if (cmbScope.SelectedItem as string == "본부 전체")
-            {
-                cmbTarget.Items.AddRange(target1);
-            }
-            else if (cmbScope.SelectedItem as string == "팀 전체")
-            {
-                if (Program.employee.central == "자원본부")
-                    cmbTarget.Items.AddRange(target2);
-                else if (Program.employee.central == "철강본부")
-                    cmbTarget.Items.AddRange(target3);
-                else if (Program.employee.central == "섬유본부")
-                    cmbTarget.Items.AddRange(target4);
-                else if (Program.employee.central == "영업본부")
-                    cmbTarget.Items.AddRange(target5);
-            }
-            else
-                cmbTarget.Enabled = false;
         }
 
         private void pic_MouseEnter(object sender, EventArgs e)
@@ -82,6 +61,30 @@ namespace Client.Panels
             }
             catch (FormatException) { }
             Swipe(false);
+        }
+
+        //scope에 따라 다음 콤보박스 item 항목 바꾸기
+        private void cmbScope_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbScope.SelectedItem.ToString() == "본부 전체")
+            {
+                cmbTarget.Items.AddRange(target1);
+            }
+            else if(cmbScope.SelectedItem.ToString() == "팀 전체")
+            {
+                if (Program.employee.central == "자원본부")
+                    cmbTarget.Items.AddRange(target2);
+                else if (Program.employee.central == "철강본부")
+                    cmbTarget.Items.AddRange(target3);
+                else if (Program.employee.central == "섬유본부")
+                    cmbTarget.Items.AddRange(target4);
+                else if (Program.employee.central == "영업본부")
+                    cmbTarget.Items.AddRange(target5);
+            }
+            else
+            {
+                cmbTarget.Enabled = false;
+            }
         }
     }
 }

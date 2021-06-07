@@ -37,6 +37,7 @@ namespace Client.Forms
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.picContent = new System.Windows.Forms.PictureBox();
             this.picRangeColor = new System.Windows.Forms.PictureBox();
+            this.lblDday = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.picContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRangeColor)).BeginInit();
             this.SuspendLayout();
@@ -98,10 +99,20 @@ namespace Client.Forms
             this.picRangeColor.TabIndex = 0;
             this.picRangeColor.TabStop = false;
             // 
+            // lblDday
+            // 
+            this.lblDday.AutoSize = true;
+            this.lblDday.Location = new System.Drawing.Point(236, 5);
+            this.lblDday.Name = "lblDday";
+            this.lblDday.Size = new System.Drawing.Size(39, 19);
+            this.lblDday.TabIndex = 5;
+            this.lblDday.Text = "Dday";
+            // 
             // ControlSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblDday);
             this.Controls.Add(this.picContent);
             this.Controls.Add(this.lblEnd);
             this.Controls.Add(this.lblStart);
@@ -124,5 +135,6 @@ namespace Client.Forms
         private MetroFramework.Controls.MetroLabel lblEnd;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox picContent;
+        private MetroFramework.Controls.MetroLabel lblDday;
     }
 }

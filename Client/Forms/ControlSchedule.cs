@@ -19,6 +19,8 @@ namespace Client.Forms
         public ControlSchedule(Schedule schedule)
         {
             InitializeComponent();
+            TimeSpan restTime = schedule.end - DateTime.Now;
+            
 
             if (schedule.scope == "회사 전체")
                 picRangeColor.Image = Resources.lavendar;
@@ -32,6 +34,7 @@ namespace Client.Forms
             lblSche_Name.Text = schedule.title;
             lblStart.Text = schedule.start.ToString("MM-dd");
             lblEnd.Text = schedule.end.ToString("MM-dd");
+            lblDday.Text = "D - " + restTime.Days;
             ctent = schedule.contents;
         }
 

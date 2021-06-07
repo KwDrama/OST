@@ -153,6 +153,7 @@ namespace Client.Panels
             this.cmbScope.Size = new System.Drawing.Size(112, 29);
             this.cmbScope.TabIndex = 21;
             this.cmbScope.UseSelectable = true;
+            this.cmbScope.SelectedIndexChanged += new System.EventHandler(this.cmbScope_SelectedIndexChanged);
             // 
             // picClose
             // 
