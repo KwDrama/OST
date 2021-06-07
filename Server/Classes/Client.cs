@@ -139,8 +139,9 @@ namespace Server.Classes
 
                             room.lastChat = Database.GetLastChat(room);
                         }       
-
+                        // 로그인 하면서 불러온 사원의 스케줄 정보를 모두 스케줄과 사원 관계의 Map에 저장
                         List<Schedule> mySchedule = Database.GetSchedule(emp);
+                        
                         p = new LoginPacket(true, Program.employees, myRooms, mySchedule);
                     }
 

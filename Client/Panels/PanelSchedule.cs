@@ -17,6 +17,8 @@ namespace Client.Panels
         public static string[] target3 = { "철강1팀", "철강2팀", "철강3팀" };
         public static string[] target4 = { "섬유1팀", "섬유2팀", "섬유3팀" };
         public static string[] target5 = { "영업1팀", "영업2팀", "영업3팀" };
+        public static string[] target6 = { "회사 전체" };
+        public static string[] target7 = { "개인" };
 
         FormMain owner;
         public PanelSchedule(Form owner, SlidingType type) : base(owner, type)
@@ -66,11 +68,11 @@ namespace Client.Panels
         //scope에 따라 다음 콤보박스 item 항목 바꾸기
         private void cmbScope_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cmbScope.SelectedItem.ToString() == "본부 전체")
+            if (cmbScope.SelectedItem.ToString() == "본부 전체")
             {
                 cmbTarget.Items.AddRange(target1);
             }
-            else if(cmbScope.SelectedItem.ToString() == "팀 전체")
+            else if (cmbScope.SelectedItem.ToString() == "팀 전체")
             {
                 if (Program.employee.central == "자원본부")
                     cmbTarget.Items.AddRange(target2);
@@ -81,10 +83,10 @@ namespace Client.Panels
                 else if (Program.employee.central == "영업본부")
                     cmbTarget.Items.AddRange(target5);
             }
+            else if (cmbScope.SelectedItem.ToString() == "회사 전체")
+                cmbTarget.Items.AddRange(target6);
             else
-            {
-                cmbTarget.Enabled = false;
-            }
+                cmbTarget.Items.AddRange(target7);
         }
     }
 }
