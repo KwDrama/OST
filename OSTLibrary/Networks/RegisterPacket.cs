@@ -7,15 +7,13 @@ namespace OSTLibrary.Networks
     public class RegisterPacket : Packet
     {
         public bool success = false;
-        public string result;
 
         public Employee employee;
 
-        public RegisterPacket(bool success, string result = "")
+        public RegisterPacket(bool success)
         {
             type = PacketType.Register;
             this.success = success;
-            this.result = result;
         }
 
         public RegisterPacket(Employee employee)

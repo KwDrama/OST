@@ -2,6 +2,7 @@
 using OSTLibrary.Chats;
 using OSTLibrary.Classes;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -36,10 +37,12 @@ namespace Client.Forms
             {
                 PictureBox pic = new PictureBox();
 
-                // 이미지
+                // 디자인 및 이벤트
                 pic.Image = chat.image;
+                pic.Cursor = Cursors.Hand;
                 pic.BackColor = Color.Transparent;
                 pic.SizeMode = PictureBoxSizeMode.Zoom;
+                pic.MouseClick += Pic_Click;
 
                 // 위치 및 크기
                 pic.Location = lblText.Location;
@@ -108,11 +111,14 @@ namespace Client.Forms
                 dataControl.Left = Width - dataControl.Width - Padding.Right;
                 dataControl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                 dataControl.BackColor = Color.LemonChiffon;
-
+                
                 // 시계 위치
                 lblTime.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
                 lblTime.Left = Math.Min(dataControl.Left, Width - Padding.Right - lblTime.Width);
             }
+
+            // 채팅 하나하나가 분리 되게 보일수 있는 코드
+            //BackColor = Color.FromArgb(new Random(DateTime.Now.Millisecond).Next());
         }
         
         public void SetContinuous()
@@ -124,6 +130,20 @@ namespace Client.Forms
         public void OwnerRoom_Resize(object sender, EventArgs e)
         {
             Width = (sender as Form).Width - 20;
+        }
+        private void Pic_Click(object sender, MouseEventArgs e)
+        {
+            string filename = "OST_" + chat.date.ToString("yyyyMMdd_HHmmss") + ".png";
+
+            if (e.Button == MouseButtons.Left)
+            {
+
+                PictureBox pic = sender as PictureBox;
+                pic.Image.Save(filename);
+                Process.Start(filename);
+            }
+            else if (e.Button == MouseButtons.Right)
+                Process.Start(Environment.CurrentDirectory);
         }
     }
 }

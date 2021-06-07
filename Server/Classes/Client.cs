@@ -157,13 +157,14 @@ namespace Server.Classes
                 else if (packet.type == PacketType.Register)
                 {
                     RegisterPacket p = packet as RegisterPacket;
-                    if (Database.Register(p.employee))
+                    if (p.success = Database.Register(p.employee))
                     {
                         Program.employees.Add(p.employee.id, employee = p.employee);
                         Log("Register", "회원가입 성공");
                     }
                     else
                         Log("Register", "회원가입 실패");
+                    Send(p);
                 }
 
                 // 채팅
