@@ -132,10 +132,11 @@ namespace Server.Classes
         // 일정
         public static bool AddSchedule(Schedule schedule)
         {
+
             MySqlCommand cmd = new MySqlCommand(
                 "INSERT INTO schedule VALUES (@author, @title, @start, @end, @scope, @contents, @target);",
                 con);
-            using(MemoryStream ms = new MemoryStream())
+            using (MemoryStream ms = new MemoryStream())
             {
                 MySqlParameter start = new MySqlParameter("@start", MySqlDbType.DateTime, (int)ms.Length);
                 MySqlParameter end = new MySqlParameter("@end", MySqlDbType.DateTime, (int)ms.Length);
@@ -166,10 +167,6 @@ namespace Server.Classes
         public static List<Schedule> GetSchedule(Employee emp)
         {
             List<Schedule> schedules = new List<Schedule>();
-            string s1 = "회사 전체";
-            string s2 = "본부 전체";
-            string s3 = "팀 전체";
-            string s4 = "개인";
 
             string sql = $"(SELECT * FROM schedule WHERE scope = '회사 전체')"
                 + $" UNION (SELECT * FROM schedule WHERE scope = '본부 전체' AND target='{Filter(emp.central)}')"
