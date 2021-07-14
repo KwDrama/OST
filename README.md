@@ -160,17 +160,17 @@ PS C:\Users\chchc\Downloads\OSTServer> .\OSTServer.exe
 <br>
 
 #### Table: Employee
-![](Document\TableEmployee.PNG)
+![](Document/TableEmployee.PNG)
 <br>
 
 #### Table: Room
 `target` 컬럼이 제1정규화도 만족하지 못한다는 점이 아쉽긴 합니다.
-![](Document\TableRoom.PNG)
+![](Document/TableRoom.PNG)
 <br>
 
 #### Table: Chat
 채팅 테이블의 `key` 를 지정하기 위해 `chat_date` 컬럼을 `DATETIME(6)` 으로 지정하여 `millisecond` 까지 저장하도록 하였습니다.
-![](Document\TableChat.PNG)
+![](Document/TableChat.PNG)
 <br>
 
 
@@ -186,5 +186,5 @@ PS C:\Users\chchc\Downloads\OSTServer> .\OSTServer.exe
 #### 비밀번호 일방향 암호화 저장
 데이터베이스에 사원 정보가 저장될 때 비밀번호를 `SHA-512` 암호화 알고리즘을 적용하여 저장하여 보안을 한 층 더 강화하였습니다.
 
-![](Document\TableEmployeePassword.PNG)
+![](Document/TableEmployeePassword.PNG)
 <br>
