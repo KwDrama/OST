@@ -1,15 +1,15 @@
-# 💬 OST [서버](https://github.com/geoje/KwUniversity/raw/master/ApplicationSoftwarePractice/CatchMind_Server/CatchMind_Server.zip) / [클라이언트](https://github.com/geoje/KwUniversity/raw/master/ApplicationSoftwarePractice/CatchMind_Client/CatchMind_Client.zip)
+# 💬 OST
 #### 🏢 Office messenger Supporting Telecommuting
 <br><br>
 
-## 개발 기간
+# 개발 기간
 ##### 3학년 1학기 응용소프트웨어실습 (2021-03-12 ~ 2021-06-11)
 카카오톡을 모티브로 `C#` 과 `MySQL` 등을 사용해 만든 **사내 채팅 프로그램** 팀프로젝트 입니다.
 
 실행하기 위해서는 몇가지 설정이 필요합니다.
 <br><br>
 
-## 데이터 베이스 및 유저 생성
+# 데이터 베이스 및 유저 생성
 서버 프로그램을 돌리기 위해 `.Net Core` 와 `MySQL` 프로그램이 설치될 수 있는 `Ubuntu 20.04 LTS` 운영체제에서 우선 `MySQL` 을 설치하고 `DB` 및 `User` 를 생성합니다.
 ##### bash
 ``` bash
@@ -24,7 +24,7 @@ FLUSH PRIVILEGES;
 ```
 <br><br>
 
-## 테이블 생성
+# 테이블 생성
 ##### sql
 ``` sql
 CREATE TABLE `ost`.`employee` (
@@ -85,7 +85,7 @@ CREATE TABLE `ost`.`chat` (
 이로써 사전 세팅이 모두 끝났습니다.
 <br><br>
 
-## 서버 실행
+# 서버 실행
 `Release` 탭에서 `OSTServer.zip` 을 다운받고 압축을 풀어주세요.
 
 > #### 잠깐!
@@ -109,7 +109,7 @@ PS C:\Users\chchc\Downloads\OSTServer> .\OSTServer.exe
 ```
 <br><br>
 
-## 프로그램 실행
+# 프로그램 실행
 `.Net Framework 4.7.2` 기반이며 `Window Forms` 로 제작되어 윈도우에서만 실행하시길 바랍니다.
 리눅스와 같은 운영체제에서 실행가능한 방법도 있으나 여기서 다루진 않겠습니다.
 #### Window (Powershell)
@@ -120,7 +120,7 @@ PS C:\Users\chchc\Downloads\OSTServer> .\OSTServer.exe
 
 <br><br>
 
-## 소개
+# 소개
 이제부터 프로그램 기능을 파해쳐 보도록 하겠습니다.
 
 #### 접속
@@ -176,7 +176,7 @@ PS C:\Users\chchc\Downloads\OSTServer> .\OSTServer.exe
 
 <br><br>
 
-## 특징
+# 특징
 #### 채팅 화면 간소화
 카카오톡 처럼 같은사람, 같은 시간(분 단위 까지) 일 경우 채팅이 연결되도록 되어있습니다.
 
