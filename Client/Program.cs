@@ -35,7 +35,7 @@ namespace Client.Forms
             callback = new Dictionary<PacketType, Action<Packet>>();
 
             string[] args = Environment.GetCommandLineArgs();
-            hostname = args.Length > 1 ? args[1] : "www.ygh.kr";
+            hostname = args.Length > 1 ? args[1] : "127.0.0.1";
 
 
             Application.EnableVisualStyles();

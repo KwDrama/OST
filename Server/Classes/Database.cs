@@ -15,7 +15,7 @@ namespace Server.Classes
     static class Database
     {
         public static MySqlConnection con;                      // DB 연결 정보
-        public static readonly string hostname = "www.ygh.kr";  // DB 서버 주소
+        public static readonly string hostname = "127.0.0.1";  // DB 서버 주소
         public static readonly string id = "ost";               // DB 유저 이름
         public static readonly string password = "dr@M@0st";    // DB 비밀 번호
         public static readonly string dbName = "ost";           // DB 기본 데베
@@ -45,7 +45,7 @@ namespace Server.Classes
         // 사원
         public static Dictionary<int, Employee> GetEmployees()
         {
-            string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee";
+            string sql = $"SELECT id, name, phone, central, team, `rank`, profile, profile_length FROM employee";
             MySqlCommand cmd = new MySqlCommand(sql, con);
             Dictionary<int, Employee> employees = new Dictionary<int, Employee>();
 
@@ -71,7 +71,7 @@ namespace Server.Classes
         }
         public static Employee Login(int empId, string password)
         {
-            string sql = $"SELECT id, name, phone, central, team, rank, profile, profile_length FROM employee WHERE id={empId} AND password='{Filter(password)}'";
+            string sql = $"SELECT id, name, phone, central, team, `rank`, profile, profile_length FROM employee WHERE id={empId} AND password='{Filter(password)}'";
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             using (MySqlDataReader rdr = cmd.ExecuteReader())
@@ -196,7 +196,7 @@ namespace Server.Classes
         public static bool AddRoom(Room room)
         {
             MySqlCommand cmd = new MySqlCommand(
-                   "INSERT INTO room VALUES (@id, @range, @target);",
+                   "INSERT INTO room VALUES (@id, @scope, @target);",
                    con);
 
             cmd.Parameters.AddWithValue("@id", room.id);
